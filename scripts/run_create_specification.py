@@ -27,6 +27,7 @@ if __name__ == "__main__":
     for skill_name in file_names["skill_names"]:
         original_skills[skill_name] = skills_all[skill_name]
 
+    # Comment out by Qian to test without skillb
     for skill_name in file_names["skill_names"]:
         original_skills[skill_name + "b"] = copy.deepcopy(original_skills[skill_name])
 

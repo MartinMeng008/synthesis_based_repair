@@ -26,6 +26,12 @@ class Skill:
 
     def get_name(self):
         return self.name
+    
+    def print_dict(self) -> None:
+        print(self.name)
+        print("initial preconditions: ", self.init_pres)
+        print("intermediate states: ", self.intermediate_states)
+        print("final postconditions: ", self.final_posts)
 
     def get_skill_str(self, include_false=True):
         out = "Skill name: " + self.name + "\n"
@@ -34,6 +40,7 @@ class Skill:
         out += "Initial preconditions: \n"
         for init_pre in self.init_pres:
             out += "{}\n".format(dict_to_formula(init_pre, prime=False, include_false=include_false))
+        out += "Intermediate states: \n"
         for int_state in self.intermediate_states:
             out += "{}\n".format(
                 pre_posts_to_env_formula(self.name, int_state[0], int_state[1]))

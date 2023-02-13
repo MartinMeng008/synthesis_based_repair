@@ -1,0 +1,333 @@
+Seeding 0
+is_realizable:  False
+perform_repair call number: 0
+modify postconditions
+T_winning_change_sel:
+10010010010000000100010100000000000010011
+T_env removed:
+100100-00100000001000101-----------------
+perform_repair call number: 1
+modify preconditions
+Computed winning states in: 0.14393305778503418
+perform_repair call number: 2
+modify postconditions
+T_winning_change_sel:
+10010010010000000100010000000000000011000
+T_env removed:
+100100-00100000001000100-----------------
+perform_repair call number: 3
+modify preconditions
+perform_repair call number: 4
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 5
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 6
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 7
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 8
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 9
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 10
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 11
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 12
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 13
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 14
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 15
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 16
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+Checked initial states contained in: 1.5935442447662354
+Skill postconditions modified::
+-------0010000000---------------------
+New skill::
+10001000010000000001000010------------
+10001010010000000001000010------------
+10001000010000000101000010------------
+10001010010000000101000010------------
+10010000010000000001000010------------
+10010010010000000001000010------------
+10010000010000000001000011------------
+10010010010000000001000011------------
+10010000010000000101000010------------
+10010010010000000101000010------------
+10010000010000000101000011------------
+10010010010000000101000011------------
+10010000010000000001000101------------
+10010010010000000001000101------------
+10010000010000000101000101------------
+10010010010000000101000101------------
+10001000010000000111000010------------
+10001010010000000111000010------------
+10010000010000000111000010------------
+10010010010000000111000010------------
+10010000010000000111000011------------
+10010010010000000111000011------------
+10010000010000000111000101------------
+10010010010000000111000101------------
+10010000010000000000010011------------
+10010010010000000000010011------------
+10010000010000000100010011------------
+10010010010000000100010011------------
+10010000010000000000011000------------
+10010010010000000000011000------------
+10010000010000000100011000------------
+10010010010000000100011000------------
+10010000010000000110010011------------
+10010010010000000110010011------------
+10010000010000000110011000------------
+10010010010000000110011000------------
+00110010010000000001000010------------
+00110010010000000101000010------------
+00110010010000000111000010------------
+00100100010000000000010011------------
+00100100010000000100010011------------
+00100100010000000110010011------------
+Skill postconditions modified::
+-------0001000000---------------------
+New skill::
+10000100001000000000010010------------
+10000110001000000000010010------------
+10000100001000000000010011------------
+10000110001000000000010011------------
+10000100001000000100010010------------
+10000110001000000100010010------------
+10000100001000000100010011------------
+10000110001000000100010011------------
+10000100001000000110010010------------
+10000110001000000110010010------------
+10000100001000000110010011------------
+10000110001000000110010011------------
+00110010001000000100010011------------
+Skill postconditions modified::
+-------0000100000---------------------
+New skill::
+00110010000100000001001001------------
+00110010000100000101001001------------
+00100100000100000001001000------------
+00100110000100000001001000------------
+00100100000100000001001001------------
+00100110000100000001001001------------
+00100100000100000101001000------------
+00100110000100000101001000------------
+00100100000100000101001001------------
+00100110000100000101001001------------
+00100100000100000111001000------------
+00100110000100000111001000------------
+00100100000100000111001001------------
+00100110000100000111001001------------
+Skill postconditions modified::
+-------1000000000---------------------
+New skill::
+10010001000000000000011000------------
+10010011000000000000011000------------
+10010001000000000000011001------------
+10010011000000000000011001------------
+10010001000000000100011000------------
+10010011000000000100011000------------
+10010001000000000100011001------------
+10010011000000000100011001------------
+10010011000000000110011000------------
+10010011000000000110011001------------
+00100111000000000000011001------------
+00100111000000000100011001------------
+00100111000000000110011001------------
+Suggestion 0
+Action postconditions modified::
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2' & !user'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2' & !user') | (x0' & !x1' & !x2' & !y0' & !y1' & y2' & user') | (x0' & !x1' & !x2' & !y0' & y1' & !y2' & user') | (!x0' & !x1' & x2' & !y0' & !y1' & y2' & user') | (!x0' & !x1' & x2' & y0' & !y1' & !y2' & !user'))
+(!x0 & !x1 & x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2' & !user'))
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2' & user'))
+
+Action postconditions modified::
+!skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2' & !user') | (!x0' & !x1' & x2' & !y0' & !y1' & y2' & user'))
+(!x0 & !x1 & x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2' & user'))
+
+Action postconditions modified::
+!skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(!x0 & !x1 & x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & y0' & !y1' & !y2' & user'))
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & y0' & !y1' & !y2' & !user') | (x0' & !x1' & !x2' & y0' & !y1' & !y2' & user'))
+
+Action postconditions modified::
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2' & !user') | (!x0' & !x1' & x2' & y0' & !y1' & !y2' & user'))
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2' & user'))
+
+This took: 1.8480191230773926
+Suggestion 0
+new skill:
+-------0010000000------------------------
+Init pres:
+1000100----------------------------------
+1001000----------------------------------
+1001001----------------------------------
+Missing bits:  support - care_vars = {"user'"}
+posts:
+-----------------1000010-----------------
+-----------------1000011-----------------
+-----------------1000101-----------------
+-----------------0010011-----------------
+-----------------0011000-----------------
+Final posts:
+1000010----------------------------------
+1000011----------------------------------
+0010011----------------------------------
+Missing bits:  support - care_vars = {'user'}
+Missing bits:  support - care_vars = {'user'}
+Missing bits:  support - care_vars = {'user'}
+Missing bits:  support - care_vars = {'user'}
+Missing bits:  support - care_vars = {'user'}
+Missing bits:  support - care_vars = {'user'}
+new skill:
+-------0001000000------------------------
+Init pres:
+1000010----------------------------------
+1000011----------------------------------
+0011001----------------------------------
+posts:
+-----------------001001------------------
+Final posts:
+001001-----------------------------------
+Missing bits:  support - care_vars = {'user'}
+Missing bits:  support - care_vars = {'user'}
+new skill:
+-------0000100000------------------------
+Init pres:
+0011001----------------------------------
+0010010----------------------------------
+0010011----------------------------------
+posts:
+-----------------100100------------------
+Final posts:
+100100-----------------------------------
+Missing bits:  support - care_vars = {'user'}
+Missing bits:  support - care_vars = {'user'}
+new skill:
+-------1000000000------------------------
+Init pres:
+1001000----------------------------------
+1001001----------------------------------
+0010011----------------------------------
+posts:
+-----------------001100------------------
+Final posts:
+001100-----------------------------------
+Missing bits:  support - care_vars = {'user'}
+Missing bits:  support - care_vars = {'user'}
+----------------------------------
+----------------------------------
+Finish one iteration in the while loop
+skills
+dict_keys(['skill0', 'skill1', 'skill2', 'skill3', 'skill4', 'skill0b', 'skill1b', 'skill2b', 'skill3b', 'skill4b', 'skill10', 'skill11', 'skill12', 'skill13'])
+----------------------------------
+----------------------------------
+is_realizable:  False
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+undefined variable "skill10", known variables are:
+ {'x0': 0, "x0'": 1, "x0''": 2, 'x1': 3, "x1'": 4, "x1''": 5, 'x2': 6, "x2'": 7, "x2''": 8, 'y0': 9, "y0'": 10, "y0''": 11, 'y1': 12, "y1'": 13, "y1''": 14, 'y2': 15, "y2'": 16, "y2''": 17, 'user': 18, "user'": 19, "user''": 20, 'skill0': 21, "skill0'": 22, 'skill1': 23, "skill1'": 24, 'skill2': 25, "skill2'": 26, 'skill3': 27, "skill3'": 28, 'skill4': 29, "skill4'": 30, 'skill0b': 31, "skill0b'": 32, 'skill1b': 33, "skill1b'": 34, 'skill2b': 35, "skill2b'": 36, 'skill3b': 37, "skill3b'": 38, 'skill4b': 39, "skill4b'": 40}
+^Z
+[5]+  Stopped      

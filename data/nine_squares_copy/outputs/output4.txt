@@ -1,0 +1,256 @@
+is_realizable:  False
+perform_repair call number: 0
+modify postconditions
+T_winning_change_sel:
+10010010010000000100010100000000000010011
+T_env removed:
+100100-00100000001000101-----------------
+perform_repair call number: 1
+modify preconditions
+Computed winning states in: 0.1318190097808838
+perform_repair call number: 2
+modify postconditions
+T_winning_change_sel:
+10010000010000000100010000000000000011001
+T_env removed:
+100100-00100000001000100-----------------
+perform_repair call number: 3
+modify preconditions
+perform_repair call number: 4
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 5
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 6
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 7
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 8
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 9
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 10
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 11
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 12
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 13
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 14
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 15
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 16
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+Checked initial states contained in: 1.410024642944336
+Skill postconditions modified::
+-------0001000000---------------------
+New skill::
+10000100001000000000010010------------
+10000100001000000100010010------------
+10000100001000000000010011------------
+10000100001000000100010011------------
+10000110001000000000010010------------
+10000110001000000100010010------------
+10000110001000000000010011------------
+10000110001000000100010011------------
+00110010001000000000010010------------
+00110010001000000100010010------------
+00110000001000000100010011------------
+10000100001000000110010010------------
+10000100001000000110010011------------
+10000110001000000110010010------------
+10000110001000000110010011------------
+Skill postconditions modified::
+-------1000000000---------------------
+New skill::
+10010001000000000000011000------------
+10010001000000000000011001------------
+10010011000000000000011000------------
+10010011000000000000011001------------
+10010011000000000100011000------------
+10010011000000000100011001------------
+00100111000000000000011001------------
+00100111000000000100011001------------
+10010011000000000110011000------------
+10010011000000000110011001------------
+00100111000000000110011001------------
+Skill postconditions modified::
+-------0010000000---------------------
+New skill::
+10010000010000000000010011------------
+10010000010000000100010011------------
+10010010010000000000010011------------
+10010010010000000100010011------------
+10010000010000000000011001------------
+10010000010000000100011001------------
+10010010010000000000011001------------
+10010010010000000100011001------------
+10001010010000000000011001------------
+10001010010000000100011001------------
+10010000010000000001000010------------
+10010000010000000101000010------------
+10010000010000000001000011------------
+10010000010000000101000011------------
+10010010010000000001000010------------
+10010010010000000101000010------------
+10010010010000000001000011------------
+10010010010000000101000011------------
+10001000010000000001000010------------
+10001000010000000101000010------------
+00110000010000000000010011------------
+00110000010000000100010011------------
+00100100010000000000010011------------
+00100100010000000100010011------------
+10010000010000000110010011------------
+10010000010000000110011001------------
+10001010010000000110011001------------
+10010000010000000111000010------------
+10010000010000000111000011------------
+10001000010000000111000010------------
+00100100010000000110010011------------
+Skill postconditions modified::
+-------0000100000---------------------
+New skill::
+00110010000100000001001001------------
+00110010000100000101001001------------
+00100100000100000001001000------------
+00100100000100000101001000------------
+00100100000100000001001001------------
+00100100000100000101001001------------
+00100110000100000001001000------------
+00100110000100000101001000------------
+00100110000100000001001001------------
+00100110000100000101001001------------
+00110010000100000111001001------------
+00100100000100000111001000------------
+00100100000100000111001001------------
+00100110000100000111001000------------
+00100110000100000111001001------------
+Suggestion 0
+Action postconditions modified::
+!skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2' & !user') | (!x0' & !x1' & x2' & !y0' & !y1' & y2' & user'))
+(!x0 & !x1 & x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2' & !user') | (!x0' & !x1' & x2' & !y0' & !y1' & y2' & user'))
+
+Action postconditions modified::
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2' & !user') | (!x0' & !x1' & x2' & y0' & !y1' & !y2' & user'))
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2' & user'))
+
+Action postconditions modified::
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2' & user') | (!x0' & !x1' & x2' & y0' & !y1' & !y2' & user') | (x0' & !x1' & !x2' & !y0' & !y1' & y2' & !user') | (x0' & !x1' & !x2' & !y0' & !y1' & y2' & user'))
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2' & user') | (x0' & !x1' & !x2' & !y0' & !y1' & y2' & !user'))
+(!x0 & !x1 & x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2' & user'))
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2' & user'))
+
+Action postconditions modified::
+!skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(!x0 & !x1 & x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & y0' & !y1' & !y2' & user'))
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & y0' & !y1' & !y2' & !user') | (x0' & !x1' & !x2' & y0' & !y1' & !y2' & user'))
+
+This took: 1.70943284034729
+Suggestion 0
+new skill:
+-------0001000000------------------------
+Init pres:
+100001-----------------------------------
+001100-----------------------------------
+posts:
+-----------------001001------------------
+Final posts:
+001001-----------------------------------
+new skill:
+-------1000000000------------------------
+Init pres:
+1001000----------------------------------
+1001001----------------------------------
+0010011----------------------------------
+posts:
+-----------------001100------------------
+Final posts:
+001100-----------------------------------
+Missing bits:  support - care_vars = {'user'}
+Missing bits:  support - care_vars = {'user'}
+new skill:
+-------0010000000------------------------
+Init pres:
+100100-----------------------------------
+100010-----------------------------------
+Missing bits:  support - care_vars = {"user'"}
+posts:
+-----------------0010011-----------------
+-----------------0011001-----------------
+-----------------1000010-----------------
+-----------------1000011-----------------
+Final posts:
+1000010----------------------------------
+1000011----------------------------------
+0010011----------------------------------
+Missing bits:  support - care_vars = {'user'}
+Missing bits:  support - care_vars = {'user'}
+Missing bits:  support - care_vars = {'user'}
+Missing bits:  support - care_vars = {'user'}
+Missing bits:  support - care_vars = {'user'}
+new skill:
+-------0000100000------------------------
+Init pres:
+0011001----------------------------------
+0010010----------------------------------
+0010011----------------------------------
+posts:
+-----------------100100------------------
+Final posts:
+100100-----------------------------------
+Missing bits:  support - care_vars = {'user'}
+Missing bits:  support - care_vars = {'user'}
+Computed winning states in: 0.14942622184753418
+is_realizable:  True

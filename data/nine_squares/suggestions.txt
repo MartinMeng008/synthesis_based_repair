@@ -1,0 +1,657 @@
+perform_repair call number: 0
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 1
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 2
+modify preconditions
+perform_repair call number: 3
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 4
+modify preconditions
+perform_repair call number: 5
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.09752416610717773
+Checked initial states contained in: 0.09754300117492676
+Skill postconditions modified::
+------1000------------
+New skill::
+01010010001100001-----
+10000110001001001-----
+10010010000010100-----
+10010010001010100-----
+Suggestion 0
+Action postconditions modified::
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+New action::
+(!x0 & x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & !y0 & !y1 & y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & x1' & !x2' & y0' & !y1' & !y2'))
+
+This took: 0.10309910774230957
+Suggestion 0
+new skill:
+------1000----------------
+Init pres:
+100100--------------------
+posts:
+----------001001----------
+----------010100----------
+----------100001----------
+Final posts:
+001001--------------------
+Computed winning states in: 0.06890368461608887
+perform_repair call number: 6
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 7
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 8
+modify preconditions
+perform_repair call number: 9
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.07827377319335938
+Checked initial states contained in: 0.07828998565673828
+Skill postconditions modified::
+------1000------------
+New skill::
+01001010001001001-----
+01010010001010010-----
+10010010000010100-----
+10010010001010100-----
+Suggestion 0
+Action postconditions modified::
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+New action::
+(!x0 & x1 & !x2 & !y0 & y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(!x0 & x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & x1' & !x2' & !y0' & y1' & !y2'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & x1' & !x2' & y0' & !y1' & !y2'))
+
+This took: 0.08395552635192871
+Suggestion 0
+new skill:
+------1000----------------
+Init pres:
+100100--------------------
+posts:
+----------001001----------
+----------010010----------
+----------010100----------
+Final posts:
+001001--------------------
+Computed winning states in: 0.06438899040222168
+perform_repair call number: 10
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 11
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 12
+modify preconditions
+perform_repair call number: 13
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 14
+modify preconditions
+perform_repair call number: 15
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.10696887969970703
+Checked initial states contained in: 0.10698390007019043
+Skill postconditions modified::
+------1000------------
+New skill::
+00101010001001001-----
+01001010001001010-----
+01010010001010010-----
+10010010000010100-----
+10010010001010100-----
+Suggestion 0
+Action postconditions modified::
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+New action::
+(!x0 & !x1 & x2 & !y0 & y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(!x0 & x1 & !x2 & !y0 & y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & y1' & !y2'))
+(!x0 & x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & x1' & !x2' & !y0' & y1' & !y2'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & x1' & !x2' & y0' & !y1' & !y2'))
+
+This took: 0.11297941207885742
+Suggestion 0
+new skill:
+------1000----------------
+Init pres:
+100100--------------------
+posts:
+----------001001----------
+----------001010----------
+----------010010----------
+----------010100----------
+Final posts:
+001001--------------------
+Computed winning states in: 0.10462236404418945
+perform_repair call number: 16
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 17
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 18
+modify preconditions
+perform_repair call number: 19
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 20
+modify preconditions
+perform_repair call number: 21
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 22
+modify preconditions
+perform_repair call number: 23
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.13865375518798828
+Checked initial states contained in: 0.13866949081420898
+Skill postconditions modified::
+------1000------------
+New skill::
+01000110001001001-----
+01010010001001001-----
+01010010001010001-----
+10010010000010100-----
+10010010001010100-----
+Suggestion 0
+Action postconditions modified::
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+New action::
+(!x0 & x1 & !x2 & !y0 & !y1 & y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(!x0 & x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2') | (!x0' & x1' & !x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & x1' & !x2' & y0' & !y1' & !y2'))
+
+This took: 0.14457392692565918
+Suggestion 0
+new skill:
+------1000----------------
+Init pres:
+100100--------------------
+posts:
+----------001001----------
+----------010001----------
+----------010100----------
+Final posts:
+001001--------------------
+Computed winning states in: 0.06323909759521484
+perform_repair call number: 24
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 25
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 26
+modify preconditions
+perform_repair call number: 27
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 28
+modify preconditions
+perform_repair call number: 29
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 30
+modify preconditions
+perform_repair call number: 31
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 32
+modify preconditions
+perform_repair call number: 33
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 34
+modify preconditions
+perform_repair call number: 35
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.13141608238220215
+Checked initial states contained in: 0.13143253326416016
+Skill postconditions modified::
+------1000------------
+New skill::
+01000110001001001-----
+01010010001001001-----
+01010010001010001-----
+01010010001100010-----
+10001010001001001-----
+10010010000010100-----
+10010010001010100-----
+Suggestion 0
+Action postconditions modified::
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+New action::
+(!x0 & x1 & !x2 & !y0 & !y1 & y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(!x0 & x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2') | (!x0' & x1' & !x2' & !y0' & !y1' & y2') | (x0' & !x1' & !x2' & !y0' & y1' & !y2'))
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & x1' & !x2' & y0' & !y1' & !y2'))
+
+This took: 0.1393723487854004
+Suggestion 0
+new skill:
+------1000----------------
+Init pres:
+100100--------------------
+posts:
+----------001001----------
+----------010001----------
+----------010100----------
+----------100010----------
+Final posts:
+001001--------------------
+Computed winning states in: 0.09166240692138672
+perform_repair call number: 36
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 37
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 38
+modify preconditions
+perform_repair call number: 39
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 40
+modify preconditions
+perform_repair call number: 41
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 42
+modify preconditions
+perform_repair call number: 43
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.1077413558959961
+Checked initial states contained in: 0.10775613784790039
+Skill postconditions modified::
+------1000------------
+New skill::
+01000110001001001-----
+01010010001010001-----
+10010010000010100-----
+10010010001010100-----
+Suggestion 0
+Action postconditions modified::
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+New action::
+(!x0 & x1 & !x2 & !y0 & !y1 & y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(!x0 & x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & x1' & !x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & x1' & !x2' & y0' & !y1' & !y2'))
+
+This took: 0.11365413665771484
+Suggestion 0
+new skill:
+------1000----------------
+Init pres:
+100100--------------------
+posts:
+----------001001----------
+----------010001----------
+----------010100----------
+Final posts:
+001001--------------------
+Computed winning states in: 0.0634467601776123
+perform_repair call number: 44
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 45
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 46
+modify preconditions
+perform_repair call number: 47
+modify postconditions
+T_winning_change_sel:
+01010010000100100000001001
+T_env removed:
+0101001000010010----------
+perform_repair call number: 48
+modify preconditions
+perform_repair call number: 49
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.09695553779602051
+Checked initial states contained in: 0.0969705581665039
+Skill postconditions modified::
+------1000------------
+New skill::
+01001010001001001-----
+01010010001001001-----
+01010010001010010-----
+10010010000010100-----
+10010010001010100-----
+Suggestion 0
+Action postconditions modified::
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+New action::
+(!x0 & x1 & !x2 & !y0 & y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(!x0 & x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2') | (!x0' & x1' & !x2' & !y0' & y1' & !y2'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & x1' & !x2' & y0' & !y1' & !y2'))
+
+This took: 0.1035759449005127
+Suggestion 0
+new skill:
+------1000----------------
+Init pres:
+100100--------------------
+posts:
+----------001001----------
+----------010010----------
+----------010100----------
+Final posts:
+001001--------------------
+Computed winning states in: 0.09928250312805176
+perform_repair call number: 50
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 51
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.08923912048339844
+Checked initial states contained in: 0.08925509452819824
+Skill postconditions modified::
+------1000------------
+New skill::
+00101010001001001-----
+01010010001100010-----
+10001010001001010-----
+10010010000010100-----
+10010010001010100-----
+Suggestion 0
+Action postconditions modified::
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+New action::
+(!x0 & !x1 & x2 & !y0 & y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(!x0 & x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((x0' & !x1' & !x2' & !y0' & y1' & !y2'))
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & y1' & !y2'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & x1' & !x2' & y0' & !y1' & !y2'))
+
+This took: 0.09526515007019043
+Suggestion 0
+new skill:
+------1000----------------
+Init pres:
+100100--------------------
+posts:
+----------001001----------
+----------001010----------
+----------010100----------
+----------100010----------
+Final posts:
+001001--------------------
+Computed winning states in: 0.06769180297851562
+perform_repair call number: 52
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 53
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 54
+modify preconditions
+perform_repair call number: 55
+modify postconditions
+T_winning_change_sel:
+01010010001000010000001001
+T_env removed:
+0101001000100001----------
+perform_repair call number: 56
+modify preconditions
+perform_repair call number: 57
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 58
+modify preconditions
+perform_repair call number: 59
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.110076904296875
+Checked initial states contained in: 0.1100921630859375
+Skill postconditions modified::
+------1000------------
+New skill::
+01000110001001001-----
+01010010001001001-----
+01010010001010001-----
+10010010000010100-----
+10010010001010100-----
+Suggestion 0
+Action postconditions modified::
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+New action::
+(!x0 & x1 & !x2 & !y0 & !y1 & y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(!x0 & x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2') | (!x0' & x1' & !x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & x1' & !x2' & y0' & !y1' & !y2'))
+
+This took: 0.1164388656616211
+Suggestion 0
+new skill:
+------1000----------------
+Init pres:
+100100--------------------
+posts:
+----------001001----------
+----------010001----------
+----------010100----------
+Final posts:
+001001--------------------
+Computed winning states in: 0.09135079383850098
+perform_repair call number: 60
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 61
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.09841704368591309
+Checked initial states contained in: 0.09843230247497559
+Skill postconditions modified::
+------1000------------
+New skill::
+00101010001001001-----
+01010010001100001-----
+10000110001001010-----
+10010010000010100-----
+10010010001010100-----
+Suggestion 0
+Action postconditions modified::
+skill0 & !skill1 & !skill0b & !skill1b & 
+Original skill:
+skill0 & !skill1 & !skill0b & !skill1b & 
+New action::
+(!x0 & !x1 & x2 & !y0 & y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(!x0 & x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & !y0 & !y1 & y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & !x1' & x2' & !y0' & y1' & !y2'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill0b & !skill1b) -> ((!x0' & x1' & !x2' & y0' & !y1' & !y2'))
+
+This took: 0.10436010360717773
+Suggestion 0
+new skill:
+------1000----------------
+Init pres:
+100100--------------------
+posts:
+----------001001----------
+----------001010----------
+----------010100----------
+----------100001----------
+Final posts:
+001001--------------------
+Computed winning states in: 0.06778478622436523

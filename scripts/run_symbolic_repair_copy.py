@@ -37,7 +37,6 @@ if __name__ == "__main__":
     for skill_name in file_names["skill_names"]:
         original_skills[skill_name] = skills_all[skill_name]
 
-    # Comment out the b skills by Qian
     for skill_name in file_names["skill_names"]:
         original_skills[skill_name + "b"] = copy.deepcopy(original_skills[skill_name])
 
@@ -51,7 +50,6 @@ if __name__ == "__main__":
         iteration_count = 1
         attempt_cnt = 1
         np.random.seed(seed)
-        print(f"Seeding {seed}")
 
         is_realizable = False
         skills = copy.deepcopy(original_skills)
@@ -69,18 +67,17 @@ if __name__ == "__main__":
             # Checking if the specification is realizable
             sym_opts['only_synthesis'] = True
             is_realizable, _ = run_repair(file_names["file_structured_slugs"], sym_opts)
-            print("is_realizable: ", is_realizable)
             if is_realizable:
                 fid = open(file_names["file_log"], 'a')
                 fid.write("Seed {} took {} iterations\n".format(seed, iteration_count))
                 fid.close()
                 write_skills_str(skills, file_names["file_log"], only_suggestions=True)
 
-                # # Plot the suggestions
-                # for skill_name, skill in skills.items():
-                #     if skill.is_suggestion():
-                #         fig, ax = skill.plot_symbolic_skill(symbols, [-0.5, 3.5], [-0.5, 3.5])
-                #         plt.savefig(file_names["folder_plot"] + "seed_" + str(seed) + "_" + skill_name)
+                # Plot the suggestions
+                for skill_name, skill in skills.items():
+                    if skill.is_suggestion():
+                        fig, ax = skill.plot_symbolic_skill(symbols, [-0.5, 3.5], [-0.5, 3.5])
+                        plt.savefig(file_names["folder_plot"] + "seed_" + str(seed) + "_" + skill_name)
 
                 break
 
@@ -102,14 +99,3 @@ if __name__ == "__main__":
             for idx, suggestion in suggestions.items():
                 skills[suggestion['name']] = Skill(suggestion, True)
                 user_spec['sys_init_false'].append(suggestion['name'])
-            print("----------------------------------")
-            print("----------------------------------")
-            print("Finish one iteration in the while loop")
-            print("skills")
-            print(skills.keys())
-            print("----------------------------------")
-            print("----------------------------------")
-
-        # Added by Qian
-        if is_realizable: break
-        # break

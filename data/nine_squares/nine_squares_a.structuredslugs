@@ -11,8 +11,6 @@ y2
 
 skill0
 skill1
-skill0b
-skill1b
 
 [ENV_INIT]
 
@@ -27,8 +25,6 @@ y0
 
 !skill0
 !skill1
-!skill0b
-!skill1b
 
 [ENV_TRANS]
 
@@ -40,14 +36,6 @@ skill1 & !x0 & !x1 & x2 & !y0 & !y1 & y2 -> ((!x0' & x1' & !x2' & !y0' & !y1' & 
 skill1 & !x0 & x1 & !x2 & !y0 & !y1 & y2 -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
 skill1 & x0 & !x1 & !x2 & !y0 & !y1 & y2 -> ((x0' & !x1' & !x2' & !y0' & y1' & !y2'))
 skill1 & x0 & !x1 & !x2 & !y0 & y1 & !y2 -> ((x0' & !x1' & !x2' & y0' & !y1' & !y2'))
-skill0b & x0 & !x1 & !x2 & y0 & !y1 & !y2 -> ((!x0' & x1' & !x2' & y0' & !y1' & !y2'))
-skill0b & !x0 & x1 & !x2 & y0 & !y1 & !y2 -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2'))
-skill0b & !x0 & !x1 & x2 & y0 & !y1 & !y2 -> ((!x0' & !x1' & x2' & !y0' & y1' & !y2'))
-skill0b & !x0 & !x1 & x2 & !y0 & y1 & !y2 -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
-skill1b & !x0 & !x1 & x2 & !y0 & !y1 & y2 -> ((!x0' & x1' & !x2' & !y0' & !y1' & y2'))
-skill1b & !x0 & x1 & !x2 & !y0 & !y1 & y2 -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
-skill1b & x0 & !x1 & !x2 & !y0 & !y1 & y2 -> ((x0' & !x1' & !x2' & !y0' & y1' & !y2'))
-skill1b & x0 & !x1 & !x2 & !y0 & y1 & !y2 -> ((x0' & !x1' & !x2' & y0' & !y1' & !y2'))
 
 [ENV_TRANS_HARD]
 !(x0' & x1')
@@ -66,29 +54,21 @@ skill1b & x0 & !x1 & !x2 & !y0 & y1 & !y2 -> ((x0' & !x1' & !x2' & y0' & !y1' & 
 !(y1 & y2)
 (x0 | x1 | x2)
 (y0 | y1 | y2)
-(!skill0 & !skill1 & !skill0b & !skill1b) -> ((x0 <-> x0') & (x1 <-> x1') & (x2 <-> x2') & (y0 <-> y0') & (y1 <-> y1') & (y2 <-> y2'))
-(skill0 & !skill1 & !skill0b & !skill1b) | (!skill0 & skill1 & !skill0b & !skill1b) | (!skill0 & !skill1 & skill0b & !skill1b) | (!skill0 & !skill1 & !skill0b & skill1b) | (!skill0 & !skill1 & !skill0b & !skill1b)
+(!skill0 & !skill1) -> ((x0 <-> x0') & (x1 <-> x1') & (x2 <-> x2') & (y0 <-> y0') & (y1 <-> y1') & (y2 <-> y2'))
+(skill0 & !skill1) | (!skill0 & skill1) | (!skill0 & !skill1)
 [SYS_TRANS]
 
 !((x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !x0' & x1' & !x2' & y0' & !y1' & !y2') | (!x0 & x1 & !x2 & y0 & !y1 & !y2 & skill0 & !x0' & !x1' & x2' & y0' & !y1' & !y2') | (!x0 & !x1 & x2 & y0 & !y1 & !y2 & skill0 & !x0' & !x1' & x2' & !y0' & y1' & !y2') | (x0' & !x1' & !x2' & y0' & !y1' & !y2')) -> !skill0'
 !((!x0 & !x1 & x2 & !y0 & !y1 & y2 & skill1 & !x0' & x1' & !x2' & !y0' & !y1' & y2') | (!x0 & x1 & !x2 & !y0 & !y1 & y2 & skill1 & x0' & !x1' & !x2' & !y0' & !y1' & y2') | (x0 & !x1 & !x2 & !y0 & !y1 & y2 & skill1 & x0' & !x1' & !x2' & !y0' & y1' & !y2') | (!x0' & !x1' & x2' & !y0' & !y1' & y2')) -> !skill1'
-!((x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0b & !x0' & x1' & !x2' & y0' & !y1' & !y2') | (!x0 & x1 & !x2 & y0 & !y1 & !y2 & skill0b & !x0' & !x1' & x2' & y0' & !y1' & !y2') | (!x0 & !x1 & x2 & y0 & !y1 & !y2 & skill0b & !x0' & !x1' & x2' & !y0' & y1' & !y2') | (x0' & !x1' & !x2' & y0' & !y1' & !y2')) -> !skill0b'
-!((!x0 & !x1 & x2 & !y0 & !y1 & y2 & skill1b & !x0' & x1' & !x2' & !y0' & !y1' & y2') | (!x0 & x1 & !x2 & !y0 & !y1 & y2 & skill1b & x0' & !x1' & !x2' & !y0' & !y1' & y2') | (x0 & !x1 & !x2 & !y0 & !y1 & y2 & skill1b & x0' & !x1' & !x2' & !y0' & y1' & !y2') | (!x0' & !x1' & x2' & !y0' & !y1' & y2')) -> !skill1b'
 (x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !x0' & x1' & !x2' & y0' & !y1' & !y2') -> skill0'
 (!x0 & x1 & !x2 & y0 & !y1 & !y2 & skill0 & !x0' & !x1' & x2' & y0' & !y1' & !y2') -> skill0'
 (!x0 & !x1 & x2 & y0 & !y1 & !y2 & skill0 & !x0' & !x1' & x2' & !y0' & y1' & !y2') -> skill0'
 (!x0 & !x1 & x2 & !y0 & !y1 & y2 & skill1 & !x0' & x1' & !x2' & !y0' & !y1' & y2') -> skill1'
 (!x0 & x1 & !x2 & !y0 & !y1 & y2 & skill1 & x0' & !x1' & !x2' & !y0' & !y1' & y2') -> skill1'
 (x0 & !x1 & !x2 & !y0 & !y1 & y2 & skill1 & x0' & !x1' & !x2' & !y0' & y1' & !y2') -> skill1'
-(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0b & !x0' & x1' & !x2' & y0' & !y1' & !y2') -> skill0b'
-(!x0 & x1 & !x2 & y0 & !y1 & !y2 & skill0b & !x0' & !x1' & x2' & y0' & !y1' & !y2') -> skill0b'
-(!x0 & !x1 & x2 & y0 & !y1 & !y2 & skill0b & !x0' & !x1' & x2' & !y0' & y1' & !y2') -> skill0b'
-(!x0 & !x1 & x2 & !y0 & !y1 & y2 & skill1b & !x0' & x1' & !x2' & !y0' & !y1' & y2') -> skill1b'
-(!x0 & x1 & !x2 & !y0 & !y1 & y2 & skill1b & x0' & !x1' & !x2' & !y0' & !y1' & y2') -> skill1b'
-(x0 & !x1 & !x2 & !y0 & !y1 & y2 & skill1b & x0' & !x1' & !x2' & !y0' & y1' & !y2') -> skill1b'
 
 [SYS_TRANS_HARD]
-(skill0' & !skill1' & !skill0b' & !skill1b') | (!skill0' & skill1' & !skill0b' & !skill1b') | (!skill0' & !skill1' & skill0b' & !skill1b') | (!skill0' & !skill1' & !skill0b' & skill1b') | (!skill0' & !skill1' & !skill0b' & !skill1b')
+(skill0' & !skill1') | (!skill0' & skill1') | (!skill0' & !skill1')
 
 # User SYS_TRANS_HARD
 !(x2 & y0)
@@ -123,6 +103,4 @@ x2 & y2
 
 [NOT_ALLOWED_REPAIR]
 
-!skill0b
-!skill1b
 

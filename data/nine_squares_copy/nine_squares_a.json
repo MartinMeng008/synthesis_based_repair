@@ -1,13 +1,13 @@
 {
-  "env_init_true": ["x0", "y0"],
-  "env_init_false": ["x1", "x2", "y1", "y2"],
+  "env_init_true": ["x0", "y1"],
+  "env_init_false": ["x1", "x2", "y0", "y2", "user"],
   "sys_init_true": [],
-  "sys_init_false": ["skill0", "skill1"],
-  "sys_live": "x0 & y0\nx2 & y2\n",
+  "sys_init_false": ["skill0", "skill1", "skill2", "skill3", "skill4", "skill0b", "skill1b", "skill2b", "skill3b", "skill4b"],
+  "sys_live": "x0 & y0\nx2 & y2\n(user -> (x2 & y0))\n(!user -> (x0 & y2))\n",
   "env_live": "",
-  "sys_trans_hard": "!(x2 & y0)\n!(x2' & y0')",
-  "reactive_variables": [],
-  "hard_constraints": [{"x2": "True", "y0": "True"}],
+  "sys_trans_hard": "",
+  "reactive_variables": ["user"],
+  "hard_constraints": [],
   "change_cons": "!(x0' & x1')\n!(x0' & x2')\n!(x1' & x2')\n!(y0' & y1')\n!(y0' & y2')\n!(y1' & y2')\n(x0' | x1' | x2')\n(y0' | y1' | y2')\n!(x0 & x1)\n!(x0 & x2)\n!(x1 & x2)\n!(y0 & y1)\n!(y0 & y2)\n!(y1 & y2)\n(x0 | x1 | x2)\n(y0 | y1 | y2)\n(x0 <-> !x0') | (x1 <-> !x1') | (x2 <-> !x2') | ((x0 <-> x0') & (x1 <-> x1') & (x2 <-> x2'))\n(y0 <-> !y0') | (y1 <-> !y1') | (y2 <-> !y2') | ((y0 <-> y0') & (y1 <-> y1') & (y2 <-> y2'))\n!((x0 <-> x0') & (x1 <-> x1') & (x2 <-> x2') & (y0 <-> y0') & (y1 <-> y1') & (y2 <-> y2'))\n",
-  "not_allowed_repair": ""
+  "not_allowed_repair": "!skill0b\n!skill1b\n!skill2b\n!skill3b\n!skill4b\n"
 }
