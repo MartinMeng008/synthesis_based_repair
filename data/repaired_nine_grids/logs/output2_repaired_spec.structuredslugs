@@ -1,0 +1,157 @@
+[INPUT]
+
+x0
+x1
+x2
+y0
+y1
+y2
+user
+
+[OUTPUT]
+
+skill0
+skill1
+skill2
+skill3
+skill4
+skill0b
+skill1b
+skill2b
+skill3b
+skill4b
+skill10
+skill11
+skill12
+skill13
+
+[ENV_INIT]
+
+!x1
+!x2
+!y0
+!y2
+x0
+y1
+
+[SYS_INIT]
+
+!skill0
+!skill1
+!skill2
+!skill3
+!skill4
+!skill0b
+!skill1b
+!skill2b
+!skill3b
+!skill4b
+!skill10
+!skill11
+!skill12
+!skill13
+
+[ENV_TRANS]
+
+skill0 & x0 & !x1 & !x2 & y0 & !y1 & !y2 -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2'))
+skill1 & !x0 & !x1 & x2 & y0 & !y1 & !y2 -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+skill2 & x0 & !x1 & !x2 & y0 & !y1 & !y2 -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2') | (x0' & !x1' & !x2' & !y0' & y1' & !y2'))
+skill3 & x0 & !x1 & !x2 & !y0 & !y1 & y2 -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+skill4 & !x0 & !x1 & x2 & !y0 & !y1 & y2 -> ((x0' & !x1' & !x2' & y0' & !y1' & !y2'))
+skill0b & x0 & !x1 & !x2 & y0 & !y1 & !y2 -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2'))
+skill1b & !x0 & !x1 & x2 & y0 & !y1 & !y2 -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+skill2b & x0 & !x1 & !x2 & y0 & !y1 & !y2 -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2') | (x0' & !x1' & !x2' & !y0' & y1' & !y2'))
+skill3b & x0 & !x1 & !x2 & !y0 & !y1 & y2 -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+skill4b & !x0 & !x1 & x2 & !y0 & !y1 & y2 -> ((x0' & !x1' & !x2' & y0' & !y1' & !y2'))
+skill10 & !x1 & !x2 & x0 & !y2 & !y0 & y1 -> ((!x1' & !x2' & x0' & !y2' & y0' & !y1' & user'))
+skill10 & !x1 & x2 & !x0 & !y2 & y0 & !y1 -> ((!x1' & !x2' & x0' & !y2' & y0' & !y1' & user'))
+skill10 & !x1 & x2 & !x0 & y2 & !y0 & !y1 -> ((!x1' & !x2' & x0' & !y2' & y0' & !y1'))
+skill11 & !x1 & !x2 & x0 & y2 & !y0 & !y1 -> ((!x1' & x2' & !x0' & y2' & !y0' & !y1'))
+skill11 & !x1 & x2 & !x0 & !y2 & y0 & !y1 -> ((!x1' & x2' & !x0' & y2' & !y0' & !y1' & user'))
+skill12 & !x1 & !x2 & x0 & !y2 & y0 & !y1 -> ((!x1' & !x2' & x0' & y2' & !y0' & !y1') | (!x1' & x2' & !x0' & !y2' & y0' & !y1' & user') | (!x1' & x2' & !x0' & y2' & !y0' & !y1' & user'))
+skill12 & !x1 & x2 & !x0 & !y2 & y0 & !y1 -> ((!x1' & x2' & !x0' & y2' & !y0' & !y1' & user'))
+skill12 & !x1 & x2 & !x0 & y2 & !y0 & !y1 -> ((!x1' & x2' & !x0' & y2' & !y0' & !y1' & user'))
+skill13 & !x1 & !x2 & x0 & !y2 & !y0 & y1 -> ((!x1' & x2' & !x0' & !y2' & y0' & !y1' & !user'))
+skill13 & !x1 & !x2 & x0 & !y2 & y0 & !y1 -> ((!x1' & x2' & !x0' & !y2' & y0' & !y1'))
+skill13 & !x1 & x2 & !x0 & y2 & !y0 & !y1 -> ((!x1' & x2' & !x0' & !y2' & y0' & !y1' & !user'))
+
+[ENV_TRANS_HARD]
+!(x0' & x1')
+!(x0' & x2')
+!(x1' & x2')
+!(y0' & y1')
+!(y0' & y2')
+!(y1' & y2')
+(x0' | x1' | x2')
+(y0' | y1' | y2')
+!(x0 & x1)
+!(x0 & x2)
+!(x1 & x2)
+!(y0 & y1)
+!(y0 & y2)
+!(y1 & y2)
+(x0 | x1 | x2)
+(y0 | y1 | y2)
+(!skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & !skill10 & !skill11 & !skill12 & !skill13) -> ((x0 <-> x0') & (x1 <-> x1') & (x2 <-> x2') & (y0 <-> y0') & (y1 <-> y1') & (y2 <-> y2'))
+(skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & !skill10 & !skill11 & !skill12 & !skill13) | (!skill0 & skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & !skill10 & !skill11 & !skill12 & !skill13) | (!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & !skill10 & !skill11 & !skill12 & !skill13) | (!skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & !skill10 & !skill11 & !skill12 & !skill13) | (!skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & !skill10 & !skill11 & !skill12 & !skill13) | (!skill0 & !skill1 & !skill2 & !skill3 & !skill4 & skill0b & !skill1b & !skill2b & !skill3b & !skill4b & !skill10 & !skill11 & !skill12 & !skill13) | (!skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & skill1b & !skill2b & !skill3b & !skill4b & !skill10 & !skill11 & !skill12 & !skill13) | (!skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & skill2b & !skill3b & !skill4b & !skill10 & !skill11 & !skill12 & !skill13) | (!skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & skill3b & !skill4b & !skill10 & !skill11 & !skill12 & !skill13) | (!skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & skill4b & !skill10 & !skill11 & !skill12 & !skill13) | (!skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & skill10 & !skill11 & !skill12 & !skill13) | (!skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & !skill10 & skill11 & !skill12 & !skill13) | (!skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & !skill10 & !skill11 & skill12 & !skill13) | (!skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & !skill10 & !skill11 & !skill12 & skill13) | (!skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & !skill10 & !skill11 & !skill12 & !skill13)
+[SYS_TRANS]
+
+!((x0' & !x1' & !x2' & y0' & !y1' & !y2')) -> !skill0'
+!((!x0' & !x1' & x2' & y0' & !y1' & !y2')) -> !skill1'
+!((x0' & !x1' & !x2' & y0' & !y1' & !y2')) -> !skill2'
+!((x0' & !x1' & !x2' & !y0' & !y1' & y2')) -> !skill3'
+!((!x0' & !x1' & x2' & !y0' & !y1' & y2')) -> !skill4'
+!((x0' & !x1' & !x2' & y0' & !y1' & !y2')) -> !skill0b'
+!((!x0' & !x1' & x2' & y0' & !y1' & !y2')) -> !skill1b'
+!((x0' & !x1' & !x2' & y0' & !y1' & !y2')) -> !skill2b'
+!((x0' & !x1' & !x2' & !y0' & !y1' & y2')) -> !skill3b'
+!((!x0' & !x1' & x2' & !y0' & !y1' & y2')) -> !skill4b'
+!((!x1' & !x2' & x0' & !y2' & !y0' & y1' & user') | (!x1' & x2' & !x0' & y2' & !y0' & !y1')) -> !skill10'
+!((!x1' & !x2' & x0' & y2' & !y0' & !y1')) -> !skill11'
+!((!x1' & !x2' & x0' & !y2' & y0' & !y1')) -> !skill12'
+!((!x1' & !x2' & x0' & !y2' & !y0' & y1' & !user') | (!x1' & !x2' & x0' & !y2' & y0' & !y1')) -> !skill13'
+
+
+[SYS_TRANS_HARD]
+(skill0' & !skill1' & !skill2' & !skill3' & !skill4' & !skill0b' & !skill1b' & !skill2b' & !skill3b' & !skill4b' & !skill10' & !skill11' & !skill12' & !skill13') | (!skill0' & skill1' & !skill2' & !skill3' & !skill4' & !skill0b' & !skill1b' & !skill2b' & !skill3b' & !skill4b' & !skill10' & !skill11' & !skill12' & !skill13') | (!skill0' & !skill1' & skill2' & !skill3' & !skill4' & !skill0b' & !skill1b' & !skill2b' & !skill3b' & !skill4b' & !skill10' & !skill11' & !skill12' & !skill13') | (!skill0' & !skill1' & !skill2' & skill3' & !skill4' & !skill0b' & !skill1b' & !skill2b' & !skill3b' & !skill4b' & !skill10' & !skill11' & !skill12' & !skill13') | (!skill0' & !skill1' & !skill2' & !skill3' & skill4' & !skill0b' & !skill1b' & !skill2b' & !skill3b' & !skill4b' & !skill10' & !skill11' & !skill12' & !skill13') | (!skill0' & !skill1' & !skill2' & !skill3' & !skill4' & skill0b' & !skill1b' & !skill2b' & !skill3b' & !skill4b' & !skill10' & !skill11' & !skill12' & !skill13') | (!skill0' & !skill1' & !skill2' & !skill3' & !skill4' & !skill0b' & skill1b' & !skill2b' & !skill3b' & !skill4b' & !skill10' & !skill11' & !skill12' & !skill13') | (!skill0' & !skill1' & !skill2' & !skill3' & !skill4' & !skill0b' & !skill1b' & skill2b' & !skill3b' & !skill4b' & !skill10' & !skill11' & !skill12' & !skill13') | (!skill0' & !skill1' & !skill2' & !skill3' & !skill4' & !skill0b' & !skill1b' & !skill2b' & skill3b' & !skill4b' & !skill10' & !skill11' & !skill12' & !skill13') | (!skill0' & !skill1' & !skill2' & !skill3' & !skill4' & !skill0b' & !skill1b' & !skill2b' & !skill3b' & skill4b' & !skill10' & !skill11' & !skill12' & !skill13') | (!skill0' & !skill1' & !skill2' & !skill3' & !skill4' & !skill0b' & !skill1b' & !skill2b' & !skill3b' & !skill4b' & skill10' & !skill11' & !skill12' & !skill13') | (!skill0' & !skill1' & !skill2' & !skill3' & !skill4' & !skill0b' & !skill1b' & !skill2b' & !skill3b' & !skill4b' & !skill10' & skill11' & !skill12' & !skill13') | (!skill0' & !skill1' & !skill2' & !skill3' & !skill4' & !skill0b' & !skill1b' & !skill2b' & !skill3b' & !skill4b' & !skill10' & !skill11' & skill12' & !skill13') | (!skill0' & !skill1' & !skill2' & !skill3' & !skill4' & !skill0b' & !skill1b' & !skill2b' & !skill3b' & !skill4b' & !skill10' & !skill11' & !skill12' & skill13') | (!skill0' & !skill1' & !skill2' & !skill3' & !skill4' & !skill0b' & !skill1b' & !skill2b' & !skill3b' & !skill4b' & !skill10' & !skill11' & !skill12' & !skill13')
+
+# User SYS_TRANS_HARD
+
+
+[SYS_LIVENESS]
+
+x2 & y2
+(user -> (x2 & y0))
+(!user -> (x0 & y2))
+x0 & y0
+
+[CHANGE_CONS]
+
+!(x0' & x1')
+!(x0' & x2')
+!(x1' & x2')
+!(y0' & y1')
+!(y0' & y2')
+!(y1' & y2')
+(x0' | x1' | x2')
+(y0' | y1' | y2')
+!(x0 & x1)
+!(x0 & x2)
+!(x1 & x2)
+!(y0 & y1)
+!(y0 & y2)
+!(y1 & y2)
+(x0 | x1 | x2)
+(y0 | y1 | y2)
+(x0 <-> !x0') | (x1 <-> !x1') | (x2 <-> !x2') | ((x0 <-> x0') & (x1 <-> x1') & (x2 <-> x2'))
+(y0 <-> !y0') | (y1 <-> !y1') | (y2 <-> !y2') | ((y0 <-> y0') & (y1 <-> y1') & (y2 <-> y2'))
+!((x0 <-> x0') & (x1 <-> x1') & (x2 <-> x2') & (y0 <-> y0') & (y1 <-> y1') & (y2 <-> y2'))
+
+[NOT_ALLOWED_REPAIR]
+
+!skill0b
+!skill1b
+!skill2b
+!skill3b
+!skill4b
+

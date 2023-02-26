@@ -1,0 +1,57 @@
+lcl dwn:~/workspace/synthesis_based_repair/scripts$ ./run_repaired_nine_grids_symbolic_repair.sh 
+Seeding 0
+is_realizable:  False
+perform_repair call number: 0
+modify postconditions
+T_winning_change_sel:
+10010010010000000100010100000000000010011
+T_env removed:
+100100-0010000000100010------------------
+perform_repair call number: 1
+modify preconditions
+Computed winning states in: 0.08720636367797852
+Checked initial states contained in: 0.08725547790527344
+Skill postconditions modified::
+-------0010000000---------------------
+New skill::
+100100-001000000010001001-------------
+100100-001000000011001001-------------
+100010-001000000000100001-------------
+100100-001000000010100001-------------
+100010-001000000010100001-------------
+100100-001000000011100001-------------
+100010-001000000011100001-------------
+Suggestion 0
+Action postconditions modified::
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2') | (x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+
+This took: 0.22159099578857422
+Suggestion 0
+new skill:
+-------0010000000------------------------
+Init pres:
+100100-----------------------------------
+100010-----------------------------------
+posts:
+-----------------001001------------------
+-----------------100001------------------
+Final posts:
+100001-----------------------------------
+001001-----------------------------------
+skill10: 
+[{'x2': False, 'x0': True, 'y2': False, 'x1': False, 'y1': False, 'y0': True}, {'x2': False, 'x0': True, 'y2': False, 'x1': False, 'y1': True, 'y0': False}]
+[[{'x2': False, 'x0': True, 'y2': False, 'x1': False, 'y1': False, 'y0': True}, [{'x2': False, 'x0': True, 'y2': True, 'x1': False, 'y1': False, 'y0': False}, {'x2': True, 'x0': False, 'y2': True, 'x1': False, 'y1': False, 'y0': False}]], [{'x2': False, 'x0': True, 'y2': False, 'x1': False, 'y1': True, 'y0': False}, [{'x2': False, 'x0': True, 'y2': True, 'x1': False, 'y1': False, 'y0': False}]]]
+[{'x2': False, 'x0': True, 'y2': True, 'x1': False, 'y1': False, 'y0': False}, {'x2': True, 'x0': False, 'y2': True, 'x1': False, 'y1': False, 'y0': False}]
+----------------------------------
+----------------------------------
+Finish one iteration in the while loop
+skills dict_keys(['skill0', 'skill1', 'skill2', 'skill3', 'skill4', 'skill0b', 'skill1b', 'skill2b', 'skill3b', 'skill4b', 'skill10'])
+----------------------------------
+----------------------------------
+Computed winning states in: 0.05215787887573242
+is_realizable:  True

@@ -153,12 +153,12 @@ class Specification:
             # output_vars_double_prime.append(output_var + "''")
 
         self.vars = copy.deepcopy(self.input_vars)
-        self.vars.extend(self.output_vars) # = X, Y
+        self.vars.extend(self.output_vars)
         self.vars_and_input_prime = copy.copy(self.vars)
-        self.vars_and_input_prime.extend(self.input_vars_prime) # = X, Y, X'
+        self.vars_and_input_prime.extend(self.input_vars_prime)
 
         self.vars_prime = copy.deepcopy(self.input_vars_prime)
-        self.vars_prime.extend(self.output_vars_prime) # = X, Y, X', Y'
+        self.vars_prime.extend(self.output_vars_prime)
 
         self.vars_and_vars_prime = copy.deepcopy(self.vars)
         self.vars_and_vars_prime.extend(self.vars_prime)
@@ -1910,7 +1910,7 @@ def run_repair(file_in, opts):
     acts_changed_ext = []
     T_previously_changed = bdd.false
     while do_compute_winning_states:
-        # Compute winning statesrun_re
+        # Compute winning states
         winning_states = compute_winning_states(repaired_gs.bdd, repaired_gs, opts)
         do_compute_winning_states = winning_states.does_need_repair()
 

@@ -1,0 +1,4670 @@
+Seeding 0
+is_realizable:  False
+perform_repair call number: 0
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 1
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 2
+modify preconditions
+perform_repair call number: 3
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 4
+modify preconditions
+perform_repair call number: 5
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06910991668701172
+perform_repair call number: 6
+modify preconditions
+perform_repair call number: 7
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 8
+modify preconditions
+perform_repair call number: 9
+modify postconditions
+T_winning_change_sel:
+01010010000100100000001001
+T_env removed:
+0101001000010010----------
+perform_repair call number: 10
+modify preconditions
+perform_repair call number: 11
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 12
+modify preconditions
+perform_repair call number: 13
+modify postconditions
+T_winning_change_sel:
+10010010001000010000001001
+T_env removed:
+1001001000100001----------
+perform_repair call number: 14
+modify preconditions
+perform_repair call number: 15
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.0864565372467041
+perform_repair call number: 16
+modify preconditions
+perform_repair call number: 17
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 18
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 19
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 20
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 21
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 22
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 23
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.0654592514038086
+perform_repair call number: 24
+modify preconditions
+perform_repair call number: 25
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 26
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 27
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 28
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 29
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 30
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 31
+modify preconditions
+perform_repair call number: 32
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 33
+modify preconditions
+perform_repair call number: 34
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 35
+modify preconditions
+perform_repair call number: 36
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 37
+modify preconditions
+perform_repair call number: 38
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 39
+modify preconditions
+perform_repair call number: 40
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 41
+modify preconditions
+perform_repair call number: 42
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 43
+modify preconditions
+perform_repair call number: 44
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 45
+modify preconditions
+perform_repair call number: 46
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 47
+modify preconditions
+perform_repair call number: 48
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 49
+modify preconditions
+perform_repair call number: 50
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 51
+modify preconditions
+perform_repair call number: 52
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 53
+modify preconditions
+perform_repair call number: 54
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 55
+modify preconditions
+perform_repair call number: 56
+modify postconditions
+T_winning_change_sel:
+10010010000101001000010010
+T_env removed:
+1001001000010100----------
+Computed winning states in: 0.1701958179473877
+perform_repair call number: 57
+modify preconditions
+perform_repair call number: 58
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 59
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 60
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 61
+modify preconditions
+perform_repair call number: 62
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 63
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 64
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 65
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 66
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 67
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 68
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 69
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 70
+modify preconditions
+perform_repair call number: 71
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.057550907135009766
+perform_repair call number: 72
+modify preconditions
+perform_repair call number: 73
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 74
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 75
+modify preconditions
+perform_repair call number: 76
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 77
+modify preconditions
+perform_repair call number: 78
+modify postconditions
+T_winning_change_sel:
+01010010001000010000001001
+T_env removed:
+0101001000100001----------
+perform_repair call number: 79
+modify preconditions
+perform_repair call number: 80
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06981515884399414
+perform_repair call number: 81
+modify preconditions
+perform_repair call number: 82
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 83
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 84
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 85
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 86
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 87
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 88
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 89
+modify preconditions
+perform_repair call number: 90
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 91
+modify preconditions
+perform_repair call number: 92
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.07431221008300781
+perform_repair call number: 93
+modify preconditions
+perform_repair call number: 94
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 95
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 96
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 97
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 98
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 99
+modify preconditions
+perform_repair call number: 100
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 101
+modify preconditions
+perform_repair call number: 102
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 103
+modify preconditions
+perform_repair call number: 104
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 105
+modify preconditions
+perform_repair call number: 106
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 107
+modify preconditions
+perform_repair call number: 108
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.08621358871459961
+perform_repair call number: 109
+modify preconditions
+perform_repair call number: 110
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 111
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 112
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 113
+modify preconditions
+perform_repair call number: 114
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.061380863189697266
+perform_repair call number: 115
+modify preconditions
+perform_repair call number: 116
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 117
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 118
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 119
+modify preconditions
+perform_repair call number: 120
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 121
+modify preconditions
+perform_repair call number: 122
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 123
+modify preconditions
+perform_repair call number: 124
+modify postconditions
+T_winning_change_sel:
+01010010001000010000001001
+T_env removed:
+0101001000100001----------
+perform_repair call number: 125
+modify preconditions
+perform_repair call number: 126
+modify postconditions
+T_winning_change_sel:
+10010010000100010000001001
+T_env removed:
+1001001000010001----------
+perform_repair call number: 127
+modify preconditions
+perform_repair call number: 128
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 129
+modify preconditions
+perform_repair call number: 130
+modify postconditions
+T_winning_change_sel:
+10010010000101001000010001
+T_env removed:
+1001001000010100----------
+Computed winning states in: 0.0993194580078125
+perform_repair call number: 131
+modify preconditions
+perform_repair call number: 132
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 133
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 134
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 135
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 136
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 137
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 138
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 139
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 140
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 141
+modify preconditions
+perform_repair call number: 142
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 143
+modify preconditions
+perform_repair call number: 144
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 145
+modify preconditions
+perform_repair call number: 146
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 147
+modify preconditions
+perform_repair call number: 148
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 149
+modify preconditions
+perform_repair call number: 150
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 151
+modify preconditions
+perform_repair call number: 152
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 153
+modify preconditions
+perform_repair call number: 154
+modify postconditions
+T_winning_change_sel:
+01010010000100100000001001
+T_env removed:
+0101001000010010----------
+perform_repair call number: 155
+modify preconditions
+perform_repair call number: 156
+modify postconditions
+T_winning_change_sel:
+10010010000101001000100010
+T_env removed:
+1001001000010100----------
+Computed winning states in: 0.11614084243774414
+perform_repair call number: 157
+modify preconditions
+perform_repair call number: 158
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 159
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 160
+modify preconditions
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+No repair found
+perform_repair call number: 161
+modify preconditions
+perform_repair call number: 162
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 163
+modify preconditions
+perform_repair call number: 164
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06260037422180176
+perform_repair call number: 165
+modify preconditions
+perform_repair call number: 166
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 167
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 168
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 169
+modify preconditions
+perform_repair call number: 170
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 171
+modify preconditions
+perform_repair call number: 172
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 173
+modify preconditions
+perform_repair call number: 174
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 175
+modify preconditions
+perform_repair call number: 176
+modify postconditions
+T_winning_change_sel:
+10010010000101001000010010
+T_env removed:
+1001001000010100----------
+Computed winning states in: 0.0908203125
+perform_repair call number: 177
+modify preconditions
+perform_repair call number: 178
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 179
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 180
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 181
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 182
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 183
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 184
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 185
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 186
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 187
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 188
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 189
+modify preconditions
+perform_repair call number: 190
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 191
+modify preconditions
+perform_repair call number: 192
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 193
+modify preconditions
+perform_repair call number: 194
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 195
+modify preconditions
+perform_repair call number: 196
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 197
+modify preconditions
+perform_repair call number: 198
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 199
+modify preconditions
+perform_repair call number: 200
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.09164118766784668
+perform_repair call number: 201
+modify preconditions
+perform_repair call number: 202
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 203
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 204
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 205
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 206
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 207
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 208
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 209
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 210
+modify preconditions
+perform_repair call number: 211
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 212
+modify preconditions
+perform_repair call number: 213
+modify postconditions
+T_winning_change_sel:
+01010010000100100000001001
+T_env removed:
+0101001000010010----------
+perform_repair call number: 214
+modify preconditions
+perform_repair call number: 215
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.0803689956665039
+perform_repair call number: 216
+modify preconditions
+perform_repair call number: 217
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 218
+modify preconditions
+perform_repair call number: 219
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 220
+modify preconditions
+perform_repair call number: 221
+modify postconditions
+T_winning_change_sel:
+01010010001000010000001001
+T_env removed:
+0101001000100001----------
+perform_repair call number: 222
+modify preconditions
+perform_repair call number: 223
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.07226777076721191
+perform_repair call number: 224
+modify preconditions
+perform_repair call number: 225
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 226
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 227
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 228
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 229
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 230
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 231
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 232
+modify preconditions
+perform_repair call number: 233
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 234
+modify preconditions
+perform_repair call number: 235
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.07311534881591797
+perform_repair call number: 236
+modify preconditions
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+No repair found
+perform_repair call number: 237
+modify preconditions
+perform_repair call number: 238
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 239
+modify preconditions
+perform_repair call number: 240
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06397032737731934
+perform_repair call number: 241
+modify preconditions
+perform_repair call number: 242
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 243
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 244
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 245
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 246
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 247
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 248
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 249
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 250
+modify preconditions
+perform_repair call number: 251
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 252
+modify preconditions
+perform_repair call number: 253
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 254
+modify preconditions
+perform_repair call number: 255
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 256
+modify preconditions
+perform_repair call number: 257
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.08967161178588867
+perform_repair call number: 258
+modify preconditions
+perform_repair call number: 259
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 260
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 261
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 262
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 263
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 264
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 265
+modify preconditions
+perform_repair call number: 266
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 267
+modify preconditions
+perform_repair call number: 268
+modify postconditions
+T_winning_change_sel:
+10010010000101001000010010
+T_env removed:
+1001001000010100----------
+Computed winning states in: 0.06358146667480469
+perform_repair call number: 269
+modify preconditions
+perform_repair call number: 270
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 271
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 272
+modify preconditions
+perform_repair call number: 273
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 274
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 275
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 276
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 277
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 278
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 279
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 280
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 281
+modify preconditions
+perform_repair call number: 282
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06365776062011719
+perform_repair call number: 283
+modify preconditions
+perform_repair call number: 284
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 285
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 286
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 287
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 288
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 289
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 290
+modify preconditions
+perform_repair call number: 291
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 292
+modify preconditions
+perform_repair call number: 293
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06287169456481934
+perform_repair call number: 294
+modify preconditions
+perform_repair call number: 295
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 296
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 297
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 298
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 299
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 300
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 301
+modify preconditions
+perform_repair call number: 302
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 303
+modify preconditions
+perform_repair call number: 304
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 305
+modify preconditions
+perform_repair call number: 306
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 307
+modify preconditions
+perform_repair call number: 308
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 309
+modify preconditions
+perform_repair call number: 310
+modify postconditions
+T_winning_change_sel:
+10010010000101001000100001
+T_env removed:
+1001001000010100----------
+Computed winning states in: 0.09117627143859863
+perform_repair call number: 311
+modify preconditions
+perform_repair call number: 312
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 313
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 314
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 315
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 316
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 317
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 318
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 319
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 320
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 321
+modify preconditions
+perform_repair call number: 322
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 323
+modify preconditions
+perform_repair call number: 324
+modify postconditions
+T_winning_change_sel:
+10010010000100010000001001
+T_env removed:
+1001001000010001----------
+perform_repair call number: 325
+modify preconditions
+perform_repair call number: 326
+modify postconditions
+T_winning_change_sel:
+10010010000101001000010001
+T_env removed:
+1001001000010100----------
+Computed winning states in: 0.07397937774658203
+perform_repair call number: 327
+modify preconditions
+perform_repair call number: 328
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 329
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 330
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 331
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 332
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 333
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 334
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 335
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 336
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 337
+modify preconditions
+perform_repair call number: 338
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06386685371398926
+perform_repair call number: 339
+modify preconditions
+perform_repair call number: 340
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 341
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 342
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 343
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 344
+modify preconditions
+perform_repair call number: 345
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 346
+modify preconditions
+perform_repair call number: 347
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 348
+modify preconditions
+perform_repair call number: 349
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 350
+modify preconditions
+perform_repair call number: 351
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 352
+modify preconditions
+perform_repair call number: 353
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.0894782543182373
+perform_repair call number: 354
+modify preconditions
+perform_repair call number: 355
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 356
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 357
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 358
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 359
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 360
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 361
+modify postconditions
+T_winning_change_sel:
+01010010001000010000001001
+T_env removed:
+0101001000100001----------
+perform_repair call number: 362
+modify preconditions
+perform_repair call number: 363
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 364
+modify preconditions
+perform_repair call number: 365
+modify postconditions
+T_winning_change_sel:
+10010010000100100000001001
+T_env removed:
+1001001000010010----------
+perform_repair call number: 366
+modify preconditions
+perform_repair call number: 367
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.08740043640136719
+perform_repair call number: 368
+modify preconditions
+perform_repair call number: 369
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 370
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 371
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 372
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 373
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 374
+modify preconditions
+perform_repair call number: 375
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 376
+modify preconditions
+perform_repair call number: 377
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 378
+modify preconditions
+perform_repair call number: 379
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.0738980770111084
+perform_repair call number: 380
+modify preconditions
+perform_repair call number: 381
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 382
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 383
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 384
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 385
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 386
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 387
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 388
+modify preconditions
+perform_repair call number: 389
+modify postconditions
+T_winning_change_sel:
+01010010000100100000001001
+T_env removed:
+0101001000010010----------
+perform_repair call number: 390
+modify preconditions
+perform_repair call number: 391
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 392
+modify preconditions
+perform_repair call number: 393
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.08504438400268555
+perform_repair call number: 394
+modify preconditions
+No repair found
+perform_repair call number: 395
+modify preconditions
+perform_repair call number: 396
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 397
+modify preconditions
+perform_repair call number: 398
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 399
+modify preconditions
+perform_repair call number: 400
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 401
+modify preconditions
+perform_repair call number: 402
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.0813751220703125
+perform_repair call number: 403
+modify preconditions
+perform_repair call number: 404
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 405
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 406
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 407
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 408
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 409
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 410
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.0564732551574707
+perform_repair call number: 411
+modify preconditions
+perform_repair call number: 412
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 413
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 414
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 415
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 416
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 417
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 418
+modify preconditions
+perform_repair call number: 419
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 420
+modify preconditions
+perform_repair call number: 421
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 422
+modify preconditions
+perform_repair call number: 423
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 424
+modify preconditions
+perform_repair call number: 425
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 426
+modify preconditions
+perform_repair call number: 427
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.08743643760681152
+perform_repair call number: 428
+modify preconditions
+perform_repair call number: 429
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 430
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 431
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 432
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 433
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 434
+modify preconditions
+perform_repair call number: 435
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 436
+modify preconditions
+perform_repair call number: 437
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.07178092002868652
+perform_repair call number: 438
+modify preconditions
+perform_repair call number: 439
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 440
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 441
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 442
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 443
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 444
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 445
+modify preconditions
+perform_repair call number: 446
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 447
+modify preconditions
+perform_repair call number: 448
+modify postconditions
+T_winning_change_sel:
+01010010001000010000001001
+T_env removed:
+0101001000100001----------
+perform_repair call number: 449
+modify preconditions
+perform_repair call number: 450
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.07238507270812988
+perform_repair call number: 451
+modify preconditions
+perform_repair call number: 452
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 453
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 454
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 455
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 456
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 457
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 458
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 459
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 460
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 461
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.0574491024017334
+perform_repair call number: 462
+modify preconditions
+perform_repair call number: 463
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 464
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 465
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 466
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 467
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 468
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 469
+modify preconditions
+perform_repair call number: 470
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 471
+modify preconditions
+perform_repair call number: 472
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06468987464904785
+perform_repair call number: 473
+modify preconditions
+perform_repair call number: 474
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 475
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 476
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 477
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 478
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06117415428161621
+perform_repair call number: 479
+modify preconditions
+perform_repair call number: 480
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 481
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 482
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 483
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 484
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 485
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 486
+modify preconditions
+perform_repair call number: 487
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 488
+modify preconditions
+perform_repair call number: 489
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06122994422912598
+perform_repair call number: 490
+modify preconditions
+perform_repair call number: 491
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 492
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 493
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 494
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 495
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 496
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 497
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 498
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 499
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.05534553527832031
+perform_repair call number: 500
+modify preconditions
+perform_repair call number: 501
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 502
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 503
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 504
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 505
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 506
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 507
+modify preconditions
+perform_repair call number: 508
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 509
+modify preconditions
+perform_repair call number: 510
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06891441345214844
+perform_repair call number: 511
+modify preconditions
+perform_repair call number: 512
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 513
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 514
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 515
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 516
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 517
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 518
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 519
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 520
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.05579185485839844
+perform_repair call number: 521
+modify preconditions
+perform_repair call number: 522
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 523
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 524
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 525
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 526
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 527
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 528
+modify preconditions
+perform_repair call number: 529
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 530
+modify preconditions
+perform_repair call number: 531
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 532
+modify preconditions
+perform_repair call number: 533
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 534
+modify preconditions
+perform_repair call number: 535
+modify postconditions
+T_winning_change_sel:
+01010010001000010000001001
+T_env removed:
+0101001000100001----------
+perform_repair call number: 536
+modify preconditions
+perform_repair call number: 537
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 538
+modify preconditions
+perform_repair call number: 539
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 540
+modify preconditions
+perform_repair call number: 541
+modify postconditions
+T_winning_change_sel:
+01010010000100100000001001
+T_env removed:
+0101001000010010----------
+perform_repair call number: 542
+modify preconditions
+perform_repair call number: 543
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 544
+modify preconditions
+perform_repair call number: 545
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.1255943775177002
+perform_repair call number: 546
+modify preconditions
+perform_repair call number: 547
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 548
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 549
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 550
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 551
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 552
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 553
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 554
+modify preconditions
+perform_repair call number: 555
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 556
+modify preconditions
+perform_repair call number: 557
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 558
+modify preconditions
+perform_repair call number: 559
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 560
+modify preconditions
+perform_repair call number: 561
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 562
+modify preconditions
+perform_repair call number: 563
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 564
+modify preconditions
+perform_repair call number: 565
+modify postconditions
+T_winning_change_sel:
+01010010000100100000001001
+T_env removed:
+0101001000010010----------
+perform_repair call number: 566
+modify preconditions
+perform_repair call number: 567
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.11850094795227051
+perform_repair call number: 568
+modify preconditions
+perform_repair call number: 569
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 570
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 571
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 572
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 573
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 574
+modify preconditions
+perform_repair call number: 575
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 576
+modify preconditions
+perform_repair call number: 577
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06583690643310547
+perform_repair call number: 578
+modify preconditions
+perform_repair call number: 579
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 580
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 581
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 582
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 583
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 584
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 585
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 586
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 587
+modify preconditions
+perform_repair call number: 588
+modify postconditions
+T_winning_change_sel:
+01010010001000010000001001
+T_env removed:
+0101001000100001----------
+perform_repair call number: 589
+modify preconditions
+perform_repair call number: 590
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.07000255584716797
+perform_repair call number: 591
+modify preconditions
+perform_repair call number: 592
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 593
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 594
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 595
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 596
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 597
+modify preconditions
+perform_repair call number: 598
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 599
+modify preconditions
+perform_repair call number: 600
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 601
+modify preconditions
+perform_repair call number: 602
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.07832837104797363
+perform_repair call number: 603
+modify preconditions
+perform_repair call number: 604
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 605
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 606
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 607
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 608
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 609
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 610
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 611
+modify preconditions
+perform_repair call number: 612
+modify postconditions
+T_winning_change_sel:
+01010010000100100000001001
+T_env removed:
+0101001000010010----------
+perform_repair call number: 613
+modify preconditions
+perform_repair call number: 614
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 615
+modify preconditions
+perform_repair call number: 616
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.07704925537109375
+perform_repair call number: 617
+modify preconditions
+perform_repair call number: 618
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 619
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 620
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 621
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 622
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 623
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 624
+modify preconditions
+perform_repair call number: 625
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 626
+modify preconditions
+perform_repair call number: 627
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06434011459350586
+perform_repair call number: 628
+modify preconditions
+perform_repair call number: 629
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 630
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 631
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 632
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 633
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 634
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 635
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 636
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 637
+modify preconditions
+perform_repair call number: 638
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06277060508728027
+perform_repair call number: 639
+modify preconditions
+perform_repair call number: 640
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 641
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 642
+modify preconditions
+perform_repair call number: 643
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 644
+modify preconditions
+perform_repair call number: 645
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 646
+modify preconditions
+perform_repair call number: 647
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 648
+modify preconditions
+perform_repair call number: 649
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 650
+modify preconditions
+perform_repair call number: 651
+modify postconditions
+T_winning_change_sel:
+10010010000101001000100010
+T_env removed:
+1001001000010100----------
+Computed winning states in: 0.10409951210021973
+perform_repair call number: 652
+modify preconditions
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+No repair found
+perform_repair call number: 653
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 654
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 655
+modify preconditions
+perform_repair call number: 656
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 657
+modify preconditions
+perform_repair call number: 658
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 659
+modify preconditions
+perform_repair call number: 660
+modify postconditions
+T_winning_change_sel:
+01010010001000010000001001
+T_env removed:
+0101001000100001----------
+perform_repair call number: 661
+modify preconditions
+perform_repair call number: 662
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.09919404983520508
+perform_repair call number: 663
+modify preconditions
+perform_repair call number: 664
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 665
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 666
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 667
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 668
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 669
+modify preconditions
+perform_repair call number: 670
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 671
+modify preconditions
+perform_repair call number: 672
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.05910015106201172
+perform_repair call number: 673
+modify preconditions
+perform_repair call number: 674
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 675
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 676
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 677
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 678
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 679
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 680
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 681
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 682
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 683
+modify preconditions
+perform_repair call number: 684
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06939888000488281
+perform_repair call number: 685
+modify preconditions
+perform_repair call number: 686
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 687
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 688
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 689
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 690
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 691
+modify preconditions
+perform_repair call number: 692
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 693
+modify preconditions
+perform_repair call number: 694
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06543564796447754
+perform_repair call number: 695
+modify preconditions
+perform_repair call number: 696
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 697
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 698
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 699
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 700
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 701
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 702
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 703
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 704
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 705
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06097674369812012
+perform_repair call number: 706
+modify preconditions
+perform_repair call number: 707
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 708
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 709
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 710
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 711
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 712
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 713
+modify preconditions
+perform_repair call number: 714
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 715
+modify preconditions
+perform_repair call number: 716
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06553864479064941
+perform_repair call number: 717
+modify preconditions
+perform_repair call number: 718
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 719
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 720
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 721
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 722
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 723
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 724
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 725
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 726
+modify preconditions
+perform_repair call number: 727
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 728
+modify preconditions
+perform_repair call number: 729
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 730
+modify preconditions
+perform_repair call number: 731
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.0835561752319336
+perform_repair call number: 732
+modify preconditions
+perform_repair call number: 733
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 734
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 735
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 736
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 737
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 738
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 739
+modify preconditions
+perform_repair call number: 740
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 741
+modify preconditions
+perform_repair call number: 742
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.07320880889892578
+perform_repair call number: 743
+modify preconditions
+perform_repair call number: 744
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 745
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 746
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 747
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 748
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 749
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 750
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 751
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 752
+modify preconditions
+perform_repair call number: 753
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06534385681152344
+perform_repair call number: 754
+modify preconditions
+perform_repair call number: 755
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 756
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 757
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 758
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 759
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 760
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 761
+modify preconditions
+perform_repair call number: 762
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 763
+modify preconditions
+perform_repair call number: 764
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 765
+modify preconditions
+perform_repair call number: 766
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 767
+modify preconditions
+perform_repair call number: 768
+modify postconditions
+T_winning_change_sel:
+01010010000100100000001001
+T_env removed:
+0101001000010010----------
+perform_repair call number: 769
+modify preconditions
+perform_repair call number: 770
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.09673953056335449
+perform_repair call number: 771
+modify preconditions
+perform_repair call number: 772
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 773
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 774
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 775
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 776
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 777
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 778
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 779
+modify preconditions
+perform_repair call number: 780
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 781
+modify preconditions
+perform_repair call number: 782
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.08104634284973145
+perform_repair call number: 783
+modify preconditions
+perform_repair call number: 784
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 785
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 786
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 787
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 788
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 789
+modify preconditions
+perform_repair call number: 790
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 791
+modify preconditions
+perform_repair call number: 792
+modify postconditions
+T_winning_change_sel:
+01010010000100100000001001
+T_env removed:
+0101001000010010----------
+perform_repair call number: 793
+modify preconditions
+perform_repair call number: 794
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 795
+modify preconditions
+perform_repair call number: 796
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.10386395454406738
+perform_repair call number: 797
+modify preconditions
+perform_repair call number: 798
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 799
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 800
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 801
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 802
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 803
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 804
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 805
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 806
+modify preconditions
+perform_repair call number: 807
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 808
+modify preconditions
+perform_repair call number: 809
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.0863802433013916
+perform_repair call number: 810
+modify preconditions
+perform_repair call number: 811
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 812
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 813
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 814
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 815
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 816
+modify preconditions
+perform_repair call number: 817
+modify postconditions
+T_winning_change_sel:
+01010010000100100000001001
+T_env removed:
+0101001000010010----------
+perform_repair call number: 818
+modify preconditions
+perform_repair call number: 819
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 820
+modify preconditions
+perform_repair call number: 821
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 822
+modify preconditions
+perform_repair call number: 823
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.09556007385253906
+perform_repair call number: 824
+modify preconditions
+perform_repair call number: 825
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 826
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 827
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 828
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 829
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 830
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 831
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 832
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 833
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 834
+modify preconditions
+perform_repair call number: 835
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 836
+modify preconditions
+perform_repair call number: 837
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 838
+modify preconditions
+perform_repair call number: 839
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 840
+modify preconditions
+perform_repair call number: 841
+modify postconditions
+T_winning_change_sel:
+10010010001000010000001001
+T_env removed:
+1001001000100001----------
+perform_repair call number: 842
+modify preconditions
+perform_repair call number: 843
+modify postconditions
+T_winning_change_sel:
+10010010000101001000100001
+T_env removed:
+1001001000010100----------
+Computed winning states in: 0.11256885528564453
+perform_repair call number: 844
+modify preconditions
+perform_repair call number: 845
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 846
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 847
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 848
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 849
+modify preconditions
+perform_repair call number: 850
+modify postconditions
+T_winning_change_sel:
+01010010001000010000001001
+T_env removed:
+0101001000100001----------
+perform_repair call number: 851
+modify preconditions
+perform_repair call number: 852
+modify postconditions
+T_winning_change_sel:
+01010010000100100000001001
+T_env removed:
+0101001000010010----------
+perform_repair call number: 853
+modify preconditions
+perform_repair call number: 854
+modify postconditions
+T_winning_change_sel:
+10010010000101001000010010
+T_env removed:
+1001001000010100----------
+Computed winning states in: 0.07333493232727051
+perform_repair call number: 855
+modify preconditions
+perform_repair call number: 856
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 857
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 858
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 859
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 860
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 861
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 862
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 863
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 864
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06910371780395508
+perform_repair call number: 865
+modify preconditions
+perform_repair call number: 866
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 867
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 868
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 869
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 870
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 871
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 872
+modify preconditions
+perform_repair call number: 873
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 874
+modify preconditions
+perform_repair call number: 875
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 876
+modify preconditions
+perform_repair call number: 877
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 878
+modify preconditions
+perform_repair call number: 879
+modify postconditions
+T_winning_change_sel:
+10010010000100100000001001
+T_env removed:
+1001001000010010----------
+perform_repair call number: 880
+modify preconditions
+perform_repair call number: 881
+modify postconditions
+T_winning_change_sel:
+10010010000101001000010010
+T_env removed:
+1001001000010100----------
+Computed winning states in: 0.12168169021606445
+perform_repair call number: 882
+modify preconditions
+perform_repair call number: 883
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 884
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 885
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 886
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 887
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 888
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 889
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 890
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 891
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 892
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.05918693542480469
+perform_repair call number: 893
+modify preconditions
+perform_repair call number: 894
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 895
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 896
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 897
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 898
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 899
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 900
+modify preconditions
+perform_repair call number: 901
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 902
+modify preconditions
+perform_repair call number: 903
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 904
+modify preconditions
+perform_repair call number: 905
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 906
+modify preconditions
+perform_repair call number: 907
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.08225679397583008
+perform_repair call number: 908
+modify preconditions
+perform_repair call number: 909
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 910
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 911
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 912
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 913
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 914
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 915
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 916
+modify preconditions
+perform_repair call number: 917
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 918
+modify preconditions
+perform_repair call number: 919
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.0869591236114502
+perform_repair call number: 920
+modify preconditions
+perform_repair call number: 921
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 922
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 923
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 924
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 925
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 926
+modify preconditions
+perform_repair call number: 927
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 928
+modify preconditions
+perform_repair call number: 929
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06491446495056152
+perform_repair call number: 930
+modify preconditions
+perform_repair call number: 931
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 932
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 933
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 934
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 935
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 936
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 937
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 938
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 939
+modify preconditions
+perform_repair call number: 940
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.06266570091247559
+perform_repair call number: 941
+modify preconditions
+perform_repair call number: 942
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 943
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 944
+modify preconditions
+perform_repair call number: 945
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 946
+modify preconditions
+perform_repair call number: 947
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 948
+modify preconditions
+perform_repair call number: 949
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 950
+modify preconditions
+perform_repair call number: 951
+modify postconditions
+T_winning_change_sel:
+10010010000101001000100001
+T_env removed:
+1001001000010100----------
+Computed winning states in: 0.07804107666015625
+perform_repair call number: 952
+modify preconditions
+perform_repair call number: 953
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 954
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 955
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 956
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 957
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 958
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 959
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 960
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 961
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 962
+modify preconditions
+perform_repair call number: 963
+modify postconditions
+T_winning_change_sel:
+01010010000100100000001001
+T_env removed:
+0101001000010010----------
+perform_repair call number: 964
+modify preconditions
+perform_repair call number: 965
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.07815384864807129
+perform_repair call number: 966
+modify preconditions
+perform_repair call number: 967
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 968
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 969
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 970
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 971
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 972
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 973
+modify preconditions
+perform_repair call number: 974
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 975
+modify preconditions
+perform_repair call number: 976
+modify postconditions
+T_winning_change_sel:
+10010010000100010000001001
+T_env removed:
+1001001000010001----------
+perform_repair call number: 977
+modify preconditions
+perform_repair call number: 978
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.07563495635986328
+perform_repair call number: 979
+modify preconditions
+perform_repair call number: 980
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 981
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 982
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 983
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 984
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 985
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 986
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 987
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 988
+modify preconditions
+perform_repair call number: 989
+modify postconditions
+T_winning_change_sel:
+00110010000100010000001001
+T_env removed:
+0011001000010001----------
+perform_repair call number: 990
+modify preconditions
+perform_repair call number: 991
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 992
+modify preconditions
+perform_repair call number: 993
+modify postconditions
+T_winning_change_sel:
+01010010000011001000010001
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.08526420593261719
+perform_repair call number: 994
+modify preconditions
+perform_repair call number: 995
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 996
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 997
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 998
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 999
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 1000
+modify preconditions
+perform_repair call number: 1001
+modify postconditions
+T_winning_change_sel:
+00110010001000100000001001
+T_env removed:
+0011001000100010----------
+perform_repair call number: 1002
+modify preconditions
+perform_repair call number: 1003
+modify postconditions
+T_winning_change_sel:
+00110010001000010000001001
+T_env removed:
+0011001000100001----------
+perform_repair call number: 1004
+modify preconditions
+perform_repair call number: 1005
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 1006
+modify preconditions
+perform_repair call number: 1007
+modify postconditions
+T_winning_change_sel:
+01010010000100010000001001
+T_env removed:
+0101001000010001----------
+perform_repair call number: 1008
+modify preconditions
+perform_repair call number: 1009
+modify postconditions
+T_winning_change_sel:
+10010010000100100000001001
+T_env removed:
+1001001000010010----------
+perform_repair call number: 1010
+modify preconditions
+perform_repair call number: 1011
+modify postconditions
+T_winning_change_sel:
+01010010000100100000001001
+T_env removed:
+0101001000010010----------
+perform_repair call number: 1012
+modify preconditions
+perform_repair call number: 1013
+modify postconditions
+T_winning_change_sel:
+10010010000101001000010010
+T_env removed:
+1001001000010100----------
+Computed winning states in: 0.11272215843200684
+perform_repair call number: 1014
+modify preconditions
+perform_repair call number: 1015
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 1016
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 1017
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 1018
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 1019
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 1020
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 1021
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+No repair found
+perform_repair call number: 1022
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 1023
+modify postconditions
+T_winning_change_sel:
+00110010000100100000001001
+T_env removed:
+0011001000010010----------
+perform_repair call number: 1024
+modify preconditions
+perform_repair call number: 1025
+modify postconditions
+T_winning_change_sel:
+01010010001000100000001001
+T_env removed:
+0101001000100010----------
+perform_repair call number: 1026
+modify preconditions
+perform_repair call number: 1027
+modify postconditions
+T_winning_change_sel:
+01010010000011001000100010
+T_env removed:
+0101001000001100----------
+Computed winning states in: 0.07160115242004395
+perform_repair call number: 1028
+modify preconditions
+perform_repair call number: 1029
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 1030
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 1031
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 1032
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions

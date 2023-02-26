@@ -1,0 +1,10 @@
+{
+  "file_symbols": "../data/repaired_nine_grids/repaired_nine_grids_symbols.json",
+  "file_skills": "../data/repaired_nine_grids/repaired_nine_grids_skills.json",
+  "folder_trajectories": "../data/repaired_nine_grids/trajectories/",
+  "folder_plot": "../data/repaired_nine_grids/plots/",
+  "skill_names": ["skill0", "skill1", "skill2", "skill3", "skill4"],
+  "file_structured_slugs": "../data/repaired_nine_grids/repaired_nine_grids_a.structuredslugs",
+  "file_log": "../data/repaired_nine_grids/log_a.txt",
+  "f_user_spec": "../data/repaired_nine_grids/repaired_nine_grids_a.json"
+}

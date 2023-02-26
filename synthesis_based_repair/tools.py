@@ -240,7 +240,7 @@ def write_spec(file_spec, symbols, skills, user_spec, change_cons, not_allowed_r
     write_init(file_spec, 'ENV_INIT', user_spec['env_init_true'], user_spec['env_init_false'])
 
     # SYS_INIT
-    write_init(file_spec, 'SYS_INIT', user_spec['sys_init_true'], user_spec['sys_init_false'])
+    write_init(file_spec, 'SYS_INIT', user_spec['sys_init_true'], list(skills.keys()))
 
     # ENV_TRANS
     write_env_trans(file_spec, symbols, skills, opts)
