@@ -1,0 +1,1332 @@
+Seeding 0
+is_realizable:  False
+perform_repair call number: 0
+modify postconditions
+T_winning_change_sel:
+10010010010000000100010100000000000010011
+T_env removed:
+100100-0010000000100010------------------
+perform_repair call number: 1
+modify preconditions
+Computed winning states in: 0.08735871315002441
+Checked initial states contained in: 0.08738827705383301
+Skill postconditions modified::
+-------0010000000---------------------
+New skill::
+1001000001000000000001001-------------
+1001000001000000010001001-------------
+1001000001000000011001001-------------
+1001001001000000010001001-------------
+1001001001000000011001001-------------
+1001000001000000000100001-------------
+1001000001000000010100001-------------
+1001000001000000011100001-------------
+1001001001000000010100001-------------
+1001001001000000011100001-------------
+1000100001000000000100001-------------
+1000101001000000000100001-------------
+1000100001000000010100001-------------
+1000101001000000010100001-------------
+1000100001000000011100001-------------
+1000101001000000011100001-------------
+Suggestion 0
+Action postconditions modified::
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2') | (x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+
+This took: 0.21837234497070312
+Suggestion 0
+new skill:
+-------0010000000------------------------
+Init pres:
+100100-----------------------------------
+100010-----------------------------------
+posts:
+-----------------001001------------------
+-----------------100001------------------
+Final posts:
+100001-----------------------------------
+001001-----------------------------------
+skill10: 
+[{'x2': False, 'x0': True, 'y1': False, 'y2': False, 'y0': True, 'x1': False}, {'x2': False, 'x0': True, 'y1': True, 'y2': False, 'y0': False, 'x1': False}]
+[[{'x2': False, 'x0': True, 'y1': False, 'y2': False, 'y0': True, 'x1': False}, [{'x2': False, 'x0': True, 'y1': False, 'y2': True, 'y0': False, 'x1': False}, {'x2': True, 'x0': False, 'y1': False, 'y2': True, 'y0': False, 'x1': False}]], [{'x2': False, 'x0': True, 'y1': True, 'y2': False, 'y0': False, 'x1': False}, [{'x2': False, 'x0': True, 'y1': False, 'y2': True, 'y0': False, 'x1': False}]]]
+[{'x2': False, 'x0': True, 'y1': False, 'y2': True, 'y0': False, 'x1': False}, {'x2': True, 'x0': False, 'y1': False, 'y2': True, 'y0': False, 'x1': False}]
+----------------------------------
+----------------------------------
+Finish one iteration in the while loop
+skills dict_keys(['skill0', 'skill1', 'skill2', 'skill3', 'skill4', 'skill0b', 'skill1b', 'skill2b', 'skill3b', 'skill4b', 'skill10'])
+----------------------------------
+----------------------------------
+Computed winning states in: 0.051576852798461914
+is_realizable:  True
+Seeding 1
+is_realizable:  False
+perform_repair call number: 2
+modify postconditions
+T_winning_change_sel:
+00100100000100000100100000000000001000011
+T_env removed:
+001001-0000100000100100------------------
+Computed winning states in: 0.055397748947143555
+perform_repair call number: 3
+modify preconditions
+perform_repair call number: 4
+modify postconditions
+T_winning_change_sel:
+10010010010000000100010000000000000011000
+T_env removed:
+100100-0010000000100010------------------
+perform_repair call number: 5
+modify preconditions
+Checked initial states contained in: 0.1428983211517334
+Skill postconditions modified::
+-------0010000000---------------------
+New skill::
+100100-001000000000001100-------------
+100100-001000000010001100-------------
+100010-001000000000001100-------------
+100010-001000000010001100-------------
+100010-001000000011001100-------------
+100100-001000000000100001-------------
+100100-001000000010100001-------------
+Skill postconditions modified::
+-------0000100000---------------------
+New skill::
+001001-000010000000100001-------------
+001001-000010000010100001-------------
+001001-000010000011100001-------------
+Suggestion 0
+Action postconditions modified::
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2') | (x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2'))
+
+Action postconditions modified::
+!skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+
+This took: 0.264049768447876
+Suggestion 0
+new skill:
+-------0010000000------------------------
+Init pres:
+100100-----------------------------------
+100010-----------------------------------
+posts:
+-----------------001100------------------
+-----------------100001------------------
+Final posts:
+001100-----------------------------------
+100001-----------------------------------
+new skill:
+-------0000100000------------------------
+Init pres:
+001001-----------------------------------
+posts:
+-----------------100001------------------
+Final posts:
+100001-----------------------------------
+skill10: 
+[{'x1': False, 'y1': False, 'x0': True, 'x2': False, 'y2': False, 'y0': True}, {'x1': False, 'y1': True, 'x0': True, 'x2': False, 'y2': False, 'y0': False}]
+[[{'x1': False, 'y1': False, 'x0': True, 'x2': False, 'y2': False, 'y0': True}, [{'x1': False, 'y1': False, 'x0': False, 'x2': True, 'y2': False, 'y0': True}, {'x1': False, 'y1': False, 'x0': True, 'x2': False, 'y2': True, 'y0': False}]], [{'x1': False, 'y1': True, 'x0': True, 'x2': False, 'y2': False, 'y0': False}, [{'x1': False, 'y1': False, 'x0': False, 'x2': True, 'y2': False, 'y0': True}]]]
+[{'x1': False, 'y1': False, 'x0': False, 'x2': True, 'y2': False, 'y0': True}, {'x1': False, 'y1': False, 'x0': True, 'x2': False, 'y2': True, 'y0': False}]
+skill11: 
+[{'x1': False, 'y1': False, 'x0': False, 'x2': True, 'y2': True, 'y0': False}]
+[[{'x1': False, 'y1': False, 'x0': False, 'x2': True, 'y2': True, 'y0': False}, [{'x1': False, 'y1': False, 'x0': True, 'x2': False, 'y2': True, 'y0': False}]]]
+[{'x1': False, 'y1': False, 'x0': True, 'x2': False, 'y2': True, 'y0': False}]
+----------------------------------
+----------------------------------
+Finish one iteration in the while loop
+skills dict_keys(['skill0', 'skill1', 'skill2', 'skill3', 'skill4', 'skill0b', 'skill1b', 'skill2b', 'skill3b', 'skill4b', 'skill10', 'skill11'])
+----------------------------------
+----------------------------------
+Computed winning states in: 0.05157828330993652
+is_realizable:  True
+Seeding 2
+is_realizable:  False
+perform_repair call number: 6
+modify postconditions
+T_winning_change_sel:
+10010001000000000001100000000000001000011
+T_env removed:
+100100-1000000000001100------------------
+Computed winning states in: 0.057929277420043945
+perform_repair call number: 7
+modify preconditions
+perform_repair call number: 8
+modify postconditions
+T_winning_change_sel:
+10010010010000000100010000000000001000011
+T_env removed:
+100100-0010000000100010------------------
+perform_repair call number: 9
+modify preconditions
+perform_repair call number: 10
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 11
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 12
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 13
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 14
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 15
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 16
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+Checked initial states contained in: 0.33962035179138184
+Skill postconditions modified::
+-------1000000000---------------------
+New skill::
+1001000100000000000100001-------------
+1001000100000000010100001-------------
+1001001100000000010100001-------------
+1001000100000000011100001-------------
+Skill postconditions modified::
+-------0010000000---------------------
+New skill::
+1000100001000000000100001-------------
+0010010001000000000100001-------------
+0011000001000000000100001-------------
+1000100001000000010100001-------------
+1001000001000000010100001-------------
+0010010001000000010100001-------------
+0011000001000000010100001-------------
+1000101001000000000100001-------------
+1000101001000000010100001-------------
+1001001001000000000100001-------------
+1001001001000000010100001-------------
+0010011001000000000100001-------------
+0010011001000000010100001-------------
+0011001001000000000100001-------------
+0011001001000000010100001-------------
+1000100001000000011100001-------------
+1000101001000000011100001-------------
+1001000001000000011100001-------------
+1001001001000000011100001-------------
+0010010001000000011100001-------------
+0010011001000000011100001-------------
+Suggestion 0
+Action postconditions modified::
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+
+Action postconditions modified::
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+(!x0 & !x1 & x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+
+This took: 0.47422075271606445
+Suggestion 0
+new skill:
+-------1000000000------------------------
+Init pres:
+100100-----------------------------------
+posts:
+-----------------100001------------------
+Final posts:
+100001-----------------------------------
+new skill:
+-------0010000000------------------------
+Init pres:
+100010-----------------------------------
+100100-----------------------------------
+001001-----------------------------------
+001100-----------------------------------
+posts:
+-----------------100001------------------
+Final posts:
+100001-----------------------------------
+skill10: 
+[{'x1': False, 'x2': False, 'x0': True, 'y0': True, 'y2': False, 'y1': False}]
+[[{'x1': False, 'x2': False, 'x0': True, 'y0': True, 'y2': False, 'y1': False}, [{'x1': False, 'x2': False, 'x0': True, 'y0': False, 'y2': True, 'y1': False}]]]
+[{'x1': False, 'x2': False, 'x0': True, 'y0': False, 'y2': True, 'y1': False}]
+skill11: 
+[{'x1': False, 'x2': False, 'x0': True, 'y0': False, 'y2': False, 'y1': True}, {'x1': False, 'x2': False, 'x0': True, 'y0': True, 'y2': False, 'y1': False}, {'x1': False, 'x2': True, 'x0': False, 'y0': False, 'y2': True, 'y1': False}, {'x1': False, 'x2': True, 'x0': False, 'y0': True, 'y2': False, 'y1': False}]
+[[{'x1': False, 'x2': False, 'x0': True, 'y0': False, 'y2': False, 'y1': True}, [{'x1': False, 'x2': False, 'x0': True, 'y0': False, 'y2': True, 'y1': False}]], [{'x1': False, 'x2': False, 'x0': True, 'y0': True, 'y2': False, 'y1': False}, [{'x1': False, 'x2': False, 'x0': True, 'y0': False, 'y2': True, 'y1': False}]], [{'x1': False, 'x2': True, 'x0': False, 'y0': False, 'y2': True, 'y1': False}, [{'x1': False, 'x2': False, 'x0': True, 'y0': False, 'y2': True, 'y1': False}]], [{'x1': False, 'x2': True, 'x0': False, 'y0': True, 'y2': False, 'y1': False}, [{'x1': False, 'x2': False, 'x0': True, 'y0': False, 'y2': True, 'y1': False}]]]
+[{'x1': False, 'x2': False, 'x0': True, 'y0': False, 'y2': True, 'y1': False}]
+----------------------------------
+----------------------------------
+Finish one iteration in the while loop
+skills dict_keys(['skill0', 'skill1', 'skill2', 'skill3', 'skill4', 'skill0b', 'skill1b', 'skill2b', 'skill3b', 'skill4b', 'skill10', 'skill11'])
+----------------------------------
+----------------------------------
+Computed winning states in: 0.057647705078125
+is_realizable:  True
+Seeding 3
+is_realizable:  False
+perform_repair call number: 17
+modify postconditions
+T_winning_change_sel:
+10010010010000000100010000000000000010011
+T_env removed:
+100100-0010000000100010------------------
+perform_repair call number: 18
+modify preconditions
+perform_repair call number: 19
+modify postconditions
+T_winning_change_sel:
+00110000100000000001001000000000001000011
+T_env removed:
+001100-0100000000001001------------------
+Computed winning states in: 0.09624409675598145
+perform_repair call number: 20
+modify preconditions
+Checked initial states contained in: 0.1211690902709961
+Skill postconditions modified::
+-------0010000000---------------------
+New skill::
+1001000001000000000001001-------------
+1001001001000000000001001-------------
+1001000001000000011001001-------------
+1001001001000000010001001-------------
+1001001001000000011001001-------------
+1001000001000000000100001-------------
+1001001001000000000100001-------------
+1001000001000000011100001-------------
+1001001001000000010100001-------------
+1001001001000000011100001-------------
+Skill postconditions modified::
+-------1000000000---------------------
+New skill::
+100100-100000000000001100-------------
+100100-100000000010001100-------------
+100100-100000000011001100-------------
+001001-100000000000001100-------------
+001001-100000000010001100-------------
+001001-100000000011001100-------------
+Skill postconditions modified::
+-------0100000000---------------------
+New skill::
+001100-010000000000100001-------------
+001100-010000000010100001-------------
+001100-010000000011100001-------------
+Skill postconditions modified::
+-------0001000000---------------------
+New skill::
+100001-000100000000001001-------------
+100001-000100000010001001-------------
+100001-000100000011001001-------------
+100010-000100000000001001-------------
+100010-000100000010001001-------------
+100010-000100000011001001-------------
+Suggestion 0
+Action postconditions modified::
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2') | (x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+
+Action postconditions modified::
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2'))
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2'))
+
+Action postconditions modified::
+!skill0 & skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(!x0 & !x1 & x2 & y0 & !y1 & !y2 & !skill0 & skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+
+Action postconditions modified::
+!skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+
+This took: 0.24309110641479492
+Suggestion 0
+new skill:
+-------0010000000------------------------
+Init pres:
+100100-----------------------------------
+posts:
+-----------------001001------------------
+-----------------100001------------------
+Final posts:
+100001-----------------------------------
+001001-----------------------------------
+new skill:
+-------1000000000------------------------
+Init pres:
+100100-----------------------------------
+001001-----------------------------------
+posts:
+-----------------001100------------------
+Final posts:
+001100-----------------------------------
+new skill:
+-------0100000000------------------------
+Init pres:
+001100-----------------------------------
+posts:
+-----------------100001------------------
+Final posts:
+100001-----------------------------------
+new skill:
+-------0001000000------------------------
+Init pres:
+100001-----------------------------------
+100010-----------------------------------
+posts:
+-----------------001001------------------
+Final posts:
+001001-----------------------------------
+skill10: 
+[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': True, 'y2': False}]
+[[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': True, 'y2': False}, [{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}, {'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': False, 'y2': True}]]]
+[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}, {'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': False, 'y2': True}]
+skill11: 
+[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': True, 'y2': False}, {'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': False, 'y2': True}]
+[[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': True, 'y2': False}, [{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': True, 'y2': False}]], [{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': False, 'y2': True}, [{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': True, 'y2': False}]]]
+[{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': True, 'y2': False}]
+skill12: 
+[{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': True, 'y2': False}]
+[[{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': True, 'y2': False}, [{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}]]]
+[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}]
+skill13: 
+[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}, {'x1': False, 'x2': False, 'x0': True, 'y1': True, 'y0': False, 'y2': False}]
+[[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}, [{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': False, 'y2': True}]], [{'x1': False, 'x2': False, 'x0': True, 'y1': True, 'y0': False, 'y2': False}, [{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': False, 'y2': True}]]]
+[{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': False, 'y2': True}]
+----------------------------------
+----------------------------------
+Finish one iteration in the while loop
+skills dict_keys(['skill0', 'skill1', 'skill2', 'skill3', 'skill4', 'skill0b', 'skill1b', 'skill2b', 'skill3b', 'skill4b', 'skill10', 'skill11', 'skill12', 'skill13'])
+----------------------------------
+----------------------------------
+Computed winning states in: 0.06524348258972168
+is_realizable:  True
+Seeding 4
+is_realizable:  False
+perform_repair call number: 21
+modify postconditions
+T_winning_change_sel:
+10010010010000000100010000000000000011001
+T_env removed:
+100100-0010000000100010------------------
+perform_repair call number: 22
+modify preconditions
+Computed winning states in: 0.06964254379272461
+perform_repair call number: 23
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 24
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+Checked initial states contained in: 0.12878847122192383
+Skill postconditions modified::
+-------0010000000---------------------
+New skill::
+0010010001000000000100001-------------
+0010010001000000010100001-------------
+0010011001000000000100001-------------
+0010011001000000010100001-------------
+0010011001000000011100001-------------
+1001000001000000010100001-------------
+1001000001000000011100001-------------
+1001001001000000000100001-------------
+1001001001000000010100001-------------
+1001001001000000011100001-------------
+1001000001000000010001100-------------
+1001000001000000011001100-------------
+1001001001000000000001100-------------
+1001001001000000010001100-------------
+1001001001000000011001100-------------
+Skill postconditions modified::
+-------0001000000---------------------
+New skill::
+100001-000100000000001001-------------
+100001-000100000010001001-------------
+100001-000100000011001001-------------
+100010-000100000000001001-------------
+100010-000100000010001001-------------
+100010-000100000011001001-------------
+Suggestion 0
+Action postconditions modified::
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2') | (!x0' & !x1' & x2' & y0' & !y1' & !y2'))
+
+Action postconditions modified::
+!skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+
+This took: 0.24315357208251953
+Suggestion 0
+new skill:
+-------0010000000------------------------
+Init pres:
+001001-----------------------------------
+100100-----------------------------------
+posts:
+-----------------100001------------------
+-----------------001100------------------
+Final posts:
+001100-----------------------------------
+100001-----------------------------------
+new skill:
+-------0001000000------------------------
+Init pres:
+100001-----------------------------------
+100010-----------------------------------
+posts:
+-----------------001001------------------
+Final posts:
+001001-----------------------------------
+skill10: 
+[{'x1': False, 'x0': False, 'x2': True, 'y1': False, 'y0': False, 'y2': True}, {'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y0': True, 'y2': False}]
+[[{'x1': False, 'x0': False, 'x2': True, 'y1': False, 'y0': False, 'y2': True}, [{'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y0': False, 'y2': True}]], [{'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y0': True, 'y2': False}, [{'x1': False, 'x0': False, 'x2': True, 'y1': False, 'y0': True, 'y2': False}, {'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y0': False, 'y2': True}]]]
+[{'x1': False, 'x0': False, 'x2': True, 'y1': False, 'y0': True, 'y2': False}, {'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y0': False, 'y2': True}]
+skill11: 
+[{'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y0': False, 'y2': True}, {'x1': False, 'x0': True, 'x2': False, 'y1': True, 'y0': False, 'y2': False}]
+[[{'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y0': False, 'y2': True}, [{'x1': False, 'x0': False, 'x2': True, 'y1': False, 'y0': False, 'y2': True}]], [{'x1': False, 'x0': True, 'x2': False, 'y1': True, 'y0': False, 'y2': False}, [{'x1': False, 'x0': False, 'x2': True, 'y1': False, 'y0': False, 'y2': True}]]]
+[{'x1': False, 'x0': False, 'x2': True, 'y1': False, 'y0': False, 'y2': True}]
+----------------------------------
+----------------------------------
+Finish one iteration in the while loop
+skills dict_keys(['skill0', 'skill1', 'skill2', 'skill3', 'skill4', 'skill0b', 'skill1b', 'skill2b', 'skill3b', 'skill4b', 'skill10', 'skill11'])
+----------------------------------
+----------------------------------
+Computed winning states in: 0.07961773872375488
+is_realizable:  True
+Seeding 5
+is_realizable:  False
+perform_repair call number: 25
+modify postconditions
+T_winning_change_sel:
+00100100000100000100100000000000000011001
+T_env removed:
+001001-0000100000100100------------------
+perform_repair call number: 26
+modify preconditions
+perform_repair call number: 27
+modify postconditions
+T_winning_change_sel:
+10010000010000000100010100000000000010011
+T_env removed:
+100100-0010000000100010------------------
+perform_repair call number: 28
+modify preconditions
+perform_repair call number: 29
+modify postconditions
+T_winning_change_sel:
+00101001000000000001100000000000001000010
+T_env removed:
+001010-1000000000001100------------------
+perform_repair call number: 30
+modify preconditions
+perform_repair call number: 31
+modify postconditions
+T_winning_change_sel:
+10010000010000000001001000000000001000010
+T_env removed:
+100100-0010000000001001------------------
+Computed winning states in: 0.1547095775604248
+perform_repair call number: 32
+modify preconditions
+perform_repair call number: 33
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 34
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 35
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 36
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 37
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+Checked initial states contained in: 0.3423902988433838
+Skill postconditions modified::
+-------0000100000---------------------
+New skill::
+001001-000010000000001100-------------
+001001-000010000010001100-------------
+001001-000010000011001100-------------
+Skill postconditions modified::
+-------0010000000---------------------
+New skill::
+1001000001000000000100001-------------
+1001000001000000010100001-------------
+1000100001000000000100001-------------
+1000100001000000010100001-------------
+1001000001000000011100001-------------
+1000100001000000011100001-------------
+1000101001000000000100001-------------
+1001001001000000010100001-------------
+1000101001000000010100001-------------
+1000101001000000011100001-------------
+Skill postconditions modified::
+-------0001000000---------------------
+New skill::
+100001-000100000000001001-------------
+100100-000100000010001001-------------
+100001-000100000010001001-------------
+100100-000100000011001001-------------
+100001-000100000011001001-------------
+Suggestion 0
+Action postconditions modified::
+!skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2'))
+
+Action postconditions modified::
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+
+Action postconditions modified::
+!skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+
+This took: 0.47835373878479004
+Suggestion 0
+new skill:
+-------0000100000------------------------
+Init pres:
+001001-----------------------------------
+posts:
+-----------------001100------------------
+Final posts:
+001100-----------------------------------
+new skill:
+-------0010000000------------------------
+Init pres:
+100100-----------------------------------
+100010-----------------------------------
+posts:
+-----------------100001------------------
+Final posts:
+100001-----------------------------------
+new skill:
+-------0001000000------------------------
+Init pres:
+100100-----------------------------------
+100001-----------------------------------
+posts:
+-----------------001001------------------
+Final posts:
+001001-----------------------------------
+skill10: 
+[{'x1': False, 'x0': False, 'x2': True, 'y1': False, 'y2': True, 'y0': False}]
+[[{'x1': False, 'x0': False, 'x2': True, 'y1': False, 'y2': True, 'y0': False}, [{'x1': False, 'x0': False, 'x2': True, 'y1': False, 'y2': False, 'y0': True}]]]
+[{'x1': False, 'x0': False, 'x2': True, 'y1': False, 'y2': False, 'y0': True}]
+skill11: 
+[{'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y2': False, 'y0': True}, {'x1': False, 'x0': True, 'x2': False, 'y1': True, 'y2': False, 'y0': False}]
+[[{'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y2': False, 'y0': True}, [{'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y2': True, 'y0': False}]], [{'x1': False, 'x0': True, 'x2': False, 'y1': True, 'y2': False, 'y0': False}, [{'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y2': True, 'y0': False}]]]
+[{'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y2': True, 'y0': False}]
+skill12: 
+[{'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y2': False, 'y0': True}, {'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y2': True, 'y0': False}]
+[[{'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y2': False, 'y0': True}, [{'x1': False, 'x0': False, 'x2': True, 'y1': False, 'y2': True, 'y0': False}]], [{'x1': False, 'x0': True, 'x2': False, 'y1': False, 'y2': True, 'y0': False}, [{'x1': False, 'x0': False, 'x2': True, 'y1': False, 'y2': True, 'y0': False}]]]
+[{'x1': False, 'x0': False, 'x2': True, 'y1': False, 'y2': True, 'y0': False}]
+----------------------------------
+----------------------------------
+Finish one iteration in the while loop
+skills dict_keys(['skill0', 'skill1', 'skill2', 'skill3', 'skill4', 'skill0b', 'skill1b', 'skill2b', 'skill3b', 'skill4b', 'skill10', 'skill11', 'skill12'])
+----------------------------------
+----------------------------------
+Computed winning states in: 0.06838774681091309
+is_realizable:  True
+Seeding 6
+is_realizable:  False
+perform_repair call number: 38
+modify postconditions
+T_winning_change_sel:
+10010010010000000100010000000000000010011
+T_env removed:
+100100-0010000000100010------------------
+perform_repair call number: 39
+modify preconditions
+perform_repair call number: 40
+modify postconditions
+T_winning_change_sel:
+00100100000100000100100000000000001000010
+T_env removed:
+001001-0000100000100100------------------
+Computed winning states in: 0.09670138359069824
+perform_repair call number: 41
+modify preconditions
+perform_repair call number: 42
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 43
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 44
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 45
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 46
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+Checked initial states contained in: 0.2684776782989502
+Skill postconditions modified::
+-------0100000000---------------------
+New skill::
+100100-010000000000001001-------------
+100100-010000000010001001-------------
+001100-010000000000001001-------------
+001100-010000000010001001-------------
+100100-010000000011001001-------------
+001100-010000000011001001-------------
+Skill postconditions modified::
+-------0010000000---------------------
+New skill::
+100010-001000000000001001-------------
+100010-001000000010001001-------------
+100100-001000000011001001-------------
+100100-001000000011100001-------------
+100010-001000000011001001-------------
+Skill postconditions modified::
+-------0000100000---------------------
+New skill::
+0011000000010000000100001-------------
+0011001000010000000100001-------------
+0011000000010000010100001-------------
+0011001000010000010100001-------------
+0010010000010000000100001-------------
+0010011000010000000100001-------------
+0010010000010000010100001-------------
+0010011000010000010100001-------------
+0011000000010000011100001-------------
+0010010000010000011100001-------------
+0010011000010000011100001-------------
+Suggestion 0
+Action postconditions modified::
+!skill0 & skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(!x0 & !x1 & x2 & y0 & !y1 & !y2 & !skill0 & skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+
+Action postconditions modified::
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2') | (x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+
+Action postconditions modified::
+!skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(!x0 & !x1 & x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+
+This took: 0.40598201751708984
+Suggestion 0
+new skill:
+-------0100000000------------------------
+Init pres:
+100100-----------------------------------
+001100-----------------------------------
+posts:
+-----------------001001------------------
+Final posts:
+001001-----------------------------------
+new skill:
+-------0010000000------------------------
+Init pres:
+100100-----------------------------------
+100010-----------------------------------
+posts:
+-----------------001001------------------
+-----------------100001------------------
+Final posts:
+100001-----------------------------------
+001001-----------------------------------
+new skill:
+-------0000100000------------------------
+Init pres:
+001100-----------------------------------
+001001-----------------------------------
+posts:
+-----------------100001------------------
+Final posts:
+100001-----------------------------------
+skill10: 
+[{'x1': False, 'x2': False, 'x0': True, 'y2': False, 'y1': False, 'y0': True}, {'x1': False, 'x2': True, 'x0': False, 'y2': False, 'y1': False, 'y0': True}]
+[[{'x1': False, 'x2': False, 'x0': True, 'y2': False, 'y1': False, 'y0': True}, [{'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}]], [{'x1': False, 'x2': True, 'x0': False, 'y2': False, 'y1': False, 'y0': True}, [{'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}]]]
+[{'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}]
+skill11: 
+[{'x1': False, 'x2': False, 'x0': True, 'y2': False, 'y1': False, 'y0': True}, {'x1': False, 'x2': False, 'x0': True, 'y2': False, 'y1': True, 'y0': False}]
+[[{'x1': False, 'x2': False, 'x0': True, 'y2': False, 'y1': False, 'y0': True}, [{'x1': False, 'x2': False, 'x0': True, 'y2': True, 'y1': False, 'y0': False}, {'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}]], [{'x1': False, 'x2': False, 'x0': True, 'y2': False, 'y1': True, 'y0': False}, [{'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}]]]
+[{'x1': False, 'x2': False, 'x0': True, 'y2': True, 'y1': False, 'y0': False}, {'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}]
+skill12: 
+[{'x1': False, 'x2': True, 'x0': False, 'y2': False, 'y1': False, 'y0': True}, {'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}]
+[[{'x1': False, 'x2': True, 'x0': False, 'y2': False, 'y1': False, 'y0': True}, [{'x1': False, 'x2': False, 'x0': True, 'y2': True, 'y1': False, 'y0': False}]], [{'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}, [{'x1': False, 'x2': False, 'x0': True, 'y2': True, 'y1': False, 'y0': False}]]]
+[{'x1': False, 'x2': False, 'x0': True, 'y2': True, 'y1': False, 'y0': False}]
+----------------------------------
+----------------------------------
+Finish one iteration in the while loop
+skills dict_keys(['skill0', 'skill1', 'skill2', 'skill3', 'skill4', 'skill0b', 'skill1b', 'skill2b', 'skill3b', 'skill4b', 'skill10', 'skill11', 'skill12'])
+----------------------------------
+----------------------------------
+Computed winning states in: 0.06261968612670898
+is_realizable:  True
+Seeding 7
+is_realizable:  False
+perform_repair call number: 47
+modify postconditions
+T_winning_change_sel:
+10010000010000000100010100000000000011001
+T_env removed:
+100100-0010000000100010------------------
+perform_repair call number: 48
+modify preconditions
+perform_repair call number: 49
+modify postconditions
+T_winning_change_sel:
+00110000100000000001001000000000001000010
+T_env removed:
+001100-0100000000001001------------------
+Computed winning states in: 0.09338855743408203
+perform_repair call number: 50
+modify preconditions
+perform_repair call number: 51
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 52
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 53
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 54
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 55
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 56
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 57
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+Checked initial states contained in: 0.34225034713745117
+Skill postconditions modified::
+-------0010000000---------------------
+New skill::
+1001001001000000000001100-------------
+1001001001000000000100001-------------
+1001000001000000010001100-------------
+1001001001000000010001100-------------
+1001000001000000010100001-------------
+1001001001000000010100001-------------
+1001000001000000011001100-------------
+1001001001000000011001100-------------
+1001000001000000011100001-------------
+1001001001000000011100001-------------
+Skill postconditions modified::
+-------0100000000---------------------
+New skill::
+001001-010000000000100001-------------
+001001-010000000010100001-------------
+001100-010000000000100001-------------
+001100-010000000010100001-------------
+001001-010000000011100001-------------
+001100-010000000011100001-------------
+Skill postconditions modified::
+-------0001000000---------------------
+New skill::
+1000010000100000000001001-------------
+1001000000100000000001001-------------
+1000100000100000000001001-------------
+1000011000100000000001001-------------
+1000101000100000000001001-------------
+1000010000100000010001001-------------
+1000011000100000010001001-------------
+1001000000100000010001001-------------
+1001001000100000010001001-------------
+1000100000100000010001001-------------
+1000101000100000010001001-------------
+1000010000100000011001001-------------
+1000011000100000011001001-------------
+1000100000100000011001001-------------
+1000101000100000011001001-------------
+Skill postconditions modified::
+-------1000000000---------------------
+New skill::
+1000010100000000000001100-------------
+1001001100000000000001100-------------
+1000010100000000010001100-------------
+1001000100000000010001100-------------
+1000011100000000010001100-------------
+1000010100000000011001100-------------
+1000011100000000011001100-------------
+1001000100000000011001100-------------
+1001001100000000011001100-------------
+Suggestion 0
+Action postconditions modified::
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2') | (x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+
+Action postconditions modified::
+!skill0 & skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & !skill0 & skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+(!x0 & !x1 & x2 & y0 & !y1 & !y2 & !skill0 & skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+
+Action postconditions modified::
+!skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+
+Action postconditions modified::
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & !y0 & !y1 & y2 & skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2'))
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2'))
+
+This took: 0.5368177890777588
+Suggestion 0
+new skill:
+-------0010000000------------------------
+Init pres:
+100100-----------------------------------
+posts:
+-----------------001100------------------
+-----------------100001------------------
+Final posts:
+100001-----------------------------------
+001100-----------------------------------
+new skill:
+-------0100000000------------------------
+Init pres:
+001001-----------------------------------
+001100-----------------------------------
+posts:
+-----------------100001------------------
+Final posts:
+100001-----------------------------------
+new skill:
+-------0001000000------------------------
+Init pres:
+100001-----------------------------------
+100100-----------------------------------
+100010-----------------------------------
+posts:
+-----------------001001------------------
+Final posts:
+001001-----------------------------------
+new skill:
+-------1000000000------------------------
+Init pres:
+100001-----------------------------------
+100100-----------------------------------
+posts:
+-----------------001100------------------
+Final posts:
+001100-----------------------------------
+skill10: 
+[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': True, 'y2': False}]
+[[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': True, 'y2': False}, [{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}, {'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': True, 'y2': False}]]]
+[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}, {'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': True, 'y2': False}]
+skill11: 
+[{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': False, 'y2': True}, {'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': True, 'y2': False}]
+[[{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': False, 'y2': True}, [{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}]], [{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': True, 'y2': False}, [{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}]]]
+[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}]
+skill12: 
+[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}, {'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': True, 'y2': False}, {'x1': False, 'x2': False, 'x0': True, 'y1': True, 'y0': False, 'y2': False}]
+[[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}, [{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': False, 'y2': True}]], [{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': True, 'y2': False}, [{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': False, 'y2': True}]], [{'x1': False, 'x2': False, 'x0': True, 'y1': True, 'y0': False, 'y2': False}, [{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': False, 'y2': True}]]]
+[{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': False, 'y2': True}]
+skill13: 
+[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}, {'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': True, 'y2': False}]
+[[{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': False, 'y2': True}, [{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': True, 'y2': False}]], [{'x1': False, 'x2': False, 'x0': True, 'y1': False, 'y0': True, 'y2': False}, [{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': True, 'y2': False}]]]
+[{'x1': False, 'x2': True, 'x0': False, 'y1': False, 'y0': True, 'y2': False}]
+----------------------------------
+----------------------------------
+Finish one iteration in the while loop
+skills dict_keys(['skill0', 'skill1', 'skill2', 'skill3', 'skill4', 'skill0b', 'skill1b', 'skill2b', 'skill3b', 'skill4b', 'skill10', 'skill11', 'skill12', 'skill13'])
+----------------------------------
+----------------------------------
+Computed winning states in: 0.06771731376647949
+is_realizable:  True
+Seeding 8
+is_realizable:  False
+perform_repair call number: 58
+modify postconditions
+T_winning_change_sel:
+00100100000100000100100000000000000011001
+T_env removed:
+001001-0000100000100100------------------
+perform_repair call number: 59
+modify preconditions
+Computed winning states in: 0.07247018814086914
+perform_repair call number: 60
+modify postconditions
+T_winning_change_sel:
+10010000010000000100010000000000000011001
+T_env removed:
+100100-0010000000100010------------------
+perform_repair call number: 61
+modify preconditions
+perform_repair call number: 62
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 63
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 64
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 65
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 66
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 67
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+Checked initial states contained in: 0.33342838287353516
+Skill postconditions modified::
+-------0000100000---------------------
+New skill::
+0010010000010000000001100-------------
+0010010000010000010001100-------------
+0010011000010000010001100-------------
+0010010000010000011001100-------------
+0010011000010000011001100-------------
+Skill postconditions modified::
+-------1000000000---------------------
+New skill::
+1001000100000000000001100-------------
+1001000100000000010001100-------------
+1001001100000000010001100-------------
+1001000100000000011001100-------------
+0010010100000000000001100-------------
+0010011100000000000001100-------------
+0010010100000000010001100-------------
+0010011100000000010001100-------------
+0010010100000000011001100-------------
+0010011100000000011001100-------------
+Skill postconditions modified::
+-------0100000000---------------------
+New skill::
+1001000010000000000001001-------------
+1001000010000000010001001-------------
+1001001010000000000001001-------------
+1001001010000000011001001-------------
+0011000010000000000001001-------------
+0011001010000000000001001-------------
+0011000010000000010001001-------------
+0011001010000000010001001-------------
+0011000010000000011001001-------------
+0011001010000000011001001-------------
+Skill postconditions modified::
+-------0010000000---------------------
+New skill::
+1000100001000000000100001-------------
+1001000001000000010100001-------------
+1000100001000000010100001-------------
+1000101001000000000100001-------------
+1000101001000000010100001-------------
+1001000001000000011100001-------------
+1000100001000000011100001-------------
+1000101001000000011100001-------------
+1001000001000000010001100-------------
+1001000001000000011001100-------------
+0010010001000000000100001-------------
+0010011001000000000100001-------------
+0010010001000000010100001-------------
+0010011001000000010100001-------------
+0010010001000000011100001-------------
+0010011001000000011100001-------------
+Suggestion 0
+Action postconditions modified::
+!skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & !skill2 & !skill3 & skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2'))
+
+Action postconditions modified::
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2'))
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & y0' & !y1' & !y2'))
+
+Action postconditions modified::
+!skill0 & skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(!x0 & !x1 & x2 & y0 & !y1 & !y2 & !skill0 & skill1 & !skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+
+Action postconditions modified::
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2') | (!x0' & !x1' & x2' & y0' & !y1' & !y2'))
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+(!x0 & !x1 & x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+
+This took: 0.5037708282470703
+Suggestion 0
+new skill:
+-------0000100000------------------------
+Init pres:
+001001-----------------------------------
+posts:
+-----------------001100------------------
+Final posts:
+001100-----------------------------------
+new skill:
+-------1000000000------------------------
+Init pres:
+100100-----------------------------------
+001001-----------------------------------
+posts:
+-----------------001100------------------
+Final posts:
+001100-----------------------------------
+new skill:
+-------0100000000------------------------
+Init pres:
+100100-----------------------------------
+001100-----------------------------------
+posts:
+-----------------001001------------------
+Final posts:
+001001-----------------------------------
+new skill:
+-------0010000000------------------------
+Init pres:
+100100-----------------------------------
+100010-----------------------------------
+001001-----------------------------------
+posts:
+-----------------100001------------------
+-----------------001100------------------
+Final posts:
+100001-----------------------------------
+001100-----------------------------------
+skill10: 
+[{'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}]
+[[{'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}, [{'x1': False, 'x2': True, 'x0': False, 'y2': False, 'y1': False, 'y0': True}]]]
+[{'x1': False, 'x2': True, 'x0': False, 'y2': False, 'y1': False, 'y0': True}]
+skill11: 
+[{'x1': False, 'x2': False, 'x0': True, 'y2': False, 'y1': False, 'y0': True}, {'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}]
+[[{'x1': False, 'x2': False, 'x0': True, 'y2': False, 'y1': False, 'y0': True}, [{'x1': False, 'x2': True, 'x0': False, 'y2': False, 'y1': False, 'y0': True}]], [{'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}, [{'x1': False, 'x2': True, 'x0': False, 'y2': False, 'y1': False, 'y0': True}]]]
+[{'x1': False, 'x2': True, 'x0': False, 'y2': False, 'y1': False, 'y0': True}]
+skill12: 
+[{'x1': False, 'x2': False, 'x0': True, 'y2': False, 'y1': False, 'y0': True}, {'x1': False, 'x2': True, 'x0': False, 'y2': False, 'y1': False, 'y0': True}]
+[[{'x1': False, 'x2': False, 'x0': True, 'y2': False, 'y1': False, 'y0': True}, [{'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}]], [{'x1': False, 'x2': True, 'x0': False, 'y2': False, 'y1': False, 'y0': True}, [{'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}]]]
+[{'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}]
+skill13: 
+[{'x1': False, 'x2': False, 'x0': True, 'y2': False, 'y1': False, 'y0': True}, {'x1': False, 'x2': False, 'x0': True, 'y2': False, 'y1': True, 'y0': False}, {'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}]
+[[{'x1': False, 'x2': False, 'x0': True, 'y2': False, 'y1': False, 'y0': True}, [{'x1': False, 'x2': False, 'x0': True, 'y2': True, 'y1': False, 'y0': False}, {'x1': False, 'x2': True, 'x0': False, 'y2': False, 'y1': False, 'y0': True}]], [{'x1': False, 'x2': False, 'x0': True, 'y2': False, 'y1': True, 'y0': False}, [{'x1': False, 'x2': False, 'x0': True, 'y2': True, 'y1': False, 'y0': False}]], [{'x1': False, 'x2': True, 'x0': False, 'y2': True, 'y1': False, 'y0': False}, [{'x1': False, 'x2': False, 'x0': True, 'y2': True, 'y1': False, 'y0': False}]]]
+[{'x1': False, 'x2': False, 'x0': True, 'y2': True, 'y1': False, 'y0': False}, {'x1': False, 'x2': True, 'x0': False, 'y2': False, 'y1': False, 'y0': True}]
+----------------------------------
+----------------------------------
+Finish one iteration in the while loop
+skills dict_keys(['skill0', 'skill1', 'skill2', 'skill3', 'skill4', 'skill0b', 'skill1b', 'skill2b', 'skill3b', 'skill4b', 'skill10', 'skill11', 'skill12', 'skill13'])
+----------------------------------
+----------------------------------
+Computed winning states in: 0.07900524139404297
+is_realizable:  True
+Seeding 9
+is_realizable:  False
+perform_repair call number: 68
+modify postconditions
+T_winning_change_sel:
+10010010010000000100010000000000001000010
+T_env removed:
+100100-0010000000100010------------------
+Computed winning states in: 0.06410074234008789
+perform_repair call number: 69
+modify preconditions
+perform_repair call number: 70
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+Checked initial states contained in: 0.1173715591430664
+Skill postconditions modified::
+-------0010000000---------------------
+New skill::
+1001001001000000000100001-------------
+1001000001000000010100001-------------
+1001001001000000010100001-------------
+1001000001000000011100001-------------
+1001001001000000011100001-------------
+Skill postconditions modified::
+-------0001000000---------------------
+New skill::
+100010-000100000000001001-------------
+100010-000100000010001001-------------
+100001-000100000000001001-------------
+100001-000100000010001001-------------
+100010-000100000011001001-------------
+100001-000100000011001001-------------
+Suggestion 0
+Action postconditions modified::
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+Original skill:
+!skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & y0 & !y1 & !y2 & !skill0 & !skill1 & skill2 & !skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
+
+Action postconditions modified::
+!skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b & 
+New action::
+(x0 & !x1 & !x2 & !y0 & y1 & !y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+(x0 & !x1 & !x2 & !y0 & !y1 & y2 & !skill0 & !skill1 & !skill2 & skill3 & !skill4 & !skill0b & !skill1b & !skill2b & !skill3b & !skill4b) -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+
+This took: 0.23695778846740723
+Suggestion 0
+new skill:
+-------0010000000------------------------
+Init pres:
+100100-----------------------------------
+posts:
+-----------------100001------------------
+Final posts:
+100001-----------------------------------
+new skill:
+-------0001000000------------------------
+Init pres:
+100010-----------------------------------
+100001-----------------------------------
+posts:
+-----------------001001------------------
+Final posts:
+001001-----------------------------------
+skill10: 
+[{'x2': False, 'x0': True, 'x1': False, 'y2': False, 'y1': False, 'y0': True}]
+[[{'x2': False, 'x0': True, 'x1': False, 'y2': False, 'y1': False, 'y0': True}, [{'x2': False, 'x0': True, 'x1': False, 'y2': True, 'y1': False, 'y0': False}]]]
+[{'x2': False, 'x0': True, 'x1': False, 'y2': True, 'y1': False, 'y0': False}]
+skill11: 
+[{'x2': False, 'x0': True, 'x1': False, 'y2': False, 'y1': True, 'y0': False}, {'x2': False, 'x0': True, 'x1': False, 'y2': True, 'y1': False, 'y0': False}]
+[[{'x2': False, 'x0': True, 'x1': False, 'y2': False, 'y1': True, 'y0': False}, [{'x2': True, 'x0': False, 'x1': False, 'y2': True, 'y1': False, 'y0': False}]], [{'x2': False, 'x0': True, 'x1': False, 'y2': True, 'y1': False, 'y0': False}, [{'x2': True, 'x0': False, 'x1': False, 'y2': True, 'y1': False, 'y0': False}]]]
+[{'x2': True, 'x0': False, 'x1': False, 'y2': True, 'y1': False, 'y0': False}]
+----------------------------------
+----------------------------------
+Finish one iteration in the while loop
+skills dict_keys(['skill0', 'skill1', 'skill2', 'skill3', 'skill4', 'skill0b', 'skill1b', 'skill2b', 'skill3b', 'skill4b', 'skill10', 'skill11'])
+----------------------------------
+----------------------------------
+Computed winning states in: 0.05670046806335449
+is_realizable:  True

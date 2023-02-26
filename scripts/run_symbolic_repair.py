@@ -121,5 +121,5 @@ if __name__ == "__main__":
             print("----------------------------------")
 
         # Added by Qian
-        if is_realizable: break
+        # if is_realizable: break
         # break
