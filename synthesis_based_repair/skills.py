@@ -11,6 +11,7 @@ import json
 class Skill:
 
     def __init__(self, info, suggestion=False, stretch_eff=0.1):
+        self.info = info
         self.name = info['name']
         self.suggestion = suggestion
         self.stretch_eff = stretch_eff
@@ -23,6 +24,9 @@ class Skill:
         # self.unique = info['unique_states']
         self.folder_train = info['folder_train']
         self.folder_val = info['folder_val']
+
+    def get_info(self):
+        return self.info
 
     def get_name(self):
         return self.name

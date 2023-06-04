@@ -3,6 +3,7 @@ Skill name: skill4
 Original name: skill0
 Initial preconditions: 
 x0 & y0
+Intermediate states: 
 skill4 & !x0 & x1 & !x2 & y0 & !y1 & !y2 -> ((x0' & !x1' & !x2' & !y0' & !y1' & y2'))
 skill4 & x0 & !x1 & !x2 & !y0 & !y1 & y2 -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
 skill4 & x0 & !x1 & !x2 & y0 & !y1 & !y2 -> ((!x0' & x1' & !x2' & y0' & !y1' & !y2'))

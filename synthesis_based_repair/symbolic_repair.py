@@ -495,8 +495,8 @@ class WinningStates:
 
 
 def print_debug(msg):
-    # if DEBUG:
-    if False:
+    if DEBUG:
+    # if False:
         print(msg)
 
 
