@@ -1076,7 +1076,7 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
         T_winning_change_sel = arg_bdd.cube(T_winning_changes_list[sel_idx])
     else:
         T_winning_change_sel = arg_bdd.false
-    if True: breakpoint()
+    if DEBUG: breakpoint()
     print_expr(arg_bdd, "T_winning_change_sel", T_winning_change_sel,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=True)
     if arg_opts['enforce_reactive_variables']:
@@ -1244,7 +1244,7 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     #     sel_idx = 5
     # print("Post_repair_cnt: {}, sel_idx: {}".format(arg_opts['post_repair_cnt'], sel_idx))
     T_selected_change = arg_bdd.cube(all_possible_changes[sel_idx])
-    if True: breakpoint()
+    if DEBUG: breakpoint()
     print_expr(arg_bdd, "T_selected_change", T_selected_change,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
 
