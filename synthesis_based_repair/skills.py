@@ -7,6 +7,12 @@ import os
 from synthesis_based_repair.symbols import in_symbols, find_symbols_true_and_false, load_symbols, plot_symbolic_state
 import json
 
+def dict_bool2list(dic: dict) -> list:
+    ls = []
+    for name, val in dic.items():
+        if val:
+            ls.append(name)
+    return ls
 
 class Skill:
 
@@ -22,8 +28,10 @@ class Skill:
         self.init_pres = info['initial_preconditions']
         self.final_posts = info['final_postconditions']
         # self.unique = info['unique_states']
-        self.folder_train = info['folder_train']
-        self.folder_val = info['folder_val']
+        if 'folder_train' in info.keys():
+            self.folder_train = info['folder_train']
+        if 'folder_val' in info.keys():
+            self.folder_val = info['folder_val']
 
     def get_info(self):
         return self.info
@@ -32,10 +40,31 @@ class Skill:
         return self.name
     
     def print_dict(self) -> None:
+        print("========")
         print(self.name)
-        print("initial preconditions: ", self.init_pres)
-        print("intermediate states: ", self.intermediate_states)
-        print("final postconditions: ", self.final_posts)
+        print("initial preconditions: ")
+        for init_dict in self.init_pres:
+            print(dict_bool2list(init_dict))
+        print("====")
+        print("intermediate states: ")
+        for pre_dict, post_dict_list in self.intermediate_states:
+            print("pre: ", dict_bool2list(pre_dict))
+            for post_dict in post_dict_list:
+                print("post: ", dict_bool2list(post_dict))
+        print("====")
+        print("final postconditions: ")
+        for post_dict in self.final_posts:
+            print(dict_bool2list(post_dict))
+        try:
+            print("original skill: ", self.original_skill)
+            print("new skill: ", self.new_skill)
+        except AttributeError:
+            pass
+        print("")
+        print("info", self.info)
+        print("========")
+        print("")
+
 
     def get_skill_str(self, include_false=True):
         out = "Skill name: " + self.name + "\n"
