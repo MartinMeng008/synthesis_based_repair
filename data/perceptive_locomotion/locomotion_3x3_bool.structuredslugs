@@ -1,0 +1,86 @@
+[INPUT]
+# State of the robot in the grid
+x0
+x1
+x2
+y0
+y1
+y2
+
+# Command for different goals
+x0request
+x1request
+x2request
+y0request
+y1request
+y2request
+
+[OUTPUT]
+skill0
+skill1
+waypointrequestPending
+
+[ENV_INIT]
+!x0
+!x2
+!y0
+!y2
+x1
+y1
+
+[SYS_INIT]
+!skill0
+!skill1
+
+[ENV_TRANS]
+# Postconditions for different skills
+skill0 & !x0 & x1 & !x2 & !y0 & y1 & !y2 -> ((!x0' & x1' & !x2' & !y0' & !y1' & y2'))
+skill1 & !x0 & x1 & !x2 & !y0 & !y1 & y2 -> ((!x0' & !x1' & x2' & !y0' & !y1' & y2'))
+
+[ENV_TRANS_HARD]
+!(x0' & x1')
+!(x0' & x2')
+!(x1' & x2')
+!(y0' & y1')
+!(y0' & y2')
+!(y1' & y2')
+(x0' | x1' | x2')
+(y0' | y1' | y2')
+!(x0 & x1)
+!(x0 & x2)
+!(x1 & x2)
+!(y0 & y1)
+!(y0 & y2)
+!(y1 & y2)
+(x0 | x1 | x2)
+(y0 | y1 | y2)
+
+# Don't move if no skill is chosen
+(!skill0 & !skill1) -> ((x0 <-> x0') & (x1 <-> x1') & (x2 <-> x2') & (y0 <-> y0') & (y1 <-> y1') & (y2 <-> y2'))
+
+[SYS_TRANS]
+# Preconditions for the different skills
+!((!x0' & x1' & !x2' & !y0' & y1' & !y2')) -> !skill0'
+!((!x0' & x1' & !x2' & !y0' & !y1' & y2')) -> !skill1'
+
+[SYS_TRANS_HARD]
+# Mutual exclusion of the skills
+(skill0' & !skill1') | (!skill0' & skill1') | (!skill0' & !skill1')
+
+# User SYS_TRANS_HARD
+# More to be added for repair
+(x0=x0request & x1=x1request & x2=x2request & y0=y0request & y1=y1request & y2=y2request) -> !waypointrequestPending
+!(x0=x0request & x1=x1request & x2=x2request & y0=y0request & y1=y1request & y2=y2request) -> waypointrequestPending
+!waypointrequestPending -> (!skill0 & !skill1)
+
+
+[SYS_LIVENESS]
+!waypointrequestPending
+
+[ENV_LIVENESS]
+
+[CHANGE_CONS]
+# To be added for repair
+
+[NOT_ALLOWED_REPAIR]
+!waypointrequestPending
