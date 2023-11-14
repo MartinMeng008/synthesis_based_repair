@@ -249,7 +249,7 @@ Plots will be generated in `synthesis_based_repair/data/stretch/plots/`.
 - This [fork](https://github.com/MartinMeng008/slugs) of slugs
 - z3
 
-In the file [mocomp.py](monitor/mocomp.py), change the slugs location to be the directory of the installed slugs.
+In the file [mocomp.py](monitor/mocomp.py), change the slugs location to the directory of the installed slugs in this [line](https://github.com/MartinMeng008/synthesis_based_repair/blob/1162ab7678459f85bc815db74df3c348e723434d/monitor/mocomp.py#L23).
 
 ### Usage
 
