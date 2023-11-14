@@ -1,0 +1,91 @@
+[INPUT]
+x0
+x1
+x2
+y0
+y1
+y2
+xrequest0
+xrequest1
+xrequest2
+yrequest0
+yrequest1
+yrequest2
+
+[OUTPUT]
+skill0
+skill1
+waypointrequestPending
+
+[ENV_INIT]
+( ! x0 & x1 & ! x2 )
+( ! y0 & y1 & ! y2 )
+( ! xrequest0 & ! xrequest1 & xrequest2 )
+( ! yrequest0 & ! yrequest1 & yrequest2 )
+
+[SYS_INIT]
+! skill0
+! skill1
+
+[ENV_TRANS]
+( ( skill0 & ( ! x0 & x1 & ! x2 ) & ( ! y0 & y1 & ! y2 ) ) -> ( ( ! x0' & x1' & ! x2' ) & ( ! y0' & ! y1' & y2' ) ) )
+( ( skill1 & ( ! x0 & x1 & ! x2 ) & ( ! y0 & ! y1 & y2 ) ) -> ( ( ! x0' & ! x1' & x2' ) & ( ! y0' & ! y1' & y2' ) ) )
+
+[ENV_TRANS_HARD]
+! ( yrequest1 & yrequest2 )
+! ( yrequest0 & yrequest2 )
+! ( yrequest0 & yrequest1 )
+( yrequest0 | yrequest1 | yrequest2 )
+! ( yrequest1' & yrequest2' )
+! ( yrequest0' & yrequest2' )
+! ( yrequest0' & yrequest1' )
+( yrequest0' | yrequest1' | yrequest2' )
+! ( xrequest1 & xrequest2 )
+! ( xrequest0 & xrequest2 )
+! ( xrequest0 & xrequest1 )
+( xrequest0 | xrequest1 | xrequest2 )
+! ( xrequest1' & xrequest2' )
+! ( xrequest0' & xrequest2' )
+! ( xrequest0' & xrequest1' )
+( xrequest0' | xrequest1' | xrequest2' )
+! ( y1 & y2 )
+! ( y0 & y2 )
+! ( y0 & y1 )
+( y0 | y1 | y2 )
+! ( y1' & y2' )
+! ( y0' & y2' )
+! ( y0' & y1' )
+( y0' | y1' | y2' )
+! ( x1 & x2 )
+! ( x0 & x2 )
+! ( x0 & x1 )
+( x0 | x1 | x2 )
+! ( x1' & x2' )
+! ( x0' & x2' )
+! ( x0' & x1' )
+( x0' | x1' | x2' )
+( ( xrequest0 <-> xrequest0' ) & ( xrequest1 <-> xrequest1' ) & ( xrequest2 <-> xrequest2' ) )
+( ( yrequest0 <-> yrequest0' ) & ( yrequest1 <-> yrequest1' ) & ( yrequest2 <-> yrequest2' ) )
+( ( ! skill0 & ! skill1 ) -> ( ( ( x0' <-> x0 ) & ( x1' <-> x1 ) & ( x2' <-> x2 ) ) & ( ( y0' <-> y0 ) & ( y1' <-> y1 ) & ( y2' <-> y2 ) ) ) )
+( ( skill0 & ! skill1 ) | ( ! skill0 & skill1 ) | ( ! skill0 & ! skill1 ) )
+
+[SYS_TRANS]
+( ! ( ( ! x0' & x1' & ! x2' ) & ( ! y0' & y1' & ! y2' ) ) -> ! skill0' )
+( ! ( ( ! x0' & x1' & ! x2' ) & ( ! y0' & ! y1' & y2' ) ) -> ! skill1' )
+
+[SYS_TRANS_HARD]
+( ( skill0' & ! skill1' ) | ( ! skill0' & skill1' ) | ( ! skill0' & ! skill1' ) )
+( ( ( ( x0 <-> xrequest0 ) & ( x1 <-> xrequest1 ) & ( x2 <-> xrequest2 ) ) & ( ( y0 <-> yrequest0 ) & ( y1 <-> yrequest1 ) & ( y2 <-> yrequest2 ) ) ) -> ! waypointrequestPending )
+( ! ( ( ( x0 <-> xrequest0 ) & ( x1 <-> xrequest1 ) & ( x2 <-> xrequest2 ) ) & ( ( y0 <-> yrequest0 ) & ( y1 <-> yrequest1 ) & ( y2 <-> yrequest2 ) ) ) -> waypointrequestPending )
+( ! waypointrequestPending -> ( ! skill0 & ! skill1 ) )
+
+[ENV_LIVENESS]
+
+[SYS_LIVENESS]
+! waypointrequestPending
+
+[CHANGE_CONS]
+
+[NOT_ALLOWED_REPAIR]
+! waypointrequestPending
+

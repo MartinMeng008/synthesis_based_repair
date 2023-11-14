@@ -13,8 +13,10 @@ skill1
 waypointrequestPending
 
 [ENV_INIT]
-xrequest=1
-yrequest=1
+x=1
+y=1
+xrequest=2
+yrequest=2
 
 [SYS_INIT]
 !skill0
@@ -26,8 +28,17 @@ skill0 & x=1 & y=1 -> (x'=1 & y'=2)
 skill1 & x=1 & y=2 -> (x'=2 & y'=2)
 
 [ENV_TRANS_HARD]
+
+# Assume static request
+xrequest = xrequest'
+yrequest = yrequest'
+
 # Don't move if no skill is chosen
 (!skill0 & !skill1) -> (x'=x & y'=y)
+
+# Skill mutual exclusion
+(skill0 & !skill1) | (!skill0 & skill1) | (!skill0 & !skill1)
+
 
 [SYS_TRANS]
 # Preconditions for the different skills
