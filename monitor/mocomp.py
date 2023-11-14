@@ -25,7 +25,7 @@ from Parser import Parser
 import os
 
 
-synthesis_based_repair_dir = '/home/qian/workspace/synthesis_based_repair/synthesis_based_repair'
+synthesis_based_repair_dir = '../synthesis_based_repair'
 sys.path.insert(0, synthesis_based_repair_dir)
 from skills import Skill
 
