@@ -19,7 +19,9 @@ from tools import (
     find_controllable_manipulation_symbols,
 
     )
-sys.path.insert(0, '/home/qian/workspace/slugs/tools/StructuredSlugsParser')
+
+slugs_location = '/home/qian/workspace/slugs'
+sys.path.insert(0, f'{slugs_location}/tools/StructuredSlugsParser')
 from compiler import get_asts, asts_to_slugsin, get_asts_from_structuredslugsplus
 from Parser import Parser
 import os
