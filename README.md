@@ -243,7 +243,15 @@ python run_plot_symbols.py --file_names "../data/stretch/stretch_files.json" --s
 
 Plots will be generated in `synthesis_based_repair/data/stretch/plots/`.
 
-## Transform Specs with Integer Inputs to Spec with Boolean Inputs Only
+## Transformation: Specs with Integer Inputs to Spec with Boolean Inputs Only
+
+### Required packages
+- This [fork](https://github.com/MartinMeng008/slugs) of slugs
+- z3
+
+In the file [mocomp.py](monitor/mocomp.py), change the slugs location to be the directory of the installed slugs.
+
+### Usage
 
 To perform the integer-to-boolean transformation, from `\synthesis_based_repair` run:
 ```
