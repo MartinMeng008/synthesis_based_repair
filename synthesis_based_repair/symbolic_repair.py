@@ -416,6 +416,27 @@ class GameStructure:
 
     def get_t_env_init(self):
         return self.T_env_init
+    
+    def get_t_env_init_uncontrollable(self, opts):
+        """Returns the environment initial condition about uncontrollable/reactive variables only"""
+        controllable_inputs: list = copy.deepcopy(self.get_input_vars())
+        for var in self.get_input_vars():
+            # Find controllable inputs
+            if var in opts['reactive_variables_current']:
+                controllable_inputs.remove(var)
+        return self.bdd.exist(controllable_inputs, self.T_env_init)
+    
+    def get_t_env_init_uncontrollable_prime(self, opts):
+        """Returns the environment initial condition about uncontrollable/reactive variables only, for input prime"""
+        return self.bdd.let(self.get_input_to_inputprime(), self.get_t_env_init_uncontrollable(opts))
+    
+    def get_t_env_init_uncontrollable_double_prime(self, opts):
+        """Returns the environment initial condition about uncontrollable/reactive variables only, for input double prime"""
+        return self.bdd.let(self.get_input_to_inputdoubleprime(), self.get_t_env_init_uncontrollable(opts))
+    
+    def get_t_env_init_uncontrollable_v_and_p_and_dp(self, opts):
+        """Returns the environment initial condition about uncontrollable/reactive variables only, for inputs, inputs prime, and input double prime"""
+        return self.get_t_env_init_uncontrollable(opts) & self.get_t_env_init_uncontrollable_prime(opts) & self.get_t_env_init_uncontrollable_double_prime(opts)
 
     def get_t_sys_init(self):
         return self.T_sys_init
@@ -527,6 +548,7 @@ def compute_winning_states(arg_bdd, gs_internal, arg_opts):
                        vars_ordering=gs_internal.get_vars_and_vars_prime(),
                        do_print=DEBUG & DEBUG_WS_COMPUTE, do_names=arg_opts['do_names'], arg_opts=arg_opts,
                        to_file=arg_opts['to_file'])
+            # de_print = DEBUG & DEBUG_WS_COMPUTE
 
             Y = arg_bdd.false
             Y_prime = arg_bdd.true
@@ -559,8 +581,8 @@ def compute_winning_states(arg_bdd, gs_internal, arg_opts):
                 if start == arg_bdd.false:  # or (z_cnt == 1 and ii == 0):
                     print_expr(arg_bdd, "Cannot win. Z is:", Z_internal,
                                vars_ordering=gs_internal.get_vars_and_vars_prime(),
-                               do_print=DEBUG & DEBUG_WS_COMPUTE)
-                    if DEBUG: breakpoint()
+                               do_print=True) # DEBUG & DEBUG_WS_COMPUTE
+                    if DEBUG: breakpoint() 
                     return WinningStates(Z_internal, arg_bdd.false, arg_bdd.false, True,
                                          arg_bdd.add_expr(sys_live_internal))
                     # print("This will break")
@@ -955,7 +977,7 @@ def find_encoded_skills(arg_bdd, arg_gs, arg_T_env):
                                                                       arg_gs.get_t_env_hard()) & ~arg_T_env) & arg_T_env
 
 
-def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_gs, arg_T_previously_changed,
+def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_gs: GameStructure, arg_T_previously_changed,
                           arg_opts):
     """
     Modifies the postconditions by changing a single postcondition such that it increases the winning states
@@ -1047,13 +1069,14 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
                          ~T_no_effect & \
                          (~T_skill_with_pre_dp | T_skill_with_post_dp) & \
                          arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys)
+                        #  arg_gs.get_t_env_init_uncontrollable_v_and_p_and_dp(arg_opts) # <- env init uncontrollable same for possible changes
 
     print_expr(arg_bdd, "T_possible_changes", T_possible_changes,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
 
     # These are the changes that are winning
     T_winning_changes = T_possible_changes & winning_p_dp
-    if DEBUG: breakpoint()
+    if DEBUG: breakpoint() # DEBUG
     print_expr(arg_bdd, "T_winning_changes", T_winning_changes,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
 
@@ -1078,6 +1101,7 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
     else:
         T_winning_change_sel = arg_bdd.false
     if DEBUG: breakpoint()
+    # T_winning_change_sel = arg_bdd.false
     print_expr(arg_bdd, "T_winning_change_sel", T_winning_change_sel,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=True)
     if arg_opts['enforce_reactive_variables']:
@@ -1142,7 +1166,7 @@ def find_final_post(arg_bdd, arg_gs, arg_skills, arg_T_env, arg_T_sys_nh):
     return T_out
 
 
-def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_gs, arg_opts):
+def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_gs: GameStructure, arg_opts):
     print("modify preconditions")
     # np.random.seed(42)
     print_expr(arg_bdd, "winning states", arg_winning_states, vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
@@ -1170,6 +1194,7 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     input_vars_prime_minus_reactive = copy.deepcopy(arg_gs.get_input_vars_prime())
     if arg_opts['enforce_reactive_variables']:
         for rv in arg_opts['reactive_variables_current']:
+            # print(rv)
             input_vars_prime_minus_reactive.remove(rv + "'")
     T_sys_always_wins = arg_bdd.forall(input_vars_prime_minus_reactive, (~arg_T_env) | T_sys_can_win) & ~arg_bdd.add_expr(no_skills)
     # T_sys_always_wins = (arg_bdd.forall(input_vars_prime_minus_reactive,arg_bdd.add_expr(arg_gs.get_env_live_assumptions()[0]) | T_sys_can_win) |
@@ -1218,6 +1243,18 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     # These are the possible changes to the preconditions while not allowing changes to preconditions that are already in the skill
     # Also restricts that the change must obey hard system constraints
     skill_has_no_effect = find_skill_has_no_effect(arg_bdd, arg_gs, 'p_and_dp', arg_opts=arg_opts)
+    
+    T_possible_changes_in_dp_all_old = T_sys_always_wins_and_reachable & \
+                                   arg_bdd.let(arg_gs.get_v_prime_to_v(), arg_gs.get_change_cons_p_and_dp()) & \
+                                   arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(),
+                                               arg_gs.get_not_allowed_repair()) & \
+                                   ~T_pres_in_skill & \
+                                   arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), arg_gs.get_t_sys_hard()) & \
+                                   ~arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(),
+                                                T_sys_always_wins_and_reachable) & \
+                                   ~skill_has_no_effect & \
+                                   ~T_final_post
+    
     T_possible_changes_in_dp_all = T_sys_always_wins_and_reachable & \
                                    arg_bdd.let(arg_gs.get_v_prime_to_v(), arg_gs.get_change_cons_p_and_dp()) & \
                                    arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(),
@@ -1228,7 +1265,8 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
                                                 T_sys_always_wins_and_reachable) & \
                                    ~skill_has_no_effect & \
                                    ~T_final_post
-    if DEBUG: breakpoint()
+                                #    arg_gs.get_t_env_init_uncontrollable_v_and_p_and_dp(arg_opts) # <- env init uncontrollable same for possible changes
+    if DEBUG: breakpoint() # DEBUG
     print_expr(arg_bdd, "T_possible_changes_in_dp_all", T_possible_changes_in_dp_all,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
 
@@ -1314,7 +1352,8 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
                    vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
 
     # Line 26
-    T_sys_new = T_sys_mutable | T_new_pre_primed | T_new_full_skill
+    # T_sys_new = T_sys_mutable | T_new_pre_primed | T_new_full_skill
+    T_sys_new = (T_sys_mutable | T_new_pre_primed | T_new_full_skill) & ~T_old_pre_primed
 
     # Adds the new preconditions to the environment transitions.
     # First, removes all transitions associated with the new precondition and skill
@@ -1343,12 +1382,12 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
                do_print=DEBUG_PRE)
 
     # # Line 29 and 30
-    T_env_new = ((arg_T_env & ~T_new_pre_and_skill) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
-                                                                    T_new_full_skill) | T_new_pre_pre_env) & arg_gs.get_t_env_hard()
+    # T_env_new = ((arg_T_env & ~T_new_pre_and_skill) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
+    #                                                                 T_new_full_skill) | T_new_pre_pre_env) & arg_gs.get_t_env_hard()
 
     # Forbid the old_pre_pre -> old_pre transition
-    # T_env_new = ((arg_T_env & ~T_new_pre_and_skill & ~T_old_pre_primed_env) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
-    #                                                                 T_new_full_skill) | T_new_pre_pre_env) & arg_gs.get_t_env_hard()
+    T_env_new = ((arg_T_env & ~T_new_pre_and_skill & ~T_old_pre_primed_env) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
+                                                                    T_new_full_skill) | T_new_pre_pre_env) & arg_gs.get_t_env_hard()
 
     return T_env_new, T_sys_new, arg_bdd.false
 
@@ -1962,6 +2001,7 @@ def run_repair(file_in, opts):
     while repair_cnt <= max_repair_cnt and do_compute_winning_states:
         repair_cnt += 1
         # Compute winning states
+        if DEBUG: breakpoint()
         winning_states = compute_winning_states(repaired_gs.bdd, repaired_gs, opts)
         do_compute_winning_states = winning_states.does_need_repair()
 
@@ -1972,7 +2012,7 @@ def run_repair(file_in, opts):
 
         if winning_states.does_need_repair():
             opts['cover'] = False
-            if DEBUG: breakpoint()
+            if DEBUG: breakpoint() 
             repaired_gs, acts_changed, T_previously_changed, T_swapped_pre, T_swapped_post = perform_repair(
                 repaired_gs.bdd, repaired_gs,
                 winning_states,
@@ -2001,7 +2041,7 @@ def run_repair(file_in, opts):
     while repair_cnt <= max_repair_cnt and not is_realizable:
         repair_cnt += 1
         opts['cover'] = True
-        if DEBUG: breakpoint()
+        if DEBUG: breakpoint() 
         repaired_gs, acts_changed, T_previously_changed, T_swapped_pre, T_swapped_post = perform_repair(repaired_gs.bdd,
                                                                                                         repaired_gs,
                                                                                                         winning_states,
@@ -2085,6 +2125,21 @@ def print_pdb(ls):
 def print_bdd(bdd: _bdd, expr):
     ls = list(bdd.pick_iter(expr))
     print_pdb(ls)
+
+def print_bdd_to_file(bdd: _bdd, expr, file_name: str = "pdb_output.txt"):
+    ls = list(bdd.pick_iter(expr))
+    states = list_of_dicts_to_curr_prime_dp(ls)
+    cnt = 1
+    with open(file_name, "wt") as file:
+        for curr_state, next_state, double_next_state in states:
+            print(f"{cnt}.", file=file)
+            cnt += 1
+            if curr_state is not None and len(curr_state) > 0:
+                print("curr_state: ", curr_state, file=file)
+            if next_state is not None and len(next_state) > 0:
+                print("next_state: ", next_state, file=file)
+            if double_next_state is not None and len(double_next_state) > 0:
+                print("double_next_state: ", double_next_state, file=file)
 
 def list_of_dicts_to_curr_prime_dp(ls):
     cnt = 1
