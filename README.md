@@ -242,3 +242,35 @@ python run_plot_symbols.py --file_names "../data/stretch/stretch_files.json" --s
 ```
 
 Plots will be generated in `synthesis_based_repair/data/stretch/plots/`.
+
+## Transformation: Specs with Integer Inputs to Spec with Boolean Inputs Only
+
+### Required packages
+- This [fork](https://github.com/MartinMeng008/slugs) of slugs
+- z3
+
+In the file [mocomp.py](monitor/mocomp.py), change the slugs location to the directory of the installed slugs in this [line](https://github.com/MartinMeng008/synthesis_based_repair/blob/1162ab7678459f85bc815db74df3c348e723434d/monitor/mocomp.py#L23).
+
+### Usage
+
+To perform the integer-to-boolean transformation, from `\synthesis_based_repair` run:
+```
+cd monitor
+python mocomp.py -s [input_file] -so [output_file] -t 
+```
+
+e.g.
+```
+cd monitor
+python mocomp.py -s "../data/perceptive_locomotion/locomotion_3x3.structuredslugsplus" -so "../data/perceptive_locomotion/transformed_int2bool_locomotion_3x3.structuredslugsplus" -t 
+```
+
+To check the realizability of a spec, run:
+```
+python mocomp.py -s [spec]
+```
+
+e.g. 
+```
+python mocomp.py -s "../data/perceptive_locomotion/transformed_int2bool_locomotion_3x3.structuredslugsplus"
+```
