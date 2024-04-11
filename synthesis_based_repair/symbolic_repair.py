@@ -452,7 +452,8 @@ class GameStructure:
         x.extend(self.cntr_vars_prime)
         return x
 
-    def cox(self, x_set):
+    def cox(self, x_set, arg_bdd=None):
+        if DEBUG: breakpoint()
         x_set_prime = self.bdd.let(self.get_v_to_v_prime(), x_set)
         tmp_sys_and_x_set_prime = x_set_prime & self.get_t_sys()
         tmp_exists = self.bdd.exist(self.get_output_vars_prime(), tmp_sys_and_x_set_prime)
@@ -530,6 +531,7 @@ def compute_winning_states(arg_bdd, gs_internal, arg_opts):
     Z_internal = arg_bdd.true
     Z_prime_internal = arg_bdd.false
     z_cnt = 0
+    if DEBUG: breakpoint()
     while Z_prime_internal != Z_internal:  # fixed point of Z
         print_debug("Starting another Z fixed point")
         print_expr(arg_bdd, "iter_" + str(z_cnt) + "_Z", Z_internal,
@@ -572,7 +574,7 @@ def compute_winning_states(arg_bdd, gs_internal, arg_opts):
                            do_print=DEBUG & DEBUG_WS_COMPUTE, do_names=arg_opts['do_names'], arg_opts=arg_opts,
                            to_file=arg_opts['to_file'])
 
-                start = arg_bdd.add_expr(sys_live_internal) & gs_internal.cox(Z_internal)
+                start = arg_bdd.add_expr(sys_live_internal) & gs_internal.cox(Z_internal, arg_bdd)
                 print_expr(arg_bdd, "iter_{}_live_{}_y_{}_start".format(z_cnt, ii, fpY_cnt), start,
                            vars_ordering=gs_internal.get_vars_and_vars_prime(),
                            do_print=DEBUG & DEBUG_WS_COMPUTE, do_names=arg_opts['do_names'],
