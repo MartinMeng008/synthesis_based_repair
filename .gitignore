@@ -8,3 +8,4 @@ build/
 synthesis_based_repair.egg-info
 synthesis_based_repair/__pycache__/*
 synthesis_based_repair/__pycache__/symbolic_repair.cpython-38.pyc
+__pycache__
