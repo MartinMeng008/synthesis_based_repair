@@ -2008,6 +2008,94 @@ def run_repair(file_in, opts):
 
     return False, suggestions[0]
 
+#### ==== DEBUG ==== ####
+def print_pdb_to_file(ls): 
+    file = open("pdb_output.txt", "wt")
+    ppr(list_of_dicts_to_curr_prime_dp(ls), stream=file)
+    return None
+
+def print_pdb(ls):
+    states = list_of_dicts_to_curr_prime_dp(ls)
+    cnt = 1
+    for curr_state, next_state, double_next_state in states:
+        print(f"{cnt}.")
+        cnt += 1
+        if curr_state is not None and len(curr_state) > 0:
+            print("curr_state: ", curr_state)
+        if next_state is not None and len(next_state) > 0:
+            print("next_state: ", next_state)
+        if double_next_state is not None and len(double_next_state) > 0:
+            print("double_next_state: ", double_next_state)
+
+def print_bdd(bdd: _bdd, expr):
+    ls = list(bdd.pick_iter(expr))
+    print_pdb(ls)
+
+def print_bdd_to_file(bdd: _bdd, expr, file_name: str = "pdb_output.txt"):
+    ls = list(bdd.pick_iter(expr))
+    states = list_of_dicts_to_curr_prime_dp(ls)
+    cnt = 1
+    with open(file_name, "wt") as file:
+        for curr_state, next_state, double_next_state in states:
+            print(f"{cnt}.", file=file)
+            cnt += 1
+            if curr_state is not None and len(curr_state) > 0:
+                print("curr_state: ", curr_state, file=file)
+            if next_state is not None and len(next_state) > 0:
+                print("next_state: ", next_state, file=file)
+            if double_next_state is not None and len(double_next_state) > 0:
+                print("double_next_state: ", double_next_state, file=file)
+
+def list_of_dicts_to_curr_prime_dp(ls):
+    cnt = 1
+    states = []
+    for state_dict in ls:
+        curr_state = get_curr_state(state_dict)
+        # if 'p_cup_t' in dict_bool2list(curr_state):
+        #     continue
+        # print(f"{cnt}.")
+        # cnt += 1
+        next_state = get_next_state(state_dict)
+        double_next_state = get_double_next_state(state_dict)
+        states.append((dict_bool2list(curr_state), dict_bool2list(next_state), dict_bool2list(double_next_state)))
+        # if curr_state is not None and len(curr_state) > 0:
+        #     print("curr_state: ", dict_bool2list(curr_state))
+        # if next_state is not None and len(next_state) > 0:
+        #     print("next_state: ", dict_bool2list(next_state))
+        # if double_next_state is not None and len(double_next_state) > 0:
+        #     # print("len: ", len(double_next_state))
+        #     print("double_next_state: ", dict_bool2list(double_next_state))
+    return states
+
+def get_curr_state(state_dict):
+    curr_state = {}
+    for key in state_dict:
+        if not "'" in key:
+            curr_state[key] = state_dict[key]
+    return curr_state
+
+def get_next_state(state_dict):
+    next_state = {}
+    for key in state_dict:
+        if "'" in key and not "''" in key:
+            next_state[key] = state_dict[key]
+    return next_state
+
+def get_double_next_state(state_dict):
+    next_state = {}
+    for key in state_dict:
+        if "''" in key:
+            next_state[key] = state_dict[key]
+    return next_state
+
+def dict_bool2list(dic: dict) -> list:
+    ls = []
+    for name, val in dic.items():
+        if val:
+            ls.append(name)
+    return ls
+
+#### ======== ####
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
