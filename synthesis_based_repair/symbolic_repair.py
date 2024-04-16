@@ -457,17 +457,18 @@ class GameStructure:
         post_image = self.bdd.let(self.get_v_prime_to_v(), tmp_image)
         return post_image
 
-    def update_change_cons(self, arg_skills_changed):
+    def update_constraints(self, arg_skills_changed, constraints):
         for new_skill, old_skill in arg_skills_changed:
-            old_cons = self.bdd.exist(self.get_output_vars(), self.change_cons & old_skill)
+            old_cons = self.bdd.exist(self.get_output_vars(), constraints & old_skill)
             new_cons = old_cons & new_skill
-            self.change_cons = (self.change_cons & ~new_skill) | new_cons
+            constraints = (constraints & ~new_skill) | new_cons
+        return None
+
+    def update_change_cons(self, arg_skills_changed):
+        return self.update_constraints(arg_skills_changed, self.change_cons)
 
     def update_not_allowed_repair(self, arg_skills_changed):
-        for new_skill, old_skill in arg_skills_changed:
-            old_cons = self.bdd.exist(self.get_output_vars(), self.not_allowed_repair & old_skill)
-            new_cons = old_cons & new_skill
-            self.not_allowed_repair = (self.not_allowed_repair & ~new_skill) | new_cons
+        return self.update_constraints(arg_skills_changed, self.not_allowed_repair)
 
 
 class WinningStates:
@@ -992,7 +993,8 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
     # Line 2
     # The full skills that are encoded
     no_op = "!" + " & !".join(arg_opts['existing_skills'])
-    T_full_skills = arg_gs.get_t_sys_not_hard() & T_reachable & ~arg_bdd.add_expr(no_op)
+    T_no_op = arg_bdd.add_expr(no_op)
+    T_full_skills = arg_gs.get_t_sys_not_hard() & T_reachable # & ~arg_bdd.add_expr(no_op) <- allow no-op
     print_expr(arg_bdd, "T_full_skills", T_full_skills, vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
                do_print=DEBUG)
 
@@ -1009,15 +1011,15 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
     # precondition as the state it is changing to
     # Line 5
     T_pres = arg_bdd.exist(arg_gs.get_input_vars_prime(), T_reachable)
-    T_skill_with_pre_dp = arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), T_pres)
+    T_skill_with_pre_dp = arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), T_pres) & ~T_no_op # <- we make sure that the preconditions indeed include skills
     T_skill_with_post_dp = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), T_reachable)
-    T_no_effect = find_skill_has_no_effect(arg_bdd, arg_gs, "v_and_dp")
+    T_no_effect = find_skill_has_no_effect(arg_bdd, arg_gs, "v_and_dp") & arg_bdd.false # <- we allow no-op or no effect skills
     T_possible_changes = T_full_skills_not_winning & \
                          arg_gs.get_change_cons_p_and_dp() & \
                          arg_gs.get_not_allowed_repair_v_and_dp() & \
                          ~T_no_effect & \
                          (~T_skill_with_pre_dp | T_skill_with_post_dp) & \
-                         arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys)# & \
+                         arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys & arg_gs.get_t_sys_hard())# & \ # <- the change should respect sys hard constraints
                          # arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys & arg_gs.get_t_sys_hard()) & \
                          # arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_gs.get_t_env_hard())
 
@@ -1026,6 +1028,7 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
 
     # These are the changes that are winning
     T_winning_changes = T_possible_changes & winning_p_dp
+    if True: breakpoint()
     print_expr(arg_bdd, "T_winning_changes", T_winning_changes,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
 
@@ -1055,7 +1058,9 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
         T_winning_change_sel = arg_bdd.exist(arg_opts['reactive_variables'], T_winning_change_sel)
         print_expr(arg_bdd, "T_winning_change_sel (after enforcing reactive variables)", T_winning_change_sel,
                    vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
-
+    
+    T_winning_change_old = arg_bdd.exist(arg_gs.get_output_vars_prime() + arg_gs.get_input_vars_double_prime(),
+                                           T_winning_change_sel)
     T_winning_change_new = arg_bdd.exist(arg_gs.get_output_vars_prime(),
                                          arg_bdd.let(arg_gs.get_inputdoubleprime_to_inputprime(),
                                                      arg_bdd.exist(arg_gs.get_input_vars_prime(),
@@ -1065,8 +1070,10 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
 
     # Lines 12-15
     # For the environment transition, we just need to remove the old postcondition(s) and add the new postcondition(s)
-    T_env_out = arg_T_env & ~arg_bdd.exist(arg_gs.get_output_vars_prime() + arg_gs.get_input_vars_double_prime(),
-                                           T_winning_change_sel)
+    if T_winning_change_old & T_no_op == arg_bdd.false:  
+        T_env_out = arg_T_env & ~T_winning_change_old
+    else:
+        T_env_out = arg_T_env
     T_env_out = T_env_out | arg_bdd.exist(arg_gs.get_output_vars_prime(), T_winning_change_new)
     print_expr(arg_bdd, "T_env removed",
                arg_bdd.exist(arg_gs.get_output_vars_prime() + arg_gs.get_input_vars_double_prime(),
@@ -1145,8 +1152,8 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     # T_sys_always_wins = arg_bdd.forall(input_vars_prime_minus_reactive, (~arg_T_env) | T_sys_can_win) & ~arg_bdd.add_expr(no_skills)
     T_sys_always_wins = (arg_bdd.forall(input_vars_prime_minus_reactive,
                                         arg_bdd.add_expr(arg_gs.get_env_live_assumptions()[0]) | T_sys_can_win) |
-                         arg_bdd.forall(input_vars_prime_minus_reactive, (~arg_T_env) | T_sys_can_win)) \
-                        & ~arg_bdd.add_expr(no_skills)
+                         arg_bdd.forall(input_vars_prime_minus_reactive, (~arg_T_env) | T_sys_can_win)) #\
+                        #& ~arg_bdd.add_expr(no_skills)
     # print_expr(arg_bdd, "A x get to Y", T_sys_always_wins,
     #            vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
 
@@ -1207,6 +1214,7 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     # Only select one precondition to be added
     all_possible_changes = list(arg_bdd.pick_iter(T_possible_changes_in_dp_all,
                                                   care_vars=arg_gs.get_vars_and_prime_and_dp()))
+    if True: breakpoint()
     if len(all_possible_changes) == 0:
         return arg_T_env, arg_gs.get_t_sys_not_hard(), arg_bdd.false
     sel_idx = np.random.randint(len(all_possible_changes))
@@ -2008,6 +2016,94 @@ def run_repair(file_in, opts):
 
     return False, suggestions[0]
 
+#### ==== DEBUG ==== ####
+def print_pdb_to_file(ls): 
+    file = open("pdb_output.txt", "wt")
+    ppr(list_of_dicts_to_curr_prime_dp(ls), stream=file)
+    return None
+
+def print_pdb(ls):
+    states = list_of_dicts_to_curr_prime_dp(ls)
+    cnt = 1
+    for curr_state, next_state, double_next_state in states:
+        print(f"{cnt}.")
+        cnt += 1
+        if curr_state is not None and len(curr_state) > 0:
+            print("curr_state: ", curr_state)
+        if next_state is not None and len(next_state) > 0:
+            print("next_state: ", next_state)
+        if double_next_state is not None and len(double_next_state) > 0:
+            print("double_next_state: ", double_next_state)
+
+def print_bdd(bdd: _bdd, expr):
+    ls = list(bdd.pick_iter(expr))
+    print_pdb(ls)
+
+def print_bdd_to_file(bdd: _bdd, expr, file_name: str = "pdb_output.txt"):
+    ls = list(bdd.pick_iter(expr))
+    states = list_of_dicts_to_curr_prime_dp(ls)
+    cnt = 1
+    with open(file_name, "wt") as file:
+        for curr_state, next_state, double_next_state in states:
+            print(f"{cnt}.", file=file)
+            cnt += 1
+            if curr_state is not None and len(curr_state) > 0:
+                print("curr_state: ", curr_state, file=file)
+            if next_state is not None and len(next_state) > 0:
+                print("next_state: ", next_state, file=file)
+            if double_next_state is not None and len(double_next_state) > 0:
+                print("double_next_state: ", double_next_state, file=file)
+
+def list_of_dicts_to_curr_prime_dp(ls):
+    cnt = 1
+    states = []
+    for state_dict in ls:
+        curr_state = get_curr_state(state_dict)
+        # if 'p_cup_t' in dict_bool2list(curr_state):
+        #     continue
+        # print(f"{cnt}.")
+        # cnt += 1
+        next_state = get_next_state(state_dict)
+        double_next_state = get_double_next_state(state_dict)
+        states.append((dict_bool2list(curr_state), dict_bool2list(next_state), dict_bool2list(double_next_state)))
+        # if curr_state is not None and len(curr_state) > 0:
+        #     print("curr_state: ", dict_bool2list(curr_state))
+        # if next_state is not None and len(next_state) > 0:
+        #     print("next_state: ", dict_bool2list(next_state))
+        # if double_next_state is not None and len(double_next_state) > 0:
+        #     # print("len: ", len(double_next_state))
+        #     print("double_next_state: ", dict_bool2list(double_next_state))
+    return states
+
+def get_curr_state(state_dict):
+    curr_state = {}
+    for key in state_dict:
+        if not "'" in key:
+            curr_state[key] = state_dict[key]
+    return curr_state
+
+def get_next_state(state_dict):
+    next_state = {}
+    for key in state_dict:
+        if "'" in key and not "''" in key:
+            next_state[key] = state_dict[key]
+    return next_state
+
+def get_double_next_state(state_dict):
+    next_state = {}
+    for key in state_dict:
+        if "''" in key:
+            next_state[key] = state_dict[key]
+    return next_state
+
+def dict_bool2list(dic: dict) -> list:
+    ls = []
+    for name, val in dic.items():
+        if val:
+            ls.append(name)
+    return ls
+
+#### ======== ####
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
