@@ -286,3 +286,6 @@ e.g.
 ```
 python repair.py -s "../data/perceptive_locomotion/transformed_int2bool_locomotion_3x3_repair_test_unrealizable.structuredslugsplus" -o "../data/perceptive_locomotion/opts.json" -a
 ```
+
+### Debug mode
+To run repair with the debugger on or off, change ```[debug]``` in ```"../data/perceptive_locomotion/opts.json"```
