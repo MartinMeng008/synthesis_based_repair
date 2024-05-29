@@ -274,3 +274,18 @@ e.g.
 ```
 python mocomp.py -s "../data/perceptive_locomotion/transformed_int2bool_locomotion_3x3.structuredslugsplus"
 ```
+
+## Add backup skills and run repair
+To add backup skills and run repair, from `\synthesis_based_repair` run:
+```
+cd monitor
+python repair.py -s [input_file] -o [option_file] -a
+```
+
+e.g.
+```
+python repair.py -s "../data/perceptive_locomotion/transformed_int2bool_locomotion_3x3_repair_test_unrealizable.structuredslugsplus" -o "../data/perceptive_locomotion/opts.json" -a
+```
+
+### Debug mode
+To run repair with the debugger on or off, change ```[debug]``` in ```"../data/perceptive_locomotion/opts.json"```
