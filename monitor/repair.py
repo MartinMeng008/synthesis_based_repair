@@ -32,14 +32,9 @@ class Repair:
         else:
             self.max_iter = 50
         self.file_structuredslugsplus = filename
-        # self.compiler.generate_structuredslugsplus(self.file_structuredslugsplus)
-        # np.random.seed(seed)
-        if files_json:
-            uncontrollable_symbols = self.compiler.uncontrollable_variables
-            self.opts["reactive_variables_current"] = uncontrollable_symbols
-            self.opts["reactive_variables"] = uncontrollable_symbols + varlist2prime(uncontrollable_symbols) + varlist2doubleprime(uncontrollable_symbols)
-            self.opts["controllable_mobile_variables"] = json_load_wrapper(files_json["controllable_mobile_inputs"])["controllable_mobile_inputs"]
-            self.opts["controllable_manipulation_variables"] = json_load_wrapper(files_json["controllable_manipulation_inputs"])["controllable_manipulation_inputs"]
+        uncontrollable_inputs = self.opts["uncontrollable_inputs"]
+        self.opts["reactive_variables_current"] = uncontrollable_inputs
+        self.opts["reactive_variables"] = uncontrollable_inputs + varlist2prime(uncontrollable_inputs) + varlist2doubleprime(uncontrollable_inputs)
 
     def run_symbolic_repair(self) -> dict:
         """Run the symbolic repair module
@@ -65,15 +60,7 @@ class Repair:
             print(f"is_realizable at iteration {cnt}: ", is_realizable)
             if is_realizable:
                 print("The spec is realizable")
-                # self.compiler.reset_dict_num()
-                # self.compiler.remove_skills()
-                # self.compiler.reset_after_successful_repair()
                 return skills
-            # self.compiler.remove_skills()
-            # self.compiler.change_manipulation_or_mobile_only(self.opts)
-            # if "switch_repair" in self.opts.keys() and self.opts["switch_repair"]:
-            #     self.opts["mobile_repair"] = not self.opts["mobile_repair"]
-            # self.compiler.generate_structuredslugsplus(self.file_structuredslugsplus)
             self.opts['only_synthesis'] = False
             found_suggestion = False
             while not found_suggestion:

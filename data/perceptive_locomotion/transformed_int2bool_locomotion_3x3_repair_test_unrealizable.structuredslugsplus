@@ -35,7 +35,6 @@ skill_18
 skill_19
 skill_20
 skill_21
-waypointrequestPending
 
 [ENV_INIT]
 ( ! xrequest0 & xrequest1 & ! xrequest2 )
@@ -122,7 +121,7 @@ waypointrequestPending
 ! ( x0' & x2' )
 ! ( x0' & x1' )
 ( x0' | x1' | x2' )
-( waypointrequestPending -> ( ( ( xrequest0' <-> xrequest0 ) & ( xrequest1' <-> xrequest1 ) & ( xrequest2' <-> xrequest2 ) ) & ( ( yrequest0' <-> yrequest0 ) & ( yrequest1' <-> yrequest1 ) & ( yrequest2' <-> yrequest2 ) ) ) )
+( !( ( x0 <-> xrequest0 ) & ( x1 <-> xrequest1 ) & ( x2 <-> xrequest2 ) & ( y0 <-> yrequest0 ) & ( y1 <-> yrequest1 ) & ( y2 <-> yrequest2 ) ) -> ( ( ( xrequest0' <-> xrequest0 ) & ( xrequest1' <-> xrequest1 ) & ( xrequest2' <-> xrequest2 ) ) & ( ( yrequest0' <-> yrequest0 ) & ( yrequest1' <-> yrequest1 ) & ( yrequest2' <-> yrequest2 ) ) ) )
 ( ( ! skill_0 & ! skill_1 & ! skill_2 & ! skill_3 & ! skill_4 & ! skill_5 & ! skill_6 & ! skill_7 & ! skill_8 & ! skill_9 & ! skill_10 & ! skill_11 & ! skill_12 & ! skill_13 & ! skill_14 & ! skill_15 & ! skill_16 & ! skill_17 & ! skill_18 & ! skill_19 & ! skill_20 & ! skill_21 ) -> ( ( ( x0' <-> x0 ) & ( x1' <-> x1 ) & ( x2' <-> x2 ) ) & ( ( y0' <-> y0 ) & ( y1' <-> y1 ) & ( y2' <-> y2 ) ) ) )
 
 [SYS_TRANS]
@@ -150,15 +149,13 @@ waypointrequestPending
 ( ! ( ( ! x0' & ! x1' & x2' ) & ( ! y0' & y1' & ! y2' ) ) -> ! skill_21' )
 
 [SYS_TRANS_HARD]
-( ( ( ( x0 <-> xrequest0 ) & ( x1 <-> xrequest1 ) & ( x2 <-> xrequest2 ) ) & ( ( y0 <-> yrequest0 ) & ( y1 <-> yrequest1 ) & ( y2 <-> yrequest2 ) ) ) -> ! waypointrequestPending )
-( ! ( ( ( x0 <-> xrequest0 ) & ( x1 <-> xrequest1 ) & ( x2 <-> xrequest2 ) ) & ( ( y0 <-> yrequest0 ) & ( y1 <-> yrequest1 ) & ( y2 <-> yrequest2 ) ) ) -> waypointrequestPending )
-( ! waypointrequestPending -> ( ! skill_0 & ! skill_1 & ! skill_2 & ! skill_3 & ! skill_4 & ! skill_5 & ! skill_6 & ! skill_7 & ! skill_8 & ! skill_9 & ! skill_10 & ! skill_11 & ! skill_12 & ! skill_13 & ! skill_14 & ! skill_15 & ! skill_16 & ! skill_17 & ! skill_18 & ! skill_19 & ! skill_20 & ! skill_21 ) )
+( ( ( x0 <-> xrequest0 ) & ( x1 <-> xrequest1 ) & ( x2 <-> xrequest2 ) & ( y0 <-> yrequest0 ) & ( y1 <-> yrequest1 ) & ( y2 <-> yrequest2 ) ) -> ( ! skill_0 & ! skill_1 & ! skill_2 & ! skill_3 & ! skill_4 & ! skill_5 & ! skill_6 & ! skill_7 & ! skill_8 & ! skill_9 & ! skill_10 & ! skill_11 & ! skill_12 & ! skill_13 & ! skill_14 & ! skill_15 & ! skill_16 & ! skill_17 & ! skill_18 & ! skill_19 & ! skill_20 & ! skill_21 ) )
 ( ( skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_1' & ! skill_0' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_2' & ! skill_0' & ! skill_1' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_3' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_4' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_5' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_6' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_7' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_8' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_9' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_10' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_11' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_12' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_13' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_14' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_15' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_16' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_17' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_18' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_19' & ! skill_20' & ! skill_21' ) | ( skill_19' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_20' & ! skill_21' ) | ( skill_20' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_21' ) | ( skill_21' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' ) | ( ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' & ! skill_14' & ! skill_15' & ! skill_16' & ! skill_17' & ! skill_18' & ! skill_19' & ! skill_20' & ! skill_21' ) )
 
 [ENV_LIVENESS]
 
 [SYS_LIVENESS]
-! waypointrequestPending
+( x0 <-> xrequest0 ) & ( x1 <-> xrequest1 ) & ( x2 <-> xrequest2 ) & ( y0 <-> yrequest0 ) & ( y1 <-> yrequest1 ) & ( y2 <-> yrequest2 )
 
 [CHANGE_CONS]
 ! ( yrequest1 & yrequest2 )
@@ -193,8 +190,31 @@ waypointrequestPending
 ! ( x0' & x2' )
 ! ( x0' & x1' )
 ( x0' | x1' | x2' )
-( waypointrequestPending -> ( ( ( xrequest0' <-> xrequest0 ) & ( xrequest1' <-> xrequest1 ) & ( xrequest2' <-> xrequest2 ) ) & ( ( yrequest0' <-> yrequest0 ) & ( yrequest1' <-> yrequest1 ) & ( yrequest2' <-> yrequest2 ) ) ) )
-(waypointrequestPending <-> waypointrequestPending')
+
+(x0 <-> !x0') | (x1 <-> !x1') | (x2 <-> !x2') | (y0 <-> !y0') | (y1 <-> !y1') | (y2 <-> !y2') 
+
+(xrequest0 <-> xrequest0')
+(xrequest1 <-> xrequest1')
+(xrequest2 <-> xrequest2')
+(yrequest0 <-> yrequest0')
+(yrequest1 <-> yrequest1')
+(yrequest2 <-> yrequest2')
 
 [NOT_ALLOWED_REPAIR]
+(x0 <-> !x0') | (x1 <-> !x1') | (x2 <-> !x2') | (y0 <-> !y0') | (y1 <-> !y1') | (y2 <-> !y2') 
+(x0 & y0) -> ((x1' & y0') | (x0' & y1'))
+(x1 & y0) -> ((x0' & y0') | (x2' & y0') | (x1' & y1'))
+(x2 & y0) -> ((x1' & y0') | (x2' & y1'))
+(x0 & y1) -> ((x1' & y1') | (x0' & y2') | (x0' & y0'))
+(x1 & y1) -> ((x0' & y1') | (x2' & y1') | (x1' & y2') | (x1' & y0'))
+(x2 & y1) -> ((x1' & y1') | (x2' & y2') | (x2' & y0'))
+(x0 & y2) -> ((x0' & y1') | (x1' & y2'))
+(x1 & y2) -> ((x0' & y2') | (x2' & y2') | (x1' & y1'))
+(x2 & y2) -> ((x1' & y2') | (x2' & y1'))
 
+#(xrequest0 <-> xrequest0')
+#(xrequest1 <-> xrequest1')
+#(xrequest2 <-> xrequest2')
+#(yrequest0 <-> yrequest0')
+#(yrequest1 <-> yrequest1')
+#(yrequest2 <-> yrequest2')
