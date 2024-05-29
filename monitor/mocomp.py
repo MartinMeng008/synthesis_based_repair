@@ -60,8 +60,8 @@ class Compiler:
         self.violated_env_trans_hard_indices = set()
         self.MANIPULATION_ONLY = all(is_manipulation_object(obj, self.objects_data) for obj in self.objects_data.keys())
         self.MOBILE_ONLY = all(is_mobile_object(obj, self.objects_data) for obj in self.objects_data.keys())
-        print("MANIPULATION_ONLY: ", self.MANIPULATION_ONLY)
-        print("MOBILE_ONLY: ", self.MOBILE_ONLY)
+        # print("MANIPULATION_ONLY: ", self.MANIPULATION_ONLY)
+        # print("MOBILE_ONLY: ", self.MOBILE_ONLY)
 
     def set_asts(self, input_file: str) -> None:
         """Set the ASTs from the input_file"""
@@ -97,7 +97,6 @@ class Compiler:
         self.asts = asts
         # self.env_trans_asts = self.asts[self.properties["env_trans"]] + self.asts[self.properties["env_trans_hard"]]
         self._set_pointers_to_not_any_skills()
-        self._set_pointer_to_manipulation_or_mobile_only()
         return None
 
     def _get_vars_and_asts_from_structuredslugs(self) -> None:
@@ -111,33 +110,13 @@ class Compiler:
     def _set_pointers_to_not_any_skills(self) -> None:
         """Set pointers to not any skills"""
         env_trans_hard = self.asts[self.properties["env_trans_hard"]]
-        if not self.MANIPULATION_ONLY and len(env_trans_hard) >= 4:
-            print("Manipulation only: ", self.MANIPULATION_ONLY)
-            inact_wo_mobile_skills = env_trans_hard[-4]
-            self.not_any_mobile_skills_conjunction = inact_wo_mobile_skills[1][1]
-            if True:
-                print("not any mobile skill conjunction: ", self.not_any_mobile_skills_conjunction)
-        if not self.MOBILE_ONLY and len(env_trans_hard) >= 3:
-            inact_wo_manipulation_skills = env_trans_hard[-3]
-            self.not_any_manipulation_skills_conjunction = inact_wo_manipulation_skills[1][1]
-            if True:
-                print("not any manipulation skill conjunction: ", self.not_any_manipulation_skills_conjunction)
-        if len(env_trans_hard) >= 2:
-            inact_wo_skills = env_trans_hard[-2]
+        if len(env_trans_hard) >= 1:
+            inact_wo_skills = env_trans_hard[-1]
             self.not_any_skills_conjunction = inact_wo_skills[1][1]
             if True:
                 print("not any skill conjunction: ", self.not_any_skills_conjunction)
         # self.skill_mutual_exclusion = env_trans_hard[-1][1]
         # print(self.skill_mutual_exclusion)
-
-    def _set_pointer_to_manipulation_or_mobile_only(self) -> None:
-        """Set pointer to manipulation or mobile only"""
-        if not self.MANIPULATION_ONLY and not self.MOBILE_ONLY:
-            not_allowed_repair = self.asts[self.properties["not_allowed_repair"]]
-            self.manipulation_or_mobile_only_conjunction = not_allowed_repair[0][1]
-            self.asts[self.properties["change_cons"]][0][1] = self.manipulation_or_mobile_only_conjunction
-            if True:
-                print("Manipulation or mobile only: ", self.manipulation_or_mobile_only_conjunction)
 
     def get_vars(self): 
         return self.vars
@@ -852,10 +831,10 @@ class Monitor:
     def add_backup_skills(self) -> None:
         """Add backup skills to spec before repair module"""
         # output, sys_init, not_allowed_repair
-        backup_skills = [f'{skill}backup' for skill in self.vars[self.properties["output"]]]
+        backup_skills = [f'{skill}backup' for skill in self.vars[self.properties["output"]] if self.contains_skill(skill)]
         self.vars[self.properties["output"]] = self.vars[self.properties["output"]] + backup_skills
-        for backup_skill in backup_skills:
-            self.skills_data[backup_skill] = self.skills_data[backup_skill[:-6]]
+        # for backup_skill in backup_skills:
+        #     self.skills_data[backup_skill] = self.skills_data[backup_skill[:-6]]
         self.asts[self.properties["sys_init"]] = self.asts[self.properties["sys_init"]] + [self.add_formula_wrapper(self.add_not_wrapper(self.name2assignment(backup_skill))) for backup_skill in backup_skills]
         self.asts[self.properties["not_allowed_repair"]] = self.asts[self.properties["not_allowed_repair"]] + [self.add_formula_wrapper(self.add_not_wrapper(self.name2assignment(backup_skill))) for backup_skill in backup_skills]
         
@@ -887,7 +866,7 @@ class Monitor:
         for property_type in [self.properties["sys_init"], self.properties["not_allowed_repair"], self.properties['env_trans'], self.properties['sys_trans'], self.properties['env_liveness'], self.properties['sys_liveness']]:
             self.asts[property_type] = self.filter_list(self.asts[property_type], lambda x: not self.contains_skill_and_backup(x))
             [ast for ast in self.asts[property_type] if not self.contains_skill_and_backup(ast)]
-        for skill_name in list(self.skills_data.keys()):
+        for skill_name in self.get_skills():
             if 'backup' in skill_name:
                 self.skills_data.pop(skill_name)
         self.generate_env_trans_hard()
@@ -1096,14 +1075,14 @@ class Monitor:
         return formulas
     
     def modify_inactivity_without_skills_formulas(self) -> None:
-        mobile_skills = [skill for skill, skill_data in self.skills_data.items() if skill_data['type'] == "mobile"]
-        if not self.MANIPULATION_ONLY:
-            self.modify_inactivity_without_skills_formulas_given_skills(self.not_any_mobile_skills_conjunction, mobile_skills)
+        # mobile_skills = [skill for skill, skill_data in self.skills_data.items() if skill_data['type'] == "mobile"]
+        # if not self.MANIPULATION_ONLY:
+        #     self.modify_inactivity_without_skills_formulas_given_skills(self.not_any_mobile_skills_conjunction, mobile_skills)
 
-        manipulation_skills = [skill for skill, skill_data in self.skills_data.items() if skill_data['type'] == "manipulation"]
-        self.modify_inactivity_without_skills_formulas_given_skills(self.not_any_manipulation_skills_conjunction, manipulation_skills)
+        # manipulation_skills = [skill for skill, skill_data in self.skills_data.items() if skill_data['type'] == "manipulation"]
+        # self.modify_inactivity_without_skills_formulas_given_skills(self.not_any_manipulation_skills_conjunction, manipulation_skills)
 
-        all_skills = list(self.skills_data.keys())
+        all_skills = self.get_skills()
         self.modify_inactivity_without_skills_formulas_given_skills(self.not_any_skills_conjunction, all_skills)
     
     def modify_inactivity_without_skills_formulas_given_skills(self, conjunction: list, skills: list) -> None:
@@ -1111,7 +1090,8 @@ class Monitor:
         """
         new_skill_conjunction = []
         for skill in skills:
-            new_skill_conjunction.append(self.add_not_wrapper(self.name2assignment(skill)))
+            if self.contains_skill(skill):
+                new_skill_conjunction.append(self.add_not_wrapper(self.name2assignment(skill)))
         if len(skills) > 1:
             conjunction[0] = self.terminals['conjunction']
             conjunction[1:] = []
@@ -1128,7 +1108,8 @@ class Monitor:
         # skills = self.vars['[OUTPUT]']
         not_skills_conjunction = self.create_empty_conjunction()
         for skill in skills:
-            not_skills_conjunction.append(self.add_not_wrapper(self.name2assignment(skill)))
+            if self.contains_skill(skill):
+                not_skills_conjunction.append(self.add_not_wrapper(self.name2assignment(skill)))
         inactivity_conjunction = self.create_empty_conjunction()
         for var in symbols:
             # if var not in self.uncontrollable_variables:
@@ -1179,17 +1160,15 @@ class Monitor:
         """Reset the env_trans_hard AST based on current vars and skills"""
         env_trans_hard: list = self.asts[self.properties["env_trans_hard"]]
         # env_trans_hard = self.delete_skills(env_trans_hard, self.violated_env_trans_hard_indices)
-        env_trans_hard = env_trans_hard[:-1] # delete the skill mutual exclusion assumption
+        # env_trans_hard = env_trans_hard[:-1] # delete the skill mutual exclusion assumption
         self.modify_inactivity_without_skills_formulas()
-        env_trans_hard.append(self.create_mutual_exclusion_skills_formula())
-        if STATIC_WORLD:
-            env_trans_hard.append(self.create_uncontrollable_inputs_inactivity_during_skillls_formula())
+        # env_trans_hard.append(self.create_mutual_exclusion_skills_formula())
         self.asts[self.properties["env_trans_hard"]] = env_trans_hard
         
     def generate_sys_trans_hard(self) -> None:
         """Reset the sys_trans_hard AST based on current vars and skills"""
         sys_trans_hard = self.asts[self.properties["sys_trans_hard"]]
-        sys_trans_hard = self.delete_skills(sys_trans_hard)
+        sys_trans_hard = sys_trans_hard[:-1] # delete the skill mutual exclusion assumption
         sys_trans_hard.append(self.create_mutual_exclusion_skills_formula(is_prime=True))
         self.asts[self.properties["sys_trans_hard"]] = sys_trans_hard
 

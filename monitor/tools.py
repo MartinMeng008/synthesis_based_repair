@@ -10,7 +10,7 @@ import subprocess
 import numpy as np
 import copy
 
-repair_dir = "/home/qian/workspace/synthesis_based_repair/synthesis_based_repair"
+repair_dir = '../synthesis_based_repair'
 sys.path.insert(0, repair_dir)
 from skills import Skill
 

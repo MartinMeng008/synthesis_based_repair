@@ -11,16 +11,15 @@ import sys
 import time
 import os
 import numpy as np
-from pprint import pprint as ppr
 
 DEBUG_THRESH = 121
 
-PRINT_EXPR = True
+PRINT_EXPR = False
 DEBUG_PRE = False
 DEBUG = False
 DEBUG_WS_COMPUTE = False
 DEBUG_DETERMINIZE = False
-DEBUG_REVISION = True
+DEBUG_REVISION = False
 
 # PRINT_EXPR = False
 # DEBUG_PRE = False
@@ -318,9 +317,6 @@ class GameStructure:
         tmp = self.bdd.let(self.inputprime_to_inputdoubleprime, self.change_cons)
         tmp = self.bdd.let(self.input_to_inputprime, tmp)
         return tmp
-    
-    def get_change_cons_v_and_dp(self): 
-        return self.bdd.let(self.inputprime_to_inputdoubleprime, self.change_cons)
 
     def get_not_allowed_repair(self):
         return self.not_allowed_repair
@@ -416,27 +412,6 @@ class GameStructure:
 
     def get_t_env_init(self):
         return self.T_env_init
-    
-    def get_t_env_init_uncontrollable(self, opts):
-        """Returns the environment initial condition about uncontrollable/reactive variables only"""
-        controllable_inputs: list = copy.deepcopy(self.get_input_vars())
-        for var in self.get_input_vars():
-            # Find controllable inputs
-            if var in opts['reactive_variables_current']:
-                controllable_inputs.remove(var)
-        return self.bdd.exist(controllable_inputs, self.T_env_init)
-    
-    def get_t_env_init_uncontrollable_prime(self, opts):
-        """Returns the environment initial condition about uncontrollable/reactive variables only, for input prime"""
-        return self.bdd.let(self.get_input_to_inputprime(), self.get_t_env_init_uncontrollable(opts))
-    
-    def get_t_env_init_uncontrollable_double_prime(self, opts):
-        """Returns the environment initial condition about uncontrollable/reactive variables only, for input double prime"""
-        return self.bdd.let(self.get_input_to_inputdoubleprime(), self.get_t_env_init_uncontrollable(opts))
-    
-    def get_t_env_init_uncontrollable_v_and_p_and_dp(self, opts):
-        """Returns the environment initial condition about uncontrollable/reactive variables only, for inputs, inputs prime, and input double prime"""
-        return self.get_t_env_init_uncontrollable(opts) & self.get_t_env_init_uncontrollable_prime(opts) & self.get_t_env_init_uncontrollable_double_prime(opts)
 
     def get_t_sys_init(self):
         return self.T_sys_init
@@ -452,8 +427,7 @@ class GameStructure:
         x.extend(self.cntr_vars_prime)
         return x
 
-    def cox(self, x_set, arg_bdd=None):
-        if DEBUG: breakpoint()
+    def cox(self, x_set):
         x_set_prime = self.bdd.let(self.get_v_to_v_prime(), x_set)
         tmp_sys_and_x_set_prime = x_set_prime & self.get_t_sys()
         tmp_exists = self.bdd.exist(self.get_output_vars_prime(), tmp_sys_and_x_set_prime)
@@ -528,10 +502,10 @@ def print_debug(msg):
 
 def compute_winning_states(arg_bdd, gs_internal, arg_opts):
     # Compute winning states
+    if DEBUG: breakpoint() # <- DEBUG
     Z_internal = arg_bdd.true
     Z_prime_internal = arg_bdd.false
     z_cnt = 0
-    if DEBUG: breakpoint()
     while Z_prime_internal != Z_internal:  # fixed point of Z
         print_debug("Starting another Z fixed point")
         print_expr(arg_bdd, "iter_" + str(z_cnt) + "_Z", Z_internal,
@@ -545,12 +519,11 @@ def compute_winning_states(arg_bdd, gs_internal, arg_opts):
         for ii, sys_live_internal in enumerate(
                 gs_internal.get_sys_live_guarantees()):  # loop through liveness guarantees
             # print_debug("Liveness guarantee: {}".format(ii))
-
+            if DEBUG: breakpoint() # <- DEBUG
             print_expr(arg_bdd, "iter_{}_Liveness_guarantee_{}".format(z_cnt, ii), arg_bdd.add_expr(sys_live_internal),
                        vars_ordering=gs_internal.get_vars_and_vars_prime(),
                        do_print=DEBUG & DEBUG_WS_COMPUTE, do_names=arg_opts['do_names'], arg_opts=arg_opts,
                        to_file=arg_opts['to_file'])
-            # de_print = DEBUG & DEBUG_WS_COMPUTE
 
             Y = arg_bdd.false
             Y_prime = arg_bdd.true
@@ -574,17 +547,17 @@ def compute_winning_states(arg_bdd, gs_internal, arg_opts):
                            do_print=DEBUG & DEBUG_WS_COMPUTE, do_names=arg_opts['do_names'], arg_opts=arg_opts,
                            to_file=arg_opts['to_file'])
 
-                start = arg_bdd.add_expr(sys_live_internal) & gs_internal.cox(Z_internal, arg_bdd)
+                start = arg_bdd.add_expr(sys_live_internal) & gs_internal.cox(Z_internal)
                 print_expr(arg_bdd, "iter_{}_live_{}_y_{}_start".format(z_cnt, ii, fpY_cnt), start,
                            vars_ordering=gs_internal.get_vars_and_vars_prime(),
                            do_print=DEBUG & DEBUG_WS_COMPUTE, do_names=arg_opts['do_names'],
                            arg_opts=arg_opts, to_file=arg_opts['to_file'])
 
                 if start == arg_bdd.false:  # or (z_cnt == 1 and ii == 0):
+                    if arg_opts["debug"]: breakpoint() # <- DEBUG
                     print_expr(arg_bdd, "Cannot win. Z is:", Z_internal,
                                vars_ordering=gs_internal.get_vars_and_vars_prime(),
-                               do_print=True) # DEBUG & DEBUG_WS_COMPUTE
-                    if DEBUG: breakpoint() 
+                               do_print=DEBUG & DEBUG_WS_COMPUTE)
                     return WinningStates(Z_internal, arg_bdd.false, arg_bdd.false, True,
                                          arg_bdd.add_expr(sys_live_internal))
                     # print("This will break")
@@ -650,7 +623,7 @@ def compute_winning_states(arg_bdd, gs_internal, arg_opts):
                        vars_ordering=gs_internal.get_vars_and_vars_prime(), do_print=DEBUG & DEBUG_WS_COMPUTE,
                        do_names=arg_opts['do_names'], arg_opts=arg_opts, to_file=arg_opts['to_file'])
         z_cnt += 1
-    if DEBUG: breakpoint()
+
     return WinningStates(Z_internal, mY, mX, False, arg_bdd.false)
 
 
@@ -897,7 +870,6 @@ def perform_repair(arg_bdd, arg_gs, arg_winning_states, arg_target_states, arg_T
         T_swapped_pre = arg_bdd.false
         T_swapped_post = arg_bdd.false
         if arg_opts['post_first']:
-            if DEBUG: breakpoint()
             tmp_T_env, tmp_T_sys, acts_changed, arg_T_previously_changed, T_swapped_post = modify_postconditions(
                 arg_bdd,
                 repaired_T_env,
@@ -911,7 +883,6 @@ def perform_repair(arg_bdd, arg_gs, arg_winning_states, arg_target_states, arg_T
             gs_internal.update_not_allowed_repair(acts_changed)
 
             if tmp_T_env == repaired_T_env and tmp_T_sys == repaired_T_sys:
-                if DEBUG: breakpoint()
                 tmp_T_env, tmp_T_sys, T_swapped_pre = modify_preconditions(arg_bdd, tmp_T_env,
                                                                            tmp_T_sys,
                                                                            current_winning_states, gs_internal,
@@ -919,13 +890,12 @@ def perform_repair(arg_bdd, arg_gs, arg_winning_states, arg_target_states, arg_T
             else:
                 arg_opts['post_first'] = False
         else:
-            if DEBUG: breakpoint()
             tmp_T_env, tmp_T_sys, T_swapped_pre = modify_preconditions(arg_bdd, repaired_T_env, repaired_T_sys,
                                                                        current_winning_states,
                                                                        gs_internal,
                                                                        arg_opts)
             if tmp_T_env == repaired_T_env and tmp_T_sys == repaired_T_sys:
-                if DEBUG: breakpoint()
+
                 gs_internal.update_change_cons(acts_changed)
                 gs_internal.update_not_allowed_repair(acts_changed)
 
@@ -979,7 +949,7 @@ def find_encoded_skills(arg_bdd, arg_gs, arg_T_env):
                                                                       arg_gs.get_t_env_hard()) & ~arg_T_env) & arg_T_env
 
 
-def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_gs: GameStructure, arg_T_previously_changed,
+def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_gs, arg_T_previously_changed,
                           arg_opts):
     """
     Modifies the postconditions by changing a single postcondition such that it increases the winning states
@@ -1043,44 +1013,24 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
     T_pres = arg_bdd.exist(arg_gs.get_input_vars_prime(), T_reachable)
     T_skill_with_pre_dp = arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), T_pres)
     T_skill_with_post_dp = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), T_reachable)
-    T_no_effect = find_skill_has_no_effect(arg_bdd, arg_gs, "v_and_dp", arg_opts=arg_opts)
-    if DEBUG: breakpoint()
-    if DEBUG:
-        T_pc_2 = T_full_skills_not_winning & arg_gs.get_change_cons_p_and_dp()
-        T_pc_3 = T_pc_2 & arg_gs.get_not_allowed_repair_v_and_dp()
-        T_pc_4 = T_pc_3 & ~T_no_effect
-        T_pc_5 = T_pc_4 & (~T_skill_with_pre_dp | T_skill_with_post_dp)
-        T_pc_6 = T_pc_5 & arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys)
-        T_pc_1456 = T_full_skills_not_winning & ~T_no_effect & (~T_skill_with_pre_dp | T_skill_with_post_dp) & arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys)
-        T_pc_12456 = T_pc_1456 & arg_gs.get_change_cons_p_and_dp()
-        T_pc_1246 = T_pc_2 & ~T_no_effect & arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys)
-        T_pc_126 = T_pc_2 & arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys)
-        T_pc_124 = T_pc_2 & ~T_no_effect 
-        # T_possible_changes_new = T_full_skills_not_winning & \
-        #                     arg_gs.get_change_cons_p_and_dp() & \
-        #                     arg_gs.get_not_allowed_repair_v_and_dp() & \
-        #                     ~T_no_effect & \
-        #                     (~T_skill_with_pre_dp | T_skill_with_post_dp) #& \
-        #                     #  arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys)# & \
-        #                     # arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys & arg_gs.get_t_sys_hard()) & \
-        #                     # arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_gs.get_t_env_hard())
-    
+    T_no_effect = find_skill_has_no_effect(arg_bdd, arg_gs, "v_and_dp")
     T_possible_changes = T_full_skills_not_winning & \
                          arg_gs.get_change_cons_p_and_dp() & \
                          arg_gs.get_not_allowed_repair_v_and_dp() & \
                          ~T_no_effect & \
                          (~T_skill_with_pre_dp | T_skill_with_post_dp) & \
-                         arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys)
-                        #  arg_gs.get_t_env_init_uncontrollable_v_and_p_and_dp(arg_opts) # <- env init uncontrollable same for possible changes
+                         arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys)# & \
+                         # arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys & arg_gs.get_t_sys_hard()) & \
+                         # arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_gs.get_t_env_hard())
 
     print_expr(arg_bdd, "T_possible_changes", T_possible_changes,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
 
     # These are the changes that are winning
     T_winning_changes = T_possible_changes & winning_p_dp
-    if DEBUG: breakpoint() # DEBUG
     print_expr(arg_bdd, "T_winning_changes", T_winning_changes,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
+    if arg_opts["debug"]: breakpoint() # <- DEBUG
 
     # if arg_opts['enforce_reactive_variables']:
     #     T_winning_changes = arg_bdd.exist(arg_opts['reactive_variables'], T_winning_changes)
@@ -1102,8 +1052,6 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
         T_winning_change_sel = arg_bdd.cube(T_winning_changes_list[sel_idx])
     else:
         T_winning_change_sel = arg_bdd.false
-    if DEBUG: breakpoint()
-    # T_winning_change_sel = arg_bdd.false
     print_expr(arg_bdd, "T_winning_change_sel", T_winning_change_sel,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=True)
     if arg_opts['enforce_reactive_variables']:
@@ -1168,7 +1116,7 @@ def find_final_post(arg_bdd, arg_gs, arg_skills, arg_T_env, arg_T_sys_nh):
     return T_out
 
 
-def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_gs: GameStructure, arg_opts):
+def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_gs, arg_opts):
     print("modify preconditions")
     # np.random.seed(42)
     print_expr(arg_bdd, "winning states", arg_winning_states, vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
@@ -1196,12 +1144,12 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     input_vars_prime_minus_reactive = copy.deepcopy(arg_gs.get_input_vars_prime())
     if arg_opts['enforce_reactive_variables']:
         for rv in arg_opts['reactive_variables_current']:
-            # print(rv)
             input_vars_prime_minus_reactive.remove(rv + "'")
-    T_sys_always_wins = arg_bdd.forall(input_vars_prime_minus_reactive, (~arg_T_env) | T_sys_can_win) & ~arg_bdd.add_expr(no_skills)
-    # T_sys_always_wins = (arg_bdd.forall(input_vars_prime_minus_reactive,arg_bdd.add_expr(arg_gs.get_env_live_assumptions()[0]) | T_sys_can_win) |
-    #                      arg_bdd.forall(input_vars_prime_minus_reactive, (~arg_T_env) | T_sys_can_win)) \
-    #                     & ~arg_bdd.add_expr(no_skills)
+    # T_sys_always_wins = arg_bdd.forall(input_vars_prime_minus_reactive, (~arg_T_env) | T_sys_can_win) & ~arg_bdd.add_expr(no_skills)
+    T_sys_always_wins = (arg_bdd.forall(input_vars_prime_minus_reactive,
+                                        arg_bdd.add_expr(arg_gs.get_env_live_assumptions()[0]) | T_sys_can_win) |
+                         arg_bdd.forall(input_vars_prime_minus_reactive, (~arg_T_env) | T_sys_can_win)) \
+                        & ~arg_bdd.add_expr(no_skills)
     # print_expr(arg_bdd, "A x get to Y", T_sys_always_wins,
     #            vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
 
@@ -1244,19 +1192,7 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     # Line 8
     # These are the possible changes to the preconditions while not allowing changes to preconditions that are already in the skill
     # Also restricts that the change must obey hard system constraints
-    skill_has_no_effect = find_skill_has_no_effect(arg_bdd, arg_gs, 'p_and_dp', arg_opts=arg_opts)
-    
-    T_possible_changes_in_dp_all_old = T_sys_always_wins_and_reachable & \
-                                   arg_bdd.let(arg_gs.get_v_prime_to_v(), arg_gs.get_change_cons_p_and_dp()) & \
-                                   arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(),
-                                               arg_gs.get_not_allowed_repair()) & \
-                                   ~T_pres_in_skill & \
-                                   arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), arg_gs.get_t_sys_hard()) & \
-                                   ~arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(),
-                                                T_sys_always_wins_and_reachable) & \
-                                   ~skill_has_no_effect & \
-                                   ~T_final_post
-    
+    skill_has_no_effect = find_skill_has_no_effect(arg_bdd, arg_gs, 'p_and_dp')
     T_possible_changes_in_dp_all = T_sys_always_wins_and_reachable & \
                                    arg_bdd.let(arg_gs.get_v_prime_to_v(), arg_gs.get_change_cons_p_and_dp()) & \
                                    arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(),
@@ -1267,8 +1203,6 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
                                                 T_sys_always_wins_and_reachable) & \
                                    ~skill_has_no_effect & \
                                    ~T_final_post
-                                #    arg_gs.get_t_env_init_uncontrollable_v_and_p_and_dp(arg_opts) # <- env init uncontrollable same for possible changes
-    if DEBUG: breakpoint() # DEBUG
     print_expr(arg_bdd, "T_possible_changes_in_dp_all", T_possible_changes_in_dp_all,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
 
@@ -1276,6 +1210,7 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     # Only select one precondition to be added
     all_possible_changes = list(arg_bdd.pick_iter(T_possible_changes_in_dp_all,
                                                   care_vars=arg_gs.get_vars_and_prime_and_dp()))
+    if arg_opts["debug"]: breakpoint() # <- DEBUG
     if len(all_possible_changes) == 0:
         return arg_T_env, arg_gs.get_t_sys_not_hard(), arg_bdd.false
     sel_idx = np.random.randint(len(all_possible_changes))
@@ -1285,7 +1220,6 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     #     sel_idx = 5
     # print("Post_repair_cnt: {}, sel_idx: {}".format(arg_opts['post_repair_cnt'], sel_idx))
     T_selected_change = arg_bdd.cube(all_possible_changes[sel_idx])
-    if DEBUG: breakpoint()
     print_expr(arg_bdd, "T_selected_change", T_selected_change,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
 
@@ -1318,7 +1252,7 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
                do_print=DEBUG_PRE)
 
     # Find the pre-preconditions
-    # Lines 18 and 19
+    # Lines 17 and 18
     # Add the new precondition to the system transition where the old precondition was
     T_old_pre_primed = T_sys_mutable & arg_bdd.let(arg_gs.get_v_to_v_prime(),
                                                    arg_bdd.exist(arg_gs.get_vars_prime(), T_old_full_skill))
@@ -1354,8 +1288,7 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
                    vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
 
     # Line 26
-    # T_sys_new = T_sys_mutable | T_new_pre_primed | T_new_full_skill
-    T_sys_new = (T_sys_mutable | T_new_pre_primed | T_new_full_skill) & ~T_old_pre_primed
+    T_sys_new = T_sys_mutable | T_new_pre_primed | T_new_full_skill
 
     # Adds the new preconditions to the environment transitions.
     # First, removes all transitions associated with the new precondition and skill
@@ -1368,13 +1301,6 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     T_old_pre_primed_env = arg_bdd.let(arg_gs.get_v_to_v_prime(),
                                        arg_bdd.exist(arg_gs.get_vars_prime() + arg_gs.get_output_vars(),
                                                      T_old_full_skill)) & T_cur_skill & T_reachable
-    
-    if arg_opts['enforce_reactive_variables']:
-        T_old_pre_primed_env = arg_bdd.exist(arg_opts['reactive_variables'], T_old_pre_primed_env)
-        if DEBUG: breakpoint()
-        print_expr(arg_bdd, "T_old_pre_primed_env (remove rv)", T_old_pre_primed_env, vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
-               do_print=DEBUG_PRE)
-
     T_new_pre_pre = arg_bdd.exist(arg_gs.get_input_vars_prime(), T_old_pre_primed_env)
 
     # Line 28
@@ -1383,24 +1309,16 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     print_expr(arg_bdd, "T_new_pre_pre_env", T_new_pre_pre_env, vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
                do_print=DEBUG_PRE)
 
-    # # Line 29 and 30
-    # T_env_new = ((arg_T_env & ~T_new_pre_and_skill) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
-    #                                                                 T_new_full_skill) | T_new_pre_pre_env) & arg_gs.get_t_env_hard()
-
-    # Forbid the old_pre_pre -> old_pre transition
-    T_env_new = ((arg_T_env & ~T_new_pre_and_skill & ~T_old_pre_primed_env) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
+    # Line 29 and 30
+    T_env_new = ((arg_T_env & ~T_new_pre_and_skill) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
                                                                     T_new_full_skill) | T_new_pre_pre_env) & arg_gs.get_t_env_hard()
 
     return T_env_new, T_sys_new, arg_bdd.false
 
 
-def find_skill_has_no_effect(arg_bdd, arg_gs, arg_which_vars, arg_opts = None):
+def find_skill_has_no_effect(arg_bdd, arg_gs, arg_which_vars):
     no_change_list = []
-    vars_to_check =  copy.deepcopy(arg_gs.get_input_vars())
-    if arg_opts and arg_opts['enforce_reactive_variables']:
-        for rv in arg_opts['reactive_variables_current']:
-            vars_to_check.remove(rv)
-    for var in vars_to_check:
+    for var in arg_gs.get_input_vars():
         if arg_which_vars == 'p_and_dp':
             no_change_list.append("(" + var + "' <-> " + var + "'')")
         elif arg_which_vars == "v_and_dp":
@@ -1979,10 +1897,6 @@ def bdd_to_suggestions(arg_bdd, arg_mod_pre, arg_mod_post, arg_opts, arg_acts_ch
 
 
 def run_repair(file_in, opts):
-    if 'max_repair_cnt' in opts:
-        max_repair_cnt = opts['max_repair_cnt']
-    else:
-        max_repair_cnt = 500
     s_time = time.time()
     bdd = _bdd.BDD()
     spec_in = Specification(file_in_internal=file_in, bdd_internal=bdd)
@@ -1999,11 +1913,8 @@ def run_repair(file_in, opts):
     # repaired_gs.bdd = gs.bdd
     acts_changed_ext = []
     T_previously_changed = bdd.false
-    repair_cnt = 0
-    while repair_cnt <= max_repair_cnt and do_compute_winning_states:
-        repair_cnt += 1
+    while do_compute_winning_states:
         # Compute winning states
-        if DEBUG: breakpoint()
         winning_states = compute_winning_states(repaired_gs.bdd, repaired_gs, opts)
         do_compute_winning_states = winning_states.does_need_repair()
 
@@ -2014,7 +1925,6 @@ def run_repair(file_in, opts):
 
         if winning_states.does_need_repair():
             opts['cover'] = False
-            if DEBUG: breakpoint() 
             repaired_gs, acts_changed, T_previously_changed, T_swapped_pre, T_swapped_post = perform_repair(
                 repaired_gs.bdd, repaired_gs,
                 winning_states,
@@ -2039,11 +1949,8 @@ def run_repair(file_in, opts):
         return False, dict()
     elif opts['only_synthesis'] and is_realizable:
         return True, dict()
-    repair_cnt = 0
-    while repair_cnt <= max_repair_cnt and not is_realizable:
-        repair_cnt += 1
+    while not is_realizable:
         opts['cover'] = True
-        if DEBUG: breakpoint() 
         repaired_gs, acts_changed, T_previously_changed, T_swapped_pre, T_swapped_post = perform_repair(repaired_gs.bdd,
                                                                                                         repaired_gs,
                                                                                                         winning_states,
