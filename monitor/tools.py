@@ -702,6 +702,9 @@ def test_find_true_robot_mobile_symbol(symbols, objects, locations):
     # Test function
     print(find_true_robot_mobile_symbols(input_state_dict, symbols, objects, locations))
     
+def list_minus(l1: list, l2: list) -> list:
+    """Return l1 - l2"""
+    return [elem for elem in l1 if elem not in l2]
 
 if __name__ == '__main__':
     objects_data = json_load_wrapper('examples/cupplate/inputs/pickup_dropoff_cup/abstraction/objects.json')

@@ -1014,12 +1014,18 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
     T_skill_with_pre_dp = arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), T_pres)
     T_skill_with_post_dp = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), T_reachable)
     T_no_effect = find_skill_has_no_effect(arg_bdd, arg_gs, "v_and_dp")
+    T_curr_skills = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), 
+                                arg_bdd.exist(arg_gs.get_output_vars() + arg_opts["reactive_variables"], 
+                                              T_reachable))
     T_possible_changes = T_full_skills_not_winning & \
                          arg_gs.get_change_cons_p_and_dp() & \
                          arg_gs.get_not_allowed_repair_v_and_dp() & \
                          ~T_no_effect & \
                          (~T_skill_with_pre_dp | T_skill_with_post_dp) & \
-                         arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys)# & \
+                         arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys) & \
+                         ~T_curr_skills
+                        
+                        # & \
                          # arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys & arg_gs.get_t_sys_hard()) & \
                          # arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_gs.get_t_env_hard())
 
@@ -1028,7 +1034,9 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
 
     # These are the changes that are winning
     T_winning_changes = T_possible_changes & winning_p_dp
-    print_expr(arg_bdd, "T_winning_changes", T_winning_changes,
+    if arg_opts['enforce_reactive_variables']:
+        T_winning_changes_noreactive = arg_bdd.exist(arg_opts['reactive_variables'], T_winning_changes)
+    print_expr(arg_bdd, "T_winning_changes", T_winning_changes_noreactive,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
     if arg_opts["debug"]: breakpoint() # <- DEBUG
 
@@ -1038,12 +1046,12 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
     #                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
 
     # Lines 6-11
-    if T_winning_changes != arg_bdd.false:
+    if T_winning_changes_noreactive != arg_bdd.false:
         # non_rv = copy.deepcopy(arg_gs.get_vars_and_prime_and_dp())
         # if arg_opts['enforce_reactive_variables']:
         #     for rv in arg_opts['reactive_variables']:
         #         non_rv.remove(rv)
-        T_winning_changes_list = list(arg_bdd.pick_iter(T_winning_changes, care_vars=arg_gs.get_vars_and_prime_and_dp()))
+        T_winning_changes_list = list(arg_bdd.pick_iter(T_winning_changes_noreactive, care_vars=list_minus(arg_gs.get_vars_and_prime_and_dp(), arg_opts['reactive_variables'])))
         sel_idx = np.random.randint(len(T_winning_changes_list))
         # sel_idx = 11
         # if arg_opts['post_repair_cnt'] == 1 and arg_opts['generate_figure'] == 'symbolic':
@@ -1181,6 +1189,10 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
                                                                                         T_reachable & T_possible_skills_changing))
     print_expr(arg_bdd, "T_pres_in_skill", T_pres_in_skill, vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
                do_print=DEBUG_PRE)
+    
+    T_curr_skills = arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), 
+                               arg_bdd.exist(arg_gs.get_output_vars() + arg_opts["reactive_variables"], 
+                                T_reachable & T_possible_skills_changing))
 
     # Line 7
     # These are the final postconditions of skills that might be changed
@@ -1202,14 +1214,19 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
                                    ~arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(),
                                                 T_sys_always_wins_and_reachable) & \
                                    ~skill_has_no_effect & \
-                                   ~T_final_post
-    print_expr(arg_bdd, "T_possible_changes_in_dp_all", T_possible_changes_in_dp_all,
+                                   ~T_final_post & \
+                                   ~T_curr_skills
+    if arg_opts['enforce_reactive_variables']:
+        # print("before removing reactive inputs")
+        T_possible_changes_in_dp_all_noreactive = arg_bdd.exist(arg_opts['reactive_variables'], T_possible_changes_in_dp_all)
+        # print("after removing reactive inputs")
+    print_expr(arg_bdd, "T_possible_changes_in_dp_all", T_possible_changes_in_dp_all_noreactive,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
 
     # Line 10
     # Only select one precondition to be added
-    all_possible_changes = list(arg_bdd.pick_iter(T_possible_changes_in_dp_all,
-                                                  care_vars=arg_gs.get_vars_and_prime_and_dp()))
+    all_possible_changes = list(arg_bdd.pick_iter(T_possible_changes_in_dp_all_noreactive,
+                                                  care_vars=list_minus(arg_gs.get_vars_and_prime_and_dp(), arg_opts['reactive_variables'])))
     if arg_opts["debug"]: breakpoint() # <- DEBUG
     if len(all_possible_changes) == 0:
         return arg_T_env, arg_gs.get_t_sys_not_hard(), arg_bdd.false
@@ -2098,6 +2115,10 @@ def dict_bool2list(dic: dict) -> list:
         if val:
             ls.append(name)
     return ls
+
+def list_minus(l1: list, l2: list) -> list:
+    """Return l1 - l2"""
+    return [elt for elt in l1 if elt not in l2]
 
 #### ======== ####
 

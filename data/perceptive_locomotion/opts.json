@@ -5,7 +5,7 @@
     "enforce_reactive_variables": true,
     "suggestions": "none",
     "do_names": true,
-    "post_first": false,
+    "post_first": true,
     "post_repair_cnt": 0,
     "to_file": false,
     "fid_base": "none",
@@ -14,6 +14,6 @@
     "generate_figure": "",
     "n_seeds": 42,
     "max_repair_cnt": 40,
-    "debug": false,
+    "debug": true,
     "uncontrollable_inputs": ["xrequest0", "xrequest1", "xrequest2", "yrequest0", "yrequest1", "yrequest2"]
   }

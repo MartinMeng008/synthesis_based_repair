@@ -37,8 +37,12 @@ skill_20
 skill_21
 
 [ENV_INIT]
-( ! xrequest0 & xrequest1 & ! xrequest2 )
-( ! yrequest0 & yrequest1 & ! yrequest2 )
+! xrequest0
+xrequest1
+! xrequest2 
+! yrequest0
+yrequest1
+! yrequest2 
 
 [SYS_INIT]
 ! skill_0
