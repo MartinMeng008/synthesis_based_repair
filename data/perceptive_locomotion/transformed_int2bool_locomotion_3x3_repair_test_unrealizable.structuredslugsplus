@@ -37,6 +37,12 @@ skill_20
 skill_21
 
 [ENV_INIT]
+x0
+!x1
+!x2
+y0
+!y1
+!y2
 ! xrequest0
 xrequest1
 ! xrequest2 
