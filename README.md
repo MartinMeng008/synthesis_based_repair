@@ -289,3 +289,10 @@ python repair.py -s "../data/perceptive_locomotion/transformed_int2bool_locomoti
 
 ### Debug mode
 To run repair with the debugger on or off, change ```[debug]``` in ```"../data/perceptive_locomotion/opts.json"```
+
+## Terrain variables
+For example, from `\synthesis_based_repair` run:
+```
+cd monitor
+python repair.py -s "../data/perceptive_locomotion/two_regions/transformed_int2bool_locomotion_3x3_repair_test_with_terrain_simple_unrealizable.structuredslugsplus" -o "../data/perceptive_locomotion/two_regions/opts.json" -a
+```
