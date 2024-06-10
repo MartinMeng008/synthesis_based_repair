@@ -35,6 +35,12 @@ class Repair:
         uncontrollable_inputs = self.opts["uncontrollable_inputs"]
         self.opts["reactive_variables_current"] = uncontrollable_inputs
         self.opts["reactive_variables"] = uncontrollable_inputs + varlist2prime(uncontrollable_inputs) + varlist2doubleprime(uncontrollable_inputs)
+        if "terrain_inputs" in self.opts:
+            terrain_inputs = self.opts["terrain_inputs"]
+            self.opts["terrain_variables_current"] = terrain_inputs
+            self.opts["terrain_variables"] = terrain_inputs + varlist2prime(terrain_inputs) + varlist2doubleprime(terrain_inputs)
+            self.opts["terrain_variables_p"] = varlist2prime(terrain_inputs)
+            self.opts["terrain_variables_p_dp"] = varlist2prime(terrain_inputs) + varlist2doubleprime(terrain_inputs)
 
     def run_symbolic_repair(self) -> dict:
         """Run the symbolic repair module

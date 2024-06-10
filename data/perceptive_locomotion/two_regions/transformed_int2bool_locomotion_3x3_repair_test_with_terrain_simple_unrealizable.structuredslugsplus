@@ -12,7 +12,10 @@ skill_1
 skill_2
 
 [ENV_INIT]
-( ! xrequest0 & xrequest1)
+x0
+!x1
+! xrequest0
+xrequest1
 
 [SYS_INIT]
 ! skill_0
@@ -46,15 +49,37 @@ skill_2
 ( ! ( ( ! x0' & x1' ) & ( nextcellheight0' & ! nextcellheight1' ) ) -> ! skill_2' )
 
 [SYS_TRANS_HARD]
-( ( ! skill_0' & ! skill_1' & ! skill_2' ) | ( skill_0' & ! skill_1' & ! skill_2' ) | ( skill_1' & ! skill_0' & ! skill_2' ) | ( skill_2' & ! skill_0' & ! skill_1' ) )
 ( ( ( x0 <-> xrequest0 ) & ( x1 <-> xrequest1 ) ) -> ( ! skill_0 & ! skill_1 & ! skill_2 ) )
+( ( ! skill_0' & ! skill_1' & ! skill_2' ) | ( skill_0' & ! skill_1' & ! skill_2' ) | ( skill_1' & ! skill_0' & ! skill_2' ) | ( skill_2' & ! skill_0' & ! skill_1' ) )
 
 [ENV_LIVENESS]
 
 [SYS_LIVENESS]
 ( x0 <-> xrequest0 ) & ( x1 <-> xrequest1 )
 
-#[CHANGE_CONS]
+[CHANGE_CONS]
+! ( nextcellheight0 & nextcellheight1 )
+( nextcellheight0 | nextcellheight1 )
+! ( nextcellheight0' & nextcellheight1' )
+( nextcellheight0' | nextcellheight1' )
+! ( xrequest0 & xrequest1 )
+( xrequest0 | xrequest1 )
+! ( xrequest0' & xrequest1' )
+( xrequest0' | xrequest1' )
+! ( x0 & x1 )
+( x0 | x1 )
+! ( x0' & x1' )
+( x0' | x1' )
 
-#[NOT_ALLOWED_REPAIR]
+(x0 <-> !x0') | (x1 <-> !x1') | (nextcellheight0 <-> !nextcellheight0') | (nextcellheight1 <-> !nextcellheight1') 
+
+(xrequest0 <-> xrequest0')
+(xrequest1 <-> xrequest1')
+
+[NOT_ALLOWED_REPAIR]
+(x0 <-> !x0') | (x1 <-> !x1') | (nextcellheight0 <-> !nextcellheight0') | (nextcellheight1 <-> !nextcellheight1') 
+
+# Below is not useful here, but will be useful in 9 grid example
+x0 -> (x1' | x0')
+x1 -> (x0' | x1')
 

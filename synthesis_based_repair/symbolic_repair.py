@@ -761,9 +761,9 @@ def determinize_strategy(arg_bdd, arg_strategy):
     deterministic_strat_internal = arg_bdd.false
     cntr_vars_internal = arg_strategy.get_cntr_vars()
     vars_internal = arg_strategy.get_vars()
-
+    init = arg_bdd.exist(arg_strategy.get_vars_prime(), arg_strategy.get_t_init() & arg_strategy.get_t_env() & arg_strategy.get_t_env_hard())
     init_states = list(
-        arg_bdd.pick_iter(arg_strategy.get_t_init() & assign(arg_bdd, 0, cntr_vars_internal), vars_internal))
+        arg_bdd.pick_iter(init & assign(arg_bdd, 0, cntr_vars_internal), vars_internal))
     states_to_process = []
     for init_state in init_states:
         states_to_process.append(arg_bdd.cube(init_state))
@@ -1014,8 +1014,13 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
     T_skill_with_pre_dp = arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), T_pres)
     T_skill_with_post_dp = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), T_reachable)
     T_no_effect = find_skill_has_no_effect(arg_bdd, arg_gs, "v_and_dp")
-    T_curr_skills = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), 
+    if "terrain_variables_p_dp" not in arg_opts:
+        T_curr_skills = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), 
                                 arg_bdd.exist(arg_gs.get_output_vars() + arg_opts["reactive_variables"], 
+                                              T_reachable))
+    else:
+        T_curr_skills = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), 
+                                arg_bdd.exist(arg_gs.get_output_vars() + arg_opts["reactive_variables"] + arg_opts["terrain_variables_p_dp"], 
                                               T_reachable))
     T_possible_changes = T_full_skills_not_winning & \
                          arg_gs.get_change_cons_p_and_dp() & \
@@ -1035,7 +1040,10 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
     # These are the changes that are winning
     T_winning_changes = T_possible_changes & winning_p_dp
     if arg_opts['enforce_reactive_variables']:
-        T_winning_changes_noreactive = arg_bdd.exist(arg_opts['reactive_variables'], T_winning_changes)
+        if "terrain_variables_p_dp" not in arg_opts:
+            T_winning_changes_noreactive = arg_bdd.exist(arg_opts['reactive_variables'], T_winning_changes)
+        else:
+            T_winning_changes_noreactive = arg_bdd.exist(arg_opts['reactive_variables'] + arg_opts["terrain_variables_p_dp"], T_winning_changes)
     print_expr(arg_bdd, "T_winning_changes", T_winning_changes_noreactive,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
     if arg_opts["debug"]: breakpoint() # <- DEBUG
@@ -1190,8 +1198,13 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     print_expr(arg_bdd, "T_pres_in_skill", T_pres_in_skill, vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
                do_print=DEBUG_PRE)
     
-    T_curr_skills = arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), 
+    if "terrain_variables_p_dp" not in arg_opts:
+        T_curr_skills = arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), 
                                arg_bdd.exist(arg_gs.get_output_vars() + arg_opts["reactive_variables"], 
+                                T_reachable & T_possible_skills_changing))
+    else:
+        T_curr_skills = arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), 
+                               arg_bdd.exist(arg_gs.get_output_vars() + arg_opts["reactive_variables"] + arg_opts["terrain_variables_p_dp"], 
                                 T_reachable & T_possible_skills_changing))
 
     # Line 7
@@ -1218,7 +1231,10 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
                                    ~T_curr_skills
     if arg_opts['enforce_reactive_variables']:
         # print("before removing reactive inputs")
-        T_possible_changes_in_dp_all_noreactive = arg_bdd.exist(arg_opts['reactive_variables'], T_possible_changes_in_dp_all)
+        if "terrain_variables_p_dp" not in arg_opts:
+            T_possible_changes_in_dp_all_noreactive = arg_bdd.exist(arg_opts['reactive_variables'], T_possible_changes_in_dp_all)
+        else:
+            T_possible_changes_in_dp_all_noreactive = arg_bdd.exist(arg_opts['reactive_variables'] + arg_opts["terrain_variables_p"], T_possible_changes_in_dp_all)
         # print("after removing reactive inputs")
     print_expr(arg_bdd, "T_possible_changes_in_dp_all", T_possible_changes_in_dp_all_noreactive,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
@@ -1226,7 +1242,7 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     # Line 10
     # Only select one precondition to be added
     all_possible_changes = list(arg_bdd.pick_iter(T_possible_changes_in_dp_all_noreactive,
-                                                  care_vars=list_minus(arg_gs.get_vars_and_prime_and_dp(), arg_opts['reactive_variables'])))
+                                                  care_vars=list_minus(arg_gs.get_vars_and_prime_and_dp(), arg_opts['reactive_variables'] + arg_opts["terrain_variables_p"])))
     if arg_opts["debug"]: breakpoint() # <- DEBUG
     if len(all_possible_changes) == 0:
         return arg_T_env, arg_gs.get_t_sys_not_hard(), arg_bdd.false
@@ -1366,15 +1382,27 @@ def report_skill_revision(arg_bdd, arg_original_gs, arg_deterministic_strat, arg
 
     # For this we don't care about the cntr variables, just what skills are possible
     if arg_opts['enforce_reactive_variables']:
-        relaxed_T_sys_internal = arg_bdd.exist(arg_deterministic_strat.get_cntr_vars() + arg_opts['reactive_variables'],
-                                               arg_deterministic_strat.get_t_sys())
+        if "terrain_variables_p" not in arg_opts:
+            relaxed_T_sys_internal = arg_bdd.exist(arg_deterministic_strat.get_cntr_vars() + arg_opts['reactive_variables'],
+                                                arg_deterministic_strat.get_t_sys())
+        else:
+            relaxed_T_sys_internal = arg_bdd.exist(arg_deterministic_strat.get_cntr_vars() + arg_opts['reactive_variables'] + arg_opts["terrain_variables_p"],
+                                                arg_deterministic_strat.get_t_sys())
     else:
         relaxed_T_sys_internal = arg_bdd.exist(arg_deterministic_strat.get_cntr_vars(),
                                                arg_deterministic_strat.get_t_sys())
 
     T_added_sys = (relaxed_T_sys_internal & ~arg_original_gs.get_t_sys()) & winning_states_system_internal
-    T_removed_env = arg_bdd.exist(arg_opts['reactive_variables'] + arg_deterministic_strat.get_cntr_vars_and_prime(), (
-            arg_original_gs.get_t_env() & ~arg_deterministic_strat.get_t_env()) & winning_states_internal)
+    if arg_opts['enforce_reactive_variables']:
+        if "terrain_variables_p" not in arg_opts:
+            T_removed_env = arg_bdd.exist(arg_opts['reactive_variables'] + arg_deterministic_strat.get_cntr_vars_and_prime(), (
+                arg_original_gs.get_t_env() & ~arg_deterministic_strat.get_t_env()) & winning_states_internal)
+        else:
+            T_removed_env = arg_bdd.exist(arg_opts['reactive_variables'] + arg_opts["terrain_variables_p"] + arg_deterministic_strat.get_cntr_vars_and_prime(), (
+                arg_original_gs.get_t_env() & ~arg_deterministic_strat.get_t_env()) & winning_states_internal)
+    else:
+        T_removed_env = arg_bdd.exist(arg_deterministic_strat.get_cntr_vars_and_prime(), (
+                arg_original_gs.get_t_env() & ~arg_deterministic_strat.get_t_env()) & winning_states_internal)
     modifications = []
     if T_removed_env != arg_bdd.false:
         # if T_added_sys != arg_bdd.false or T_removed_env != arg_bdd.false:
@@ -1394,12 +1422,21 @@ def report_skill_revision(arg_bdd, arg_original_gs, arg_deterministic_strat, arg
                        vars_ordering=arg_deterministic_strat.get_vars_and_vars_prime(), do_print=DEBUG_REVISION)
             one_mod.append(skill_bdd)
             if arg_opts['enforce_reactive_variables']:
-                one_mod.append(
-                    arg_bdd.exist(arg_opts['reactive_variables'] + arg_deterministic_strat.get_cntr_vars_and_prime(),
-                                  skill_bdd & T_removed_env))
-                one_mod.append(
-                    arg_bdd.exist(arg_opts['reactive_variables'] + arg_deterministic_strat.get_cntr_vars_and_prime(),
-                                  skill_bdd & arg_deterministic_strat.get_t_env() & winning_states_internal))
+                # if "terrain_variables_p" not in arg_opts:
+                if "terrain_variables_p" not in arg_opts:
+                    one_mod.append(
+                        arg_bdd.exist(arg_opts['reactive_variables'] + arg_deterministic_strat.get_cntr_vars_and_prime(),
+                                    skill_bdd & T_removed_env))
+                    one_mod.append(
+                        arg_bdd.exist(arg_opts['reactive_variables'] + arg_deterministic_strat.get_cntr_vars_and_prime(),
+                                    skill_bdd & arg_deterministic_strat.get_t_env() & winning_states_internal))
+                else:
+                    one_mod.append(
+                        arg_bdd.exist(arg_opts['reactive_variables'] + arg_opts["terrain_variables_p"] + arg_deterministic_strat.get_cntr_vars_and_prime(),
+                                    skill_bdd & T_removed_env))
+                    one_mod.append(
+                        arg_bdd.exist(arg_opts['reactive_variables'] + arg_opts["terrain_variables_p"] + arg_deterministic_strat.get_cntr_vars_and_prime(),
+                                    skill_bdd & arg_deterministic_strat.get_t_env() & winning_states_internal))
             else:
                 one_mod.append(
                     arg_bdd.exist(arg_deterministic_strat.get_cntr_vars_and_prime(), skill_bdd & T_removed_env))
@@ -1785,6 +1822,10 @@ def print_suggestions(arg_bdd, arg_mod_pre, arg_mod_post, arg_opts, arg_acts_cha
                         for rv in arg_opts['reactive_variables']:
                             if vars_input_primed_copy.count(rv) > 0:
                                 vars_input_primed_copy.remove(rv)
+                        if "terrain_variables_p" in arg_opts:
+                            for tv in arg_opts['terrain_variables_p']:
+                                if vars_input_primed_copy.count(tv) > 0:
+                                    vars_input_primed_copy.remove(tv)
                     print_expr_as_env_trans(arg_bdd, "New action:", ompost[2], vars_current=vars_current,
                                             vars_primed=vars_input_primed_copy, do_names=do_names)
 
@@ -1847,6 +1888,9 @@ def bdd_to_suggestions(arg_bdd, arg_mod_pre, arg_mod_post, arg_opts, arg_acts_ch
                     for rv in arg_opts['reactive_variables_current']:
                         inp_vars_prime.remove(rv + "'")
                         inp_vars.remove(rv)
+                    if "terrain_variables_p" in arg_opts:
+                        for tv in arg_opts['terrain_variables_p']:
+                            inp_vars_prime.remove(tv)
                 pres = arg_bdd.exist(arg_gs.get_output_vars() + inp_vars_prime,
                                      ompost[2] & posts)
                 init_pres = arg_bdd.let(arg_gs.get_inputprime_to_input(),
@@ -1879,7 +1923,7 @@ def bdd_to_suggestions(arg_bdd, arg_mod_pre, arg_mod_post, arg_opts, arg_acts_ch
                     all_posts_for_a_pre.append(
                         [pre,
                          list(arg_bdd.pick_iter(arg_bdd.let(arg_gs.get_v_prime_to_v(), posts),
-                                                care_vars=inp_vars))])
+                                                care_vars=list_prime_to_list(inp_vars_prime)))])
 
                 pres = arg_bdd.exist(arg_gs.get_output_vars() + arg_gs.get_input_vars_prime(), ompost[2])
                 posts = arg_bdd.exist(arg_gs.get_vars(), ompost[2])
@@ -1897,7 +1941,7 @@ def bdd_to_suggestions(arg_bdd, arg_mod_pre, arg_mod_post, arg_opts, arg_acts_ch
                             0],
                     'intermediate_states_all_pres': all_pres_for_a_post,
                     'intermediate_states': all_posts_for_a_pre,
-                    'final_postconditions': list(arg_bdd.pick_iter(final_posts, care_vars=inp_vars)),
+                    'final_postconditions': list(arg_bdd.pick_iter(final_posts, care_vars=list_prime_to_list(inp_vars_prime))),
                     'initial_preconditions': list(arg_bdd.pick_iter(init_pres, care_vars=inp_vars)),
                     'unique_states': unique_states,
                     'swapped': list(arg_bdd.pick_iter(arg_bdd.false,
@@ -1959,7 +2003,9 @@ def run_repair(file_in, opts):
 
     print("Computed winning states in: {}".format(time.time() - s_time))
     # Make system reach livesness guarantees from initial states
-    is_realizable = repaired_gs.get_t_init() & winning_states.get_z() == repaired_gs.get_t_init()
+    init = bdd.exist(repaired_gs.get_vars_prime(), repaired_gs.get_t_init() & repaired_gs.get_t_env() & repaired_gs.get_t_env_hard())
+    is_realizable = repaired_gs.get_t_init() & winning_states.get_z() == init
+    # is_realizable = repaired_gs.get_t_init() & winning_states.get_z() == repaired_gs.get_t_init()
     print_expr(bdd, "init", repaired_gs.get_t_init(), vars_ordering=repaired_gs.get_vars_and_vars_prime(),
                do_print=False)
     print_expr(bdd, "winning states", winning_states.get_z(), vars_ordering=repaired_gs.get_vars_and_vars_prime(),
@@ -1985,7 +2031,9 @@ def run_repair(file_in, opts):
         T_swapped_post_all = T_swapped_post_all | T_swapped_post
         # repaired_gs.update_change_cons(acts_changed)
 
-        is_realizable = repaired_gs.get_t_init() & winning_states.get_z() == repaired_gs.get_t_init()
+        # is_realizable = repaired_gs.get_t_init() & winning_states.get_z() == repaired_gs.get_t_init()
+        init = bdd.exist(repaired_gs.get_vars_prime(), repaired_gs.get_t_init() & repaired_gs.get_t_env() & repaired_gs.get_t_env_hard())
+        is_realizable = repaired_gs.get_t_init() & winning_states.get_z() == init
     print("Checked initial states contained in: {}".format(time.time() - s_time))
 
     # Synthesize a strategy
@@ -2005,6 +2053,7 @@ def run_repair(file_in, opts):
     #     print("Synthesized a strategy in: {}".format(time.time() - s_time))
     #     # sys.exit("Done with synthesis")
     #     return True, dict()
+    if opts["debug"]: breakpoint()
     T_removed, T_added, one_rep_mod_post, one_rep_mod_pre = \
         report_skill_revision(deterministic_strat.bdd, gs, deterministic_strat, opts)
     all_mod_pres.append(one_rep_mod_pre)
@@ -2123,6 +2172,10 @@ def dict_bool2list(dic: dict) -> list:
 def list_minus(l1: list, l2: list) -> list:
     """Return l1 - l2"""
     return [elt for elt in l1 if elt not in l2]
+
+def list_prime_to_list(l: list) -> list:
+    """Converts list of variables in their primed version to their original version"""
+    return [var[:-1] for var in l]
 
 #### ======== ####
 
