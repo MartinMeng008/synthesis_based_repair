@@ -1305,7 +1305,8 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
                    vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
 
     # Line 26
-    T_sys_new = T_sys_mutable | T_new_pre_primed | T_new_full_skill
+    # T_sys_new = T_sys_mutable | T_new_pre_primed | T_new_full_skill
+    T_sys_new = (T_sys_mutable | T_new_pre_primed | T_new_full_skill) & ~T_old_pre_primed
 
     # Adds the new preconditions to the environment transitions.
     # First, removes all transitions associated with the new precondition and skill
@@ -1327,7 +1328,10 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
                do_print=DEBUG_PRE)
 
     # Line 29 and 30
-    T_env_new = ((arg_T_env & ~T_new_pre_and_skill) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
+    # T_env_new = ((arg_T_env & ~T_new_pre_and_skill) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
+    #                                                                 T_new_full_skill) | T_new_pre_pre_env) & arg_gs.get_t_env_hard()
+    
+    T_env_new = ((arg_T_env & ~T_new_pre_and_skill & ~T_old_full_skill) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
                                                                     T_new_full_skill) | T_new_pre_pre_env) & arg_gs.get_t_env_hard()
 
     return T_env_new, T_sys_new, arg_bdd.false

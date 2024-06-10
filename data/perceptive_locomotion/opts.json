@@ -14,6 +14,6 @@
     "generate_figure": "",
     "n_seeds": 42,
     "max_repair_cnt": 40,
-    "debug": true,
+    "debug": false,
     "uncontrollable_inputs": ["xrequest0", "xrequest1", "xrequest2", "yrequest0", "yrequest1", "yrequest2"]
   }
