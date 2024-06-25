@@ -71,13 +71,13 @@ xrequest1
 ! ( x0' & x1' )
 ( x0' | x1' )
 
-(x0 <-> !x0') | (x1 <-> !x1') | (nextcellheight0 <-> !nextcellheight0') | (nextcellheight1 <-> !nextcellheight1') 
+#(x0 <-> !x0') | (x1 <-> !x1') | (nextcellheight0 <-> !nextcellheight0') | (nextcellheight1 <-> !nextcellheight1') 
 
-(xrequest0 <-> xrequest0')
-(xrequest1 <-> xrequest1')
+#(xrequest0 <-> xrequest0')
+#(xrequest1 <-> xrequest1')
 
 [NOT_ALLOWED_REPAIR]
-(x0 <-> !x0') | (x1 <-> !x1') | (nextcellheight0 <-> !nextcellheight0') | (nextcellheight1 <-> !nextcellheight1') 
+#(x0 <-> !x0') | (x1 <-> !x1') | (nextcellheight0 <-> !nextcellheight0') | (nextcellheight1 <-> !nextcellheight1') 
 
 # Below is not useful here, but will be useful in 9 grid example
 x0 -> (x1' | x0')

@@ -15,7 +15,7 @@
     "n_seeds": 42,
     "max_repair_cnt": 40,
     "debug": false,
-    "uncontrollable_inputs": ["xrequest0", "xrequest1"],
-    "terrain_inputs": ["nextcellheight0", "nextcellheight1"],
+    "uncontrollable_inputs": [],
+    "terrain_inputs": [],
     "num_grid": 9
   }

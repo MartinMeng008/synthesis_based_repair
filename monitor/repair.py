@@ -32,6 +32,11 @@ class Repair:
         else:
             self.max_iter = 50
         self.file_structuredslugsplus = filename
+        self.opts["uncontrollable_inputs"] = self.compiler.get_request_inputs()
+        print("uncontrollable_inputs: ", self.opts["uncontrollable_inputs"])
+        self.opts["terrain_inputs"] = self.compiler.get_terrain_inputs()
+        print("terrain_inputs: ", self.opts["terrain_inputs"])
+        # sys.exit(0)
         uncontrollable_inputs = self.opts["uncontrollable_inputs"]
         self.opts["reactive_variables_current"] = uncontrollable_inputs
         self.opts["reactive_variables"] = uncontrollable_inputs + varlist2prime(uncontrollable_inputs) + varlist2doubleprime(uncontrollable_inputs)

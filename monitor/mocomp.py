@@ -35,7 +35,7 @@ DEBUG = False
 STATIC_WORLD = False
 
 class Compiler:
-    def __init__(self, input_file: str, skills_data: dict, symbols_data: dict, objects_data: dict, controllabe_variables: list, uncontrollable_variables: list = []) -> None:
+    def __init__(self, input_file: str, skills_data: dict, symbols_data: dict, objects_data: dict, controllabe_variables: list, uncontrollable_variables: list = [], opts: dict = None) -> None:
         """
         Args:
             input_file: structuredslugsplus file
@@ -49,6 +49,7 @@ class Compiler:
         self.skills_data = skills_data
         self.symbols_data = symbols_data
         self.objects_data = objects_data
+        self.opts = json_load_wrapper(opts) if opts else None
         self.set_data()
         self._set_keys()
         self.set_asts(input_file)
@@ -489,6 +490,82 @@ class Monitor:
                 return True
         return False
     
+    def add_change_constraints(self) -> None:
+        """Add the change constraints to the ASTs"""
+        # 1. Add mutual exclusion for each integer variable
+        for _, bool_vars in self.int_to_bool_vars.items():
+            self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "change_cons", is_primed = True)
+            self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "change_cons", is_primed = False)
+        return None
+
+    def add_not_allowed_repair(self) -> None:
+        """Add the not allowed repair to the ASTs"""
+        # 1. Add physical constraints
+        self._add_physical_constraints()
+
+    def get_request_inputs(self) -> list:
+        """Return the request inputs"""
+        return self._get_keyword_inputs("request")
+    
+    def get_terrain_inputs(self) -> list:
+        """Return the terrain inputs"""
+        return self._get_keyword_inputs("cellheight")
+
+    def _get_keyword_inputs(self, keyword) -> list:
+        """Return the request inputs"""
+        inputs = []
+        for var in self.vars[self.properties["input"]]:
+            if self.contains_keyword(var, keyword):
+                inputs.append(var)
+        return inputs
+    
+
+    def _add_physical_constraints(self) -> None:
+        print("opts: ", self.opts)
+        if self.opts and int(self.opts["num_grid"]) == 9:
+            self._add_physical_constraints_9_grid()
+        else:
+            raise Exception("Not supported yet")
+        return None
+
+    def _add_physical_constraints_9_grid(self) -> None:
+        """Add the physical constraints for 9 grid"""
+        # 1. Add the physical constraints
+        for x in range(3):
+            for y in range(3):
+                self._add_physical_constraints_for_cell_9_grid(x, y)
+        return None
+    
+    def _add_physical_constraints_for_cell_9_grid(self, x: int, y: int) -> None:
+        """Add the physical constraints for a cell
+            add the following constraints:
+            x0y0 -> x1y0 or x0y1
+            x1y0 -> x0y0 or x2y0 or x1y1
+            x2y0 -> x1y0 or x2y1
+            x0y1 -> x0y0 or x1y1 or x0y2
+            x1y1 -> x0y1 or x2y1 or x1y0 or x1y2
+            x2y1 -> x1y1 or x2y0 or x2y2
+            x0y2 -> x0y1 or x1y2
+            x1y2 -> x0y2 or x2y2 or x1y1
+            x2y2 -> x1y2 or x2y1
+
+            Algorithm:
+                consider all four directions and only add valid ones
+        """
+        curr_state = self.add_conjunction_wrapper([self.name2assignment(f"x{x}"), self.name2assignment(f"y{y}")])
+        or_list = []
+        dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        for dx, dy in dirs:
+            new_x = x + dx
+            new_y = y + dy
+            if new_x >= 0 and new_x <= 2 and new_y >= 0 and new_y <= 2:
+                # append x_{new_x} & y_{new_y} to or list
+                or_list.append(self.add_conjunction_wrapper([self.name2assignment(f"x{new_x}'"), self.name2assignment(f"y{new_y}'")]))
+        new_or = self.add_formula_wrapper(self.add_disjunction_wrapper(or_list))
+        curr_state_implies_new_or = self.add_implication_wrapper(curr_state, new_or)
+        self.asts[self.properties["not_allowed_repair"]].append(curr_state_implies_new_or)
+        return None
+    
     def _change_integer_inputs_to_boolean_inputs(self) -> None:
         """Change the integer inputs to boolean inputs"""
         # 1. Change the vars
@@ -519,8 +596,8 @@ class Monitor:
 
         # 4. Add input mutual exclusion for each integer variable
         for _, bool_vars in self.int_to_bool_vars.items():
-            self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, is_primed = True)
-            self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, is_primed = False)
+            self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "env_trans_hard", is_primed = True)
+            self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "env_trans_hard", is_primed = False)
 
         if True:
             self.print_asts()
@@ -655,14 +732,14 @@ class Monitor:
         """Return whether the variable is primed"""
         return var[-1] == "'"
     
-    def _add_inputs_mutual_exclusion_and_must_exist(self, vars: list, is_primed = False) -> None:
+    def _add_inputs_mutual_exclusion_and_must_exist(self, vars: list, ast_property, is_primed = False) -> None:
         """Add boolean input variables mutual exclusion to env_trans_hard"""
         if is_primed:
             vars = [var + "'" for var in vars]
 
         # Add must exist
         new_formula = self.add_formula_wrapper(self.add_disjunction_wrapper([self.name2assignment(var) for var in vars]))
-        self.asts[self.properties["env_trans_hard"]].insert(0, new_formula)
+        self.asts[self.properties[ast_property]].insert(0, new_formula)
 
         # Add mutual exclusion
         for i in range(len(vars)):
@@ -671,7 +748,7 @@ class Monitor:
                     self.add_not_wrapper(
                         self.add_conjunction_wrapper(
                             [self.name2assignment(vars[i]), self.name2assignment(vars[j])])))
-                self.asts[self.properties["env_trans_hard"]].insert(0, new_formula)
+                self.asts[self.properties[ast_property]].insert(0, new_formula)
 
 
 
@@ -1382,7 +1459,7 @@ def old_test(args=None):
     print("Monitor generated!")
     compiler.add_backup_skills()
 
-def test_transform_asts(input_file: str, filename_json: str = None, output_file: str = None):
+def test_transform_asts(input_file: str, filename_json: str = None, output_file: str = None, opts: dict = None):
     if filename_json is not None:
         file_json = json_load_wrapper(filename_json)
         skills_data = json_load_wrapper(file_json['skills'])
@@ -1402,7 +1479,8 @@ def test_transform_asts(input_file: str, filename_json: str = None, output_file:
                         symbols_data=symbols_data, 
                         objects_data=objects_data, 
                         controllabe_variables=controllabe_variables,
-                        uncontrollable_variables=uncontrollable_variables,)
+                        uncontrollable_variables=uncontrollable_variables,
+                        opts=opts)
     if DEBUG: 
         print("vars: ", compiler.get_vars())
         compiler.print_asts()
@@ -1411,6 +1489,8 @@ def test_transform_asts(input_file: str, filename_json: str = None, output_file:
         print(compiler.asts)
         print("int2bool transform needed: ", compiler.int2bool_transform_needed())
     compiler.transform_asts_int2bool()
+    compiler.add_change_constraints()
+    compiler.add_not_allowed_repair()
     compiler.generate_structuredslugsplus(output_file)
 
 def test_check_realizability(input_file: str, filename_json: str = None):
@@ -1458,14 +1538,14 @@ if __name__ == '__main__':
     argparser.add_argument('-s', '--structuredslugplus', action='store', dest='spec', required=False, default='tests/spec.structuredslugsplus')
     argparser.add_argument('-so', '--structuredslugplusout', action='store', dest='spec_out', required=False, default='tests/spec.structuredslugsplus')
     argparser.add_argument('-f', '--file', action='store', dest='file_json', required=False, default=None)
-
+    argparser.add_argument('-o', '--opts', action='store', dest='opts', required=False, default=None)
     # Add a Boolean flag test
     argparser.add_argument('-t', '--test', action='store_true', dest='test', required=False, default=False)
 
     args = argparser.parse_args()
 
     if args.test:
-        test_transform_asts(args.spec, args.file_json, args.spec_out)
+        test_transform_asts(args.spec, args.file_json, args.spec_out, args.opts)
     else:
         test_check_realizability(args.spec, args.file_json)
     print(args.test)

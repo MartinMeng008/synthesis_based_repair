@@ -1059,7 +1059,7 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
         # if arg_opts['enforce_reactive_variables']:
         #     for rv in arg_opts['reactive_variables']:
         #         non_rv.remove(rv)
-        T_winning_changes_list = list(arg_bdd.pick_iter(T_winning_changes_noreactive, care_vars=list_minus(arg_gs.get_vars_and_prime_and_dp(), arg_opts['reactive_variables'])))
+        T_winning_changes_list = list(arg_bdd.pick_iter(T_winning_changes_noreactive, care_vars=list_minus(arg_gs.get_vars_and_prime_and_dp(), arg_opts['reactive_variables'] + arg_opts["terrain_variables_p_dp"])))
         sel_idx = np.random.randint(len(T_winning_changes_list))
         # sel_idx = 11
         # if arg_opts['post_repair_cnt'] == 1 and arg_opts['generate_figure'] == 'symbolic':
