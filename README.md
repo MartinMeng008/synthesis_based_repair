@@ -302,5 +302,9 @@ python repair.py -s "../data/perceptive_locomotion/two_regions/transformed_int2b
 First, transform the spec with integer variables to the spec with Boolean variables only, and add repair constraints. From `\synthesis_based_repair` run:
 ```
 cd monitor
-
+python mocomp.py -s "../data/perceptive_locomotion/full_spec/locomotion_full_repair_test_new_unrealizable.structuredslugsplus" -so "../data/perceptive_locomotion/full_spec/transformed_locomotion_full_repair_test_new_unrealizable.structuredslugsplus" -o "../data/perceptive_locomotion/full_spec/opts.json" -t
+```
+Next, we run repair on the transformed spec:
+```
+python repair.py -s "../data/perceptive_locomotion/full_spec/transformed_locomotion_full_repair_test_new_unrealizable.structuredslugsplus" -o "../data/perceptive_locomotion/full_spec/opts.json" -a
 ```
