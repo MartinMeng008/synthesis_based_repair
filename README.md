@@ -243,16 +243,17 @@ python run_plot_symbols.py --file_names "../data/stretch/stretch_files.json" --s
 
 Plots will be generated in `synthesis_based_repair/data/stretch/plots/`.
 
-## Transformation: Specs with Integer Inputs to Spec with Boolean Inputs Only
+# Transformation: Specs with Integer Inputs to Spec with Boolean Inputs Only
 
-### Required packages
+## Required packages
 - This [fork](https://github.com/MartinMeng008/slugs) of slugs
 - z3
 
 In the file [mocomp.py](monitor/mocomp.py), change the slugs location to the directory of the installed slugs in this [line](https://github.com/MartinMeng008/synthesis_based_repair/blob/1162ab7678459f85bc815db74df3c348e723434d/monitor/mocomp.py#L23).
 
-### Usage
+## Usage
 
+### Int to Bool Transformation
 To perform the integer-to-boolean transformation, from `\synthesis_based_repair` run:
 ```
 cd monitor
@@ -275,7 +276,7 @@ e.g.
 python mocomp.py -s "../data/perceptive_locomotion/transformed_int2bool_locomotion_3x3.structuredslugsplus"
 ```
 
-## Add backup skills and run repair
+### Add backup skills and run repair
 To add backup skills and run repair, from `\synthesis_based_repair` run:
 ```
 cd monitor
@@ -290,9 +291,16 @@ python repair.py -s "../data/perceptive_locomotion/transformed_int2bool_locomoti
 ### Debug mode
 To run repair with the debugger on or off, change ```[debug]``` in ```"../data/perceptive_locomotion/opts.json"```
 
-## Terrain variables
+### Terrain variables
 For example, from `\synthesis_based_repair` run:
 ```
 cd monitor
 python repair.py -s "../data/perceptive_locomotion/two_regions/transformed_int2bool_locomotion_3x3_repair_test_with_terrain_simple_unrealizable.structuredslugsplus" -o "../data/perceptive_locomotion/two_regions/opts.json" -a
+```
+
+### Full spec example
+First, transform the spec with integer variables to the spec with Boolean variables only, and add repair constraints. From `\synthesis_based_repair` run:
+```
+cd monitor
+
 ```
