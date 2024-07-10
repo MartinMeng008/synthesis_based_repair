@@ -97,6 +97,8 @@ skill_70
 skill_71
 
 [ENV_INIT]
+( x0 & ! x1 & ! x2 )
+( y0 & ! y1 & ! y2 )
 ( ! xrequest0 & xrequest1 & ! xrequest2 )
 ( ! yrequest0 & yrequest1 & ! yrequest2 )
 

@@ -969,6 +969,7 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
 
     """
     print("modify postconditions")
+    if arg_opts['debug']: breakpoint() # <- DEBUG
     # These are the states that are winning at the next time that the system must get to
     winning_prime = arg_bdd.let(arg_gs.get_v_to_v_prime(), arg_winning_states)
     winning_p_dp = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), winning_prime)
@@ -1059,7 +1060,10 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
         # if arg_opts['enforce_reactive_variables']:
         #     for rv in arg_opts['reactive_variables']:
         #         non_rv.remove(rv)
-        T_winning_changes_list = list(arg_bdd.pick_iter(T_winning_changes_noreactive, care_vars=list_minus(arg_gs.get_vars_and_prime_and_dp(), arg_opts['reactive_variables'] + arg_opts["terrain_variables_p_dp"])))
+        if "terrain_variables_p_dp" not in arg_opts:
+            T_winning_changes_list = list(arg_bdd.pick_iter(T_winning_changes_noreactive, care_vars=list_minus(arg_gs.get_vars_and_prime_and_dp(), arg_opts['reactive_variables'])))
+        else:
+            T_winning_changes_list = list(arg_bdd.pick_iter(T_winning_changes_noreactive, care_vars=list_minus(arg_gs.get_vars_and_prime_and_dp(), arg_opts['reactive_variables'] + arg_opts["terrain_variables_p_dp"])))
         sel_idx = np.random.randint(len(T_winning_changes_list))
         # sel_idx = 11
         # if arg_opts['post_repair_cnt'] == 1 and arg_opts['generate_figure'] == 'symbolic':
@@ -1137,6 +1141,8 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     # np.random.seed(42)
     print_expr(arg_bdd, "winning states", arg_winning_states, vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
                do_print=DEBUG_PRE)
+    
+    if arg_opts['debug']: breakpoint() # <- DEBUG
 
     winning_prime = arg_bdd.let(arg_gs.get_v_to_v_prime(), arg_winning_states)
     T_sys_mutable = arg_gs.get_t_sys_not_hard()

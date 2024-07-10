@@ -17,7 +17,7 @@ from tools import (
     find_uncontrollable_symbols,
     find_controllable_mobile_symbols,
     find_controllable_manipulation_symbols,
-
+    list_minus
     )
 
 slugs_location = '/home/qian/workspace/slugs'
@@ -405,7 +405,7 @@ class Monitor:
             return ["TRUE"]
         if ast[0] == self.terminals['false']:
             return ["FALSE"]
-        print("Error ast: ")
+        # print("Error ast: ")
         print(ast)
         raise Exception("Monitor compiler parsing error when generating structuredslugsplus file")                
 
@@ -415,7 +415,7 @@ class Monitor:
         fid = open(self.file, 'a')
         for property_type in self.structuredslugsplus_property_types:
             fid.write(f'{property_type}\n')
-            # print(property_type)
+            print(property_type)
             for ast in self.asts[property_type]:
                 tokens = self.generate_structuredslugsplus_formula(ast, False)
                 curr_line = " ".join(tokens)
@@ -492,16 +492,35 @@ class Monitor:
     
     def add_change_constraints(self) -> None:
         """Add the change constraints to the ASTs"""
+        # 0. Get each type of inputs
+        self.request_inputs = self.get_request_inputs()
+        self.terrain_inputs = self.get_terrain_inputs()
+        self.location_inputs = self.get_location_inputs(self.request_inputs, self.terrain_inputs)
+
         # 1. Add mutual exclusion for each integer variable
         for _, bool_vars in self.int_to_bool_vars.items():
             self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "change_cons", is_primed = True)
             self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "change_cons", is_primed = False)
-        return None
+        
+        # 2. Add some grounding input must change
+        self._add_inputs_must_change_constraint(self.location_inputs + self.terrain_inputs, "change_cons")
+
+        # 3. Location inputs change implies terrain inputs static
+        self._add_change_implies_static_constraints(self.location_inputs, self.terrain_inputs, "change_cons")
+
+        # 4. Terrain inputs change implies location inputs static
+        self._add_change_implies_static_constraints(self.terrain_inputs, self.location_inputs, "change_cons")
 
     def add_not_allowed_repair(self) -> None:
         """Add the not allowed repair to the ASTs"""
         # 1. Add physical constraints
         self._add_physical_constraints()
+        return None
+
+        
+    def get_location_inputs(self, request_inputs, terrain_inputs) -> list:
+        """Return the location inputs"""
+        return list_minus(list_minus(self.vars[self.properties["input"]], request_inputs), terrain_inputs)
 
     def get_request_inputs(self) -> list:
         """Return the request inputs"""
@@ -732,7 +751,7 @@ class Monitor:
         """Return whether the variable is primed"""
         return var[-1] == "'"
     
-    def _add_inputs_mutual_exclusion_and_must_exist(self, vars: list, ast_property, is_primed = False) -> None:
+    def _add_inputs_mutual_exclusion_and_must_exist(self, vars: list, ast_property: str, is_primed: bool = False) -> None:
         """Add boolean input variables mutual exclusion to env_trans_hard"""
         if is_primed:
             vars = [var + "'" for var in vars]
@@ -749,8 +768,31 @@ class Monitor:
                         self.add_conjunction_wrapper(
                             [self.name2assignment(vars[i]), self.name2assignment(vars[j])])))
                 self.asts[self.properties[ast_property]].insert(0, new_formula)
+        return None
 
+    def _add_inputs_must_change_constraint(self, vars: list, ast_property: str) -> None:
+        """Add the constraint that or(var <-> !var') for all var in vars """
+        or_list = []
+        for var in vars:
+            or_list.append(self.add_biimplication_wrapper(self.name2assignment(var), self.add_not_wrapper(self.name2assignment(var + "'"))))
+        new_formula = self.add_formula_wrapper(self.add_disjunction_wrapper(or_list))
+        self.asts[self.properties[ast_property]].append(new_formula)
+        return None
 
+    def _add_change_implies_static_constraints(self, change_vars: list, static_vars: list, ast_property: str) -> None:
+        """Add the constraint that if change_vars change, then static_vars remain the same"""
+        change_list = []
+        for var in change_vars:
+            # Add the constraints var <-> !var'
+            change_list.append(self.add_biimplication_wrapper(self.name2assignment(var), self.add_not_wrapper(self.name2assignment(var + "'"))))
+        change_ast = self.add_disjunction_wrapper(change_list)
+        stay_list = []
+        for var in static_vars:
+            stay_list.append(self.add_biimplication_wrapper(self.name2assignment(var), self.name2assignment(var + "'")))
+        stay_ast = self.add_conjunction_wrapper(stay_list)
+        change_implies_stay_formula = self.add_formula_wrapper(self.add_implication_wrapper(change_ast, stay_ast))
+        self.asts[self.properties[ast_property]].append(change_implies_stay_formula)
+        return None
 
 # ================================================================ #
 
