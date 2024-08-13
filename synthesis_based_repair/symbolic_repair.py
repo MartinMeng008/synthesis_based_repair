@@ -41,7 +41,7 @@ class Specification:
         self.sections = {"input": "[INPUT]", "output": "[OUTPUT]", "envinit": "[ENV_INIT]", "sysinit": "[SYS_INIT]",
                          "envtrans": "[ENV_TRANS]", "envtranshard": "[ENV_TRANS_HARD]", "systrans": "[SYS_TRANS]",
                          "systranshard": "[SYS_TRANS_HARD]", "syslive": "[SYS_LIVENESS]", "envlive": "[ENV_LIVENESS]",
-                         "changecons": "[CHANGE_CONS]", "notallowedrepair": "[NOT_ALLOWED_REPAIR]"}
+                         "changecons": "[CHANGE_CONS]", "notallowedrepair": "[NOT_ALLOWED_REPAIR]", "changerepaircons": "[CHANGE_REPAIR_CONS]"}
         self.sections_inv = {v: k for k, v in self.sections.items()}
 
         self.input_vars = []
@@ -62,6 +62,7 @@ class Specification:
         self.sys_live_guarantees = []
         self.change_cons = []
         self.not_allowed_repair = []
+        self.change_repair_cons = []
 
         self.vars = []
         self.vars_prime = []
@@ -85,6 +86,7 @@ class Specification:
         self.T_sys_live = None
         self.T_change_cons = None
         self.T_not_allowed_repair = None
+        self.T_change_repair_cons = None
 
         self.T_sys_not_hard = None
         self.T_env_not_hard = None
@@ -135,6 +137,8 @@ class Specification:
                 self.change_cons.append(line)
             elif current_section == "notallowedrepair":
                 self.not_allowed_repair.append(line)
+            elif current_section == "changerepaircons":
+                self.change_repair_cons.append(line)
             else:
                 print("current_section '{}' not recognized".format(current_section))
 
@@ -184,6 +188,8 @@ class Specification:
         # Create change constraints
         self.T_change_cons = create_expr(self.bdd, self.change_cons)
         self.T_not_allowed_repair = create_expr(self.bdd, self.not_allowed_repair)
+        self.T_change_repair_cons = create_expr(self.bdd, self.change_repair_cons)
+        # breakpoint()
 
     def get_game_structure(self):
         if self.gs is None:
@@ -195,7 +201,8 @@ class Specification:
                                     self.env_live_assumptions, self.sys_live_guarantees,
                                     self.T_env_init, self.T_sys_init,
                                     arg_change_cons=self.T_change_cons,
-                                    arg_not_allowed_repair=self.T_not_allowed_repair)
+                                    arg_not_allowed_repair=self.T_not_allowed_repair,
+                                    arg_change_repair_cons=self.T_change_repair_cons)
         return self.gs
 
     def get_init(self):
@@ -211,7 +218,7 @@ class GameStructure:
                  env_live_assumptions_internal, sys_live_guarantees_internal,
                  arg_T_env_init, arg_T_sys_init,
                  arg_cntr_vars=None, arg_cntr_vars_prime=None,
-                 arg_change_cons=None, arg_not_allowed_repair=None):
+                 arg_change_cons=None, arg_not_allowed_repair=None, arg_change_repair_cons=None):
         """
 
         :type bdd_internal: dd.autoref.BDD
@@ -241,6 +248,7 @@ class GameStructure:
         self.cntr_vars_prime = arg_cntr_vars_prime
         self.change_cons = arg_change_cons
         self.not_allowed_repair = arg_not_allowed_repair
+        self.change_repair_cons = arg_change_repair_cons
 
         self.v_to_v_prime = self.create_mapping(self.vars, self.vars_prime)
         self.v_prime_to_v = self.create_mapping(self.vars_prime, self.vars)
@@ -268,11 +276,16 @@ class GameStructure:
         self.vars_and_output_prime = copy.copy(self.vars)
         self.vars_and_output_prime.extend(self.output_vars_prime)
 
+        self.new_trans = self.bdd.false
+
     def create_mapping(self, orig, new):
         d = dict()
         for o, n in zip(orig, new):
             d[o] = n
         return d
+
+    def get_new_trans(self):
+        return self.new_trans
 
     def get_v_to_v_prime(self):
         return self.v_to_v_prime
@@ -327,6 +340,9 @@ class GameStructure:
     def get_not_allowed_repair_p_and_dp(self):
         tmp = self.bdd.let(self.inputprime_to_inputdoubleprime, self.not_allowed_repair)
         return self.bdd.let(self.input_to_inputprime, tmp)
+    
+    def get_change_repair_cons(self):
+        return self.change_repair_cons
 
     def get_env_live_assumptions(self):
         return self.env_live_assumptions
@@ -554,7 +570,7 @@ def compute_winning_states(arg_bdd, gs_internal, arg_opts):
                            arg_opts=arg_opts, to_file=arg_opts['to_file'])
 
                 if start == arg_bdd.false:  # or (z_cnt == 1 and ii == 0):
-                    if arg_opts["debug"]: breakpoint() # <- DEBUG
+                    # if arg_opts["debug"]: breakpoint() # <- DEBUG
                     print_expr(arg_bdd, "Cannot win. Z is:", Z_internal,
                                vars_ordering=gs_internal.get_vars_and_vars_prime(),
                                do_print=DEBUG & DEBUG_WS_COMPUTE)
@@ -834,7 +850,7 @@ def determinize_strategy(arg_bdd, arg_strategy):
     return deterministic_strat_out
 
 
-def perform_repair(arg_bdd, arg_gs, arg_winning_states, arg_target_states, arg_T_previously_changed, arg_opts):
+def perform_repair(arg_bdd, arg_gs, arg_winning_states, arg_target_states, arg_T_previously_changed, arg_opts, original_gs = None):
     print("perform_repair call number: {}".format(arg_opts["post_repair_cnt"]))
     repaired_T_env = arg_gs.get_t_env()
     repaired_T_sys = arg_gs.get_t_sys_not_hard()
@@ -887,6 +903,7 @@ def perform_repair(arg_bdd, arg_gs, arg_winning_states, arg_target_states, arg_T
                                                                            tmp_T_sys,
                                                                            current_winning_states, gs_internal,
                                                                            arg_opts)
+                # arg_opts['post_first'] = False
             else:
                 arg_opts['post_first'] = False
         else:
@@ -910,6 +927,7 @@ def perform_repair(arg_bdd, arg_gs, arg_winning_states, arg_target_states, arg_T
 
                 gs_internal.update_change_cons(acts_changed)
                 gs_internal.update_not_allowed_repair(acts_changed)
+                # arg_gs['post_first'] = True
             else:
                 arg_opts['post_first'] = True
 
@@ -940,6 +958,10 @@ def perform_repair(arg_bdd, arg_gs, arg_winning_states, arg_target_states, arg_T
             if arg_opts['return_with_one_repair']:
                 return gs_internal, acts_changed, arg_T_previously_changed, T_swapped_pre, T_swapped_post
         else:
+            if True: breakpoint()
+            env_diff = arg_bdd.exist(arg_opts["reactive_variables"] + arg_opts["terrain_variables_p"], repaired_T_env & ~original_gs.get_t_env_not_hard())
+            z = compute_winning_states(arg_bdd, gs_internal, arg_opts)
+            init = arg_bdd.exist(gs_internal.get_vars_prime(), gs_internal.get_t_init() & gs_internal.get_t_env() & gs_internal.get_t_env_hard())
             arg_opts['post_repair_cnt'] += 1
             raise Exception("No repair found")
 
@@ -949,7 +971,7 @@ def find_encoded_skills(arg_bdd, arg_gs, arg_T_env):
                                                                       arg_gs.get_t_env_hard()) & ~arg_T_env) & arg_T_env
 
 
-def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_gs, arg_T_previously_changed,
+def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_gs: GameStructure, arg_T_previously_changed,
                           arg_opts):
     """
     Modifies the postconditions by changing a single postcondition such that it increases the winning states
@@ -969,7 +991,7 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
 
     """
     print("modify postconditions")
-    if arg_opts['debug']: breakpoint() # <- DEBUG
+    # if arg_opts['debug']: breakpoint() # <- DEBUG
     # These are the states that are winning at the next time that the system must get to
     winning_prime = arg_bdd.let(arg_gs.get_v_to_v_prime(), arg_winning_states)
     winning_p_dp = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), winning_prime)
@@ -1055,6 +1077,7 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
     #                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
 
     # Lines 6-11
+    T_winning_change_old = T_winning_change_new = arg_bdd.false
     if T_winning_changes_noreactive != arg_bdd.false:
         # non_rv = copy.deepcopy(arg_gs.get_vars_and_prime_and_dp())
         # if arg_opts['enforce_reactive_variables']:
@@ -1064,37 +1087,62 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
             T_winning_changes_list = list(arg_bdd.pick_iter(T_winning_changes_noreactive, care_vars=list_minus(arg_gs.get_vars_and_prime_and_dp(), arg_opts['reactive_variables'])))
         else:
             T_winning_changes_list = list(arg_bdd.pick_iter(T_winning_changes_noreactive, care_vars=list_minus(arg_gs.get_vars_and_prime_and_dp(), arg_opts['reactive_variables'] + arg_opts["terrain_variables_p_dp"])))
-        sel_idx = np.random.randint(len(T_winning_changes_list))
+        size_winning_changes = len(T_winning_changes_list)
+        init_self_idx = sel_idx = np.random.randint(len(T_winning_changes_list))
         # sel_idx = 11
         # if arg_opts['post_repair_cnt'] == 1 and arg_opts['generate_figure'] == 'symbolic':
         #     sel_idx = 0
         # print("Post_repair_cnt: {}, sel_idx: {}".format(arg_opts['post_repair_cnt'], sel_idx))
-        T_winning_change_sel = arg_bdd.cube(T_winning_changes_list[sel_idx])
-    else:
-        T_winning_change_sel = arg_bdd.false
-    print_expr(arg_bdd, "T_winning_change_sel", T_winning_change_sel,
-               vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=True)
-    if arg_opts['enforce_reactive_variables']:
-        T_winning_change_sel = arg_bdd.exist(arg_opts['reactive_variables'], T_winning_change_sel)
-        print_expr(arg_bdd, "T_winning_change_sel (after enforcing reactive variables)", T_winning_change_sel,
-                   vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
+        first_time = True
+        while first_time or sel_idx != init_self_idx:
+            first_time = False
+            T_winning_change_sel = arg_bdd.cube(T_winning_changes_list[sel_idx])
+            if arg_opts['enforce_reactive_variables']:
+                T_winning_change_sel = arg_bdd.exist(arg_opts['reactive_variables'], T_winning_change_sel)
 
-    T_winning_change_new = arg_bdd.exist(arg_gs.get_output_vars_prime(),
+            # Remove the terrain inputs that are not to keep, because they are not part of the preconditions
+            # T_winning_change_sel = remove_terrain_inputs_not_to_keep_in_old_pre(arg_bdd, arg_gs, arg_opts, T_winning_change_sel)
+            
+            T_winning_change_old = arg_bdd.exist(arg_gs.get_output_vars_prime() + arg_gs.get_input_vars_double_prime(), 
+                                                               T_winning_change_sel)
+            # Remove the terrain inputs that are not to keep, because they are not part of the preconditions
+            T_winning_change_old = remove_terrain_inputs_not_to_keep_in_transition(arg_bdd, arg_gs, arg_opts, T_winning_change_old)
+            if T_winning_change_old & arg_gs.get_new_trans() != T_winning_change_old:
+                # That means the old_tran is not newly generated by repair
+                T_winning_change_new = arg_bdd.exist(arg_gs.get_output_vars_prime(),
                                          arg_bdd.let(arg_gs.get_inputdoubleprime_to_inputprime(),
                                                      arg_bdd.exist(arg_gs.get_input_vars_prime(),
                                                                    T_winning_change_sel)))
+                # Remove the terrain inputs that are not to keep, because they are not part of the preconditions
+                T_winning_change_new = remove_terrain_inputs_not_to_keep_in_transition(arg_bdd, arg_gs, arg_opts, T_winning_change_new)
+                arg_gs.new_trans |= T_winning_change_new
+                break
+            else:
+                sel_idx = (sel_idx + 1) % size_winning_changes
+        if first_time and sel_idx == init_self_idx:
+            T_winning_change_sel = T_winning_change_new = arg_bdd.false
+        # T_winning_change_sel = arg_bdd.cube(T_winning_changes_list[sel_idx])
+    else:
+        T_winning_change_sel = T_winning_change_new = T_winning_change_old = arg_bdd.false
+    # print_expr(arg_bdd, "T_winning_change_sel", T_winning_change_sel,
+    #            vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=True)
+    # if arg_opts['enforce_reactive_variables']:
+    #     T_winning_change_sel = arg_bdd.exist(arg_opts['reactive_variables'], T_winning_change_sel)
+    #     print_expr(arg_bdd, "T_winning_change_sel (after enforcing reactive variables)", T_winning_change_sel,
+    #                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
+
     print_expr(arg_bdd, "T_winning_change_new", T_winning_change_new,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
 
+
     # Lines 12-15
     # For the environment transition, we just need to remove the old postcondition(s) and add the new postcondition(s)
-    T_env_out = arg_T_env & ~arg_bdd.exist(arg_gs.get_output_vars_prime() + arg_gs.get_input_vars_double_prime(),
-                                           T_winning_change_sel)
+    T_env_out = arg_T_env & ~T_winning_change_old
     T_env_out = T_env_out | arg_bdd.exist(arg_gs.get_output_vars_prime(), T_winning_change_new)
-    print_expr(arg_bdd, "T_env removed",
-               arg_bdd.exist(arg_gs.get_output_vars_prime() + arg_gs.get_input_vars_double_prime(),
-                             T_winning_change_sel),
-               vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=True)
+    # print_expr(arg_bdd, "T_env removed",
+    #            arg_bdd.exist(arg_gs.get_output_vars_prime() + arg_gs.get_input_vars_double_prime(),
+    #                          T_winning_change_sel),
+    #            vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=True)
 
     # # Line 16-21
     # # Modify the preconditions
@@ -1135,14 +1183,42 @@ def find_final_post(arg_bdd, arg_gs, arg_skills, arg_T_env, arg_T_sys_nh):
 
     return T_out
 
+def find_terrains_inputs_to_keep(arg_bdd: _bdd.BDD, arg_gs: GameStructure, arg_opts: dict, T_transition) -> list:
+    """Return the list of terrain inputs to keep in a transition over vars and vars_prime"""
+    t = arg_bdd.exist(arg_gs.get_output_vars_prime() + arg_opts["terrain_variables"] + arg_gs.get_output_vars(), T_transition)
+    for key, val in arg_opts["terrain_inputs_keep_dict"].items():
+        if t == arg_bdd.add_expr(key):
+            return arg_opts[val]
+    raise Exception("Terrain inputs to keep not found")
 
-def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_gs, arg_opts):
+def remove_terrain_inputs_not_to_keep_in_transition(arg_bdd: _bdd.BDD, arg_gs: GameStructure, arg_opts: dict, T_transition) -> _bdd.BDD:
+    """Remove the terrain inputs not to keep in a transition over vars and vars_prime"""
+    terrain_inputs_kept = find_terrains_inputs_to_keep(arg_bdd, arg_gs, arg_opts, T_transition)
+    terrain_inputs_remove = list_minus(arg_opts["terrain_variables_current"], terrain_inputs_kept)
+    return arg_bdd.exist(terrain_inputs_remove, T_transition)
+
+def remove_terrain_inputs_not_to_keep_in_old_pre(arg_bdd: _bdd.BDD, arg_gs: GameStructure, arg_opts: dict, T_selected_change) -> _bdd.BDD:
+    """Remove the terrain inputs not to keep in the old preconditions"""
+    T_old_full_skill = arg_bdd.exist(arg_gs.get_input_vars_double_prime(), T_selected_change)
+    T_left_over = arg_bdd.exist(arg_gs.get_vars() + arg_gs.get_vars_prime(), T_selected_change)
+    T_old_full_skill_terrain_removed = remove_terrain_inputs_not_to_keep_in_transition(arg_bdd, arg_gs, arg_opts, T_old_full_skill)
+    return T_old_full_skill_terrain_removed & T_left_over
+
+def remove_terrain_inputs_not_to_keep_in_new_pre(arg_bdd: _bdd.BDD, arg_gs: GameStructure, arg_opts: dict, T_selected_change) -> _bdd.BDD:
+    """Remove the terrain inputs not to keep in the new preconditions"""
+    T_new_full_skill = arg_bdd.let(arg_gs.get_inputdoubleprime_to_input(),
+                                   arg_bdd.exist(arg_gs.get_vars(), T_selected_change))
+    T_left_over = arg_bdd.exist(arg_gs.get_input_vars_double_prime(), T_selected_change)
+    T_new_full_skill_terrain_removed = remove_terrain_inputs_not_to_keep_in_transition(arg_bdd, arg_gs, arg_opts, T_new_full_skill)
+    return T_left_over & arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), T_new_full_skill_terrain_removed)
+
+def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_states, arg_gs: GameStructure, arg_opts):
     print("modify preconditions")
     # np.random.seed(42)
     print_expr(arg_bdd, "winning states", arg_winning_states, vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
                do_print=DEBUG_PRE)
     
-    if arg_opts['debug']: breakpoint() # <- DEBUG
+    # if arg_opts['debug']: breakpoint() # <- DEBUG
 
     winning_prime = arg_bdd.let(arg_gs.get_v_to_v_prime(), arg_winning_states)
     T_sys_mutable = arg_gs.get_t_sys_not_hard()
@@ -1228,6 +1304,7 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
                                    arg_bdd.let(arg_gs.get_v_prime_to_v(), arg_gs.get_change_cons_p_and_dp()) & \
                                    arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(),
                                                arg_gs.get_not_allowed_repair()) & \
+                                   arg_gs.get_change_repair_cons() & \
                                    ~T_pres_in_skill & \
                                    arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), arg_gs.get_t_sys_hard()) & \
                                    ~arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(),
@@ -1258,21 +1335,28 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     # if arg_opts['post_repair_cnt'] == 0 and arg_opts['generate_figure'] == 'integrated':
     #     sel_idx = 5
     # print("Post_repair_cnt: {}, sel_idx: {}".format(arg_opts['post_repair_cnt'], sel_idx))
-    T_selected_change = arg_bdd.cube(all_possible_changes[sel_idx])
+    T_old_selected_change = T_selected_change = arg_bdd.cube(all_possible_changes[sel_idx])
     print_expr(arg_bdd, "T_selected_change", T_selected_change,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
 
-    # Line 11
+    # # Line 11
     # Select other valid changes if this is the precondition to the last transition
-    T_selected_change = T_sys_mutable & arg_bdd.exist(arg_gs.get_output_vars_prime(), T_selected_change)
+    T_selected_change = T_sys_mutable & arg_bdd.exist(arg_gs.get_output_vars_prime(), T_selected_change) & arg_gs.get_t_sys_hard()
     print_expr(arg_bdd, "T_selected_change expanded", T_selected_change,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
 
     # Line 12
     if arg_opts['enforce_reactive_variables']:
-        T_selected_change = arg_bdd.exist(arg_opts['reactive_variables'], T_selected_change)
+        if "terrain_variables_p_dp" not in arg_opts:
+            T_selected_change = arg_bdd.exist(arg_opts['reactive_variables'], T_selected_change)
+        else:
+            T_selected_change = arg_bdd.exist(arg_opts['reactive_variables'] + arg_opts["terrain_variables_p"], T_selected_change)
         print_expr(arg_bdd, "T_possible_changes_in_dp (enforce reactive variables)", T_selected_change,
                    vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
+
+    # Remove the terrain inputs that are not to keep, because they are not part of the preconditions
+    T_selected_change = remove_terrain_inputs_not_to_keep_in_old_pre(arg_bdd, arg_gs, arg_opts, T_selected_change)
+    T_selected_change = remove_terrain_inputs_not_to_keep_in_new_pre(arg_bdd, arg_gs, arg_opts, T_selected_change)
 
     # Line 16
     # This is the precondition that is added
@@ -1326,9 +1410,22 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
         print_expr(arg_bdd, "T_new_pre_primed (new precondition) (revised)", T_new_pre_primed,
                    vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
 
+    T_old_full_skill_wo_outprime = arg_bdd.exist(arg_gs.get_output_vars_prime(), T_old_full_skill)
+    T_new_full_skill_wo_outprime = arg_bdd.exist(arg_gs.get_output_vars_prime(), T_new_full_skill)
+    old_skill_is_new_trans = T_old_full_skill_wo_outprime & arg_gs.new_trans == T_old_full_skill_wo_outprime
+
     # Line 26
-    # T_sys_new = T_sys_mutable | T_new_pre_primed | T_new_full_skill
-    T_sys_new = (T_sys_mutable | T_new_pre_primed | T_new_full_skill) & ~T_old_pre_primed
+    if old_skill_is_new_trans:
+        T_sys_new = T_sys_mutable | T_new_pre_primed | T_new_full_skill
+    else:
+        if T_remove_from_pre != arg_bdd.false:
+            T_sys_new = T_sys_mutable | T_new_pre_primed | T_new_full_skill | T_remove_from_pre
+        else:
+            T_sys_new = T_sys_mutable | T_new_pre_primed | T_new_full_skill
+        # T_sys_new = (T_sys_mutable | T_new_pre_primed | T_new_full_skill) & ~T_old_pre_primed
+
+    # Record the new transition
+    arg_gs.new_trans |= T_new_full_skill_wo_outprime
 
     # Adds the new preconditions to the environment transitions.
     # First, removes all transitions associated with the new precondition and skill
@@ -1352,9 +1449,15 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     # Line 29 and 30
     # T_env_new = ((arg_T_env & ~T_new_pre_and_skill) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
     #                                                                 T_new_full_skill) | T_new_pre_pre_env) & arg_gs.get_t_env_hard()
-    
-    T_env_new = ((arg_T_env & ~T_new_pre_and_skill & ~T_old_full_skill) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
+
+    if old_skill_is_new_trans:
+        T_env_new = ((arg_T_env & ~T_new_pre_and_skill ) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
                                                                     T_new_full_skill) | T_new_pre_pre_env) & arg_gs.get_t_env_hard()
+    else:
+        T_env_new = ((arg_T_env & ~T_new_pre_and_skill ) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
+                                                                        T_new_full_skill) | T_new_pre_pre_env) & arg_gs.get_t_env_hard()
+        # T_env_new = ((arg_T_env & ~T_new_pre_and_skill & ~T_old_full_skill) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
+        #                                                                 T_new_full_skill) | T_new_pre_pre_env) & arg_gs.get_t_env_hard()
 
     return T_env_new, T_sys_new, arg_bdd.false
 
@@ -1968,6 +2071,10 @@ def bdd_to_suggestions(arg_bdd, arg_mod_pre, arg_mod_post, arg_opts, arg_acts_ch
 
 
 def run_repair(file_in, opts):
+    if 'max_repair_cnt' in opts:
+        max_repair_cnt = opts['max_repair_cnt']
+    else:
+        max_repair_cnt = 500
     s_time = time.time()
     bdd = _bdd.BDD()
     spec_in = Specification(file_in_internal=file_in, bdd_internal=bdd)
@@ -1984,7 +2091,9 @@ def run_repair(file_in, opts):
     # repaired_gs.bdd = gs.bdd
     acts_changed_ext = []
     T_previously_changed = bdd.false
-    while do_compute_winning_states:
+    repair_cnt = 0
+    while repair_cnt <= max_repair_cnt and do_compute_winning_states:
+        repair_cnt += 1
         # Compute winning states
         winning_states = compute_winning_states(repaired_gs.bdd, repaired_gs, opts)
         do_compute_winning_states = winning_states.does_need_repair()
@@ -2000,7 +2109,8 @@ def run_repair(file_in, opts):
                 repaired_gs.bdd, repaired_gs,
                 winning_states,
                 winning_states.get_target_states(),
-                T_previously_changed, opts)
+                T_previously_changed, opts,
+                gs)
             # opts['post_first'] = not opts['post_first']
             acts_changed_ext.extend(acts_changed)
             T_swapped_pre_all = T_swapped_pre_all | T_swapped_pre
@@ -2022,14 +2132,17 @@ def run_repair(file_in, opts):
         return False, dict()
     elif opts['only_synthesis'] and is_realizable:
         return True, dict()
-    while not is_realizable:
+    repair_cnt = 0
+    while repair_cnt <= max_repair_cnt and not is_realizable:
+        repair_cnt += 1
         opts['cover'] = True
         repaired_gs, acts_changed, T_previously_changed, T_swapped_pre, T_swapped_post = perform_repair(repaired_gs.bdd,
                                                                                                         repaired_gs,
                                                                                                         winning_states,
                                                                                                         repaired_gs.get_t_init(),
                                                                                                         T_previously_changed,
-                                                                                                        opts)
+                                                                                                        opts,
+                                                                                                        gs)
         # opts['post_first'] = not opts['post_first']
         winning_states = compute_winning_states(repaired_gs.bdd, repaired_gs, opts)
         acts_changed_ext.extend(acts_changed)
@@ -2039,7 +2152,7 @@ def run_repair(file_in, opts):
 
         # is_realizable = repaired_gs.get_t_init() & winning_states.get_z() == repaired_gs.get_t_init()
         init = bdd.exist(repaired_gs.get_vars_prime(), repaired_gs.get_t_init() & repaired_gs.get_t_env() & repaired_gs.get_t_env_hard())
-        is_realizable = repaired_gs.get_t_init() & winning_states.get_z() == init
+        is_realizable = init & winning_states.get_z() == init
     print("Checked initial states contained in: {}".format(time.time() - s_time))
 
     # Synthesize a strategy

@@ -5,7 +5,7 @@
     "enforce_reactive_variables": true,
     "suggestions": "none",
     "do_names": true,
-    "post_first": true,
+    "post_first": false,
     "post_repair_cnt": 0,
     "to_file": false,
     "fid_base": "none",
@@ -13,9 +13,38 @@
     "n_dims": 3,
     "generate_figure": "",
     "n_seeds": 42,
-    "max_repair_cnt": 40,
+    "max_repair_cnt": 500,
     "debug": false,
     "uncontrollable_inputs": [],
     "terrain_inputs": [],
-    "num_grid": 9
+    "num_grid": 9,
+    "terrain_inputs_keep_dict": {
+      "x0 & ~x1 & ~x2 & y0 & ~y1 & ~y2 & x0' & ~x1' & ~x2' & ~y0' & y1' & ~y2'": "up_terrain_vars",
+      "x0 & ~x1 & ~x2 & ~y0 & y1 & ~y2 & x0' & ~x1' & ~x2' & ~y0' & ~y1' & y2'": "up_terrain_vars",
+      "~x0 & x1 & ~x2 & y0 & ~y1 & ~y2 & ~x0' & x1' & ~x2' & ~y0' & y1' & ~y2'": "up_terrain_vars",
+      "~x0 & x1 & ~x2 & ~y0 & y1 & ~y2 & ~x0' & x1' & ~x2' & ~y0' & ~y1' & y2'": "up_terrain_vars",
+      "~x0 & ~x1 & x2 & y0 & ~y1 & ~y2 & ~x0' & ~x1' & x2' & ~y0' & y1' & ~y2'": "up_terrain_vars",
+      "~x0 & ~x1 & x2 & ~y0 & y1 & ~y2 & ~x0' & ~x1' & x2' & ~y0' & ~y1' & y2'": "up_terrain_vars",
+
+      "x0 & ~x1 & ~x2 & ~y0 & ~y1 & y2 & x0' & ~x1' & ~x2' & ~y0' & y1' & ~y2'": "down_terrain_vars",
+      "x0 & ~x1 & ~x2 & ~y0 & y1 & ~y2 & x0' & ~x1' & ~x2' & y0' & ~y1' & ~y2'": "down_terrain_vars",
+      "~x0 & x1 & ~x2 & ~y0 & ~y1 & y2 & ~x0' & x1' & ~x2' & ~y0' & y1' & ~y2'": "down_terrain_vars",
+      "~x0 & x1 & ~x2 & ~y0 & y1 & ~y2 & ~x0' & x1' & ~x2' & y0' & ~y1' & ~y2'": "down_terrain_vars",
+      "~x0 & ~x1 & x2 & ~y0 & ~y1 & y2 & ~x0' & ~x1' & x2' & ~y0' & y1' & ~y2'": "down_terrain_vars",
+      "~x0 & ~x1 & x2 & ~y0 & y1 & ~y2 & ~x0' & ~x1' & x2' & y0' & ~y1' & ~y2'": "down_terrain_vars",
+
+      "~x0 & ~x1 & x2 & y0 & ~y1 & ~y2 & ~x0' & x1' & ~x2' & y0' & ~y1' & ~y2'": "left_terrain_vars",
+      "~x0 & x1 & ~x2 & y0 & ~y1 & ~y2 & x0' & ~x1' & ~x2' & y0' & ~y1' & ~y2'": "left_terrain_vars",
+      "~x0 & ~x1 & x2 & ~y0 & y1 & ~y2 & ~x0' & x1' & ~x2' & ~y0' & y1' & ~y2'": "left_terrain_vars",
+      "~x0 & x1 & ~x2 & ~y0 & y1 & ~y2 & x0' & ~x1' & ~x2' & ~y0' & y1' & ~y2'": "left_terrain_vars",
+      "~x0 & ~x1 & x2 & ~y0 & ~y1 & y2 & ~x0' & x1' & ~x2' & ~y0' & ~y1' & y2'": "left_terrain_vars",
+      "~x0 & x1 & ~x2 & ~y0 & ~y1 & y2 & x0' & ~x1' & ~x2' & ~y0' & ~y1' & y2'": "left_terrain_vars",
+
+      "x0 & ~x1 & ~x2 & y0 & ~y1 & ~y2 & ~x0' & x1' & ~x2' & y0' & ~y1' & ~y2'": "right_terrain_vars",
+      "~x0 & x1 & ~x2 & y0 & ~y1 & ~y2 & ~x0' & ~x1' & x2' & y0' & ~y1' & ~y2'": "right_terrain_vars",
+      "x0 & ~x1 & ~x2 & ~y0 & y1 & ~y2 & ~x0' & x1' & ~x2' & ~y0' & y1' & ~y2'": "right_terrain_vars",
+      "~x0 & x1 & ~x2 & ~y0 & y1 & ~y2 & ~x0' & ~x1' & x2' & ~y0' & y1' & ~y2'": "right_terrain_vars",
+      "x0 & ~x1 & ~x2 & ~y0 & ~y1 & y2 & ~x0' & x1' & ~x2' & ~y0' & ~y1' & y2'": "right_terrain_vars",
+      "~x0 & x1 & ~x2 & ~y0 & ~y1 & y2 & ~x0' & ~x1' & x2' & ~y0' & ~y1' & y2'": "right_terrain_vars"
+    }
   }
