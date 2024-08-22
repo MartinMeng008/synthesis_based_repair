@@ -61,9 +61,34 @@ class Skill:
         except AttributeError:
             pass
         print("")
-        print("info", self.info)
+        # print("info", self.info)
         print("========")
         print("")
+
+    def write_to_file(self, file_name: str) -> None:
+        fid = open(file_name, "w")
+        fid.write("========\n")
+        fid.write(self.name + "\n")
+        fid.write("initial preconditions: \n")
+        for init_dict in self.init_pres:
+            fid.write(str(dict_bool2list(init_dict)) + "\n")
+        fid.write("====\n")
+        fid.write("intermediate states: \n")
+        for pre_dict, post_dict_list in self.intermediate_states:
+            fid.write("pre: " + str(dict_bool2list(pre_dict)) + "\n")
+            for post_dict in post_dict_list:
+                fid.write("post: " + str(dict_bool2list(post_dict)) + "\n")
+        fid.write("====\n")
+        fid.write("final postconditions: \n")
+        for post_dict in self.final_posts:
+            fid.write(str(dict_bool2list(post_dict)) + "\n")
+        try:
+            fid.write("original skill: " + str(self.original_skill) + "\n")
+            fid.write("new skill: " + str(self.new_skill) + "\n")
+        except AttributeError:
+            pass
+        fid.write("========\n")
+        fid.close()
 
 
     def get_skill_str(self, include_false=True):

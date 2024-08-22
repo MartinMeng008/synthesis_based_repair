@@ -421,8 +421,10 @@ y1
 ( ( x2 & y2 ) -> ( ( x2' & y1' ) | ( x1' & y2' ) ) )
 
 [CHANGE_REPAIR_CONS]
-((x0 & y0 & x0' & y1') | (x0 & y1 & x0' & y2') | (x1 & y0 & x1' & y1') | (x1 & y1 & x1' & y2') | (x2 & y0 & x2' & y1') | (x2 & y1 & x2' & y2')) -> ((downcellheight0 <-> downcellheight0'') & (downcellheight1 <-> downcellheight1'') & (leftcellheight0 <-> leftcellheight0'') & (leftcellheight1 <-> leftcellheight1'') & (rightcellheight0 <-> rightcellheight0'') & (rightcellheight1 <-> rightcellheight1''))
-((x0 & y2 & x0' & y1') | (x0 & y1 & x0' & y0') | (x1 & y2 & x1' & y1') | (x1 & y1 & x1' & y0') | (x2 & y2 & x2' & y1') | (x2 & y1 & x2' & y0')) -> ((upcellheight0 <-> upcellheight0'') & (upcellheight1 <-> upcellheight1'') & (leftcellheight0 <-> leftcellheight0'') & (leftcellheight1 <-> leftcellheight1'') & (rightcellheight0 <-> rightcellheight0'') & (rightcellheight1 <-> rightcellheight1''))
+((x0 & y0 & x0' & y1') | (x0 & y1 & x0' & y2') | (x1 & y0 & x1' & y1') | (x1 & y1 & x1' & y2') | (x2 & y0 & x2' & y1') | (x2 & y1 & x2' & y2')) -> ((upcellheight0 <-> upcellheight0'') & (upcellheight1 <-> upcellheight1'') & (leftcellheight0 <-> leftcellheight0'') & (leftcellheight1 <-> leftcellheight1'') & (rightcellheight0 <-> rightcellheight0'') & (rightcellheight1 <-> rightcellheight1''))
+
+((x0 & y2 & x0' & y1') | (x0 & y1 & x0' & y0') | (x1 & y2 & x1' & y1') | (x1 & y1 & x1' & y0') | (x2 & y2 & x2' & y1') | (x2 & y1 & x2' & y0')) -> ((downcellheight0 <-> downcellheight0'') & (downcellheight1 <-> downcellheight1'') & (leftcellheight0 <-> leftcellheight0'') & (leftcellheight1 <-> leftcellheight1'') & (rightcellheight0 <-> rightcellheight0'') & (rightcellheight1 <-> rightcellheight1''))
+
 ((x2 & y0 & x1' & y0') | (x1 & y0 & x0' & y0') | (x2 & y1 & x1' & y1') | (x1 & y1 & x0' & y1') | (x2 & y2 & x1' & y2') | (x1 & y2 & x0' & y2')) -> ((upcellheight0 <-> upcellheight0'') & (upcellheight1 <-> upcellheight1'') & (downcellheight0 <-> downcellheight0'') & (downcellheight1 <-> downcellheight1'') & (rightcellheight0 <-> rightcellheight0'') & (rightcellheight1 <-> rightcellheight1''))
 ((x0 & y0 & x1' & y0') | (x1 & y0 & x2' & y0') | (x0 & y1 & x1' & y1') | (x1 & y1 & x2' & y1') | (x0 & y2 & x1' & y2') | (x1 & y2 & x2' & y2')) -> ((downcellheight0 <-> downcellheight0'') & (downcellheight1 <-> downcellheight1'') & (leftcellheight0 <-> leftcellheight0'') & (leftcellheight1 <-> leftcellheight1'') & (upcellheight0 <-> upcellheight0'') & (upcellheight1 <-> upcellheight1''))
 

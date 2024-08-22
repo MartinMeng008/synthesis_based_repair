@@ -81,7 +81,7 @@ class Compiler:
         self.variable_types = ["[INPUT]","[OUTPUT]","[OBSERVABLE_INPUT]","[UNOBSERVABLE_INPUT]","[CONTROLLABLE_INPUT]"]
         self.structuredslugsplus_property_types = ["[ENV_INIT]", "[SYS_INIT]", "[ENV_TRANS]", "[ENV_TRANS_HARD]", "[SYS_TRANS]", "[SYS_TRANS_HARD]", "[ENV_LIVENESS]", "[SYS_LIVENESS]", "[CHANGE_CONS]", "[NOT_ALLOWED_REPAIR]", "[CHANGE_REPAIR_CONS]"]
         self.terminals = {"formula": "Formula", "biimplication": "Biimplication", "implication": "Implication", "conjunction": "Conjunction", "disjunction": "Disjunction", "unary": "UnaryFormula", "not": "NotOperator", "next": "NextOperator", "assignment": "Assignment", "true": "TRUE", "false": "FALSE", "calculation": "CalculationSubformula", "numID": "numID", "comparison": "NumberComparisonOperator", "equal": "EqualOperator", "number": "numeral"}
-        self.properties = {"env_trans": "[ENV_TRANS]", "env_init": "[ENV_INIT]", "input": "[INPUT]", "output": "[OUTPUT]", "sys_trans": "[SYS_TRANS]", "sys_init": "[SYS_INIT]", "env_liveness": "[ENV_LIVENESS]", "sys_liveness": "[SYS_LIVENESS]", "observable_input": "[OBSERVABLE_INPUT]", "unobservable_input": "[UNOBSERVABLE_INPUT]", "controllable_input": "[CONTROLLABLE_INPUT]", "env_trans_hard": "[ENV_TRANS_HARD]", "sys_trans_hard": "[SYS_TRANS_HARD]", "change_cons": "[CHANGE_CONS]", "not_allowed_repair": "[NOT_ALLOWED_REPAIR]"}
+        self.properties = {"env_trans": "[ENV_TRANS]", "env_init": "[ENV_INIT]", "input": "[INPUT]", "output": "[OUTPUT]", "sys_trans": "[SYS_TRANS]", "sys_init": "[SYS_INIT]", "env_liveness": "[ENV_LIVENESS]", "sys_liveness": "[SYS_LIVENESS]", "observable_input": "[OBSERVABLE_INPUT]", "unobservable_input": "[UNOBSERVABLE_INPUT]", "controllable_input": "[CONTROLLABLE_INPUT]", "env_trans_hard": "[ENV_TRANS_HARD]", "sys_trans_hard": "[SYS_TRANS_HARD]", "change_cons": "[CHANGE_CONS]", "not_allowed_repair": "[NOT_ALLOWED_REPAIR]", "change_repair_cons": "[CHANGE_REPAIR_CONS]"}
 
     def set_mappings_int_to_bool_vars(self) -> None:
         """Set mappings from integer variables to boolean variables"""
@@ -490,7 +490,7 @@ class Monitor:
                 return True
         return False
     
-    def add_change_constraints(self) -> None:
+    def add_change_constraints(self, opts: dict =None) -> None:
         """Add the change constraints to the ASTs"""
         # 0. Get each type of inputs
         self.request_inputs = self.get_request_inputs()
@@ -511,12 +511,73 @@ class Monitor:
         # 4. Terrain inputs change implies location inputs static
         self._add_change_implies_static_constraints(self.terrain_inputs, self.location_inputs, "change_cons")
 
-    def add_not_allowed_repair(self) -> None:
+    def add_not_allowed_repair(self, opts: dict = None) -> None:
         """Add the not allowed repair to the ASTs"""
         # 1. Add physical constraints
         self._add_physical_constraints()
         return None
+    
+    def add_change_repair_cons(self, opts: dict = None) -> None:
+        """Add the change repair constraints to the ASTs"""
+        # 1. Add the physical constraints
+        # self._add_physical_change_repair_constraints()
+        self._change_heights_in_post_only()
+        return None
+    
+    def _change_heights_in_post_only(self) -> None:
+        self._change_heights_in_post_only_9_grid()
 
+    def _change_heights_in_post_only_9_grid(self) -> None:
+        """Change the heights in the post only"""
+        for x in range(3):
+            for y in range(3):
+                self._change_heights_in_post_only_for_cell_9_grid(x, y)
+        return None
+    
+    def _change_heights_in_post_only_for_cell_9_grid(self, x: int, y: int) -> None:
+        pre_xs, pre_ys = self._find_preconditions_and_dir_for_cell_9_grid(x, y)
+        for pre_x, pre_y in zip(pre_xs, pre_ys):
+            transition_conjunction = self._get_transition_conjunction(x, y, pre_x, pre_y)
+            terrains_to_keep = self._get_terrains_to_keep(x, y, pre_x, pre_y)
+            terrains_to_keep_list = self._create_variables_stay_list(terrains_to_keep, dp=True)
+            terrains_to_keep_conjunction = self.add_conjunction_wrapper(terrains_to_keep_list)
+            self.asts[self.properties["change_repair_cons"]].append(self.add_formula_wrapper(self.add_implication_wrapper(transition_conjunction, terrains_to_keep_conjunction)))
+        return None
+
+    
+    def _get_transition_conjunction(self, x: int, y: int, pre_x: int, pre_y: int) -> list:
+        """Return the transition"""
+        return self.add_conjunction_wrapper([
+            self.name2assignment(f"x{pre_x}"), 
+            self.name2assignment(f"y{pre_y}"), 
+            self.name2assignment(f"x{pre_x}''"), 
+            self.name2assignment(f"y{pre_y}''"), 
+            self.name2assignment(f"x{x}'"),
+            self.name2assignment(f"y{y}'")])
+    
+    def _get_terrains_to_keep(self, x: int, y: int, pre_x: int, pre_y: int) -> list:
+        terrains_to_keep = []
+        for i in range(3):
+            for j in range(3):
+                if i == x and j == y:
+                    continue
+                if i == pre_x and j == pre_y:
+                    continue
+                terrains_to_keep.append(f"x_{i}_y_{j}_terrain")
+        return terrains_to_keep
+
+    def _find_preconditions_and_dir_for_cell_9_grid(self, x: int, y: int) -> tuple:
+        """Find the preconditions and direction for a cell"""
+        pre_xs = []
+        pre_ys = []
+        dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        for dx, dy in dirs:
+            pre_x = x - dx
+            pre_y = y - dy
+            if pre_x >= 0 and pre_x <= 2 and pre_y >= 0 and pre_y <= 2:
+                pre_xs.append(pre_x)
+                pre_ys.append(pre_y)
+        return pre_xs, pre_ys
         
     def get_location_inputs(self, request_inputs, terrain_inputs) -> list:
         """Return the location inputs"""
@@ -528,7 +589,7 @@ class Monitor:
     
     def get_terrain_inputs(self) -> list:
         """Return the terrain inputs"""
-        return self._get_keyword_inputs("cellheight")
+        return self._get_keyword_inputs("terrain")
 
     def _get_keyword_inputs(self, keyword) -> list:
         """Return the request inputs"""
@@ -563,8 +624,6 @@ class Monitor:
         opts["right_terrain_vars"] = self._get_keyword_inputs("right") + self._get_keyword_inputs("current")
 
         return None
-
-
     
     def _add_physical_constraints_for_cell_9_grid(self, x: int, y: int) -> None:
         """Add the physical constraints for a cell
@@ -593,9 +652,55 @@ class Monitor:
                 or_list.append(self.add_conjunction_wrapper([self.name2assignment(f"x{new_x}'"), self.name2assignment(f"y{new_y}'")]))
         new_or = self.add_formula_wrapper(self.add_disjunction_wrapper(or_list))
         curr_state_implies_new_or = self.add_implication_wrapper(curr_state, new_or)
-        self.asts[self.properties["not_allowed_repair"]].append(curr_state_implies_new_or)
+        self.asts[self.properties["not_allowed_repair"]].append(self.add_formula_wrapper(curr_state_implies_new_or))
         return None
     
+    def _add_physical_change_repair_constraints(self) -> None:
+        """Add the physical change repair constraints"""
+        if self.opts and int(self.opts["num_grid"]) == 9:
+            self._add_physical_change_repair_constraints_9_grid()
+        else:
+            raise Exception("Not supported yet")
+        return None
+    
+    def _add_physical_change_repair_constraints_9_grid(self) -> None:
+        """Add the physical change repair constraints for 9 grid"""
+        dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        dirs_name = ["down", "right", "up", "left"]
+        for dir, dir_name in zip(dirs, dirs_name):
+            formula_to_add = self._add_physical_change_repair_constraints_for_dir_9_grid(dir, dir_name)
+            self.asts[self.properties["change_repair_cons"]].append(formula_to_add)
+        return None
+    
+    def _add_physical_change_repair_constraints_for_dir_9_grid(self, dir: tuple, dir_name: str) -> list:
+        """Add the physical change repair constraints for a direction"""
+        or_formula = self._get_physical_change_repair_constraints_or_formula_for_dir_9_grid(dir)
+        and_formula = self._get_physical_change_repair_constraints_and_formula_for_dir_9_grid(dir_name)
+        return self.add_formula_wrapper(self.add_implication_wrapper(or_formula, and_formula))
+    
+    def _get_physical_change_repair_constraints_or_formula_for_dir_9_grid(self, dir: tuple) -> list:
+        """Return the or formula part of the physical change repair constraints"""
+        dx, dy = dir
+        or_list = []
+        for x in range(3):
+            for y in range(3):
+                new_x = x + dx
+                new_y = y + dy
+                if new_x >= 0 and new_x <= 2 and new_y >= 0 and new_y <= 2:
+                    # append x_{x} & y_{y} & x_{new_x}' & y_{new_y}' to or list
+                    or_list.append(self.add_conjunction_wrapper([self.name2assignment(f"x{x}"), self.name2assignment(f"y{y}"), self.name2assignment(f"x{new_x}'"), self.name2assignment(f"y{new_y}'")])) 
+        return self.add_disjunction_wrapper(or_list)
+    
+    def _get_physical_change_repair_constraints_and_formula_for_dir_9_grid(self, dir_name: str) -> list:
+        """Return the and formula part of the physical change repair constraints"""
+        minus_terrains = self._get_keyword_inputs("current") + self._get_keyword_inputs(dir_name)
+        keep_terrains = list_minus(self.get_terrain_inputs(), minus_terrains)
+        and_list = []
+        for terrain in keep_terrains:
+            """Add terrain <-> terrain'' to and_list"""
+            and_list.append(self.add_biimplication_wrapper(self.name2assignment(terrain), self.name2assignment(f"{terrain}''")))
+        return self.add_conjunction_wrapper(and_list)
+
     def _change_integer_inputs_to_boolean_inputs(self) -> None:
         """Change the integer inputs to boolean inputs"""
         # 1. Change the vars
@@ -1027,12 +1132,16 @@ class Monitor:
                 print("mobile_repair: ", opts["mobile_repair"])
                 print("New manipulation_or_mobile_only_conjunction: ", self.manipulation_or_mobile_only_conjunction)
 
-    def _create_variables_stay_list(self, variables: list) -> list:
+    def _create_variables_stay_list(self, variables: list, dp: bool = False) -> list:
         """Given a list of variables [var, ...], 
         Return a list of [var <-> var', ...]"""
         result = []
-        for var in variables:
-            result.append(self.add_biimplication_wrapper(self.name2assignment(var), self.name2assignment(var, is_prime=True)))
+        if not dp:
+            for var in variables:
+                result.append(self.add_biimplication_wrapper(self.name2assignment(var), self.name2assignment(var, is_prime=True)))
+        else:
+            for var in variables:
+                result.append(self.add_biimplication_wrapper(self.name2assignment(var), self.name2assignment(f"{var}''")))
         return result
 
 # ================================================================ #
@@ -1542,8 +1651,9 @@ def test_transform_asts(input_file: str, filename_json: str = None, output_file:
         print(compiler.asts)
         print("int2bool transform needed: ", compiler.int2bool_transform_needed())
     compiler.transform_asts_int2bool()
-    compiler.add_change_constraints()
-    compiler.add_not_allowed_repair()
+    compiler.add_change_constraints(opts)
+    compiler.add_not_allowed_repair(opts)
+    compiler.add_change_repair_cons(opts)
     compiler.generate_structuredslugsplus(output_file)
 
 def test_check_realizability(input_file: str, filename_json: str = None):

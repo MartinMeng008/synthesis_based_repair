@@ -36,8 +36,8 @@ class Repair:
         print("uncontrollable_inputs: ", self.opts["uncontrollable_inputs"])
         self.opts["terrain_inputs"] = self.compiler.get_terrain_inputs()
         print("terrain_inputs: ", self.opts["terrain_inputs"])
-        self.compiler.update_terrain_vars_dir(self.opts)
-        if DEBUG: print("terrain_vars_dir: ", self.opts["up_terrain_vars"])
+        # self.compiler.update_terrain_vars_dir(self.opts)
+        # if DEBUG: print("terrain_vars_dir: ", self.opts["up_terrain_vars"])
         # sys.exit(0)
         uncontrollable_inputs = self.opts["uncontrollable_inputs"]
         self.opts["reactive_variables_current"] = uncontrollable_inputs
@@ -50,7 +50,6 @@ class Repair:
             self.opts["terrain_variables_p_dp"] = varlist2prime(terrain_inputs) + varlist2doubleprime(terrain_inputs)
         
             
-
     def run_symbolic_repair(self) -> dict:
         """Run the symbolic repair module
         
@@ -96,6 +95,8 @@ class Repair:
                     skills[suggestion['name']] = Skill(suggestion)
                 for _, skill in skills.items():
                     skill.print_dict()
+                    skill.write_to_file(f"{self.opts['new_skills_file']}_{skill.get_name()}.txt")
+
                 if True:
                     raise Exception("stop here")
             print("----------------------------------")
