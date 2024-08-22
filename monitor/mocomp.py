@@ -556,15 +556,20 @@ class Monitor:
             self.name2assignment(f"y{y}'")])
     
     def _get_terrains_to_keep(self, x: int, y: int, pre_x: int, pre_y: int) -> list:
-        terrains_to_keep = []
-        for i in range(3):
-            for j in range(3):
-                if i == x and j == y:
-                    continue
-                if i == pre_x and j == pre_y:
-                    continue
-                terrains_to_keep.append(f"x_{i}_y_{j}_terrain")
-        return terrains_to_keep
+        terrains_to_change = []
+        terrains_to_change_prefix = [f"x_{x}_y_{y}_terrain", f"x_{pre_x}_y_{pre_y}_terrain"]
+        for terrain_input in self.terrain_inputs:
+            if any(terrain_input.startswith(prefix) for prefix in terrains_to_change_prefix):
+                terrains_to_change.append(terrain_input)
+        return list_minus(self.terrain_inputs, terrains_to_change)
+        # for i in range(3):
+        #     for j in range(3):
+        #         if i == x and j == y:
+        #             continue
+        #         if i == pre_x and j == pre_y:
+        #             continue
+        #         terrains_to_keep.append(f"x_{i}_y_{j}_terrain")
+        # return terrains_to_keep
 
     def _find_preconditions_and_dir_for_cell_9_grid(self, x: int, y: int) -> tuple:
         """Find the preconditions and direction for a cell"""

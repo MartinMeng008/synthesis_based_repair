@@ -1,0 +1,12 @@
+========
+skill36
+initial preconditions: 
+['x2', 'y0']
+====
+intermediate states: 
+pre: ['x2', 'y0']
+post: ['x2', 'y1']
+====
+final postconditions: 
+['x2', 'y1']
+========
