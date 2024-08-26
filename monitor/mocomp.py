@@ -116,6 +116,7 @@ class Compiler:
             self.not_any_skills_conjunction = inact_wo_skills[1][1]
             if True:
                 print("not any skill conjunction: ", self.not_any_skills_conjunction)
+                # sys.exit(0)
         # self.skill_mutual_exclusion = env_trans_hard[-1][1]
         # print(self.skill_mutual_exclusion)
 
@@ -1412,9 +1413,18 @@ class Monitor:
     def generate_sys_trans_hard(self) -> None:
         """Reset the sys_trans_hard AST based on current vars and skills"""
         sys_trans_hard = self.asts[self.properties["sys_trans_hard"]]
+        self.modify_waypoints_reached_imply_skill_inactivity(sys_trans_hard)
         sys_trans_hard = sys_trans_hard[:-1] # delete the skill mutual exclusion assumption
         sys_trans_hard.append(self.create_mutual_exclusion_skills_formula(is_prime=True))
         self.asts[self.properties["sys_trans_hard"]] = sys_trans_hard
+
+    def modify_waypoints_reached_imply_skill_inactivity(self, sys_trans_hard: list) -> None:
+        if len(sys_trans_hard) >= 2:
+            waypoints_reached_imply_skill_inact_formula = sys_trans_hard[-2]
+            waypoints_reached_imply_skill_inact_formula[1][2] = self.not_any_skills_conjunction
+            if True:
+                print("not_any_skills_conjunction: ", waypoints_reached_imply_skill_inact_formula[1][2])
+        return None
 
     def add_skills(self, skills: dict) -> None:
         """Add skills to ASTs wrt the pre and post conditions

@@ -1,0 +1,12 @@
+========
+skill49
+initial preconditions: 
+['x_2_y_2_terrain', 'y2', 'x1']
+====
+intermediate states: 
+pre: ['x_2_y_2_terrain', 'y2', 'x1']
+post: ['y2', 'x2']
+====
+final postconditions: 
+['y2', 'x2']
+========
