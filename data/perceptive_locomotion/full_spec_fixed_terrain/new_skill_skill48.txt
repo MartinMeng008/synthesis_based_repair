@@ -1,10 +1,10 @@
 ========
 skill48
 initial preconditions: 
-['x_2_y_2_terrain', 'x1', 'y1']
+['x_2_y_0_terrain', 'x_1_y_2_terrain', 'x_2_y_1_terrain', 'x_1_y_1_terrain', 'x_2_y_2_terrain', 'x1', 'y1']
 ====
 intermediate states: 
-pre: ['x_2_y_2_terrain', 'x1', 'y1']
+pre: ['x_2_y_0_terrain', 'x_1_y_2_terrain', 'x_2_y_1_terrain', 'x_1_y_1_terrain', 'x_2_y_2_terrain', 'x1', 'y1']
 post: ['y2', 'x1']
 ====
 final postconditions: 
