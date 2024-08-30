@@ -14,12 +14,12 @@ import numpy as np
 
 DEBUG_THRESH = 121
 
-PRINT_EXPR = True
-DEBUG_PRE = True
+PRINT_EXPR = False
+DEBUG_PRE = False
 DEBUG = False
-DEBUG_WS_COMPUTE = True
+DEBUG_WS_COMPUTE = False
 DEBUG_DETERMINIZE = False
-DEBUG_REVISION = True
+DEBUG_REVISION = False
 
 # PRINT_EXPR = False
 # DEBUG_PRE = False
@@ -502,7 +502,7 @@ def print_debug(msg):
 
 def compute_winning_states(arg_bdd, gs_internal, arg_opts):
     # Compute winning states
-    if DEBUG: breakpoint() # <- DEBUG
+    if arg_opts["debug"]: breakpoint() # <- DEBUG
     Z_internal = arg_bdd.true
     Z_prime_internal = arg_bdd.false
     z_cnt = 0
@@ -519,7 +519,7 @@ def compute_winning_states(arg_bdd, gs_internal, arg_opts):
         for ii, sys_live_internal in enumerate(
                 gs_internal.get_sys_live_guarantees()):  # loop through liveness guarantees
             # print_debug("Liveness guarantee: {}".format(ii))
-            if DEBUG: breakpoint() # <- DEBUG
+            if arg_opts["debug"]: breakpoint() # <- DEBUG
             print_expr(arg_bdd, "iter_{}_Liveness_guarantee_{}".format(z_cnt, ii), arg_bdd.add_expr(sys_live_internal),
                        vars_ordering=gs_internal.get_vars_and_vars_prime(),
                        do_print=DEBUG & DEBUG_WS_COMPUTE, do_names=arg_opts['do_names'], arg_opts=arg_opts,
@@ -554,7 +554,7 @@ def compute_winning_states(arg_bdd, gs_internal, arg_opts):
                            arg_opts=arg_opts, to_file=arg_opts['to_file'])
 
                 if start == arg_bdd.false:  # or (z_cnt == 1 and ii == 0):
-                    if DEBUG: breakpoint() # <- DEBUG
+                    if arg_opts["debug"]: breakpoint() # <- DEBUG
                     print_expr(arg_bdd, "Cannot win. Z is:", Z_internal,
                                vars_ordering=gs_internal.get_vars_and_vars_prime(),
                                do_print=DEBUG & DEBUG_WS_COMPUTE)
@@ -1030,7 +1030,7 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
     T_winning_changes = T_possible_changes & winning_p_dp
     print_expr(arg_bdd, "T_winning_changes", T_winning_changes,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
-    if DEBUG: breakpoint() # <- DEBUG
+    if arg_opts["debug"]: breakpoint() # <- DEBUG
 
     # if arg_opts['enforce_reactive_variables']:
     #     T_winning_changes = arg_bdd.exist(arg_opts['reactive_variables'], T_winning_changes)
@@ -1210,7 +1210,7 @@ def modify_preconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg_
     # Only select one precondition to be added
     all_possible_changes = list(arg_bdd.pick_iter(T_possible_changes_in_dp_all,
                                                   care_vars=arg_gs.get_vars_and_prime_and_dp()))
-    if DEBUG: breakpoint() # <- DEBUG
+    if arg_opts["debug"]: breakpoint() # <- DEBUG
     if len(all_possible_changes) == 0:
         return arg_T_env, arg_gs.get_t_sys_not_hard(), arg_bdd.false
     sel_idx = np.random.randint(len(all_possible_changes))
