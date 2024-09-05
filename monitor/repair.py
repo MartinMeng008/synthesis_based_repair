@@ -10,7 +10,7 @@ from tools import (json_load_wrapper,
                    )
 repair_dir = '../synthesis_based_repair'
 sys.path.insert(0, repair_dir)
-from super_symbolic_repair import run_repair
+from symbolic_repair import run_repair
 from skills import Skill
 # from grounding import Grounding
 
