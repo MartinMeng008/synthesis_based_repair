@@ -2130,7 +2130,7 @@ def run_repair(file_in, opts):
     print("Computed winning states in: {}".format(time.time() - s_time))
     # Make system reach livesness guarantees from initial states
     init = bdd.exist(repaired_gs.get_vars_prime(), repaired_gs.get_t_init() & repaired_gs.get_t_env() & repaired_gs.get_t_env_hard())
-    breakpoint()
+    # breakpoint()
     is_realizable = init & winning_states.get_z() == init
     # is_realizable = repaired_gs.get_t_init() & winning_states.get_z() == repaired_gs.get_t_init()
     print_expr(bdd, "init", repaired_gs.get_t_init(), vars_ordering=repaired_gs.get_vars_and_vars_prime(),
@@ -2167,7 +2167,7 @@ def run_repair(file_in, opts):
     print("Checked initial states contained in: {}".format(time.time() - s_time))
     if repair_cnt > max_repair_cnt:
         print("Exceeded max repair count")
-        if True: breakpoint()
+        if False: breakpoint()
         env_diff = bdd.exist(opts["reactive_variables"] + opts["terrain_variables_p"], repaired_gs.get_t_env() & ~gs.get_t_env() & repaired_gs.get_t_env_hard())
         sys_diff = repaired_gs.get_t_sys() & ~gs.get_t_sys() & repaired_gs.get_t_sys_hard()
         return False, dict()
