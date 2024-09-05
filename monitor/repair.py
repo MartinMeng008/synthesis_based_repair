@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+import rospy
 import sys
 import numpy as np
 import argparse
@@ -13,6 +14,8 @@ sys.path.insert(0, repair_dir)
 from symbolic_repair import run_repair
 from skills import Skill
 # from grounding import Grounding
+import symbolic_repair_msgs.msg
+import symbolic_repair_msgs.srv 
 
 DEBUG = False
 
@@ -51,6 +54,8 @@ class Repair:
             self.opts["terrain_variables_dp"] = varlist2doubleprime(terrain_inputs)
         
         self.opts["original_skills"] = self.compiler.get_original_skills()
+        
+        self.feasibility_check = rospy.ServiceProxy('fake_feasibility_check', symbolic_repair_msgs.srv.FeasibilityCheck)
             
     def run_symbolic_repair(self) -> dict:
         """Run the symbolic repair module
@@ -94,12 +99,33 @@ class Repair:
             skills = {}
             if found_suggestion:
                 for _, suggestion in suggestions.items():
-                    skills[suggestion['name']] = Skill(suggestion)
+                    skills[suggestion['name']] = Skill(suggestion, location_inputs=self.compiler.get_location_inputs(), terrain_inputs=self.compiler.get_terrain_inputs())
+                skill_array_msg = symbolic_repair_msgs.msg.SkillArray()
                 for _, skill in skills.items():
                     skill.print_dict()
                     skill.write_to_file(f"{self.opts['new_skills_file']}_{skill.get_name()}.txt")
+                    skill_msg = skill.get_skill_msg()
+                    if True:
+                        print(skill_msg)
+                    skill_array_msg.skills.append(skill_msg)
+                skill_array_msg.header.stamp = rospy.Time.now()
+                try:
+                    resp = self.feasibility_check(skill_array_msg)
+                    print(resp.feasibilities_checked)
+                except rospy.ServiceException as e:
+                    print("Service call failed: %s"%e)
+                
+                ## Feasibility check
+                # 1. go through each feasibility in resp.feasibilities_checked
+                # 2. for each feasibility, 
+                #       if feasibility.feasibility is False:
+                #           mocomp.add_not_allowed_constraints(skills[feasibility.name])
+                # 3. if any skill is not feasible, generate a new spec from AST, and run repair again
+                # 4. Otherwise, exist
+
 
                 if True:
+                    return skills
                     raise Exception("stop here")
             print("----------------------------------")
             print("----------------------------------")
@@ -226,6 +252,8 @@ def rename_new_skills(compiler: Compiler, skills: dict) -> None:
             cnt += 1
 
 if __name__ == "__main__":
+    rospy.init_node('fake_repair_node')
+    rospy.wait_for_service('fake_feasibility_check')
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--spec',
                         action='store', dest='filename', required=True, help='Input file name in structuredslugsplus')

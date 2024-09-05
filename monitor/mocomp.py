@@ -594,8 +594,12 @@ class Monitor:
                 pre_ys.append(pre_y)
         return pre_xs, pre_ys
         
-    def get_location_inputs(self, request_inputs, terrain_inputs) -> list:
+    def get_location_inputs(self, request_inputs=None, terrain_inputs=None) -> list:
         """Return the location inputs"""
+        if request_inputs is None:
+            request_inputs = self.get_request_inputs()
+        if terrain_inputs is None:
+            terrain_inputs = self.get_terrain_inputs()
         return list_minus(list_minus(self.vars[self.properties["input"]], request_inputs), terrain_inputs)
 
     def get_request_inputs(self) -> list:
