@@ -238,7 +238,7 @@ def run_slugs(filename_slugsin: str) -> dict:
     print("Generate strategy")
     result = subprocess.run(['slugs', '--explicitStrategy', '--jsonOutput', '--cooperativeGR1Strategy',
                             filename_slugsin], capture_output=True, text=True)
-    if True:
+    if DEBUG:
         result = subprocess.run(['slugs', '--counterStrategy',
                             filename_slugsin], capture_output=True, text=True)
     if True:

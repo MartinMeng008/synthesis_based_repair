@@ -126,6 +126,10 @@ class Compiler:
     def get_skills(self):
         """Get the existing skills from the input_file"""
         return self.vars[self.properties["output"]]
+    
+    def get_original_skills(self):
+        """Get the existing skills, i.e. skills without super"""
+        return [skill for skill in self.get_skills() if "super" not in skill]
 
     def get_asts(self):
         return self.asts
@@ -500,8 +504,10 @@ class Monitor:
 
         # 1. Add mutual exclusion for each integer variable
         for _, bool_vars in self.int_to_bool_vars.items():
-            self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "change_cons", is_primed = True)
-            self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "change_cons", is_primed = False)
+            if len(bool_vars) > 1:
+                print("bool_vars: ", bool_vars)
+                self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "change_cons", is_primed = True)
+                self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "change_cons", is_primed = False)
         
         # 2. Add some grounding input must change
         self._add_inputs_must_change_constraint(self.location_inputs + self.terrain_inputs, "change_cons")
@@ -730,17 +736,18 @@ class Monitor:
             for ast in self.asts[property_type]:
                 self._change_integer_inputs_to_boolean_inputs_in_ast(ast)
 
-        if True:
+        if DEBUG:
             self.print_asts()
             print("new asts: ", self.asts)
             # sys.exit(0)
 
         # 4. Add input mutual exclusion for each integer variable
         for _, bool_vars in self.int_to_bool_vars.items():
-            self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "env_trans_hard", is_primed = True)
-            self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "env_trans_hard", is_primed = False)
+            if len(bool_vars) > 1:
+                self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "env_trans_hard", is_primed = True)
+                self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "env_trans_hard", is_primed = False)
 
-        if True:
+        if DEBUG:
             self.print_asts()
             print("new asts with added mx: ", self.asts)
 
@@ -763,11 +770,16 @@ class Monitor:
         self.int_vars_to_limits[int_var] = (start, end)
 
         self.int_to_bool_vars[int_var] = []
-        for i in range(start, end + 1):
-            bool_var = f"{int_var}{i}"
-            self.int_to_bool_vars[int_var].append(bool_var)
-            # self.vars[self.properties["input"]].append(bool_var)
-        # self.vars[self.properties["input"]].remove(var)
+        if end == 1:
+            # Case 1: only 0 and 1, just use the int_var
+            self.int_to_bool_vars[int_var].append(int_var)
+        else:
+            # Case 2: more than 1, create boolean variables
+            for i in range(start, end + 1):
+                bool_var = f"{int_var}{i}"
+                self.int_to_bool_vars[int_var].append(bool_var)
+                # self.vars[self.properties["input"]].append(bool_var)
+            # self.vars[self.properties["input"]].remove(var)
         return None
     
     def _change_integer_inputs_to_boolean_inputs_in_ast(self, ast: list) -> None:
@@ -828,16 +840,24 @@ class Monitor:
                 except:
                     raise Exception(f"Error in {ast}, {right} should be number")
                 left_bool_vars = self._get_bool_vars_from_int_var(left_int_var)
-                limit = self._get_int_var_limit(left_int_var)
-                if DEBUG:
-                    print("right_number: ", right_number)
-                    print("limit: ", limit)
-                for i in range(limit[0], limit[1]+1):
-                    if DEBUG: breakpoint()
-                    if i == right_number:
-                        new_conjunction_list.append(self.name2assignment(left_bool_vars[i - limit[0]]))
+                if len(left_bool_vars) == 1:
+                    # Case 2.1: only one boolean variable
+                    if right_number == 0:
+                        new_conjunction_list.append(self.add_not_wrapper(self.name2assignment(left_bool_vars[0])))
                     else:
-                        new_conjunction_list.append(self.add_not_wrapper(self.name2assignment(left_bool_vars[i - limit[0]])))
+                        new_conjunction_list.append(self.name2assignment(left_bool_vars[0]))
+                else:
+                    # Case 2.2: multiple boolean variables
+                    limit = self._get_int_var_limit(left_int_var)
+                    if DEBUG:
+                        print("right_number: ", right_number)
+                        print("limit: ", limit)
+                    for i in range(limit[0], limit[1]+1):
+                        if DEBUG: breakpoint()
+                        if i == right_number:
+                            new_conjunction_list.append(self.name2assignment(left_bool_vars[i - limit[0]]))
+                        else:
+                            new_conjunction_list.append(self.add_not_wrapper(self.name2assignment(left_bool_vars[i - limit[0]])))
             
             # Case 3: both are numbers
             else:
@@ -1461,6 +1481,24 @@ class Monitor:
         self.generate_env_trans_hard()
         self.generate_sys_trans_hard()
 
+    def add_super_skills(self, num_super_skills: int) -> None:
+        """Add super skills to the ASTs, also add existing skills to not_allowed_repair
+        """
+        self.add_curr_skills_to_not_allowed_repair()
+        for i in range(num_super_skills):
+            super_skill_name = f"skill_{i}_super"
+            self.vars['[OUTPUT]'].append(super_skill_name)
+            self.asts['[SYS_INIT]'].append(self.add_formula_wrapper(self.add_not_wrapper(self.name2assignment(super_skill_name))))
+        self.generate_env_trans_hard()
+        self.generate_sys_trans_hard()
+        
+    def add_curr_skills_to_not_allowed_repair(self) -> None:
+        """Add the current skills to not_allowed_repair"""
+        for skill in self.get_skills():
+            self.asts['[NOT_ALLOWED_REPAIR]'].append(self.add_formula_wrapper(self.add_not_wrapper(self.name2assignment(skill))))
+        return None
+    
+
     def change_skill_objects_to_dicts(self, skills: dict) -> dict:
         """Change skill objects to dictionaries
         Given a dictionary of (skill_name, skill: Skill), 
@@ -1704,6 +1742,31 @@ def test_contains_controllable_input(input_file: str):
                         uncontrollable_variables=[],)
     print(compiler.contains_controllable_input(["Formula", ["Assignment", "x1"]]))
 
+def test_add_super_skills(input_file: str, filename_json: str = None, output_file: str = None, opts: dict = None, num_super_skills: int = 0) -> None:
+    if filename_json is not None:
+        file_json = json_load_wrapper(filename_json)
+        skills_data = json_load_wrapper(file_json['skills'])
+        symbols_data = json_load_wrapper(file_json['symbols'])
+        objects_data = json_load_wrapper(file_json['objects'])
+        controllabe_variables = find_controllable_symbols(symbols_data, objects_data)
+        uncontrollable_variables = find_uncontrollable_symbols(symbols_data, objects_data)
+    else:
+        skills_data = dict()
+        symbols_data = dict()
+        objects_data = dict()
+        controllabe_variables = []
+        uncontrollable_variables = []
+
+    compiler = Compiler(input_file=input_file, 
+                        skills_data=skills_data, 
+                        symbols_data=symbols_data, 
+                        objects_data=objects_data, 
+                        controllabe_variables=controllabe_variables,
+                        uncontrollable_variables=uncontrollable_variables,
+                        opts=opts)
+    compiler.add_super_skills(num_super_skills)
+    compiler.generate_structuredslugsplus(output_file)
+
 if __name__ == '__main__':
     # objects_data = json_load_wrapper('examples/cupplate/inputs/pickup_dropoff_cup/abstraction/objects.json')
     # locations_data = json_load_wrapper('examples/cupplate/inputs/pickup_dropoff_cup/abstraction/locations.json')
@@ -1719,12 +1782,18 @@ if __name__ == '__main__':
     argparser.add_argument('-o', '--opts', action='store', dest='opts', required=False, default=None)
     # Add a Boolean flag test
     argparser.add_argument('-t', '--test', action='store_true', dest='test', required=False, default=False)
+    # Add a int flag num_super_skills
+    argparser.add_argument('-n', '--num_super_skills', action='store', dest='num_super_skills', required=False, default=0)
 
     args = argparser.parse_args()
 
-    if args.test:
-        test_transform_asts(args.spec, args.file_json, args.spec_out, args.opts)
+    num_super_skills = int(args.num_super_skills)
+    if num_super_skills > 0:
+        test_add_super_skills(args.spec, args.file_json, args.spec_out, args.opts, int(args.num_super_skills))
     else:
-        test_check_realizability(args.spec, args.file_json)
-    print(args.test)
+        if args.test:
+            test_transform_asts(args.spec, args.file_json, args.spec_out, args.opts)
+        else:
+            test_check_realizability(args.spec, args.file_json)
+    # print(args.test)
     # test_contains_controllable_input(args.filename)

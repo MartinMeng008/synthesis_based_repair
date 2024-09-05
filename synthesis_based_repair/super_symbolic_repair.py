@@ -885,8 +885,8 @@ def perform_repair(arg_bdd, arg_gs, arg_winning_states, arg_target_states, arg_T
         acts_changed = []
         T_swapped_pre = arg_bdd.false
         T_swapped_post = arg_bdd.false
-        if arg_opts['post_first']:
-            tmp_T_env, tmp_T_sys, acts_changed, arg_T_previously_changed, T_swapped_post = modify_postconditions(
+
+        tmp_T_env, tmp_T_sys, acts_changed, arg_T_previously_changed, T_swapped_post = modify_postconditions(
                 arg_bdd,
                 repaired_T_env,
                 repaired_T_sys,
@@ -895,41 +895,54 @@ def perform_repair(arg_bdd, arg_gs, arg_winning_states, arg_target_states, arg_T
                 arg_T_previously_changed,
                 arg_opts)
 
-            gs_internal.update_change_cons(acts_changed)
-            gs_internal.update_not_allowed_repair(acts_changed)
+        gs_internal.update_change_cons(acts_changed)
+        gs_internal.update_not_allowed_repair(acts_changed)
 
-            if tmp_T_env == repaired_T_env and tmp_T_sys == repaired_T_sys:
-                tmp_T_env, tmp_T_sys, T_swapped_pre = modify_preconditions(arg_bdd, tmp_T_env,
-                                                                           tmp_T_sys,
-                                                                           current_winning_states, gs_internal,
-                                                                           arg_opts)
-                # arg_opts['post_first'] = False
-            else:
-                arg_opts['post_first'] = False
-        else:
-            tmp_T_env, tmp_T_sys, T_swapped_pre = modify_preconditions(arg_bdd, repaired_T_env, repaired_T_sys,
-                                                                       current_winning_states,
-                                                                       gs_internal,
-                                                                       arg_opts)
-            if tmp_T_env == repaired_T_env and tmp_T_sys == repaired_T_sys:
+        # if arg_opts['post_first']:
+        #     tmp_T_env, tmp_T_sys, acts_changed, arg_T_previously_changed, T_swapped_post = modify_postconditions(
+        #         arg_bdd,
+        #         repaired_T_env,
+        #         repaired_T_sys,
+        #         current_winning_states,
+        #         gs_internal,
+        #         arg_T_previously_changed,
+        #         arg_opts)
 
-                gs_internal.update_change_cons(acts_changed)
-                gs_internal.update_not_allowed_repair(acts_changed)
+        #     gs_internal.update_change_cons(acts_changed)
+        #     gs_internal.update_not_allowed_repair(acts_changed)
 
-                tmp_T_env, tmp_T_sys, acts_changed, arg_T_previously_changed, T_swapped_post = modify_postconditions(
-                    arg_bdd,
-                    tmp_T_env,
-                    tmp_T_sys,
-                    current_winning_states,
-                    gs_internal,
-                    arg_T_previously_changed,
-                    arg_opts)
+        #     if tmp_T_env == repaired_T_env and tmp_T_sys == repaired_T_sys:
+        #         tmp_T_env, tmp_T_sys, T_swapped_pre = modify_preconditions(arg_bdd, tmp_T_env,
+        #                                                                    tmp_T_sys,
+        #                                                                    current_winning_states, gs_internal,
+        #                                                                    arg_opts)
+        #         # arg_opts['post_first'] = False
+        #     else:
+        #         arg_opts['post_first'] = False
+        # else:
+        #     tmp_T_env, tmp_T_sys, T_swapped_pre = modify_preconditions(arg_bdd, repaired_T_env, repaired_T_sys,
+        #                                                                current_winning_states,
+        #                                                                gs_internal,
+        #                                                                arg_opts)
+        #     if tmp_T_env == repaired_T_env and tmp_T_sys == repaired_T_sys:
 
-                gs_internal.update_change_cons(acts_changed)
-                gs_internal.update_not_allowed_repair(acts_changed)
-                # arg_gs['post_first'] = True
-            else:
-                arg_opts['post_first'] = True
+        #         gs_internal.update_change_cons(acts_changed)
+        #         gs_internal.update_not_allowed_repair(acts_changed)
+
+        #         tmp_T_env, tmp_T_sys, acts_changed, arg_T_previously_changed, T_swapped_post = modify_postconditions(
+        #             arg_bdd,
+        #             tmp_T_env,
+        #             tmp_T_sys,
+        #             current_winning_states,
+        #             gs_internal,
+        #             arg_T_previously_changed,
+        #             arg_opts)
+
+        #         gs_internal.update_change_cons(acts_changed)
+        #         gs_internal.update_not_allowed_repair(acts_changed)
+        #         # arg_gs['post_first'] = True
+        #     else:
+        #         arg_opts['post_first'] = True
 
         # Determine if modifications have occurred
         if (tmp_T_env & arg_gs.get_t_env_hard() != repaired_T_env & arg_gs.get_t_env_hard()) or (
@@ -991,7 +1004,7 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
 
     """
     print("modify postconditions")
-    # if arg_opts['debug']: breakpoint() # <- DEBUG
+    if arg_opts['debug']: breakpoint() # <- DEBUG
     # These are the states that are winning at the next time that the system must get to
     winning_prime = arg_bdd.let(arg_gs.get_v_to_v_prime(), arg_winning_states)
     winning_p_dp = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), winning_prime)
@@ -1037,14 +1050,16 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
     T_skill_with_pre_dp = arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), T_pres)
     T_skill_with_post_dp = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), T_reachable)
     T_no_effect = find_skill_has_no_effect(arg_bdd, arg_gs, "v_and_dp")
+    T_no_effect = arg_bdd.exist(arg_opts["reactive_variables"] + arg_opts["terrain_variables_p_dp"], T_no_effect)
     if "terrain_variables_p_dp" not in arg_opts:
         T_curr_skills = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), 
-                                arg_bdd.exist(arg_gs.get_output_vars() + arg_opts["reactive_variables"], 
+                                arg_bdd.exist(arg_opts["original_skills"] + arg_opts["reactive_variables"], 
                                               T_reachable))
     else:
         T_curr_skills = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), 
-                                arg_bdd.exist(arg_gs.get_output_vars() + arg_opts["reactive_variables"] + arg_opts["terrain_variables_p_dp"], 
+                                arg_bdd.exist(arg_opts["original_skills"] + arg_opts["reactive_variables"] + arg_opts["terrain_variables_p_dp"], 
                                               T_reachable))
+    T_curr_skills = arg_bdd.exist(arg_opts["existing_skills"], T_curr_skills)
     T_possible_changes = T_full_skills_not_winning & \
                          arg_gs.get_change_cons_p_and_dp() & \
                          arg_gs.get_not_allowed_repair_v_and_dp() & \
@@ -1056,6 +1071,13 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
                         # & \
                          # arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys & arg_gs.get_t_sys_hard()) & \
                          # arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_gs.get_t_env_hard())
+
+    T_possible_changes_v2 = T_full_skills_not_winning & \
+                         arg_gs.get_change_cons_p_and_dp() & \
+                         arg_gs.get_not_allowed_repair_v_and_dp() & \
+                         ~T_no_effect & \
+                         (~T_skill_with_pre_dp | T_skill_with_post_dp) & \
+                         arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys)
 
     print_expr(arg_bdd, "T_possible_changes", T_possible_changes,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
@@ -2130,7 +2152,7 @@ def run_repair(file_in, opts):
     print("Computed winning states in: {}".format(time.time() - s_time))
     # Make system reach livesness guarantees from initial states
     init = bdd.exist(repaired_gs.get_vars_prime(), repaired_gs.get_t_init() & repaired_gs.get_t_env() & repaired_gs.get_t_env_hard())
-    breakpoint()
+    # breakpoint()
     is_realizable = init & winning_states.get_z() == init
     # is_realizable = repaired_gs.get_t_init() & winning_states.get_z() == repaired_gs.get_t_init()
     print_expr(bdd, "init", repaired_gs.get_t_init(), vars_ordering=repaired_gs.get_vars_and_vars_prime(),
@@ -2167,7 +2189,7 @@ def run_repair(file_in, opts):
     print("Checked initial states contained in: {}".format(time.time() - s_time))
     if repair_cnt > max_repair_cnt:
         print("Exceeded max repair count")
-        if True: breakpoint()
+        if False: breakpoint()
         env_diff = bdd.exist(opts["reactive_variables"] + opts["terrain_variables_p"], repaired_gs.get_t_env() & ~gs.get_t_env() & repaired_gs.get_t_env_hard())
         sys_diff = repaired_gs.get_t_sys() & ~gs.get_t_sys() & repaired_gs.get_t_sys_hard()
         return False, dict()

@@ -10,7 +10,7 @@ from tools import (json_load_wrapper,
                    )
 repair_dir = '../synthesis_based_repair'
 sys.path.insert(0, repair_dir)
-from symbolic_repair import run_repair
+from super_symbolic_repair import run_repair
 from skills import Skill
 # from grounding import Grounding
 
@@ -48,7 +48,9 @@ class Repair:
             self.opts["terrain_variables"] = terrain_inputs + varlist2prime(terrain_inputs) + varlist2doubleprime(terrain_inputs)
             self.opts["terrain_variables_p"] = varlist2prime(terrain_inputs)
             self.opts["terrain_variables_p_dp"] = varlist2prime(terrain_inputs) + varlist2doubleprime(terrain_inputs)
+            self.opts["terrain_variables_dp"] = varlist2doubleprime(terrain_inputs)
         
+        self.opts["original_skills"] = self.compiler.get_original_skills()
             
     def run_symbolic_repair(self) -> dict:
         """Run the symbolic repair module

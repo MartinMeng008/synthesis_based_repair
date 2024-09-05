@@ -1,0 +1,22 @@
+{
+    "return_with_one_repair": true,
+    "run_original": false,
+    "only_synthesis": false,
+    "enforce_reactive_variables": true,
+    "suggestions": "none",
+    "do_names": true,
+    "post_first": false,
+    "post_repair_cnt": 0,
+    "to_file": false,
+    "fid_base": "none",
+    "n_factors": 5,
+    "n_dims": 3,
+    "generate_figure": "",
+    "n_seeds": 9,
+    "max_repair_cnt": 600,
+    "debug": true,
+    "uncontrollable_inputs": [],
+    "terrain_inputs": [],
+    "num_grid": 9,
+    "new_skills_file": "../data/perceptive_locomotion/super_skills/new_skill"
+  }
