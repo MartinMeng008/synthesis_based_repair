@@ -1526,9 +1526,9 @@ class Monitor:
         skill_dict["final_postconditions"] = skill_info["final_postconditions"]
         original_skill = find_true_symbols(skill_info["original_skill"])[0]
         skill_dict["original_skill"] = original_skill
-        skill_dict["primitive_skill"] = self.skills_data[original_skill]["primitive_skill"] # will be changed
-        skill_dict["type"] = self.skills_data[original_skill]["type"]
-        skill_dict["goal_type"] = self.skills_data[original_skill]["goal_type"]
+        # skill_dict["primitive_skill"] = self.skills_data[original_skill]["primitive_skill"] # will be changed
+        # skill_dict["type"] = self.skills_data[original_skill]["type"]
+        # skill_dict["goal_type"] = self.skills_data[original_skill]["goal_type"]
         # skill_dict["goal"] = self.skills_data[original_skill]["goal"] # not necessarily correct
         return skill_dict
 

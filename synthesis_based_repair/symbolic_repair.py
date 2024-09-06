@@ -958,7 +958,7 @@ def perform_repair(arg_bdd, arg_gs, arg_winning_states, arg_target_states, arg_T
             if arg_opts['return_with_one_repair']:
                 return gs_internal, acts_changed, arg_T_previously_changed, T_swapped_pre, T_swapped_post
         else:
-            if True: breakpoint()
+            if False: breakpoint()
             env_diff = arg_bdd.exist(arg_opts["reactive_variables"] + arg_opts["terrain_variables_p"], repaired_T_env & ~original_gs.get_t_env_not_hard())
             z = compute_winning_states(arg_bdd, gs_internal, arg_opts)
             init = arg_bdd.exist(gs_internal.get_vars_prime(), gs_internal.get_t_init() & gs_internal.get_t_env() & gs_internal.get_t_env_hard())
@@ -2051,7 +2051,7 @@ def bdd_to_suggestions(arg_bdd, arg_mod_pre, arg_mod_post, arg_opts, arg_acts_ch
                     arg_bdd.pick_iter(T_unique, care_vars=inp_vars))
 
                 skill_pre_posts[str(mod_cnt)] = {
-                    'name': 'skill' + str(len(arg_gs.get_output_vars()) + mod_cnt),
+                    'name': 'skill_' + str(len(arg_gs.get_output_vars()) + mod_cnt),
                     'new_skill':
                         list(arg_bdd.pick_iter(new_skill, care_vars=arg_gs.get_output_vars()))[
                             0],

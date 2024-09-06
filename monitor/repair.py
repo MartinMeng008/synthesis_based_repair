@@ -126,19 +126,22 @@ class Repair:
                 # 4. Otherwise, exist
                 bad_new_transitions = []
                 bad_skill_names = []
-                for feasibility_resp in resp.feasibilities:
+                for feasibility_resp in resp.feasibilities_checked.feasibilities:
                     if not feasibility_resp.feasibility:
                         bad_skill_name = feasibility_resp.name
                         bad_skill_names.append(bad_skill_name)
                         bad_skill = skills[bad_skill_name]
+                        # breakpoint()
                         bad_new_transitions.append((bad_skill.init_pres[0], bad_skill.final_posts[0]))
                 if len(bad_new_transitions) > 0:
-                    self.compiler.add_bad_intermediate_transitions(bad_skill)
+                    self.compiler.add_bad_intermediate_transitions(bad_new_transitions)
                     self.compiler.remove_skills()
                     good_skills = {name: skill for name, skill in skills.items() if name not in bad_skill_names}
                     if len(good_skills) > 0:
                         self.compiler.add_skills(good_skills)
                         self.compiler.reset_after_successful_repair()
+                    self.compiler.add_backup_skills()
+                    breakpoint()
                     self.compiler.generate_structuredslugsplus(self.file_structuredslugsplus)
                     is_realizable = False
                 else:
@@ -265,7 +268,7 @@ def rename_new_skills(compiler: Compiler, skills: dict) -> None:
         cnt = len(compiler.get_skills())
         for old_name in list(skills.keys()):
             skill = skills.pop(old_name)
-            name = f"skill{cnt}"
+            name = f"skill_{cnt}"
             assert name not in compiler.get_skills()
             skill.name = name
             skill.info['name'] = name
