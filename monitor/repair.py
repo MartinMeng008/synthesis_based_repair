@@ -100,6 +100,8 @@ class Repair:
             if found_suggestion:
                 for _, suggestion in suggestions.items():
                     skills[suggestion['name']] = Skill(suggestion, location_inputs=self.compiler.get_location_inputs(), terrain_inputs=self.compiler.get_terrain_inputs())
+                self.compiler.remove_backup_skills()
+                add_skills_with_reduced_size(skills, self.compiler)
                 skill_array_msg = symbolic_repair_msgs.msg.SkillArray()
                 for _, skill in skills.items():
                     skill.print_dict()
@@ -122,9 +124,24 @@ class Repair:
                 #           mocomp.add_not_allowed_constraints(skills[feasibility.name])
                 # 3. if any skill is not feasible, generate a new spec from AST, and run repair again
                 # 4. Otherwise, exist
-
-
-                if True:
+                bad_new_transitions = []
+                bad_skill_names = []
+                for feasibility_resp in resp.feasibilities:
+                    if not feasibility_resp.feasibility:
+                        bad_skill_name = feasibility_resp.name
+                        bad_skill_names.append(bad_skill_name)
+                        bad_skill = skills[bad_skill_name]
+                        bad_new_transitions.append((bad_skill.init_pres[0], bad_skill.final_posts[0]))
+                if len(bad_new_transitions) > 0:
+                    self.compiler.add_bad_intermediate_transitions(bad_skill)
+                    self.compiler.remove_skills()
+                    good_skills = {name: skill for name, skill in skills.items() if name not in bad_skill_names}
+                    if len(good_skills) > 0:
+                        self.compiler.add_skills(good_skills)
+                        self.compiler.reset_after_successful_repair()
+                    self.compiler.generate_structuredslugsplus(self.file_structuredslugsplus)
+                    is_realizable = False
+                else:
                     return skills
                     raise Exception("stop here")
             print("----------------------------------")
@@ -143,6 +160,7 @@ class Repair:
             #     self.compiler.generate_structuredslugsplus(self.file_structuredslugsplus)
                 # break
             cnt += 1
+        
         return skills
             
 def test_symbolic_repair(filename_structuredslugsplus, opts, files=None):
@@ -226,6 +244,9 @@ def test_symbolic_repair_wo_add_skills(filename_structuredslugsplus, opts, files
 def add_skills_with_reduced_size(new_skills: dict, compiler: Compiler) -> None:
     """Add skills with reduced size to the compiler
         The goal of this function is to replace self.compiler.add_skills(new_skills)
+        
+        Side-effects:
+            remove skills in new_skills that are not needed
     """
     for skill_name in list(new_skills.keys()):
         removed_skill = new_skills.pop(skill_name)

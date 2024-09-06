@@ -20,7 +20,7 @@ from tools import (
     list_minus
     )
 
-slugs_location = '/home/qian/workspace/slugs'
+slugs_location = '/home/zzhou387/code/reactive_synthesis/slugs'
 sys.path.insert(0, f'{slugs_location}/tools/StructuredSlugsParser')
 from compiler import get_asts, asts_to_slugsin, get_asts_from_structuredslugsplus
 from Parser import Parser
