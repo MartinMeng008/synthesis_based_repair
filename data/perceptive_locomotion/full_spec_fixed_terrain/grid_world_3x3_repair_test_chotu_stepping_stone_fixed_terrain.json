@@ -1,0 +1,154 @@
+[
+	[
+		{
+			"terrain" : "x_0_y_0_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_1_y_0_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_2_y_0_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_0_y_1_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_1_y_1_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_2_y_1_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_0_y_2_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_1_y_2_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_2_y_2_terrain",
+			"value" : 0
+		}
+	],
+	[
+		{
+			"terrain" : "x_0_y_0_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_1_y_0_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_2_y_0_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_0_y_1_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_1_y_1_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_2_y_1_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_0_y_2_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_1_y_2_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_2_y_2_terrain",
+			"value" : 1
+		}
+	],
+	[
+		{
+			"terrain" : "x_0_y_0_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_1_y_0_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_2_y_0_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_0_y_1_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_1_y_1_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_2_y_1_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_0_y_2_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_1_y_2_terrain",
+			"value" : 0
+		},
+		{
+			"terrain" : "x_2_y_2_terrain",
+			"value" : 0
+		}
+	],
+	[
+		{
+			"terrain" : "x_0_y_0_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_1_y_0_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_2_y_0_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_0_y_1_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_1_y_1_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_2_y_1_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_0_y_2_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_1_y_2_terrain",
+			"value" : 1
+		},
+		{
+			"terrain" : "x_2_y_2_terrain",
+			"value" : 1
+		}
+	]
+]
