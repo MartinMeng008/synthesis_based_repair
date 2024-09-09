@@ -18,6 +18,7 @@ import symbolic_repair_msgs.msg
 import symbolic_repair_msgs.srv 
 
 DEBUG = False
+REPAIR_ONLY = False
 
 
 class Repair:
@@ -110,6 +111,8 @@ class Repair:
                     if True:
                         print(skill_msg)
                     skill_array_msg.skills.append(skill_msg)
+                if REPAIR_ONLY:
+                    return skills
                 skill_array_msg.header.stamp = rospy.Time.now()
                 try:
                     resp = self.feasibility_check(skill_array_msg)
@@ -208,9 +211,9 @@ def test_symbolic_repair(filename_structuredslugsplus, opts, files=None):
     new_skills = repair.run_symbolic_repair()
     # exit(0)
 
-    if DEBUG:
-        add_skilll_file = f'tests/repaired_skill_added_{filename_structuredslugsplus.split("/")[-1]}'
-        compiler.generate_structuredslugsplus(add_skilll_file)
+    if True:
+        add_skilll_file = f'build/repaired_skill_added_{filename_structuredslugsplus.split("/")[-1].split(".")[0]}.slugsin'
+        compiler.generate_slugsin(add_skilll_file)
     # compiler.remove_backup_skills()
     # add_skills_with_reduced_size(new_skills, compiler)
     # self.compiler.add_skills(new_skills)
@@ -276,8 +279,8 @@ def rename_new_skills(compiler: Compiler, skills: dict) -> None:
             cnt += 1
 
 if __name__ == "__main__":
-    rospy.init_node('fake_repair_node')
-    rospy.wait_for_service('fake_feasibility_check')
+    # rospy.init_node('fake_repair_node')
+    # rospy.wait_for_service('fake_feasibility_check')
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--spec',
                         action='store', dest='filename', required=True, help='Input file name in structuredslugsplus')
@@ -285,8 +288,15 @@ if __name__ == "__main__":
     # parser.add_argument('-o', "--output", action='store', dest='output', required=False, help='skill json file', default=None)
     # parser.add_argument('-f', "--files_json", action='store', dest='files_json', required=True, help='files_json')
     parser.add_argument('-a', "--add_skills", action='store_true', dest='add_skills', required=False, help='add skills', default=False)
+    parser.add_argument('-ro', "--repair_only", action='store_true', dest='repair_only', required=False, help='repair only', default=False)
     args = parser.parse_args()
     sys.setrecursionlimit(100000) 
+    if not args.repair_only:
+        REPAIR_ONLY = False
+        rospy.init_node('fake_repair_node')
+        rospy.wait_for_service('fake_feasibility_check')
+    else:
+        REPAIR_ONLY = True
     if args.add_skills:
         test_symbolic_repair(args.filename, json_load_wrapper(args.opts))
     else:

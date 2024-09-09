@@ -20,7 +20,8 @@ from tools import (
     list_minus
     )
 
-slugs_location = '/home/zzhou387/code/reactive_synthesis/slugs'
+# slugs_location = '/home/zzhou387/code/reactive_synthesis/slugs'
+slugs_location = '/home/qian/workspace/slugs'
 sys.path.insert(0, f'{slugs_location}/tools/StructuredSlugsParser')
 from compiler import get_asts, asts_to_slugsin, get_asts_from_structuredslugsplus
 from Parser import Parser
@@ -1792,15 +1793,21 @@ if __name__ == '__main__':
     # Add a int flag num_super_skills
     argparser.add_argument('-n', '--num_super_skills', action='store', dest='num_super_skills', required=False, default=0)
 
+    # Add a Boolean flag gen_terrain_init
+    argparser.add_argument('-g', '--gen_terrain_init', action='store_true', dest='gen_terrain_init', required=False, default=False)
+    
     args = argparser.parse_args()
 
-    num_super_skills = int(args.num_super_skills)
-    if num_super_skills > 0:
-        test_add_super_skills(args.spec, args.file_json, args.spec_out, args.opts, int(args.num_super_skills))
+    if args.gen_terrain_init:
+        pass
     else:
-        if args.test:
-            test_transform_asts(args.spec, args.file_json, args.spec_out, args.opts)
+        num_super_skills = int(args.num_super_skills)
+        if num_super_skills > 0:
+            test_add_super_skills(args.spec, args.file_json, args.spec_out, args.opts, int(args.num_super_skills))
         else:
-            test_check_realizability(args.spec, args.file_json)
+            if args.test:
+                test_transform_asts(args.spec, args.file_json, args.spec_out, args.opts)
+            else:
+                test_check_realizability(args.spec, args.file_json)
     # print(args.test)
     # test_contains_controllable_input(args.filename)

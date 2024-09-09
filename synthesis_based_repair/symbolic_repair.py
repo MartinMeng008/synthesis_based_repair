@@ -2079,6 +2079,15 @@ def bdd_to_suggestions(arg_bdd, arg_mod_pre, arg_mod_post, arg_opts, arg_acts_ch
             break
     return all_suggestions
 
+def split_skills(suggestion: dict) -> dict:
+    """Break a skill with multiple transitions to multiple skills with one transition each"""
+    return suggestion
+    new_suggestion = {}
+    for skill_name, skill in suggestion.items():
+
+        breakpoint()
+    return None
+
 
 def run_repair(file_in, opts):
     if 'max_repair_cnt' in opts:
@@ -2215,8 +2224,10 @@ def run_repair(file_in, opts):
 
     suggestions = bdd_to_suggestions(repaired_gs.bdd, all_mod_pres, all_mod_posts, opts, acts_changed_ext, repaired_gs,
                                      T_swapped_pre_all, T_swapped_post_all)
+    
+    suggestion = split_skills(suggestions[0])
 
-    return False, suggestions[0]
+    return False, suggestion
 
 #### ==== DEBUG ==== ####
 def print_pdb_to_file(ls): 

@@ -16,6 +16,7 @@ x_1_y_2_terrain:0...1
 x_2_y_0_terrain:0...1
 x_2_y_1_terrain:0...1
 x_2_y_2_terrain:0...1
+
 [ENV_INIT]
 x = 1
 y = 1
