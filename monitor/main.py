@@ -21,8 +21,9 @@ def main(filename_json: str):
     # Transform integer variables to Boolean
     input_file_int_filename = files_json["input_file_int"]
     input_file_bool_filename = files_json["input_file_bool"]
-    output_filename = files_json["output_file"]
+    output_filename_structuredslugsplus = files_json["output_file_structuredslugsplus"]
     output_filename_slugsin = files_json["output_file_slugsin"]
+    output_filename_structuredslugs = files_json["output_file_structuredslugs"]
     opts_filename = files_json["opts"]
     backup_skill_added_filename = files_json["input_file_backup_skill_added"]
     terrain_states: list = json_load_wrapper(files_json['terrain_states'])["terrain_states_list"]
@@ -52,8 +53,9 @@ def main(filename_json: str):
     
     compiler.add_init_terrain_states(terrain_states)
     compiler.add_terrain_states_as_env_trans_hard(terrain_states)
-    compiler.generate_structuredslugsplus(output_filename)
+    compiler.generate_structuredslugsplus(output_filename_structuredslugsplus)
     compiler.generate_slugsin(output_filename_slugsin)
+    compiler.generate_structuredslugs(output_filename_structuredslugs)
 
 
 if __name__ == '__main__':
