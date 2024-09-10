@@ -45,7 +45,7 @@ def main(filename_json: str):
         compiler.add_init_terrain_state(terrain_state)
         compiler.add_backup_skills()
         compiler.generate_structuredslugsplus(backup_skill_added_filename)
-        repair = Repair(compiler=compiler, filename=backup_skill_added_filename, opts=compiler.opts, symbolic_repair_only=True)
+        repair = Repair(compiler=compiler, filename=backup_skill_added_filename, opts=compiler.opts, symbolic_repair_only=compiler.opts["symbolic_repair_only"])
         print("Repairing for terrain state: ", terrain_state)
         new_skills = repair.run_symbolic_repair()
         compiler.reset_after_successful_repair()

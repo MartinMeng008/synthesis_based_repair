@@ -241,7 +241,7 @@ def run_slugs(filename_slugsin: str) -> dict:
     if DEBUG:
         result = subprocess.run(['slugs', '--counterStrategy',
                             filename_slugsin], capture_output=True, text=True)
-    if True:
+    if DEBUG:
         result = subprocess.run(['slugs', '--explicitStrategy',
                             filename_slugsin], capture_output=True, text=True)
     return result

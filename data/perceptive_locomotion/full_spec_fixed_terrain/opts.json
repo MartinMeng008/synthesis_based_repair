@@ -18,5 +18,6 @@
     "uncontrollable_inputs": [],
     "terrain_inputs": [],
     "num_grid": 9,
-    "new_skills_file": "../data/perceptive_locomotion/full_spec_fixed_terrain/new_skill"
+    "new_skills_file": "build/new_skill",
+    "symbolic_repair_only": true
   }

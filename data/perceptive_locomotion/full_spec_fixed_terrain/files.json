@@ -1,10 +1,10 @@
 {
-    "input_file_int": "../data/perceptive_locomotion/full_spec_fixed_terrain/grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_new.structuredslugsplus",
-    "input_file_bool": "build/transformed_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_new.structuredslugsplus",
-    "input_file_backup_skill_added": "build/backup_added_transformed_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_new.structuredslugsplus",
-    "output_file_structuredslugsplus": "build/repaired_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_new.structuredslugsplus",
-    "output_file_slugsin": "build/repaired_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_new.slugsin",
-    "output_file_structuredslugs": "build/repaired_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_new.structuredslugs",
+    "input_file_int": "../data/perceptive_locomotion/full_spec_fixed_terrain/grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.structuredslugsplus",
+    "input_file_bool": "build/transformed_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.structuredslugsplus",
+    "input_file_backup_skill_added": "build/backup_added_transformed_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.structuredslugsplus",
+    "output_file_structuredslugsplus": "build/repaired_transformed_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.structuredslugsplus",
+    "output_file_slugsin": "build/repaired_transformed_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.slugsin",
+    "output_file_structuredslugs": "build/repaired_transformed_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.structuredslugs",
     "opts": "../data/perceptive_locomotion/full_spec_fixed_terrain/opts.json",
-    "terrain_states": "../data/perceptive_locomotion/full_spec_fixed_terrain/grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_new.json"
+    "terrain_states": "../data/perceptive_locomotion/full_spec_fixed_terrain/grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.json"
 }
