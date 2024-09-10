@@ -315,6 +315,7 @@ The inputs are
 - a `structuredslugsplus` (note, not `structuredslugs`) file which is the input specification with integer input variables, no initial terrain states, and no repair constraints, e.g. [spec](https://github.com/MartinMeng008/synthesis_based_repair/blob/dev/perceptive_locomotion/data/perceptive_locomotion/full_spec_fixed_terrain/grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_new.structuredslugs)
 - a list of possible terrain states, e.g. [terrains.json](https://github.com/MartinMeng008/synthesis_based_repair/blob/dev/perceptive_locomotion/data/perceptive_locomotion/full_spec_fixed_terrain/grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_new.json)
 - a `json` file that contains options to repair, e.g. [opts.json](https://github.com/MartinMeng008/synthesis_based_repair/blob/dev/perceptive_locomotion/data/perceptive_locomotion/full_spec_fixed_terrain/opts.json)
+    -- Specifically, the field [symbolic_repair_only](https://github.com/MartinMeng008/synthesis_based_repair/blob/328cc5af69b7893a94556256a83a97c34c461721/data/perceptive_locomotion/full_spec_fixed_terrain/opts.json#L22) specifies whether to use physical feasibility checking 
 - a `json` file that contains all relative locations to all other files, e.g. [files.json](https://github.com/MartinMeng008/synthesis_based_repair/blob/dev/perceptive_locomotion/data/perceptive_locomotion/full_spec_fixed_terrain/files.json)
 
 To execute the main function, from `\synthesis_based_repair` run:
