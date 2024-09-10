@@ -650,9 +650,6 @@ def are_array_close(array1: np.array, array2: np.array, decimal_place = 2) -> bo
     return np.all(np.round(array1, decimal_place) == np.round(array2, decimal_place))
 
 
-    
-
-
 ## ==== Tests ==== ##
 def test_create_symbols():
     workspace = json_load_wrapper('examples/cupplate/inputs/workspace.json')

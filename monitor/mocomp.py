@@ -2,6 +2,7 @@
 import sys
 import argparse
 import copy
+# from repair import Repair
 # sys.path.insert(0, '../../')
 from tools import (
     clear_file,
@@ -17,7 +18,7 @@ from tools import (
     find_uncontrollable_symbols,
     find_controllable_mobile_symbols,
     find_controllable_manipulation_symbols,
-    list_minus
+    list_minus,
     )
 
 # slugs_location = '/home/zzhou387/code/reactive_synthesis/slugs'
@@ -82,7 +83,7 @@ class Compiler:
         self.variable_types = ["[INPUT]","[OUTPUT]","[OBSERVABLE_INPUT]","[UNOBSERVABLE_INPUT]","[CONTROLLABLE_INPUT]"]
         self.structuredslugsplus_property_types = ["[ENV_INIT]", "[SYS_INIT]", "[ENV_TRANS]", "[ENV_TRANS_HARD]", "[SYS_TRANS]", "[SYS_TRANS_HARD]", "[ENV_LIVENESS]", "[SYS_LIVENESS]", "[CHANGE_CONS]", "[NOT_ALLOWED_REPAIR]"]
         self.structuredslugsplus_property_types_with_change_repair_cons = ["[ENV_INIT]", "[SYS_INIT]", "[ENV_TRANS]", "[ENV_TRANS_HARD]", "[SYS_TRANS]", "[SYS_TRANS_HARD]", "[ENV_LIVENESS]", "[SYS_LIVENESS]", "[CHANGE_CONS]", "[NOT_ALLOWED_REPAIR]"]         
-        self.structuredslugsplus_property_types = ["[ENV_INIT]", "[SYS_INIT]", "[ENV_TRANS]", "[ENV_TRANS_HARD]", "[SYS_TRANS]", "[SYS_TRANS_HARD]", "[ENV_LIVENESS]", "[SYS_LIVENESS]", "[CHANGE_CONS]", "[NOT_ALLOWED_REPAIR]", "[CHANGE_REPAIR_CONS]"]
+        self.structuredslugsplus_property_types = ["[ENV_INIT]", "[SYS_INIT]", "[ENV_TRANS]", "[ENV_TRANS_HARD]", "[SYS_TRANS]", "[SYS_TRANS_HARD]", "[ENV_LIVENESS]", "[SYS_LIVENESS]", "[CHANGE_CONS]", "[NOT_ALLOWED_REPAIR]"]
 
         self.terminals = {"formula": "Formula", "biimplication": "Biimplication", "implication": "Implication", "conjunction": "Conjunction", "disjunction": "Disjunction", "unary": "UnaryFormula", "not": "NotOperator", "next": "NextOperator", "assignment": "Assignment", "true": "TRUE", "false": "FALSE", "calculation": "CalculationSubformula", "numID": "numID", "comparison": "NumberComparisonOperator", "equal": "EqualOperator", "number": "numeral"}
         self.properties = {"env_trans": "[ENV_TRANS]", "env_init": "[ENV_INIT]", "input": "[INPUT]", "output": "[OUTPUT]", "sys_trans": "[SYS_TRANS]", "sys_init": "[SYS_INIT]", "env_liveness": "[ENV_LIVENESS]", "sys_liveness": "[SYS_LIVENESS]", "observable_input": "[OBSERVABLE_INPUT]", "unobservable_input": "[UNOBSERVABLE_INPUT]", "controllable_input": "[CONTROLLABLE_INPUT]", "env_trans_hard": "[ENV_TRANS_HARD]", "sys_trans_hard": "[SYS_TRANS_HARD]", "change_cons": "[CHANGE_CONS]", "not_allowed_repair": "[NOT_ALLOWED_REPAIR]", "change_repair_cons": "[CHANGE_REPAIR_CONS]"}
@@ -778,7 +779,7 @@ class Monitor:
         self.int_vars_to_limits[int_var] = (start, end)
 
         self.int_to_bool_vars[int_var] = []
-        if end == 1:
+        if False: # if end == 1: # <- we don't consider this case anymore
             # Case 1: only 0 and 1, just use the int_var
             self.int_to_bool_vars[int_var].append(int_var)
         else:
@@ -1533,6 +1534,53 @@ class Monitor:
         # skill_dict["goal"] = self.skills_data[original_skill]["goal"] # not necessarily correct
         return skill_dict
 
+    def add_init_terrain_state(self, terrain_state: dict) -> None:
+        """Add terrain state to env_init"""
+        env_init: list = self.asts[self.properties["env_init"]]
+        # print("env_init: ", env_init)
+        # print("sys_init: ", self.asts[self.properties["sys_init"]])
+        # sys.exit(0)
+        for terrain_input, val in terrain_state.items():
+            if val:
+                env_init.append(self.add_formula_wrapper(self.name2assignment(terrain_input)))
+            else:
+                env_init.append(self.add_formula_wrapper(self.add_not_wrapper(self.name2assignment(terrain_input))))
+        return None
+
+    def remove_init_terrain_state(self, terrain_state: dict) -> None:
+        """Remove terrain state from env_init"""
+        env_init: list = self.asts[self.properties["env_init"]]
+        for terrain_input, val in terrain_state.items():
+            env_init.pop()
+        return None
+    
+    def add_init_terrain_states(self, terrain_states: list) -> None:
+        """Add or(terrain_state, for each terrain_state) to env_init"""
+        terrain_state_formula = self._get_terrain_states_formula(terrain_states)
+        env_init: list = self.asts[self.properties["env_init"]]
+        env_init.append(terrain_state_formula)
+        return None
+    
+    def add_terrain_states_as_env_trans_hard(self, terrain_states: list) -> None:
+        """Add or(terrain_state, for each terrain_state) as the first constraint in env_trans_hard"""
+        terrain_state_formula = self._get_terrain_states_formula(terrain_states)
+        env_trans_hard: list = self.asts[self.properties["env_trans_hard"]]
+        env_trans_hard.insert(0, terrain_state_formula)
+        return None
+
+    def _get_terrain_states_formula(self, terrain_states: list) -> list:
+        list_of_terrain_states = []
+        for terrain_state in terrain_states:
+            state_conjunction = []
+            for terrain_input, val in terrain_state.items():
+                if val:
+                    state_conjunction.append(self.name2assignment(terrain_input))
+                else:
+                    state_conjunction.append(self.add_not_wrapper(self.name2assignment(terrain_input)))
+            list_of_terrain_states.append(self.add_conjunction_wrapper(state_conjunction))
+        return self.add_formula_wrapper(self.add_disjunction_wrapper(list_of_terrain_states))
+
+
 
 
 # ================================================================ #
@@ -1773,7 +1821,7 @@ def test_add_super_skills(input_file: str, filename_json: str = None, output_fil
                         uncontrollable_variables=uncontrollable_variables,
                         opts=opts)
     compiler.add_super_skills(num_super_skills)
-    compiler.generate_structuredslugsplus(output_file)
+    compiler.generate_structuredslugsplus(output_file)    
 
 if __name__ == '__main__':
     # objects_data = json_load_wrapper('examples/cupplate/inputs/pickup_dropoff_cup/abstraction/objects.json')
@@ -1794,20 +1842,17 @@ if __name__ == '__main__':
     argparser.add_argument('-n', '--num_super_skills', action='store', dest='num_super_skills', required=False, default=0)
 
     # Add a Boolean flag gen_terrain_init
-    argparser.add_argument('-g', '--gen_terrain_init', action='store_true', dest='gen_terrain_init', required=False, default=False)
+    # argparser.add_argument('-g', '--gen_terrain_init', action='store_true', dest='gen_terrain_init', required=False, default=False)
     
     args = argparser.parse_args()
 
-    if args.gen_terrain_init:
-        pass
+    num_super_skills = int(args.num_super_skills)
+    if num_super_skills > 0:
+        test_add_super_skills(args.spec, args.file_json, args.spec_out, args.opts, int(args.num_super_skills))
     else:
-        num_super_skills = int(args.num_super_skills)
-        if num_super_skills > 0:
-            test_add_super_skills(args.spec, args.file_json, args.spec_out, args.opts, int(args.num_super_skills))
+        if args.test:
+            test_transform_asts(args.spec, args.file_json, args.spec_out, args.opts)
         else:
-            if args.test:
-                test_transform_asts(args.spec, args.file_json, args.spec_out, args.opts)
-            else:
-                test_check_realizability(args.spec, args.file_json)
+            test_check_realizability(args.spec, args.file_json)
     # print(args.test)
     # test_contains_controllable_input(args.filename)

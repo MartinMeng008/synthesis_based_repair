@@ -22,14 +22,14 @@ REPAIR_ONLY = False
 
 
 class Repair:
-    def __init__(self, compiler: Compiler, filename: str, opts: dict, files_json: dict = None) -> None:
+    def __init__(self, compiler: Compiler, filename: str, opts: dict, files_json: dict = None, symbolic_repair_only: bool = False) -> None:
         """
         Args:
             compiler: monitor_compiler
             filename: the pure name of 
         """
         self.compiler = compiler
-
+        self.symbolic_repair_only = symbolic_repair_only
         self.opts = opts
         if "max_repair_iter" in self.opts:
             self.max_iter = self.opts["max_repair_iter"]
@@ -82,6 +82,7 @@ class Repair:
             print(f"is_realizable at iteration {cnt}: ", is_realizable)
             if is_realizable:
                 print("The spec is realizable")
+                self.compiler.remove_backup_skills()
                 return skills
             self.opts['only_synthesis'] = False
             found_suggestion = False
@@ -111,7 +112,7 @@ class Repair:
                     if True:
                         print(skill_msg)
                     skill_array_msg.skills.append(skill_msg)
-                if REPAIR_ONLY:
+                if self.symbolic_repair_only:
                     return skills
                 skill_array_msg.header.stamp = rospy.Time.now()
                 try:
@@ -207,7 +208,7 @@ def test_symbolic_repair(filename_structuredslugsplus, opts, files=None):
     add_skilll_file = f'build/backup_skill_added_{filename_structuredslugsplus.split("/")[-1]}'
     compiler.generate_structuredslugsplus(add_skilll_file)
     # repair = Repair(compiler, add_skilll_file, opts)
-    repair = Repair(compiler, add_skilll_file, opts, files_json=files)
+    repair = Repair(compiler, add_skilll_file, opts, files_json=files, symbolic_repair_only=REPAIR_ONLY)
     new_skills = repair.run_symbolic_repair()
     # exit(0)
 
