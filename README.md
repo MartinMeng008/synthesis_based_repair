@@ -255,19 +255,19 @@ In the file [mocomp.py](monitor/mocomp.py), change the slugs location to the dir
 
 #### Int to Bool Transformation
 To perform the integer-to-boolean transformation, from `\synthesis_based_repair` run:
-```
+```shell
 cd monitor
 python mocomp.py -s [input_file] -so [output_file] -t 
 ```
 
 e.g.
-```
+```shell
 cd monitor
 python mocomp.py -s "../data/perceptive_locomotion/locomotion_3x3.structuredslugsplus" -so "../data/perceptive_locomotion/transformed_int2bool_locomotion_3x3.structuredslugsplus" -t 
 ```
 
 To check the realizability of a spec, run:
-```
+```shell
 python mocomp.py -s [spec]
 ```
 
@@ -278,13 +278,13 @@ python mocomp.py -s "../data/perceptive_locomotion/transformed_int2bool_locomoti
 
 ### Add backup skills and run repair
 To add backup skills and run repair, from `\synthesis_based_repair` run:
-```
+```shell
 cd monitor
 python repair.py -s [input_file] -o [option_file] -a
 ```
 
 e.g.
-```
+```shell
 python repair.py -s "../data/perceptive_locomotion/transformed_int2bool_locomotion_3x3_repair_test_unrealizable.structuredslugsplus" -o "../data/perceptive_locomotion/opts.json" -a
 ```
 
@@ -300,11 +300,24 @@ python repair.py -s "../data/perceptive_locomotion/two_regions/transformed_int2b
 
 ### Full spec example
 First, transform the spec with integer variables to the spec with Boolean variables only, and add repair constraints. From `\synthesis_based_repair` run:
-```
+```shell
 cd monitor
 python mocomp.py -s "../data/perceptive_locomotion/full_spec/locomotion_full_repair_test_new_unrealizable.structuredslugsplus" -so "../data/perceptive_locomotion/full_spec/transformed_locomotion_full_repair_test_new_unrealizable.structuredslugsplus" -o "../data/perceptive_locomotion/full_spec/opts.json" -t
 ```
 Next, we run repair on the transformed spec:
 ```
 python repair.py -s "../data/perceptive_locomotion/full_spec/transformed_locomotion_full_repair_test_new_unrealizable.structuredslugsplus" -o "../data/perceptive_locomotion/full_spec/opts.json" -a
+```
+
+## Main
+The main function repairs a given specification over a set of possible terrain states and produces an executable `slugsin` file.
+The inputs are
+- a `structuredslugsplus` (note, not `structuredslugs`) file which is the input specification with integer input variables, no initial terrain states, and no repair constraints, e.g. [spec](https://github.com/MartinMeng008/synthesis_based_repair/blob/dev/perceptive_locomotion/data/perceptive_locomotion/full_spec_fixed_terrain/grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_new.structuredslugs)
+- a list of possible terrain states, e.g. [terrains.json](https://github.com/MartinMeng008/synthesis_based_repair/blob/dev/perceptive_locomotion/data/perceptive_locomotion/full_spec_fixed_terrain/grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_new.json)
+- a `json` file that contains options to repair, e.g. [opts.json](https://github.com/MartinMeng008/synthesis_based_repair/blob/dev/perceptive_locomotion/data/perceptive_locomotion/full_spec_fixed_terrain/opts.json)
+- a `json` file that contains all relative locations to all other files, e.g. [files.json](https://github.com/MartinMeng008/synthesis_based_repair/blob/dev/perceptive_locomotion/data/perceptive_locomotion/full_spec_fixed_terrain/files.json)
+
+To execute the main function, from `\synthesis_based_repair` run:
+```shell
+python main.py -f ../data/perceptive_locomotion/full_spec_fixed_terrain/files.json
 ```
