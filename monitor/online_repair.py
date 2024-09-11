@@ -24,7 +24,7 @@ class OnlineRepair:
     def __init__(self, filename_json: str) -> None:
         """Execute online repair for a given terrain state
         """
-        files_json = json_load_wrapper(filename_json)
+        self.files_json = files_json = json_load_wrapper(filename_json)
         # print(files_json)
         skills_data = dict()
         symbols_data = dict()
@@ -74,10 +74,12 @@ class OnlineRepair:
         print(req.terrain_state_requested)
         terrain_state: dict = self._get_terrain_state_from_req(req)
         results = self.monitor.monitor_curr_input_state(terrain_state)
+        print("results: ", results)
+        sys.exit(0)
         res = OnlineRepairWithNewTerrainResponse()
         res.repair_result = OnlineRepairResult()
         res.repair_result.repair_needed = None
-        res.repair_result.slugsin_location = self.compiler.opts["online_output_file_slugsin"]
+        res.repair_result.slugsin_location = self.files_json["online_output_file_slugsin"]
 
         if self.monitor.no_violation(results):
             print("No violation")
@@ -111,7 +113,7 @@ class OnlineRepair:
         terrain_state: dict = {}
         for atomic_prop in terrain_state_msg:
             atomic_prop = atomic_prop.atomic_proposition
-            terrain_state[atomic_prop[0]] = atomic_prop[0] == '1'
+            terrain_state[atomic_prop[0]] = atomic_prop[1] == '1'
         return terrain_state
     
 

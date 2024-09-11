@@ -332,6 +332,7 @@ class Monitor:
             self.s.push()
             self.s.add(formula)
             for name, value in input_state.items():
+                print(f"input: {name}, val: {value}")
                 exec(f"self.s.add({name} == {str(value)})")
             print_debug(f"Solver for post {formula}")
             print_debug(self.s)
@@ -1058,7 +1059,7 @@ class Monitor:
 
     def relax_hard_assumption_X_only(self, indices: list, terrain_state: dict) -> None:
         env_trans_hard = self.get_env_trans_hard_asts()
-        formula_to_be_added = self.terrain_state_dict_to_formula([terrain_state])
+        formula_to_be_added = self.terrain_state_dict_to_formula(terrain_state)
         for violated_index in indices:
             violated_assumption = env_trans_hard[violated_index]
             old_formula = violated_assumption[1]
