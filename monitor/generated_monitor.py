@@ -254,3 +254,30 @@ class Monitor:
             results.append(self.sat_to_bool(self.s.check()))
             self.s.pop()
         return results
+
+if __name__ == '__main__':
+    print("Testing monitor")
+    monitor = Monitor()
+    terrain_state = {
+        "x_0_y_0_terrain0": True,
+        "x_0_y_0_terrain1": False,
+        "x_0_y_1_terrain0": True,
+        "x_0_y_1_terrain1": False,
+        "x_0_y_2_terrain0": True,
+        "x_0_y_2_terrain1": False,
+        "x_1_y_0_terrain0": True,
+        "x_1_y_0_terrain1": False,
+        "x_1_y_1_terrain0": True,
+        "x_1_y_1_terrain1": False,
+        "x_1_y_2_terrain0": True,
+        "x_1_y_2_terrain1": False,
+        "x_2_y_0_terrain0": True,
+        "x_2_y_0_terrain1": False,
+        "x_2_y_1_terrain0": True,
+        "x_2_y_1_terrain1": False,
+        "x_2_y_2_terrain0": True,
+        "x_2_y_2_terrain1": False
+    }
+    results = monitor.monitor_curr_input_state(terrain_state)
+    print(results)
+    print(monitor.no_violation(results))

@@ -114,6 +114,7 @@ class OnlineRepair:
         for atomic_prop in terrain_state_msg:
             atomic_prop = atomic_prop.atomic_proposition
             terrain_state[atomic_prop[0]] = atomic_prop[1] == '1'
+        print("terrain_state: ", terrain_state)
         return terrain_state
     
 
