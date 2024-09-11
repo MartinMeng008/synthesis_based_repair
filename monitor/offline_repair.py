@@ -2,6 +2,7 @@
 import sys
 import argparse
 import copy
+import rospy
 from mocomp import Compiler
 from repair import Repair
 # sys.path.insert(0, '../../')
@@ -38,6 +39,10 @@ def main(filename_json: str) -> None:
     compiler.add_change_constraints()
     compiler.add_not_allowed_repair()
     compiler.generate_structuredslugsplus(input_file_bool_filename)
+
+    if not compiler.opts["symbolic_repair_only"]:
+        rospy.init_node('repair_node')
+        rospy.wait_for_service('/feasibility_check')
     
     # return None
     # Go through each terrain state, add it to env_init, and repair

@@ -21,8 +21,8 @@ from tools import (
     list_minus,
     )
 
-# slugs_location = '/home/zzhou387/code/reactive_synthesis/slugs'
-slugs_location = '/home/qian/workspace/slugs'
+slugs_location = '/home/zzhou387/code/reactive_synthesis/slugs'
+# slugs_location = '/home/qian/workspace/slugs'
 sys.path.insert(0, f'{slugs_location}/tools/StructuredSlugsParser')
 from compiler import get_asts, asts_to_slugsin, get_asts_from_structuredslugsplus
 from Parser import Parser
@@ -332,7 +332,6 @@ class Monitor:
             self.s.push()
             self.s.add(formula)
             for name, value in input_state.items():
-                print(f"input: {name}, val: {value}")
                 exec(f"self.s.add({name} == {str(value)})")
             print_debug(f"Solver for post {formula}")
             print_debug(self.s)
@@ -1590,7 +1589,7 @@ class Monitor:
         """Remove the last terrain state formula in env init"""
         env_init: list = self.asts[self.properties["env_init"]]
         removed_constraint = env_init.pop()
-        if True:
+        if False:
             print("Removed constraint: ", removed_constraint)
             sys.exit(0)
         return None

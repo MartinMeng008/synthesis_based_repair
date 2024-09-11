@@ -50,8 +50,6 @@ class OnlineRepair:
         self.terrain_states_formula = copy.deepcopy(self.compiler.refer_to_terrain_assumptions())
         self.reload_monitor()
         # sys.exit(0)
-
-        rospy.init_node('online_repair_node')
         
         self.repair_service = rospy.Service('/symbolic_repair/online_repair', OnlineRepairWithNewTerrain, self.online_repair_callback)
         
@@ -75,7 +73,6 @@ class OnlineRepair:
         terrain_state: dict = self._get_terrain_state_from_req(req)
         results = self.monitor.monitor_curr_input_state(terrain_state)
         print("results: ", results)
-        sys.exit(0)
         res = OnlineRepairWithNewTerrainResponse()
         res.repair_result = OnlineRepairResult()
         res.repair_result.repair_needed = None
@@ -90,12 +87,11 @@ class OnlineRepair:
             violated_indices = self.monitor.filter_violation(results)
             self.compiler.relax_hard_assumption_X_only(terrain_state=terrain_state, indices=violated_indices)
             self.compiler.remove_init_terrain_state_formula()
-            self.compiler.add_init_terrain_state(self, terrain_state)
+            self.compiler.add_init_terrain_state(terrain_state)
             # self.compiler.generate_structuredslugsplus(self.output_filename_structuredslugsplus)
             self.compiler.add_backup_skills()
             self.compiler.generate_structuredslugsplus(self.output_filename_structuredslugsplus)
             repair = Repair(compiler=self.compiler, filename=self.output_filename_structuredslugsplus, opts=self.compiler.opts, symbolic_repair_only=self.compiler.opts["symbolic_repair_only"])
-            print("Repairing for terrain state: ", terrain_state)
             new_skills = repair.run_symbolic_repair()
             self.compiler.reset_after_successful_repair()
             self.compiler.remove_init_terrain_state(terrain_state)
@@ -119,6 +115,7 @@ class OnlineRepair:
     
 
 if __name__ == '__main__':
+    rospy.init_node('online_repair_node')
     argparser = argparse.ArgumentParser()
     argparser.add_argument('-f', '--file', action='store', dest='file_json', required=False, default=None)
     args = argparser.parse_args()
