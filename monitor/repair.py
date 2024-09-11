@@ -31,8 +31,8 @@ class Repair:
         self.compiler = compiler
         self.symbolic_repair_only = symbolic_repair_only
         if not self.symbolic_repair_only:
-            rospy.init_node('fake_repair_node')
-            rospy.wait_for_service('fake_feasibility_check')
+            rospy.init_node('repair_node')
+            rospy.wait_for_service('/feasibility_check')
         self.opts = opts
         if "max_repair_iter" in self.opts:
             self.max_iter = self.opts["max_repair_iter"]
@@ -59,7 +59,7 @@ class Repair:
         
         self.opts["original_skills"] = self.compiler.get_original_skills()
         
-        self.feasibility_check = rospy.ServiceProxy('fake_feasibility_check', symbolic_repair_msgs.srv.FeasibilityCheck)
+        self.feasibility_check = rospy.ServiceProxy('/feasibility_check', symbolic_repair_msgs.srv.FeasibilityCheck)
             
     def run_symbolic_repair(self) -> dict:
         """Run the symbolic repair module
@@ -119,6 +119,7 @@ class Repair:
                     return skills
                 skill_array_msg.header.stamp = rospy.Time.now()
                 try:
+                    print("Start feasibility check")
                     resp = self.feasibility_check(skill_array_msg)
                     print(resp.feasibilities_checked)
                 except rospy.ServiceException as e:
