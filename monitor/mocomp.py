@@ -320,9 +320,11 @@ class Monitor:
             fid.write('''\
         %s = Bool('%s')
 ''' % (var, var))
+        fid.close()
             
         self.generate_formulas()
         
+        fid = open(self.monitor_file, 'a')
         # Generate the SMT calls
         fid.write('''\
         results = []

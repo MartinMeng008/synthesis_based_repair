@@ -49,6 +49,9 @@ class OnlineRepair:
         
         self.terrain_states_formula = copy.deepcopy(self.compiler.refer_to_terrain_assumptions())
         self.reload_monitor()
+        # sys.exit(0)
+
+        rospy.init_node('online_repair_node')
         
         self.repair_service = rospy.Service('/symbolic_repair/online_repair', OnlineRepairWithNewTerrain, self.online_repair_callback)
         
@@ -113,7 +116,6 @@ class OnlineRepair:
     
 
 if __name__ == '__main__':
-    rospy.init_node('online_repair_node')
     argparser = argparse.ArgumentParser()
     argparser.add_argument('-f', '--file', action='store', dest='file_json', required=False, default=None)
     args = argparser.parse_args()
