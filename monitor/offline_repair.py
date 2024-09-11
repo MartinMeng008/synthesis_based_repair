@@ -8,8 +8,8 @@ from repair import Repair
 from tools import (
     json_load_wrapper,
     )
-
-def main(filename_json: str):
+    
+def main(filename_json: str) -> None:
     files_json = json_load_wrapper(filename_json)
     # print(files_json)
     skills_data = dict()
@@ -56,7 +56,7 @@ def main(filename_json: str):
     compiler.generate_structuredslugsplus(output_filename_structuredslugsplus)
     compiler.generate_slugsin(output_filename_slugsin)
     compiler.generate_structuredslugs(output_filename_structuredslugs)
-
+    return None
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser()

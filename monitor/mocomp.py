@@ -56,6 +56,7 @@ class Compiler:
         self._set_keys()
         self.set_asts(input_file)
         self.set_mappings_int_to_bool_vars()
+        self.terrain_states_formula = None
     
     def set_data(self) -> None:
         """Set the data for added new skills"""
@@ -142,6 +143,9 @@ class Compiler:
     def get_env_trans_asts(self):
         return self.asts[self.properties["env_trans"]] + self.asts[self.properties["env_trans_hard"]]
     
+    def get_env_trans_hard_asts(self):
+        return self.asts[self.properties["env_trans_hard"]]
+
     def check_realizability(self) -> bool:
         """Check the realizability of the spec represented by the ASTs"""
         tmp_slugsin = "build/tmp.slugsin"
@@ -279,10 +283,12 @@ class Monitor:
         fid.write('''\
         self.formulas = []
 ''')
-        for ast in self.get_env_trans_asts():
+        for ast in self.get_env_trans_hard_asts():
+            # Assume only check hard assumptions
             fid.write('''\
         self.formulas.append(%s)
 ''' % self.generate_formula(ast))
+            break # Assume only check the first formula for now
         # print(len(self.asts))
         fid.close()
 
@@ -967,6 +973,12 @@ class Monitor:
             self.dict_to_ast(formula, env)
         return formula
     
+    def terrain_state_dict_to_formula(self, terrain_state: dict) -> list:
+        """Return a conjunction of terrain state: dict[str, bool] in AST"""
+        formula = ['Conjunction']
+        self.dict_to_ast(formula, terrain_state)
+        return formula
+    
     def remove_uncontrollable_inputs(self, X: dict, X_p: dict) -> None:
         """Remove the reactive inputs from X and X_p in place"""
         for uncontrollable_variable in self.uncontrollable_variables:
@@ -1039,6 +1051,21 @@ class Monitor:
             if DEBUG:
                 print("Relaxed environment assumption:", violated_index)
                 self.print_ast(violated_assumption)
+
+    def relax_hard_assumption_X_only(self, indices: list, terrain_state: dict) -> None:
+        env_trans_hard = self.get_env_trans_hard_asts()
+        formula_to_be_added = self.terrain_state_dict_to_formula([terrain_state])
+        for violated_index in indices:
+            violated_assumption = env_trans_hard[violated_index]
+            old_formula = violated_assumption[1]
+            if old_formula[0][0] == self.terminals['disjunction']:
+                old_formula[0][1].append(formula_to_be_added)
+            else:
+                new_formula = [self.terminals['disjunction'], old_formula, formula_to_be_added]
+                violated_assumption[1] = new_formula
+        return None
+            
+
 
     def is_env_trans_hard(self, index: int) -> bool:
         """Returns whether the violated assumption is an env_trans_hard"""
@@ -1554,11 +1581,30 @@ class Monitor:
             env_init.pop()
         return None
     
+    def remove_init_terrain_state_formula(self) -> None:
+        """Remove the last terrain state formula in env init"""
+        env_init: list = self.asts[self.properties["env_init"]]
+        removed_constraint = env_init.pop()
+        if True:
+            print("Removed constraint: ", removed_constraint)
+            sys.exit(0)
+        return None
+
     def add_init_terrain_states(self, terrain_states: list) -> None:
         """Add or(terrain_state, for each terrain_state) to env_init"""
         terrain_state_formula = self._get_terrain_states_formula(terrain_states)
         env_init: list = self.asts[self.properties["env_init"]]
         env_init.append(terrain_state_formula)
+        return None
+    
+    def add_init_terrain_states_from_env_trans_hard(self) -> None:
+        """Add or(terrain_state, for each terrain_state) to env_init from env_trans_hard"""
+        self.terrain_states_formula = self.refer_to_terrain_assumptions()
+        env_init: list = self.asts[self.properties["env_init"]]
+        if True:
+            print("add terrain states formula to env_init: ", self.terrain_states_formula)
+            sys.exit(0)
+        env_init.append(self.terrain_states_formula)
         return None
     
     def add_terrain_states_as_env_trans_hard(self, terrain_states: list) -> None:
@@ -1569,19 +1615,30 @@ class Monitor:
         return None
 
     def _get_terrain_states_formula(self, terrain_states: list) -> list:
-        list_of_terrain_states = []
-        for terrain_state in terrain_states:
-            state_conjunction = []
-            for terrain_input, val in terrain_state.items():
-                if val:
-                    state_conjunction.append(self.name2assignment(terrain_input))
-                else:
-                    state_conjunction.append(self.add_not_wrapper(self.name2assignment(terrain_input)))
-            list_of_terrain_states.append(self.add_conjunction_wrapper(state_conjunction))
-        return self.add_formula_wrapper(self.add_disjunction_wrapper(list_of_terrain_states))
+        """Return the formula for the disjunction of terrain states"""
+        if self.terrain_states_formula is None:
+            list_of_terrain_states = []
+            for terrain_state in terrain_states:
+                state_conjunction = []
+                for terrain_input, val in terrain_state.items():
+                    if val:
+                        state_conjunction.append(self.name2assignment(terrain_input))
+                    else:
+                        state_conjunction.append(self.add_not_wrapper(self.name2assignment(terrain_input)))
+                list_of_terrain_states.append(self.add_conjunction_wrapper(state_conjunction))
+            self.terrain_states_formula = self.add_formula_wrapper(self.add_disjunction_wrapper(list_of_terrain_states))
+        return self.terrain_states_formula
+    
+    def reset_terrain_states_formula(self) -> None:
+        self.terrain_states_formula = None
 
-
-
+    def refer_to_terrain_assumptions(self) -> None:
+        """Refer to the terrain assumptions
+        """
+        env_trans_hard: list = self.asts[self.properties["env_trans_hard"]]
+        self.terrain_states_formula = env_trans_hard[0]
+        print("terrain states formula: ", self.terrain_states_formula)
+        return self.terrain_states_formula
 
 # ================================================================ #
 

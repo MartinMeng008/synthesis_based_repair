@@ -30,6 +30,9 @@ class Repair:
         """
         self.compiler = compiler
         self.symbolic_repair_only = symbolic_repair_only
+        if not self.symbolic_repair_only:
+            rospy.init_node('fake_repair_node')
+            rospy.wait_for_service('fake_feasibility_check')
         self.opts = opts
         if "max_repair_iter" in self.opts:
             self.max_iter = self.opts["max_repair_iter"]
@@ -294,8 +297,6 @@ if __name__ == "__main__":
     sys.setrecursionlimit(100000) 
     if not args.repair_only:
         REPAIR_ONLY = False
-        rospy.init_node('fake_repair_node')
-        rospy.wait_for_service('fake_feasibility_check')
     else:
         REPAIR_ONLY = True
     if args.add_skills:

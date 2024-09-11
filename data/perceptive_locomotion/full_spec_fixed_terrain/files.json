@@ -5,6 +5,10 @@
     "output_file_structuredslugsplus": "build/repaired_transformed_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.structuredslugsplus",
     "output_file_slugsin": "build/repaired_transformed_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.slugsin",
     "output_file_structuredslugs": "build/repaired_transformed_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.structuredslugs",
+    "online_output_file_structuredslugsplus": "build/online_repaired_transformed_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.structuredslugsplus",
+    "online_output_file_slugsin": "build/online_repaired_transformed_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.slugsin",
+    "online_output_file_structuredslugs": "build/online_repaired_transformed_grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.structuredslugs",
     "opts": "../data/perceptive_locomotion/full_spec_fixed_terrain/opts.json",
-    "terrain_states": "../data/perceptive_locomotion/full_spec_fixed_terrain/grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.json"
+    "terrain_states": "../data/perceptive_locomotion/full_spec_fixed_terrain/grid_world_3x3_repair_test_chotu_stepping_stone_fixed_terrain_missing_skills.json",
+    "new_terrain_state": "../data/perceptive_locomotion/full_spec_fixed_terrain/new_terrain_state.json"
 }

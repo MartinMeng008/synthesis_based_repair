@@ -91,6 +91,19 @@ def create_symbol_dict(sym_name, obj, loc, index_cnt, location_data = None):
     sym_dict['location'] = loc
     return sym_dict
 
+def create_build_monitor():
+    """Create build directory"""
+    curr_dir = os.getcwd()
+    # make_build_dir(curr_dir)
+    os.system('touch %s/build/generated_monitor.py' % curr_dir)
+    with open('%s/build/generated_monitor.py' % curr_dir, 'w') as f:
+        f.write('''\
+class Monitor:
+    def __init__(self) -> None:
+        pass
+''')
+    return None
+
 def object_location_to_symbol(object_name, location_name):
     """Given object, location, create symbol"""
     return f'p_{object_name}_{location_name}'
