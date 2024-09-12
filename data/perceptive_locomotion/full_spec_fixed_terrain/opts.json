@@ -19,5 +19,5 @@
     "terrain_inputs": [],
     "num_grid": 9,
     "new_skills_file": "build/new_skill",
-    "symbolic_repair_only": false
+    "symbolic_repair_only": true
   }

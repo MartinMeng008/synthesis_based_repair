@@ -1749,7 +1749,7 @@ class Monitor:
         """Add or(terrain_state, for each terrain_state) to env_init from env_trans_hard"""
         self.terrain_states_formula = self.refer_to_terrain_assumptions()
         env_init: list = self.asts[self.properties["env_init"]]
-        if True:
+        if DEBUG:
             print("add terrain states formula to env_init: ", self.terrain_states_formula)
             sys.exit(0)
         env_init.append(self.terrain_states_formula)
