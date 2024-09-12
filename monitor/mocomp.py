@@ -67,6 +67,9 @@ class Compiler:
         self.violated_env_trans_hard_indices = set()
         self.MANIPULATION_ONLY = all(is_manipulation_object(obj, self.objects_data) for obj in self.objects_data.keys())
         self.MOBILE_ONLY = all(is_mobile_object(obj, self.objects_data) for obj in self.objects_data.keys())
+        self.terrain_inputs = None
+        self.request_inputs = None
+        self.location_inputs = None
         # print("MANIPULATION_ONLY: ", self.MANIPULATION_ONLY)
         # print("MOBILE_ONLY: ", self.MOBILE_ONLY)
 
@@ -123,7 +126,7 @@ class Compiler:
         if len(env_trans_hard) >= 1:
             inact_wo_skills = env_trans_hard[-1]
             self.not_any_skills_conjunction = inact_wo_skills[1][1]
-            if True:
+            if DEBUG:
                 print("not any skill conjunction: ", self.not_any_skills_conjunction)
                 # sys.exit(0)
         # self.skill_mutual_exclusion = env_trans_hard[-1][1]
@@ -438,7 +441,7 @@ class Monitor:
         fid = open(self.file, 'a')
         for property_type in self.structuredslugsplus_property_types:
             fid.write(f'{property_type}\n')
-            print(property_type)
+            if DEBUG: print(property_type)
             for ast in self.asts[property_type]:
                 tokens = self.generate_structuredslugsplus_formula(ast, False)
                 curr_line = " ".join(tokens)
@@ -611,19 +614,25 @@ class Monitor:
         
     def get_location_inputs(self, request_inputs=None, terrain_inputs=None) -> list:
         """Return the location inputs"""
-        if request_inputs is None:
-            request_inputs = self.get_request_inputs()
-        if terrain_inputs is None:
-            terrain_inputs = self.get_terrain_inputs()
-        return list_minus(list_minus(self.vars[self.properties["input"]], request_inputs), terrain_inputs)
+        if self.location_inputs is None:
+            if request_inputs is None:
+                request_inputs = self.get_request_inputs()
+            if terrain_inputs is None:
+                terrain_inputs = self.get_terrain_inputs()
+            self.location_inputs = list_minus(list_minus(self.vars[self.properties["input"]], request_inputs), terrain_inputs)
+        return self.location_inputs
 
     def get_request_inputs(self) -> list:
         """Return the request inputs"""
-        return self._get_keyword_inputs("request")
+        if self.request_inputs is None:
+            self.request_inputs = self._get_keyword_inputs("request")
+        return self.request_inputs
     
     def get_terrain_inputs(self) -> list:
         """Return the terrain inputs"""
-        return self._get_keyword_inputs("terrain")
+        if self.terrain_inputs is None:
+            self.terrain_inputs = self._get_keyword_inputs("terrain")
+        return self.terrain_inputs
 
     def _get_keyword_inputs(self, keyword) -> list:
         """Return the request inputs"""
@@ -1485,7 +1494,7 @@ class Monitor:
         if len(sys_trans_hard) >= 2:
             waypoints_reached_imply_skill_inact_formula = sys_trans_hard[-2]
             waypoints_reached_imply_skill_inact_formula[1][2] = self.not_any_skills_conjunction
-            if True:
+            if DEBUG:
                 print("not_any_skills_conjunction: ", waypoints_reached_imply_skill_inact_formula[1][2])
         return None
 
@@ -1537,7 +1546,7 @@ class Monitor:
 
     def add_skils_for_terrain_state(self, terrain_state: dict) -> None:
         """Add skills for the given terrain state"""
-        skills_data = self._get_curr_skills_from_env_trans() 
+        skills_data: dict = self._get_curr_skills_from_env_trans() 
         new_skills_data = self._create_new_skills_for_terrain(terrain_state, skills_data)
         self.add_skills(new_skills_data)
         self.reset_after_successful_repair()
@@ -1548,29 +1557,88 @@ class Monitor:
         skills_data = dict()
         for formula in self.asts[self.properties["env_trans"]]:
             if self.contains_skill(formula):
-                skill: Skill = self._get_skill_from_formula(formula)
-                skills_data[skill.get_name()] = skill
+                skill_tuple: tuple = self._get_skill_from_formula(formula)
+                skills_data[skill_tuple[0]] = skill_tuple
         return skills_data
     
     def _create_new_skills_for_terrain(self, terrain_state: dict, skills_data: dict) -> dict:
-        """Create new skills for the given terrain state"""
+        """Create new skills data for the given terrain state"""
         new_skills_data = dict()
+        skill_count = len(skills_data)
+        if DEBUG: print("num_skills: ", skill_count)
+        for skill_name, pre_dict, post_dict in skills_data.values():
+            if DEBUG:
+                print("skill_name: ", skill_name)
+                print("pre_dict: ", pre_dict)
+                print("post_dict: ", post_dict)
+            # sys.exit(0)
+            related_terrains = self.get_related_terrains(pre_dict, post_dict)
+            if self.related_terrains_conforms_terrain_state(related_terrains, terrain_state):
+                new_skill_name = f"skill_{skill_count}"
+                skill_count += 1
+                new_pre_dict = self.change_pre_dict(pre_dict, terrain_state)
+                new_skills_data[new_skill_name] = self.create_skill_object_from_pre_and_post_dicts(new_skill_name, new_pre_dict, post_dict)
+        return new_skills_data
+    
+    def get_related_terrains(self, pre_dict: dict, post_dict: dict) -> dict:
+        pre_loc: list = self.get_location_from_state(pre_dict)
+        post_loc: list = self.get_location_from_state(post_dict)
+        related_terrain_prefix_loc = self.get_related_terrain_prefix_loc(pre_loc, post_loc)
+        if DEBUG: print("related_terrain_prefix: ", related_terrain_prefix_loc)
+        related_terrains: dict = dict()
+        terrain_inputs = self.get_terrain_inputs()
+        for terrain in terrain_inputs:
+            if any([terrain.startswith(prefix) for prefix in related_terrain_prefix_loc]):
+                related_terrains[terrain] = pre_dict[terrain]
+        if DEBUG:
+            print("related_terrains: ", related_terrains)
+            sys.exit(0)
+        return related_terrains
+
+    def get_related_terrain_prefix_loc(self, pre_loc: list, post_loc: list) -> list:
+        """Get related terrain prefix from location"""
+        return [f"{pre_loc[0][0]}_{pre_loc[0][1]}_{pre_loc[1][0]}_{pre_loc[1][1]}_terrain", 
+                f"{post_loc[0][0]}_{post_loc[0][1]}_{post_loc[1][0]}_{post_loc[1][1]}_terrain"]
+
+    def get_location_from_state(self, state: dict) -> list:
+        loc: list = []
+        location_inputs = self.get_location_inputs()
+        for inp, val in state.items():
+            if inp in location_inputs and val:
+                loc.append(inp)
+        if not loc[0].startswith("x"):
+            loc = loc[::-1]
+        return loc
+            
+    def related_terrains_conforms_terrain_state(self, related_terrains: dict, terrain_state: dict) -> bool:
+        """Check if related terrains value are in the terrain state"""
+        for related_terrain in related_terrains.keys():
+            assert related_terrain in terrain_state.keys()
+            if not related_terrains[related_terrain] == terrain_state[related_terrain]:
+                return False
+        return True
+    
+    def change_pre_dict(self, pre_dict: dict, terrain_state: dict) -> dict:
+        """Change the pre_dict wrt the terrain state"""
+        new_pre_dict = copy.deepcopy(pre_dict)
+        for terrain, val in terrain_state.items():
+            new_pre_dict[terrain] = val
+        return new_pre_dict
         
 
-    def _get_skill_from_formula(self, formula: list) -> Skill:
+    def _get_skill_from_formula(self, formula: list) -> tuple:
         """Return the skill object from the formula"""
         if DEBUG: print("formula: ", formula)
         pre_conjunction: list = formula[1][1]
         post_conjunction: list = formula[1][2]
-        print("pre_conjunction: ", pre_conjunction)
-        print("post_conjunction: ", post_conjunction)
+        if DEBUG: print("pre_conjunction: ", pre_conjunction)
+        if DEBUG: print("post_conjunction: ", post_conjunction)
         pre_dict: dict = self.conjunction_ast_to_dict(pre_conjunction, is_prime=False)
         post_dict: dict = self.conjunction_ast_to_dict(post_conjunction, is_prime=True)
         skill_name: str = self.get_and_remove_skill_name_from_pre_dict(pre_dict)
-        skill = self.create_skill_object_from_pre_and_post_dicts(skill_name, pre_dict, post_dict)
-        return skill
-        
-        sys.exit(0)
+        # skill = self.create_skill_object_from_pre_and_post_dicts(skill_name, pre_dict, post_dict)
+        return (skill_name, pre_dict, post_dict)
+
 
     def conjunction_ast_to_dict(self, conjunction: list, is_prime: bool) -> dict:
         """Return the dictionary from the conjunction AST"""
@@ -1633,8 +1701,8 @@ class Monitor:
         skill_dict["intermediate_states"] = skill_info["intermediate_states"]
         skill_dict["initial_preconditions"] = skill_info["initial_preconditions"]
         skill_dict["final_postconditions"] = skill_info["final_postconditions"]
-        original_skill = find_true_symbols(skill_info["original_skill"])[0]
-        skill_dict["original_skill"] = original_skill
+        # original_skill = find_true_symbols(skill_info["original_skill"])[0]
+        # skill_dict["original_skill"] = original_skill
         # skill_dict["primitive_skill"] = self.skills_data[original_skill]["primitive_skill"] # will be changed
         # skill_dict["type"] = self.skills_data[original_skill]["type"]
         # skill_dict["goal_type"] = self.skills_data[original_skill]["goal_type"]
@@ -2004,7 +2072,13 @@ def test_add_skils_for_terrain_state(input_file: str, filename_json: str = None,
                         uncontrollable_variables=uncontrollable_variables,
                         opts=opts)
     
+    # compiler.remove_backup_skills()
+    # compiler.generate_structuredslugsplus(input_file)
+    # return
+    
     compiler.add_skils_for_terrain_state(terrain_state)
+    if DEBUG: print("outfile_file: ", output_file)
+    compiler.generate_structuredslugsplus(output_file)
 
 
 if __name__ == '__main__':

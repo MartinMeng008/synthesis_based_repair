@@ -22,7 +22,7 @@ class Skill:
         self.info = info
         self.location_inputs = location_inputs
         self.terrain_inputs = terrain_inputs
-        if True:
+        if False:
             print("location inputs order: ", self.location_inputs)
             print("terrain inputs order: ", self.terrain_inputs)
         self.name = info['name']

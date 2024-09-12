@@ -101,6 +101,7 @@ class OnlineRepair:
             self.compiler.generate_slugsin(self.output_filename_slugsin)
             self.compiler.generate_structuredslugs(self.output_filename_structuredslugs)
             self.reload_monitor()
+            self.compiler.opts[""]
         return res
     
     def _get_terrain_state_from_req(self, req) -> dict:
