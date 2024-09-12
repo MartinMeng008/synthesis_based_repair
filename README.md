@@ -323,3 +323,8 @@ To execute the main function, from `\synthesis_based_repair` run:
 ```shell
 python main.py -f ../data/perceptive_locomotion/full_spec_fixed_terrain/files.json
 ```
+## Assumptions on specifications
+1. [inactivity without skill] is the last constraint in [ENV_TRANS_HARD]
+2. [skill mutual exclusion] is the last constraint in [SYS_TRANS_HARD]
+3. [waypoints_reached_imply_skill_inactivity] is the second to the last constraint in [SYS_TRANS_HARD]
+4. [possible_terrain_type] is the first constraint in [ENV_TRANS_HARD]
