@@ -20,9 +20,12 @@ from tools import (
     find_controllable_manipulation_symbols,
     list_minus,
     )
+repair_dir = '../synthesis_based_repair'
+sys.path.insert(0, repair_dir)
+from skills import Skill
 
-slugs_location = '/home/zzhou387/code/reactive_synthesis/slugs'
-# slugs_location = '/home/qian/workspace/slugs'
+# slugs_location = '/home/zzhou387/code/reactive_synthesis/slugs'
+slugs_location = '/home/qian/workspace/slugs'
 sys.path.insert(0, f'{slugs_location}/tools/StructuredSlugsParser')
 from compiler import get_asts, asts_to_slugsin, get_asts_from_structuredslugsplus
 from Parser import Parser
@@ -1531,7 +1534,80 @@ class Monitor:
             self.asts['[SYS_INIT]'].append(self.add_formula_wrapper(self.add_not_wrapper(self.name2assignment(super_skill_name))))
         self.generate_env_trans_hard()
         self.generate_sys_trans_hard()
+
+    def add_skils_for_terrain_state(self, terrain_state: dict) -> None:
+        """Add skills for the given terrain state"""
+        skills_data = self._get_curr_skills_from_env_trans() 
+        new_skills_data = self._create_new_skills_for_terrain(terrain_state, skills_data)
+        self.add_skills(new_skills_data)
+        self.reset_after_successful_repair()
+        return None
         
+    def _get_curr_skills_from_env_trans(self) -> dict:
+        """Return the current skills"""
+        skills_data = dict()
+        for formula in self.asts[self.properties["env_trans"]]:
+            if self.contains_skill(formula):
+                skill: Skill = self._get_skill_from_formula(formula)
+                skills_data[skill.get_name()] = skill
+        return skills_data
+    
+    def _create_new_skills_for_terrain(self, terrain_state: dict, skills_data: dict) -> dict:
+        """Create new skills for the given terrain state"""
+        new_skills_data = dict()
+        
+
+    def _get_skill_from_formula(self, formula: list) -> Skill:
+        """Return the skill object from the formula"""
+        if DEBUG: print("formula: ", formula)
+        pre_conjunction: list = formula[1][1]
+        post_conjunction: list = formula[1][2]
+        print("pre_conjunction: ", pre_conjunction)
+        print("post_conjunction: ", post_conjunction)
+        pre_dict: dict = self.conjunction_ast_to_dict(pre_conjunction, is_prime=False)
+        post_dict: dict = self.conjunction_ast_to_dict(post_conjunction, is_prime=True)
+        skill_name: str = self.get_and_remove_skill_name_from_pre_dict(pre_dict)
+        skill = self.create_skill_object_from_pre_and_post_dicts(skill_name, pre_dict, post_dict)
+        return skill
+        
+        sys.exit(0)
+
+    def conjunction_ast_to_dict(self, conjunction: list, is_prime: bool) -> dict:
+        """Return the dictionary from the conjunction AST"""
+        result = dict()
+        for assignment in conjunction[1:]:
+            if self.contains_keyword(assignment, self.terminals["not"]):
+                result[self.get_name_from_unary_formula(assignment, is_prime)] = False
+            else:
+                result[self.get_name_from_assignment_formula(assignment, is_prime)] = True
+        return result
+    
+    def create_skill_object_from_pre_and_post_dicts(self, name: str, pre_dict: dict, post_dict: dict) -> Skill:
+        """Create a skill object from the pre and post dictionaries"""
+        info: dict = dict()
+        info["name"] = name
+        info["initial_preconditions"] = [pre_dict]
+        info["final_postconditions"] = [post_dict]
+        info["intermediate_states"] = [[pre_dict, [post_dict]]]
+        return Skill(info)
+        
+    
+    def get_name_from_unary_formula(self, unary_formula: list, is_prime: bool) -> str:
+        """Return the name from the unary formula"""
+        return self.get_name_from_assignment_formula(unary_formula[2], is_prime)    
+
+    def get_name_from_assignment_formula(self, assignment_formula: list, is_prime: bool) -> str:
+        """Return the name from the assignment formula"""
+        if is_prime:
+            return assignment_formula[1][:-1]
+        return assignment_formula[1]            
+        
+    def get_and_remove_skill_name_from_pre_dict(self, pre_dict: dict) -> str:
+        """Return the skill name from the pre_dict and remove it from the dict"""
+        skill_name = [key for key in pre_dict.keys() if "skill" in key][0]
+        pre_dict.pop(skill_name)
+        return skill_name
+
     def add_curr_skills_to_not_allowed_repair(self) -> None:
         """Add the current skills to not_allowed_repair"""
         for skill in self.get_skills():
@@ -1884,6 +1960,53 @@ def test_add_super_skills(input_file: str, filename_json: str = None, output_fil
     compiler.add_super_skills(num_super_skills)
     compiler.generate_structuredslugsplus(output_file)    
 
+def test_add_skils_for_terrain_state(input_file: str, filename_json: str = None, output_file: str = None, opts: dict = None) -> None:
+    if filename_json is not None:
+        file_json = json_load_wrapper(filename_json)
+        skills_data = json_load_wrapper(file_json['skills'])
+        symbols_data = json_load_wrapper(file_json['symbols'])
+        objects_data = json_load_wrapper(file_json['objects'])
+        controllabe_variables = find_controllable_symbols(symbols_data, objects_data)
+        uncontrollable_variables = find_uncontrollable_symbols(symbols_data, objects_data)
+    else:
+        skills_data = dict()
+        symbols_data = dict()
+        objects_data = dict()
+        controllabe_variables = []
+        uncontrollable_variables = []
+
+    terrain_state = {
+        "x_0_y_0_terrain0": True,
+        "x_0_y_0_terrain1": False,
+        "x_0_y_1_terrain0": True,
+        "x_0_y_1_terrain1": False,
+        "x_0_y_2_terrain0": True,
+        "x_0_y_2_terrain1": False,
+        "x_1_y_0_terrain0": True,
+        "x_1_y_0_terrain1": False,
+        "x_1_y_1_terrain0": True,
+        "x_1_y_1_terrain1": False,
+        "x_1_y_2_terrain0": True,
+        "x_1_y_2_terrain1": False,
+        "x_2_y_0_terrain0": True,
+        "x_2_y_0_terrain1": False,
+        "x_2_y_1_terrain0": True,
+        "x_2_y_1_terrain1": False,
+        "x_2_y_2_terrain0": False,
+        "x_2_y_2_terrain1": True
+    }
+
+    compiler = Compiler(input_file=input_file, 
+                        skills_data=skills_data, 
+                        symbols_data=symbols_data, 
+                        objects_data=objects_data, 
+                        controllabe_variables=controllabe_variables,
+                        uncontrollable_variables=uncontrollable_variables,
+                        opts=opts)
+    
+    compiler.add_skils_for_terrain_state(terrain_state)
+
+
 if __name__ == '__main__':
     # objects_data = json_load_wrapper('examples/cupplate/inputs/pickup_dropoff_cup/abstraction/objects.json')
     # locations_data = json_load_wrapper('examples/cupplate/inputs/pickup_dropoff_cup/abstraction/locations.json')
@@ -1901,19 +2024,21 @@ if __name__ == '__main__':
     argparser.add_argument('-t', '--test', action='store_true', dest='test', required=False, default=False)
     # Add a int flag num_super_skills
     argparser.add_argument('-n', '--num_super_skills', action='store', dest='num_super_skills', required=False, default=0)
-
+    argparser.add_argument('-tt', '--test_terrain', action='store_true', dest='test_terrain', required=False, default=False)
     # Add a Boolean flag gen_terrain_init
     # argparser.add_argument('-g', '--gen_terrain_init', action='store_true', dest='gen_terrain_init', required=False, default=False)
     
     args = argparser.parse_args()
-
     num_super_skills = int(args.num_super_skills)
-    if num_super_skills > 0:
-        test_add_super_skills(args.spec, args.file_json, args.spec_out, args.opts, int(args.num_super_skills))
+    if args.test_terrain:
+        test_add_skils_for_terrain_state(args.spec, args.file_json, args.spec_out, args.opts)
     else:
-        if args.test:
-            test_transform_asts(args.spec, args.file_json, args.spec_out, args.opts)
+        if num_super_skills > 0:
+            test_add_super_skills(args.spec, args.file_json, args.spec_out, args.opts, int(args.num_super_skills))
         else:
-            test_check_realizability(args.spec, args.file_json)
+            if args.test:
+                test_transform_asts(args.spec, args.file_json, args.spec_out, args.opts)
+            else:
+                test_check_realizability(args.spec, args.file_json)
     # print(args.test)
     # test_contains_controllable_input(args.filename)

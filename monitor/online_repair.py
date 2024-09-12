@@ -88,6 +88,7 @@ class OnlineRepair:
             self.compiler.relax_hard_assumption_X_only(terrain_state=terrain_state, indices=violated_indices)
             self.compiler.remove_init_terrain_state_formula()
             self.compiler.add_init_terrain_state(terrain_state)
+            self.compiler.add_skils_for_terrain_state(terrain_state)
             # self.compiler.generate_structuredslugsplus(self.output_filename_structuredslugsplus)
             self.compiler.add_backup_skills()
             self.compiler.generate_structuredslugsplus(self.output_filename_structuredslugsplus)

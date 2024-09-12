@@ -101,6 +101,10 @@ class Skill:
 
     def write_to_file(self, file_name: str) -> None:
         fid = open(file_name, "w")
+        self.write_to_fid(fid)
+        fid.close()
+
+    def write_to_fid(self, fid) -> None:
         fid.write("========\n")
         fid.write(self.name + "\n")
         fid.write("initial preconditions: \n")
@@ -122,7 +126,6 @@ class Skill:
         except AttributeError:
             pass
         fid.write("========\n")
-        fid.close()
 
 
     def get_skill_str(self, include_false=True):

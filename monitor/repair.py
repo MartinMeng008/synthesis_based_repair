@@ -94,7 +94,7 @@ class Repair:
                     # print("post first? ", self.opts['post_first'])
                     # self.opts['post_first'] = not self.opts['post_first']
                     prev_post_first = self.opts['post_first'] = bool((prev_post_first + cnt) % 2)
-                    print("post first? ", self.opts['post_first'])
+                    if DEBUG: print("post first? ", self.opts['post_first'])
                     if DEBUG: breakpoint()
                     _, suggestions = run_repair(self.file_structuredslugsplus, self.opts)
                     found_suggestion = True
@@ -110,9 +110,9 @@ class Repair:
                 skill_array_msg = symbolic_repair_msgs.msg.SkillArray()
                 for _, skill in skills.items():
                     skill.print_dict()
-                    skill.write_to_file(f"{self.opts['new_skills_file']}_{skill.get_name()}.txt")
+                    if DEBUG: skill.write_to_file(f"{self.opts['new_skills_file']}_{skill.get_name()}.txt")
                     skill_msg = skill.get_skill_msg()
-                    if True:
+                    if DEBUG:
                         print(skill_msg)
                     skill_array_msg.skills.append(skill_msg)
                 if self.symbolic_repair_only:
@@ -149,7 +149,7 @@ class Repair:
                         self.compiler.add_skills(good_skills)
                         self.compiler.reset_after_successful_repair()
                     self.compiler.add_backup_skills()
-                    breakpoint()
+                    if DEBUG: breakpoint()
                     self.compiler.generate_structuredslugsplus(self.file_structuredslugsplus)
                     is_realizable = False
                 else:

@@ -53,6 +53,7 @@ def main(filename_json: str) -> None:
         repair = Repair(compiler=compiler, filename=backup_skill_added_filename, opts=compiler.opts, symbolic_repair_only=compiler.opts["symbolic_repair_only"])
         print("Repairing for terrain state: ", terrain_state)
         new_skills = repair.run_symbolic_repair()
+        write_skills_for_terrain_state(new_skills, terrain_state)
         compiler.reset_after_successful_repair()
         compiler.remove_init_terrain_state(terrain_state)
     
@@ -61,6 +62,14 @@ def main(filename_json: str) -> None:
     compiler.generate_structuredslugsplus(output_filename_structuredslugsplus)
     compiler.generate_slugsin(output_filename_slugsin)
     compiler.generate_structuredslugs(output_filename_structuredslugs)
+    return None
+
+def write_skills_for_terrain_state(new_skills: dict, terrain_state: dict) -> None:
+    filename = f"build/new_skills_4_terrain_{'_'.join([terrain for terrain, val in terrain_state.items() if val])}.txt"
+    fid = open(filename, 'w')
+    for _, skill in new_skills.items():
+        skill.write_to_fid(fid)
+    fid.close()
     return None
 
 if __name__ == '__main__':
