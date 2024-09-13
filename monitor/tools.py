@@ -720,6 +720,14 @@ def list_minus(l1: list, l2: list) -> list:
     """Return l1 - l2"""
     return [elem for elem in l1 if elem not in l2]
 
+def write_skills_for_terrain_state(new_skills: dict, terrain_state: dict) -> None:
+    filename = f"build/new_skills_4_terrain_{'_'.join([terrain for terrain, val in terrain_state.items() if val])}.txt"
+    fid = open(filename, 'w')
+    for _, skill in new_skills.items():
+        skill.write_to_fid(fid)
+    fid.close()
+    return None
+
 if __name__ == '__main__':
     objects_data = json_load_wrapper('examples/cupplate/inputs/pickup_dropoff_cup/abstraction/objects.json')
     locations_data = json_load_wrapper('examples/cupplate/inputs/pickup_dropoff_cup/abstraction/locations.json')

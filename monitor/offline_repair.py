@@ -8,6 +8,7 @@ from repair import Repair
 # sys.path.insert(0, '../../')
 from tools import (
     json_load_wrapper,
+    write_skills_for_terrain_state,
     )
     
 def main(filename_json: str) -> None:
@@ -64,13 +65,13 @@ def main(filename_json: str) -> None:
     compiler.generate_structuredslugs(output_filename_structuredslugs)
     return None
 
-def write_skills_for_terrain_state(new_skills: dict, terrain_state: dict) -> None:
-    filename = f"build/new_skills_4_terrain_{'_'.join([terrain for terrain, val in terrain_state.items() if val])}.txt"
-    fid = open(filename, 'w')
-    for _, skill in new_skills.items():
-        skill.write_to_fid(fid)
-    fid.close()
-    return None
+# def write_skills_for_terrain_state(new_skills: dict, terrain_state: dict) -> None:
+#     filename = f"build/new_skills_4_terrain_{'_'.join([terrain for terrain, val in terrain_state.items() if val])}.txt"
+#     fid = open(filename, 'w')
+#     for _, skill in new_skills.items():
+#         skill.write_to_fid(fid)
+#     fid.close()
+#     return None
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser()

@@ -9,6 +9,7 @@ from importlib import reload
 from tools import (
     json_load_wrapper,
     create_build_monitor,
+    write_skills_for_terrain_state,
     )
 import rospy
 
@@ -94,6 +95,7 @@ class OnlineRepair:
             self.compiler.generate_structuredslugsplus(self.output_filename_structuredslugsplus)
             repair = Repair(compiler=self.compiler, filename=self.output_filename_structuredslugsplus, opts=self.compiler.opts, symbolic_repair_only=self.compiler.opts["symbolic_repair_only"])
             new_skills = repair.run_symbolic_repair()
+            write_skills_for_terrain_state(new_skills, terrain_state)
             self.compiler.reset_after_successful_repair()
             self.compiler.remove_init_terrain_state(terrain_state)
             self.compiler.add_init_terrain_states_from_env_trans_hard()
