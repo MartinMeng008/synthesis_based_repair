@@ -1,0 +1,14 @@
+{
+    "input_file_int": "../data/perceptive_locomotion/full_spec_fixed_terrain/icra_3x3_repair_test_chotu_stepping_stone_fixed_terrain_without_obstacle_unitest.structuredslugsplus",
+    "input_file_bool": "build/transformed_icra_3x3_repair_test_chotu_stepping_stone_fixed_terrain_without_obstacle_unitest.structuredslugsplus",
+    "input_file_backup_skill_added": "build/backup_added_transformed_icra_3x3_repair_test_chotu_stepping_stone_fixed_terrain_without_obstacle_unitest.structuredslugsplus",
+    "output_file_structuredslugsplus": "build/repaired_transformed_icra_3x3_repair_test_chotu_stepping_stone_fixed_terrain_without_obstacle_unitest.structuredslugsplus",
+    "output_file_slugsin": "build/repaired_transformed_icra_3x3_repair_test_chotu_stepping_stone_fixed_terrain_without_obstacle_unitest.slugsin",
+    "output_file_structuredslugs": "build/repaired_transformed_icra_3x3_repair_test_chotu_stepping_stone_fixed_terrain_without_obstacle_unitest.structuredslugs",
+    "online_output_file_structuredslugsplus": "build/online_repaired_transformed_icra_3x3_repair_test_chotu_stepping_stone_fixed_terrain_without_obstacle_unitest.structuredslugsplus",
+    "online_output_file_slugsin": "build/online_repaired_transformed_icra_3x3_repair_test_chotu_stepping_stone_fixed_terrain_without_obstacle_unitest.slugsin",
+    "online_output_file_structuredslugs": "build/online_repaired_transformed_icra_3x3_repair_test_chotu_stepping_stone_fixed_terrain_without_obstacle_unitest.structuredslugs",
+    "opts": "../data/perceptive_locomotion/full_spec_fixed_terrain/opts.json",
+    "terrain_states": "../data/perceptive_locomotion/full_spec_fixed_terrain/icra_3x3_repair_test_chotu_stepping_stone_fixed_terrain_without_obstacle_unitest.json",
+    "new_terrain_state": "../data/perceptive_locomotion/full_spec_fixed_terrain/icra_3x3_repair_test_chotu_stepping_stone_fixed_terrain_without_obstacle_unitest.json"
+}
