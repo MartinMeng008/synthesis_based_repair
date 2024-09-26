@@ -119,6 +119,7 @@ class OnlineRepair:
 
 if __name__ == '__main__':
     rospy.init_node('online_repair_node')
+    sys.setrecursionlimit(100000)
     argparser = argparse.ArgumentParser()
     argparser.add_argument('-f', '--file', action='store', dest='file_json', required=False, default=None)
     args = argparser.parse_args()

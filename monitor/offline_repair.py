@@ -12,6 +12,7 @@ from tools import (
     )
     
 def main(filename_json: str) -> None:
+    sys.setrecursionlimit(100000)
     files_json = json_load_wrapper(filename_json)
     # print(files_json)
     skills_data = dict()
