@@ -16,42 +16,43 @@ x_1_y_2_terrain:0...1
 x_2_y_0_terrain:0...1
 x_2_y_1_terrain:0...1
 x_2_y_2_terrain:0...1
+
 [ENV_INIT]
 x = 1
 y = 1
 
 
 [OUTPUT]
-skill0
-skill1
-skill2
-skill3
-skill4
-skill5
-skill6
-skill7
-skill8
-skill9
-skill10
-skill11
-skill12
-skill13
+skill_1
+skill_2
+skill_0
+skill_3
+skill_4
+skill_5
+skill_6
+skill_7
+skill_8
+skill_9
+skill_10
+skill_11
+skill_12
+skill_13
 
 [SYS_INIT]
-! skill0
-! skill1
-! skill2
-! skill3
-! skill4
-! skill5
-! skill6
-! skill7
-! skill8
-! skill9
-! skill10
-! skill11
-! skill12
-! skill13
+! skill_0
+! skill_1
+! skill_2
+! skill_3
+! skill_4
+! skill_5
+! skill_6
+! skill_7
+! skill_8
+! skill_9
+! skill_10
+! skill_11
+! skill_12
+! skill_13
 
 [SYS_TRANS]
 !(x' = 0 & y' = 0 & x_0_y_0_terrain' = 0 & x_1_y_0_terrain' = 0) -> ! skill_0'
@@ -140,8 +141,8 @@ skill13
 !(x' = 2 & y' = 2 & x_2_y_2_terrain' = 1 & x_2_y_1_terrain' = 0) -> ! skill_13'
 
 [SYS_TRANS_HARD]
-(x = xrequest & y = yrequest) -> (! skill0 & ! skill1 & ! skill2 & ! skill3 & ! skill4 & ! skill5 & ! skill6 & ! skill7 & ! skill8 & ! skill9 & ! skill10 & ! skill11 & ! skill12 & ! skill13)
-(skill0' & ! skill1' & ! skill2' & ! skill3' & ! skill4' & ! skill5' & ! skill6' & ! skill7' & ! skill8' & ! skill9' & ! skill10' & ! skill11' & ! skill12' & ! skill13') | (skill1' & ! skill0' & ! skill2' & ! skill3' & ! skill4' & ! skill5' & ! skill6' & ! skill7' & ! skill8' & ! skill9' & ! skill10' & ! skill11' & ! skill12' & ! skill13') | (skill2' & ! skill0' & ! skill1' & ! skill3' & ! skill4' & ! skill5' & ! skill6' & ! skill7' & ! skill8' & ! skill9' & ! skill10' & ! skill11' & ! skill12' & ! skill13') | (skill3' & ! skill0' & ! skill1' & ! skill2' & ! skill4' & ! skill5' & ! skill6' & ! skill7' & ! skill8' & ! skill9' & ! skill10' & ! skill11' & ! skill12' & ! skill13') | (skill4' & ! skill0' & ! skill1' & ! skill2' & ! skill3' & ! skill5' & ! skill6' & ! skill7' & ! skill8' & ! skill9' & ! skill10' & ! skill11' & ! skill12' & ! skill13') | (skill5' & ! skill0' & ! skill1' & ! skill2' & ! skill3' & ! skill4' & ! skill6' & ! skill7' & ! skill8' & ! skill9' & ! skill10' & ! skill11' & ! skill12' & ! skill13') | (skill6' & ! skill0' & ! skill1' & ! skill2' & ! skill3' & ! skill4' & ! skill5' & ! skill7' & ! skill8' & ! skill9' & ! skill10' & ! skill11' & ! skill12' & ! skill13') | (skill7' & ! skill0' & ! skill1' & ! skill2' & ! skill3' & ! skill4' & ! skill5' & ! skill6' & ! skill8' & ! skill9' & ! skill10' & ! skill11' & ! skill12' & ! skill13') | (skill8' & ! skill0' & ! skill1' & ! skill2' & ! skill3' & ! skill4' & ! skill5' & ! skill6' & ! skill7' & ! skill9' & ! skill10' & ! skill11' & ! skill12' & ! skill13') | (skill9' & ! skill0' & ! skill1' & ! skill2' & ! skill3' & ! skill4' & ! skill5' & ! skill6' & ! skill7' & ! skill8' & ! skill10' & ! skill11' & ! skill12' & ! skill13') | (skill10' & ! skill0' & ! skill1' & ! skill2' & ! skill3' & ! skill4' & ! skill5' & ! skill6' & ! skill7' & ! skill8' & ! skill9' & ! skill11' & ! skill12' & ! skill13') | (skill11' & ! skill0' & ! skill1' & ! skill2' & ! skill3' & ! skill4' & ! skill5' & ! skill6' & ! skill7' & ! skill8' & ! skill9' & ! skill10' & ! skill12' & ! skill13') | (skill12' & ! skill0' & ! skill1' & ! skill2' & ! skill3' & ! skill4' & ! skill5' & ! skill6' & ! skill7' & ! skill8' & ! skill9' & ! skill10' & ! skill11' & ! skill13') | (skill13' & ! skill0' & ! skill1' & ! skill2' & ! skill3' & ! skill4' & ! skill5' & ! skill6' & ! skill7' & ! skill8' & ! skill9' & ! skill10' & ! skill11' & ! skill12') | (! skill0' & ! skill1' & ! skill2' & ! skill3' & ! skill4' & ! skill5' & ! skill6' & ! skill7' & ! skill8' & ! skill9' & ! skill10' & ! skill11' & ! skill12' & ! skill13')
+(x = xrequest & y = yrequest) -> (! skill_0 & ! skill_1 & ! skill_2 & ! skill_3 & ! skill_4 & ! skill_5 & ! skill_6 & ! skill_7 & ! skill_8 & ! skill_9 & ! skill_10 & ! skill_11 & ! skill_12 & ! skill_13)
+(skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13') | (skill_1' & ! skill_0' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13') | (skill_2' & ! skill_0' & ! skill_1' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13') | (skill_3' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13') | (skill_4' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13') | (skill_5' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13') | (skill_6' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13') | (skill_7' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13') | (skill_8' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13') | (skill_9' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13') | (skill_10' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_11' & ! skill_12' & ! skill_13') | (skill_11' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_12' & ! skill_13') | (skill_12' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_13') | (skill_13' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12') | (! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13')
 
 
 [ENV_TRANS]
@@ -244,7 +245,7 @@ x_2_y_0_terrain' = x_2_y_0_terrain
 x_2_y_1_terrain' = x_2_y_1_terrain
 x_2_y_2_terrain' = x_2_y_2_terrain
 
-(! skill0 & ! skill1 & ! skill2 & ! skill3 & ! skill4 & ! skill5 & ! skill6 & ! skill7 & ! skill8 & ! skill9 & ! skill10 & ! skill11 & ! skill12 & ! skill13) -> (x' = x & y' = y)
+(! skill_0 & ! skill_1 & ! skill_2 & ! skill_3 & ! skill_4 & ! skill_5 & ! skill_6 & ! skill_7 & ! skill_8 & ! skill_9 & ! skill_10 & ! skill_11 & ! skill_12 & ! skill_13) -> (x' = x & y' = y)
 [SYS_LIVENESS]
 x = xrequest & y = yrequest
 

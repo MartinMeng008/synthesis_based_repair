@@ -2,6 +2,7 @@
 import sys
 import argparse
 import copy
+import math
 # from repair import Repair
 # sys.path.insert(0, '../../')
 from tools import (
@@ -101,6 +102,7 @@ class Compiler:
         self.int_vars_to_vars = {}
         self.int_to_bool_vars = {}
         self.int_vars_to_limits = {}
+        self.int_vars_to_num_bits = {}
         self.int_to_bool_already_transformed = False
 
     def _get_vars_and_asts_from_structuredslugsplus(self) -> None:
@@ -524,11 +526,15 @@ class Monitor:
         self.location_inputs = self.get_location_inputs(self.request_inputs, self.terrain_inputs)
 
         # 1. Add mutual exclusion for each integer variable
-        for _, bool_vars in self.int_to_bool_vars.items():
+        for int_var, bool_vars in self.int_to_bool_vars.items():
             if len(bool_vars) > 1:
-                print("bool_vars: ", bool_vars)
-                self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "change_cons", is_primed = True)
-                self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "change_cons", is_primed = False)
+                if DEBUG: print("bool_vars: ", bool_vars)
+                if self.is_controllable_input(int_var):
+                    self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "change_cons", is_primed = True)
+                    self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "change_cons", is_primed = False)
+                else:
+                    self._add_inputs_limits_constraint(int_var, bool_vars, "change_cons", is_primed = True)
+                    self._add_inputs_limits_constraint(int_var, bool_vars, "change_cons", is_primed = False)
         
         # 2. Add some grounding input must change
         self._add_inputs_must_change_constraint(self.location_inputs + self.terrain_inputs, "change_cons")
@@ -758,9 +764,11 @@ class Monitor:
             self.vars[self.properties["input"]].remove(self.int_vars_to_vars[int_var])
             self.vars[self.properties["input"]] += bool_vars
         
-        if True:
+        if DEBUG:
             print("new inputs: ", self.vars[self.properties["input"]])
-            # sys.exit(0)
+            print("int_vars_to_bool_vars: ", self.int_to_bool_vars)
+            print("int_vars_to_num_bits: ", self.int_vars_to_num_bits)
+            sys.exit(0)
 
         # 3. Change the ASTs
         for property_type in self.structuredslugsplus_property_types:
@@ -773,10 +781,14 @@ class Monitor:
             # sys.exit(0)
 
         # 4. Add input mutual exclusion for each integer variable
-        for _, bool_vars in self.int_to_bool_vars.items():
+        for int_var, bool_vars in self.int_to_bool_vars.items():
             if len(bool_vars) > 1:
-                self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "env_trans_hard", is_primed = True)
-                self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "env_trans_hard", is_primed = False)
+                if self.is_controllable_input(int_var):
+                    self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "env_trans_hard", is_primed = True)
+                    self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "env_trans_hard", is_primed = False)
+                else:
+                    self._add_inputs_limits_constraint(int_var, bool_vars, "env_trans_hard", is_primed = True)
+                    self._add_inputs_limits_constraint(int_var, bool_vars, "env_trans_hard", is_primed = False)
 
         if DEBUG:
             self.print_asts()
@@ -798,21 +810,29 @@ class Monitor:
         except:
             raise Exception(f"Error in {int_var_range}, not integer")
         assert start <= end, f"Error in {int_var_range}, start > end"
+        assert start == 0, f"We only support start from 0, but got {start}"
         self.int_vars_to_limits[int_var] = (start, end)
 
         self.int_to_bool_vars[int_var] = []
-        if False: # if end == 1: # <- we don't consider this case anymore
-            # Case 1: only 0 and 1, just use the int_var
-            self.int_to_bool_vars[int_var].append(int_var)
-        else:
-            # Case 2: more than 1, create boolean variables
+        if self.is_controllable_input(var): 
+            # Case 1: for controllable input, create boolean variables for each of them
             for i in range(start, end + 1):
                 bool_var = f"{int_var}{i}"
                 self.int_to_bool_vars[int_var].append(bool_var)
-                # self.vars[self.properties["input"]].append(bool_var)
-            # self.vars[self.properties["input"]].remove(var)
+            # self.int_to_bool_vars[int_var].append(int_var)
+        else:
+            # Case 2: for uncontrollable input, use binary representation for minimality
+            num_bits = math.ceil(math.log2(end - start + 1))
+            self.int_vars_to_num_bits[int_var] = num_bits
+            self.int_to_bool_vars[int_var] = [f"{int_var}@{i}" + (f".{start}.{end}" if i == 0 else "") for i in range(num_bits)]
         return None
     
+    def is_controllable_input(self, var: str) -> bool:
+        """Check if the input is controllable"""
+        return not self.contains_keyword(var, "terrain") and not self.contains_keyword(var, "request")
+    
+    # var in self.get_location_inputs()
+
     def _change_integer_inputs_to_boolean_inputs_in_ast(self, ast: list) -> None:
         """Change the integer inputs to boolean inputs in the ast"""
         if ast[0] == self.terminals['formula']:
@@ -843,7 +863,7 @@ class Monitor:
             return None
         if ast[0] == self.terminals['calculation']:
             assert len(ast) == 4, f"Error in {ast}, calculation should have 3 elts"
-            assert ast[2][0] == self.terminals["comparison"], f"Error in {ast}, calculation formula should have comparison as the second elt"
+            assert ast[2][0] == self.terminals["comparison"], f"Error in {ast}, calculation formula should have comparison as the second elt, other calculations are not supported yet"
             self._change_integer_inputs_to_boolean_inputs_in_ast(ast[2])
             
             left = ast[1]
@@ -855,10 +875,30 @@ class Monitor:
                 left_int_var = left[1]
                 right_int_var = right[1]
                 left_bool_vars = self._get_bool_vars_from_int_var(left_int_var)
+                left_limit = self._get_int_var_limit(left_int_var)
                 right_bool_vars = self._get_bool_vars_from_int_var(right_int_var)
-                assert len(left_bool_vars) == len(right_bool_vars), f"Error in {ast}, left {left_bool_vars} and right {right_bool_vars} should have the same number of boolean variables"
-                for i in range(len(left_bool_vars)):
-                    new_conjunction_list.append(self.add_biimplication_wrapper(self.name2assignment(left_bool_vars[i]), self.name2assignment(right_bool_vars[i])))
+                right_limit = self._get_int_var_limit(right_int_var)
+                assert left_limit == right_limit, f"Error in {ast}, left {left_int_var} and right {right_int_var} should have the same limit"
+                for i in range(left_limit[0], left_limit[1] + 1):
+                    true_left_bool_vars = self._get_true_bool_vars_from_int_var_limit_idx(left_int_var, left_bool_vars, left_limit, i)
+                    true_right_bool_vars = self._get_true_bool_vars_from_int_var_limit_idx(right_int_var, right_bool_vars, right_limit, i)
+                    if DEBUG:
+                        print("left_int_var: ", left_int_var)
+                        print("right_int_var: ", right_int_var)
+                        print("left_bool_vars: ", left_bool_vars)
+                        print("right_bool_vars: ", right_bool_vars)
+                        print("left_limit: ", left_limit)
+                        print("right_limit: ", right_limit)
+                        print("true_left_bool_vars: ", true_left_bool_vars)
+                        print("true_right_bool_vars: ", true_right_bool_vars)
+                        sys.exit(0)
+                    left_conjunction = self._create_conjunction_to_express_int_var_with_bool_vars(left_bool_vars, true_left_bool_vars)
+                    right_conjunction = self._create_conjunction_to_express_int_var_with_bool_vars(right_bool_vars, true_right_bool_vars)
+                    if DEBUG:
+                        print("left_conjunction: ", left_conjunction)
+                        print("right_conjunction: ", right_conjunction)
+                        sys.exit(0)
+                    new_conjunction_list.append(self.add_biimplication_wrapper(left_conjunction, right_conjunction))
 
             # Case 2: one is numID, the other is number 
             elif left[0] == self.terminals["numID"] or right[0] == self.terminals["numID"]:
@@ -870,6 +910,8 @@ class Monitor:
                     right_number = int(right[1])
                 except:
                     raise Exception(f"Error in {ast}, {right} should be number")
+                left_limit = self._get_int_var_limit(left_int_var)
+                assert left_limit[0] <= right_number <= left_limit[1], f"Error in {ast}, {right_number} out of limit {left_limit}"
                 left_bool_vars = self._get_bool_vars_from_int_var(left_int_var)
                 if len(left_bool_vars) == 1:
                     # Case 2.1: only one boolean variable
@@ -879,21 +921,22 @@ class Monitor:
                         new_conjunction_list.append(self.name2assignment(left_bool_vars[0]))
                 else:
                     # Case 2.2: multiple boolean variables
-                    limit = self._get_int_var_limit(left_int_var)
-                    if DEBUG:
-                        print("right_number: ", right_number)
-                        print("limit: ", limit)
-                    for i in range(limit[0], limit[1]+1):
-                        if DEBUG: breakpoint()
-                        if i == right_number:
-                            new_conjunction_list.append(self.name2assignment(left_bool_vars[i - limit[0]]))
-                        else:
-                            new_conjunction_list.append(self.add_not_wrapper(self.name2assignment(left_bool_vars[i - limit[0]])))
+                    true_left_bool_vars = self._get_true_bool_vars_from_int_var_limit_idx(left_int_var, left_bool_vars, left_limit, right_number)
+                    left_conjunction = self._create_conjunction_to_express_int_var_with_bool_vars(left_bool_vars, true_left_bool_vars)
+                    new_conjunction_list.extend(left_conjunction[1:])
+                    # for i in range(limit[0], limit[1]+1):
+                    #     if DEBUG: breakpoint()
+                    #     if i == right_number:
+                    #         new_conjunction_list.append(self.name2assignment(left_bool_vars[i - limit[0]]))
+                    #     else:
+                    #         new_conjunction_list.append(self.add_not_wrapper(self.name2assignment(left_bool_vars[i - limit[0]])))
             
             # Case 3: both are numbers
             else:
                 raise Exception(f"Error in {ast}, both {left} and {right} are numbers, not supported yet")
             
+            # if len(new_conjunction_list) == 1:
+            #     ast[0] = new_conjunction_list[0]
             ast[0] = self.terminals['conjunction']
             ast[1:] = new_conjunction_list
             return None
@@ -905,20 +948,60 @@ class Monitor:
     def _get_bool_vars_from_int_var(self, int_var: str) -> list:
         """Return a list of boolean variables corresponding to the integer variable"""
         is_primed = self.is_prime(int_var)
-        if is_primed: 
-            int_var = int_var[:-1]
+        int_var = self._unprime(int_var)
         if int_var not in self.int_to_bool_vars:
             raise Exception(f"Error in {int_var}, not an integer variable")
         return self.int_to_bool_vars[int_var] if not is_primed else [var + "'" for var in self.int_to_bool_vars[int_var]]
     
     def _get_int_var_limit(self, int_var: str) -> tuple:
         """Return the limit of the integer variable"""
-        is_primed = self.is_prime(int_var)
-        if is_primed:
-            int_var = int_var[:-1]
+        int_var = self._unprime(int_var)
         if int_var not in self.int_vars_to_limits:
             raise Exception(f"Error in {int_var}, not an integer variable")
         return self.int_vars_to_limits[int_var]
+    
+    def _get_int_var_num_bits(self, int_var: str) -> int:
+        """Return the number of bits of the integer variable"""
+        int_var = self._unprime(int_var)
+        if int_var not in self.int_vars_to_num_bits:
+            raise Exception(f"Error in {int_var}, not an integer variable")
+        return self.int_vars_to_num_bits[int_var]
+    
+    def _get_true_bool_vars_from_int_var_limit_idx(self, int_var: str, bool_vars: list, limit: tuple, i: int) -> list:
+        """Return the boolean variable from the integer variable, limit, and index"""
+        int_var = self._unprime(int_var)
+        # if i < limit[0] or i >= limit[1]:
+        #     raise Exception(f"Error in {int_var}, index {i} out of limit {limit}")
+        if self.is_controllable_input(int_var):
+            # Case 1: for controllable input, return the boolean variable directly from the list
+            return [bool_vars[i]]
+        else:
+            # Case 2: for uncontrollable input, return binary representation for i
+            true_bool_vars = []
+            idx = 0
+            while i > 0:
+                remainder = i % 2
+                if remainder:
+                    true_bool_vars.append(bool_vars[idx])
+                i = i // 2
+                idx += 1
+            return true_bool_vars
+        
+    def _create_conjunction_to_express_int_var_with_bool_vars(self, bool_vars, true_bool_vars) -> list:
+        """Create a conjunction to express the integer variable with boolean variables"""
+        conjunction_list = []
+        for bool_var in true_bool_vars:
+            conjunction_list.append(self.name2assignment(bool_var))
+        for bool_var in list_minus(bool_vars, true_bool_vars):
+            conjunction_list.append(self.add_not_wrapper(self.name2assignment(bool_var)))
+        return self.add_conjunction_wrapper(conjunction_list)
+    
+    def _unprime(self, var: str) -> str:
+        """Return the unprimed variable"""
+        is_primed = self.is_prime(var)
+        if is_primed: 
+            var = var[:-1]
+        return var
 
     def is_prime(self, var: str) -> bool:
         """Return whether the variable is primed"""
@@ -941,6 +1024,25 @@ class Monitor:
                         self.add_conjunction_wrapper(
                             [self.name2assignment(vars[i]), self.name2assignment(vars[j])])))
                 self.asts[self.properties[ast_property]].insert(0, new_formula)
+        return None
+    
+    def _add_inputs_limits_constraint(self, int_var: int, bool_vars: list, ast_property: str, is_primed: bool = False) -> None:
+        """Add input limit constraint for integer variable"""
+        if is_primed:
+            bool_vars = [var + "'" for var in bool_vars]
+        limit = self._get_int_var_limit(int_var)
+        num_bits = self._get_int_var_num_bits(int_var)
+        largest_possible = 2 ** num_bits - 1
+        conjunction_list = []
+        for i in range(limit[1]+1, largest_possible + 1):
+            true_bool_vars = self._get_true_bool_vars_from_int_var_limit_idx(int_var, bool_vars, limit, i)
+            conjunction_list.append(self.add_not_wrapper(self._create_conjunction_to_express_int_var_with_bool_vars(bool_vars, true_bool_vars)))
+        if len(conjunction_list) >= 1:
+            if len(conjunction_list) == 1:
+                new_formula = self.add_formula_wrapper(conjunction_list[0])
+            else:
+                new_formula = self.add_formula_wrapper(self.add_conjunction_wrapper(conjunction_list))
+            self.asts[self.properties[ast_property]].insert(0, new_formula)
         return None
 
     def _add_inputs_must_change_constraint(self, vars: list, ast_property: str) -> None:
