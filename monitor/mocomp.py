@@ -824,7 +824,7 @@ class Monitor:
             # Case 2: for uncontrollable input, use binary representation for minimality
             num_bits = math.ceil(math.log2(end - start + 1))
             self.int_vars_to_num_bits[int_var] = num_bits
-            self.int_to_bool_vars[int_var] = [f"{int_var}@{i}" + (f".{start}.{end}" if i == 0 else "") for i in range(num_bits)]
+            self.int_to_bool_vars[int_var] = [f"{int_var}_{i}" + (f"_{start}_{end}" if i == 0 else "") for i in range(num_bits)]
         return None
     
     def is_controllable_input(self, var: str) -> bool:

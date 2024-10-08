@@ -1,0 +1,248 @@
+[INPUT]
+x0
+x1
+x2
+y0
+y1
+y2
+xrequest_0_0_2
+xrequest_1
+yrequest_0_0_2
+yrequest_1
+x_0_y_0_terrain_0_0_1
+x_0_y_1_terrain_0_0_1
+x_0_y_2_terrain_0_0_1
+x_1_y_0_terrain_0_0_1
+x_1_y_1_terrain_0_0_1
+x_1_y_2_terrain_0_0_1
+x_2_y_0_terrain_0_0_1
+x_2_y_1_terrain_0_0_1
+x_2_y_2_terrain_0_0_1
+
+[OUTPUT]
+skill_0
+skill_1
+skill_2
+skill_3
+skill_4
+skill_5
+skill_6
+skill_7
+skill_8
+skill_9
+skill_10
+skill_11
+skill_12
+skill_13
+
+[ENV_INIT]
+( x1 & ! x0 & ! x2 )
+( y1 & ! y0 & ! y2 )
+( ! xrequest_0_0_2 & xrequest_1)
+( ! yrequest_0_0_2 & yrequest_1)
+x_0_y_0_terrain_0_0_1
+x_0_y_1_terrain_0_0_1
+x_0_y_2_terrain_0_0_1
+x_1_y_0_terrain_0_0_1
+x_1_y_1_terrain_0_0_1
+x_1_y_2_terrain_0_0_1
+x_2_y_0_terrain_0_0_1
+x_2_y_1_terrain_0_0_1
+x_2_y_2_terrain_0_0_1
+
+[SYS_INIT]
+! skill_0
+! skill_1
+! skill_2
+! skill_3
+! skill_4
+! skill_5
+! skill_6
+! skill_7
+! skill_8
+! skill_9
+! skill_10
+! skill_11
+! skill_12
+! skill_13
+
+[ENV_TRANS]
+( ( skill_0 & ( x0 & ! x1 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( ! x_0_y_0_terrain_0_0_1 ) & ( ! x_1_y_0_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_0 & ( x1 & ! x0 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( ! x_1_y_0_terrain_0_0_1 ) & ( ! x_2_y_0_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_0 & ( x0 & ! x1 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_0_y_1_terrain_0_0_1 ) & ( ! x_1_y_1_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_0 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_1_y_1_terrain_0_0_1 ) & ( ! x_2_y_1_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_0 & ( x0 & ! x1 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( ! x_0_y_2_terrain_0_0_1 ) & ( ! x_1_y_2_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_0 & ( x1 & ! x0 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( ! x_1_y_2_terrain_0_0_1 ) & ( ! x_2_y_2_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_1 & ( x0 & ! x1 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( ! x_0_y_0_terrain_0_0_1 ) & ( ! x_0_y_1_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_1 & ( x1 & ! x0 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( ! x_1_y_0_terrain_0_0_1 ) & ( ! x_1_y_1_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_1 & ( x2 & ! x0 & ! x1 ) & ( y0 & ! y1 & ! y2 ) & ( ! x_2_y_0_terrain_0_0_1 ) & ( ! x_2_y_1_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_1 & ( x0 & ! x1 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_0_y_1_terrain_0_0_1 ) & ( ! x_0_y_2_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_1 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_1_y_1_terrain_0_0_1 ) & ( ! x_1_y_2_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_1 & ( x2 & ! x0 & ! x1 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_2_y_1_terrain_0_0_1 ) & ( ! x_2_y_2_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_2 & ( x0 & ! x1 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_0_y_1_terrain_0_0_1 ) & ( ! x_0_y_0_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_2 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_1_y_1_terrain_0_0_1 ) & ( ! x_1_y_0_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_2 & ( x2 & ! x0 & ! x1 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_2_y_1_terrain_0_0_1 ) & ( ! x_2_y_0_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_2 & ( x0 & ! x1 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( ! x_0_y_2_terrain_0_0_1 ) & ( ! x_0_y_1_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_2 & ( x1 & ! x0 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( ! x_1_y_2_terrain_0_0_1 ) & ( ! x_1_y_1_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_2 & ( x2 & ! x0 & ! x1 ) & ( y2 & ! y0 & ! y1 ) & ( ! x_2_y_2_terrain_0_0_1 ) & ( ! x_2_y_1_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_3 & ( x1 & ! x0 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( ! x_1_y_0_terrain_0_0_1 ) & ( ! x_0_y_0_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_3 & ( x2 & ! x0 & ! x1 ) & ( y0 & ! y1 & ! y2 ) & ( ! x_2_y_0_terrain_0_0_1 ) & ( ! x_1_y_0_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_3 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_1_y_1_terrain_0_0_1 ) & ( ! x_0_y_1_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_3 & ( x2 & ! x0 & ! x1 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_2_y_1_terrain_0_0_1 ) & ( ! x_1_y_1_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_3 & ( x1 & ! x0 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( ! x_1_y_2_terrain_0_0_1 ) & ( ! x_0_y_2_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_3 & ( x2 & ! x0 & ! x1 ) & ( y2 & ! y0 & ! y1 ) & ( ! x_2_y_2_terrain_0_0_1 ) & ( ! x_1_y_2_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_4 & ( x0 & ! x1 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( x_0_y_0_terrain_0_0_1 ) & ( ! x_1_y_0_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_4 & ( x1 & ! x0 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( x_1_y_0_terrain_0_0_1 ) & ( ! x_2_y_0_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_4 & ( x0 & ! x1 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( x_0_y_1_terrain_0_0_1 ) & ( ! x_1_y_1_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_4 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( x_1_y_1_terrain_0_0_1 ) & ( ! x_2_y_1_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_4 & ( x0 & ! x1 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( x_0_y_2_terrain_0_0_1 ) & ( ! x_1_y_2_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_4 & ( x1 & ! x0 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( x_1_y_2_terrain_0_0_1 ) & ( ! x_2_y_2_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_5 & ( x1 & ! x0 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( ! x_1_y_0_terrain_0_0_1 ) & ( x_0_y_0_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_5 & ( x2 & ! x0 & ! x1 ) & ( y0 & ! y1 & ! y2 ) & ( ! x_2_y_0_terrain_0_0_1 ) & ( x_1_y_0_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_5 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_1_y_1_terrain_0_0_1 ) & ( x_0_y_1_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_5 & ( x2 & ! x0 & ! x1 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_2_y_1_terrain_0_0_1 ) & ( x_1_y_1_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_5 & ( x1 & ! x0 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( ! x_1_y_2_terrain_0_0_1 ) & ( x_0_y_2_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_5 & ( x2 & ! x0 & ! x1 ) & ( y2 & ! y0 & ! y1 ) & ( ! x_2_y_2_terrain_0_0_1 ) & ( x_1_y_2_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_6 & ( x0 & ! x1 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( ! x_0_y_0_terrain_0_0_1 ) & ( x_1_y_0_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_6 & ( x1 & ! x0 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( ! x_1_y_0_terrain_0_0_1 ) & ( x_2_y_0_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_6 & ( x0 & ! x1 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_0_y_1_terrain_0_0_1 ) & ( x_1_y_1_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_6 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_1_y_1_terrain_0_0_1 ) & ( x_2_y_1_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_6 & ( x0 & ! x1 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( ! x_0_y_2_terrain_0_0_1 ) & ( x_1_y_2_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_6 & ( x1 & ! x0 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( ! x_1_y_2_terrain_0_0_1 ) & ( x_2_y_2_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_7 & ( x1 & ! x0 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( x_1_y_0_terrain_0_0_1 ) & ( ! x_0_y_0_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_7 & ( x2 & ! x0 & ! x1 ) & ( y0 & ! y1 & ! y2 ) & ( x_2_y_0_terrain_0_0_1 ) & ( ! x_1_y_0_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_7 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( x_1_y_1_terrain_0_0_1 ) & ( ! x_0_y_1_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_7 & ( x2 & ! x0 & ! x1 ) & ( y1 & ! y0 & ! y2 ) & ( x_2_y_1_terrain_0_0_1 ) & ( ! x_1_y_1_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_7 & ( x1 & ! x0 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( x_1_y_2_terrain_0_0_1 ) & ( ! x_0_y_2_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_7 & ( x2 & ! x0 & ! x1 ) & ( y2 & ! y0 & ! y1 ) & ( x_2_y_2_terrain_0_0_1 ) & ( ! x_1_y_2_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_8 & ( x0 & ! x1 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( x_0_y_0_terrain_0_0_1 ) & ( x_1_y_0_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_8 & ( x1 & ! x0 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( x_1_y_0_terrain_0_0_1 ) & ( x_2_y_0_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_8 & ( x0 & ! x1 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( x_0_y_1_terrain_0_0_1 ) & ( x_1_y_1_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_8 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( x_1_y_1_terrain_0_0_1 ) & ( x_2_y_1_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_8 & ( x0 & ! x1 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( x_0_y_2_terrain_0_0_1 ) & ( x_1_y_2_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_8 & ( x1 & ! x0 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( x_1_y_2_terrain_0_0_1 ) & ( x_2_y_2_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_9 & ( x1 & ! x0 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( x_1_y_0_terrain_0_0_1 ) & ( x_0_y_0_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_9 & ( x2 & ! x0 & ! x1 ) & ( y0 & ! y1 & ! y2 ) & ( x_2_y_0_terrain_0_0_1 ) & ( x_1_y_0_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_9 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( x_1_y_1_terrain_0_0_1 ) & ( x_0_y_1_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_9 & ( x2 & ! x0 & ! x1 ) & ( y1 & ! y0 & ! y2 ) & ( x_2_y_1_terrain_0_0_1 ) & ( x_1_y_1_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_9 & ( x1 & ! x0 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( x_1_y_2_terrain_0_0_1 ) & ( x_0_y_2_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_9 & ( x2 & ! x0 & ! x1 ) & ( y2 & ! y0 & ! y1 ) & ( x_2_y_2_terrain_0_0_1 ) & ( x_1_y_2_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_10 & ( x0 & ! x1 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( x_0_y_0_terrain_0_0_1 ) & ( ! x_0_y_1_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_10 & ( x1 & ! x0 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( x_1_y_0_terrain_0_0_1 ) & ( ! x_1_y_1_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_10 & ( x2 & ! x0 & ! x1 ) & ( y0 & ! y1 & ! y2 ) & ( x_2_y_0_terrain_0_0_1 ) & ( ! x_2_y_1_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_10 & ( x0 & ! x1 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( x_0_y_1_terrain_0_0_1 ) & ( ! x_0_y_2_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_10 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( x_1_y_1_terrain_0_0_1 ) & ( ! x_1_y_2_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_10 & ( x2 & ! x0 & ! x1 ) & ( y1 & ! y0 & ! y2 ) & ( x_2_y_1_terrain_0_0_1 ) & ( ! x_2_y_2_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_11 & ( x0 & ! x1 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_0_y_1_terrain_0_0_1 ) & ( x_0_y_0_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_11 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_1_y_1_terrain_0_0_1 ) & ( x_1_y_0_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_11 & ( x2 & ! x0 & ! x1 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_2_y_1_terrain_0_0_1 ) & ( x_2_y_0_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_11 & ( x0 & ! x1 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( ! x_0_y_2_terrain_0_0_1 ) & ( x_0_y_1_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_11 & ( x1 & ! x0 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( ! x_1_y_2_terrain_0_0_1 ) & ( x_1_y_1_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_11 & ( x2 & ! x0 & ! x1 ) & ( y2 & ! y0 & ! y1 ) & ( ! x_2_y_2_terrain_0_0_1 ) & ( x_2_y_1_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_12 & ( x0 & ! x1 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( ! x_0_y_0_terrain_0_0_1 ) & ( x_0_y_1_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_12 & ( x1 & ! x0 & ! x2 ) & ( y0 & ! y1 & ! y2 ) & ( ! x_1_y_0_terrain_0_0_1 ) & ( x_1_y_1_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_12 & ( x2 & ! x0 & ! x1 ) & ( y0 & ! y1 & ! y2 ) & ( ! x_2_y_0_terrain_0_0_1 ) & ( x_2_y_1_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_12 & ( x0 & ! x1 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_0_y_1_terrain_0_0_1 ) & ( x_0_y_2_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_12 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_1_y_1_terrain_0_0_1 ) & ( x_1_y_2_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_12 & ( x2 & ! x0 & ! x1 ) & ( y1 & ! y0 & ! y2 ) & ( ! x_2_y_1_terrain_0_0_1 ) & ( x_2_y_2_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_13 & ( x0 & ! x1 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( x_0_y_1_terrain_0_0_1 ) & ( ! x_0_y_0_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_13 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) & ( x_1_y_1_terrain_0_0_1 ) & ( ! x_1_y_0_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_13 & ( x2 & ! x0 & ! x1 ) & ( y1 & ! y0 & ! y2 ) & ( x_2_y_1_terrain_0_0_1 ) & ( ! x_2_y_0_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_13 & ( x0 & ! x1 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( x_0_y_2_terrain_0_0_1 ) & ( ! x_0_y_1_terrain_0_0_1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_13 & ( x1 & ! x0 & ! x2 ) & ( y2 & ! y0 & ! y1 ) & ( x_1_y_2_terrain_0_0_1 ) & ( ! x_1_y_1_terrain_0_0_1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_13 & ( x2 & ! x0 & ! x1 ) & ( y2 & ! y0 & ! y1 ) & ( x_2_y_2_terrain_0_0_1 ) & ( ! x_2_y_1_terrain_0_0_1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) )
+
+[ENV_TRANS_HARD]
+! ( yrequest_0_0_2 & yrequest_1 )
+! ( yrequest_0_0_2' & yrequest_1' )
+! ( xrequest_0_0_2 & xrequest_1 )
+! ( xrequest_0_0_2' & xrequest_1' )
+! ( y1 & y2 )
+! ( y0 & y2 )
+! ( y0 & y1 )
+( y0 | y1 | y2 )
+! ( y1' & y2' )
+! ( y0' & y2' )
+! ( y0' & y1' )
+( y0' | y1' | y2' )
+! ( x1 & x2 )
+! ( x0 & x2 )
+! ( x0 & x1 )
+( x0 | x1 | x2 )
+! ( x1' & x2' )
+! ( x0' & x2' )
+! ( x0' & x1' )
+( x0' | x1' | x2' )
+( ( ( ( ! xrequest_0_0_2' & ! xrequest_1' ) <-> ( ! xrequest_0_0_2 & ! xrequest_1 ) ) & ( ( xrequest_0_0_2' & ! xrequest_1' ) <-> ( xrequest_0_0_2 & ! xrequest_1 ) ) & ( ( xrequest_1' & ! xrequest_0_0_2' ) <-> ( xrequest_1 & ! xrequest_0_0_2 ) ) ) & ( ( ( ! yrequest_0_0_2' & ! yrequest_1' ) <-> ( ! yrequest_0_0_2 & ! yrequest_1 ) ) & ( ( yrequest_0_0_2' & ! yrequest_1' ) <-> ( yrequest_0_0_2 & ! yrequest_1 ) ) & ( ( yrequest_1' & ! yrequest_0_0_2' ) <-> ( yrequest_1 & ! yrequest_0_0_2 ) ) ) )
+( ( ( ! x_0_y_0_terrain_0_0_1' ) <-> ( ! x_0_y_0_terrain_0_0_1 ) ) & ( ( x_0_y_0_terrain_0_0_1' ) <-> ( x_0_y_0_terrain_0_0_1 ) ) )
+( ( ( ! x_0_y_1_terrain_0_0_1' ) <-> ( ! x_0_y_1_terrain_0_0_1 ) ) & ( ( x_0_y_1_terrain_0_0_1' ) <-> ( x_0_y_1_terrain_0_0_1 ) ) )
+( ( ( ! x_0_y_2_terrain_0_0_1' ) <-> ( ! x_0_y_2_terrain_0_0_1 ) ) & ( ( x_0_y_2_terrain_0_0_1' ) <-> ( x_0_y_2_terrain_0_0_1 ) ) )
+( ( ( ! x_1_y_0_terrain_0_0_1' ) <-> ( ! x_1_y_0_terrain_0_0_1 ) ) & ( ( x_1_y_0_terrain_0_0_1' ) <-> ( x_1_y_0_terrain_0_0_1 ) ) )
+( ( ( ! x_1_y_1_terrain_0_0_1' ) <-> ( ! x_1_y_1_terrain_0_0_1 ) ) & ( ( x_1_y_1_terrain_0_0_1' ) <-> ( x_1_y_1_terrain_0_0_1 ) ) )
+( ( ( ! x_1_y_2_terrain_0_0_1' ) <-> ( ! x_1_y_2_terrain_0_0_1 ) ) & ( ( x_1_y_2_terrain_0_0_1' ) <-> ( x_1_y_2_terrain_0_0_1 ) ) )
+( ( ( ! x_2_y_0_terrain_0_0_1' ) <-> ( ! x_2_y_0_terrain_0_0_1 ) ) & ( ( x_2_y_0_terrain_0_0_1' ) <-> ( x_2_y_0_terrain_0_0_1 ) ) )
+( ( ( ! x_2_y_1_terrain_0_0_1' ) <-> ( ! x_2_y_1_terrain_0_0_1 ) ) & ( ( x_2_y_1_terrain_0_0_1' ) <-> ( x_2_y_1_terrain_0_0_1 ) ) )
+( ( ( ! x_2_y_2_terrain_0_0_1' ) <-> ( ! x_2_y_2_terrain_0_0_1 ) ) & ( ( x_2_y_2_terrain_0_0_1' ) <-> ( x_2_y_2_terrain_0_0_1 ) ) )
+( ( ! skill_0 & ! skill_1 & ! skill_2 & ! skill_3 & ! skill_4 & ! skill_5 & ! skill_6 & ! skill_7 & ! skill_8 & ! skill_9 & ! skill_10 & ! skill_11 & ! skill_12 & ! skill_13 ) -> ( ( ( ( x0' & ! x1' & ! x2' ) <-> ( x0 & ! x1 & ! x2 ) ) & ( ( x1' & ! x0' & ! x2' ) <-> ( x1 & ! x0 & ! x2 ) ) & ( ( x2' & ! x0' & ! x1' ) <-> ( x2 & ! x0 & ! x1 ) ) ) & ( ( ( y0' & ! y1' & ! y2' ) <-> ( y0 & ! y1 & ! y2 ) ) & ( ( y1' & ! y0' & ! y2' ) <-> ( y1 & ! y0 & ! y2 ) ) & ( ( y2' & ! y0' & ! y1' ) <-> ( y2 & ! y0 & ! y1 ) ) ) ) )
+
+[SYS_TRANS]
+( ! ( ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( ! x_0_y_0_terrain_0_0_1' ) & ( ! x_1_y_0_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( ! x_1_y_0_terrain_0_0_1' ) & ( ! x_2_y_0_terrain_0_0_1' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_0_y_1_terrain_0_0_1' ) & ( ! x_1_y_1_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_1_y_1_terrain_0_0_1' ) & ( ! x_2_y_1_terrain_0_0_1' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( ! x_0_y_2_terrain_0_0_1' ) & ( ! x_1_y_2_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( ! x_1_y_2_terrain_0_0_1' ) & ( ! x_2_y_2_terrain_0_0_1' ) ) ) -> ! skill_0' )
+( ! ( ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( ! x_0_y_0_terrain_0_0_1' ) & ( ! x_0_y_1_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( ! x_1_y_0_terrain_0_0_1' ) & ( ! x_1_y_1_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) & ( ! x_2_y_0_terrain_0_0_1' ) & ( ! x_2_y_1_terrain_0_0_1' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_0_y_1_terrain_0_0_1' ) & ( ! x_0_y_2_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_1_y_1_terrain_0_0_1' ) & ( ! x_1_y_2_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_2_y_1_terrain_0_0_1' ) & ( ! x_2_y_2_terrain_0_0_1' ) ) ) -> ! skill_1' )
+( ! ( ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_0_y_1_terrain_0_0_1' ) & ( ! x_0_y_0_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_1_y_1_terrain_0_0_1' ) & ( ! x_1_y_0_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_2_y_1_terrain_0_0_1' ) & ( ! x_2_y_0_terrain_0_0_1' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( ! x_0_y_2_terrain_0_0_1' ) & ( ! x_0_y_1_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( ! x_1_y_2_terrain_0_0_1' ) & ( ! x_1_y_1_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) & ( ! x_2_y_2_terrain_0_0_1' ) & ( ! x_2_y_1_terrain_0_0_1' ) ) ) -> ! skill_2' )
+( ! ( ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( ! x_1_y_0_terrain_0_0_1' ) & ( ! x_0_y_0_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) & ( ! x_2_y_0_terrain_0_0_1' ) & ( ! x_1_y_0_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_1_y_1_terrain_0_0_1' ) & ( ! x_0_y_1_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_2_y_1_terrain_0_0_1' ) & ( ! x_1_y_1_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( ! x_1_y_2_terrain_0_0_1' ) & ( ! x_0_y_2_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) & ( ! x_2_y_2_terrain_0_0_1' ) & ( ! x_1_y_2_terrain_0_0_1' ) ) ) -> ! skill_3' )
+( ! ( ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( x_0_y_0_terrain_0_0_1' ) & ( ! x_1_y_0_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( x_1_y_0_terrain_0_0_1' ) & ( ! x_2_y_0_terrain_0_0_1' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( x_0_y_1_terrain_0_0_1' ) & ( ! x_1_y_1_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( x_1_y_1_terrain_0_0_1' ) & ( ! x_2_y_1_terrain_0_0_1' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( x_0_y_2_terrain_0_0_1' ) & ( ! x_1_y_2_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( x_1_y_2_terrain_0_0_1' ) & ( ! x_2_y_2_terrain_0_0_1' ) ) ) -> ! skill_4' )
+( ! ( ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( ! x_1_y_0_terrain_0_0_1' ) & ( x_0_y_0_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) & ( ! x_2_y_0_terrain_0_0_1' ) & ( x_1_y_0_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_1_y_1_terrain_0_0_1' ) & ( x_0_y_1_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_2_y_1_terrain_0_0_1' ) & ( x_1_y_1_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( ! x_1_y_2_terrain_0_0_1' ) & ( x_0_y_2_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) & ( ! x_2_y_2_terrain_0_0_1' ) & ( x_1_y_2_terrain_0_0_1' ) ) ) -> ! skill_5' )
+( ! ( ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( ! x_0_y_0_terrain_0_0_1' ) & ( x_1_y_0_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( ! x_1_y_0_terrain_0_0_1' ) & ( x_2_y_0_terrain_0_0_1' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_0_y_1_terrain_0_0_1' ) & ( x_1_y_1_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_1_y_1_terrain_0_0_1' ) & ( x_2_y_1_terrain_0_0_1' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( ! x_0_y_2_terrain_0_0_1' ) & ( x_1_y_2_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( ! x_1_y_2_terrain_0_0_1' ) & ( x_2_y_2_terrain_0_0_1' ) ) ) -> ! skill_6' )
+( ! ( ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( x_1_y_0_terrain_0_0_1' ) & ( ! x_0_y_0_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) & ( x_2_y_0_terrain_0_0_1' ) & ( ! x_1_y_0_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( x_1_y_1_terrain_0_0_1' ) & ( ! x_0_y_1_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) & ( x_2_y_1_terrain_0_0_1' ) & ( ! x_1_y_1_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( x_1_y_2_terrain_0_0_1' ) & ( ! x_0_y_2_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) & ( x_2_y_2_terrain_0_0_1' ) & ( ! x_1_y_2_terrain_0_0_1' ) ) ) -> ! skill_7' )
+( ! ( ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( x_0_y_0_terrain_0_0_1' ) & ( x_1_y_0_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( x_1_y_0_terrain_0_0_1' ) & ( x_2_y_0_terrain_0_0_1' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( x_0_y_1_terrain_0_0_1' ) & ( x_1_y_1_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( x_1_y_1_terrain_0_0_1' ) & ( x_2_y_1_terrain_0_0_1' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( x_0_y_2_terrain_0_0_1' ) & ( x_1_y_2_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( x_1_y_2_terrain_0_0_1' ) & ( x_2_y_2_terrain_0_0_1' ) ) ) -> ! skill_8' )
+( ! ( ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( x_1_y_0_terrain_0_0_1' ) & ( x_0_y_0_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) & ( x_2_y_0_terrain_0_0_1' ) & ( x_1_y_0_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( x_1_y_1_terrain_0_0_1' ) & ( x_0_y_1_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) & ( x_2_y_1_terrain_0_0_1' ) & ( x_1_y_1_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( x_1_y_2_terrain_0_0_1' ) & ( x_0_y_2_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) & ( x_2_y_2_terrain_0_0_1' ) & ( x_1_y_2_terrain_0_0_1' ) ) ) -> ! skill_9' )
+( ! ( ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( x_0_y_0_terrain_0_0_1' ) & ( ! x_0_y_1_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( x_1_y_0_terrain_0_0_1' ) & ( ! x_1_y_1_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) & ( x_2_y_0_terrain_0_0_1' ) & ( ! x_2_y_1_terrain_0_0_1' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( x_0_y_1_terrain_0_0_1' ) & ( ! x_0_y_2_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( x_1_y_1_terrain_0_0_1' ) & ( ! x_1_y_2_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) & ( x_2_y_1_terrain_0_0_1' ) & ( ! x_2_y_2_terrain_0_0_1' ) ) ) -> ! skill_10' )
+( ! ( ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_0_y_1_terrain_0_0_1' ) & ( x_0_y_0_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_1_y_1_terrain_0_0_1' ) & ( x_1_y_0_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_2_y_1_terrain_0_0_1' ) & ( x_2_y_0_terrain_0_0_1' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( ! x_0_y_2_terrain_0_0_1' ) & ( x_0_y_1_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( ! x_1_y_2_terrain_0_0_1' ) & ( x_1_y_1_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) & ( ! x_2_y_2_terrain_0_0_1' ) & ( x_2_y_1_terrain_0_0_1' ) ) ) -> ! skill_11' )
+( ! ( ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( ! x_0_y_0_terrain_0_0_1' ) & ( x_0_y_1_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) & ( ! x_1_y_0_terrain_0_0_1' ) & ( x_1_y_1_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) & ( ! x_2_y_0_terrain_0_0_1' ) & ( x_2_y_1_terrain_0_0_1' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_0_y_1_terrain_0_0_1' ) & ( x_0_y_2_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_1_y_1_terrain_0_0_1' ) & ( x_1_y_2_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) & ( ! x_2_y_1_terrain_0_0_1' ) & ( x_2_y_2_terrain_0_0_1' ) ) ) -> ! skill_12' )
+( ! ( ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( x_0_y_1_terrain_0_0_1' ) & ( ! x_0_y_0_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) & ( x_1_y_1_terrain_0_0_1' ) & ( ! x_1_y_0_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) & ( x_2_y_1_terrain_0_0_1' ) & ( ! x_2_y_0_terrain_0_0_1' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( x_0_y_2_terrain_0_0_1' ) & ( ! x_0_y_1_terrain_0_0_1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) & ( x_1_y_2_terrain_0_0_1' ) & ( ! x_1_y_1_terrain_0_0_1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) & ( x_2_y_2_terrain_0_0_1' ) & ( ! x_2_y_1_terrain_0_0_1' ) ) ) -> ! skill_13' )
+
+[SYS_TRANS_HARD]
+( ( ( ( ( x0 & ! x1 & ! x2 ) <-> ( ! xrequest_0_0_2 & ! xrequest_1 ) ) & ( ( x1 & ! x0 & ! x2 ) <-> ( xrequest_0_0_2 & ! xrequest_1 ) ) & ( ( x2 & ! x0 & ! x1 ) <-> ( xrequest_1 & ! xrequest_0_0_2 ) ) ) & ( ( ( y0 & ! y1 & ! y2 ) <-> ( ! yrequest_0_0_2 & ! yrequest_1 ) ) & ( ( y1 & ! y0 & ! y2 ) <-> ( yrequest_0_0_2 & ! yrequest_1 ) ) & ( ( y2 & ! y0 & ! y1 ) <-> ( yrequest_1 & ! yrequest_0_0_2 ) ) ) ) -> ( ! skill_0 & ! skill_1 & ! skill_2 & ! skill_3 & ! skill_4 & ! skill_5 & ! skill_6 & ! skill_7 & ! skill_8 & ! skill_9 & ! skill_10 & ! skill_11 & ! skill_12 & ! skill_13 ) )
+( ( skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' ) | ( skill_1' & ! skill_0' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' ) | ( skill_2' & ! skill_0' & ! skill_1' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' ) | ( skill_3' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' ) | ( skill_4' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' ) | ( skill_5' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' ) | ( skill_6' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' ) | ( skill_7' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' ) | ( skill_8' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' ) | ( skill_9' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' ) | ( skill_10' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_11' & ! skill_12' & ! skill_13' ) | ( skill_11' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_12' & ! skill_13' ) | ( skill_12' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_13' ) | ( skill_13' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' ) | ( ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10' & ! skill_11' & ! skill_12' & ! skill_13' ) )
+
+[ENV_LIVENESS]
+
+[SYS_LIVENESS]
+( ( ( ( x0 & ! x1 & ! x2 ) <-> ( ! xrequest_0_0_2 & ! xrequest_1 ) ) & ( ( x1 & ! x0 & ! x2 ) <-> ( xrequest_0_0_2 & ! xrequest_1 ) ) & ( ( x2 & ! x0 & ! x1 ) <-> ( xrequest_1 & ! xrequest_0_0_2 ) ) ) & ( ( ( y0 & ! y1 & ! y2 ) <-> ( ! yrequest_0_0_2 & ! yrequest_1 ) ) & ( ( y1 & ! y0 & ! y2 ) <-> ( yrequest_0_0_2 & ! yrequest_1 ) ) & ( ( y2 & ! y0 & ! y1 ) <-> ( yrequest_1 & ! yrequest_0_0_2 ) ) ) )
+
+[CHANGE_CONS]
+! ( yrequest_0_0_2 & yrequest_1 )
+! ( yrequest_0_0_2' & yrequest_1' )
+! ( xrequest_0_0_2 & xrequest_1 )
+! ( xrequest_0_0_2' & xrequest_1' )
+! ( y1 & y2 )
+! ( y0 & y2 )
+! ( y0 & y1 )
+( y0 | y1 | y2 )
+! ( y1' & y2' )
+! ( y0' & y2' )
+! ( y0' & y1' )
+( y0' | y1' | y2' )
+! ( x1 & x2 )
+! ( x0 & x2 )
+! ( x0 & x1 )
+( x0 | x1 | x2 )
+! ( x1' & x2' )
+! ( x0' & x2' )
+! ( x0' & x1' )
+( x0' | x1' | x2' )
+( ( x0 <-> ! x0' ) | ( x1 <-> ! x1' ) | ( x2 <-> ! x2' ) | ( y0 <-> ! y0' ) | ( y1 <-> ! y1' ) | ( y2 <-> ! y2' ) | ( x_0_y_0_terrain_0_0_1 <-> ! x_0_y_0_terrain_0_0_1' ) | ( x_0_y_1_terrain_0_0_1 <-> ! x_0_y_1_terrain_0_0_1' ) | ( x_0_y_2_terrain_0_0_1 <-> ! x_0_y_2_terrain_0_0_1' ) | ( x_1_y_0_terrain_0_0_1 <-> ! x_1_y_0_terrain_0_0_1' ) | ( x_1_y_1_terrain_0_0_1 <-> ! x_1_y_1_terrain_0_0_1' ) | ( x_1_y_2_terrain_0_0_1 <-> ! x_1_y_2_terrain_0_0_1' ) | ( x_2_y_0_terrain_0_0_1 <-> ! x_2_y_0_terrain_0_0_1' ) | ( x_2_y_1_terrain_0_0_1 <-> ! x_2_y_1_terrain_0_0_1' ) | ( x_2_y_2_terrain_0_0_1 <-> ! x_2_y_2_terrain_0_0_1' ) )
+( ( ( x0 <-> ! x0' ) | ( x1 <-> ! x1' ) | ( x2 <-> ! x2' ) | ( y0 <-> ! y0' ) | ( y1 <-> ! y1' ) | ( y2 <-> ! y2' ) ) -> ( ( x_0_y_0_terrain_0_0_1 <-> x_0_y_0_terrain_0_0_1' ) & ( x_0_y_1_terrain_0_0_1 <-> x_0_y_1_terrain_0_0_1' ) & ( x_0_y_2_terrain_0_0_1 <-> x_0_y_2_terrain_0_0_1' ) & ( x_1_y_0_terrain_0_0_1 <-> x_1_y_0_terrain_0_0_1' ) & ( x_1_y_1_terrain_0_0_1 <-> x_1_y_1_terrain_0_0_1' ) & ( x_1_y_2_terrain_0_0_1 <-> x_1_y_2_terrain_0_0_1' ) & ( x_2_y_0_terrain_0_0_1 <-> x_2_y_0_terrain_0_0_1' ) & ( x_2_y_1_terrain_0_0_1 <-> x_2_y_1_terrain_0_0_1' ) & ( x_2_y_2_terrain_0_0_1 <-> x_2_y_2_terrain_0_0_1' ) ) )
+( ( ( x_0_y_0_terrain_0_0_1 <-> ! x_0_y_0_terrain_0_0_1' ) | ( x_0_y_1_terrain_0_0_1 <-> ! x_0_y_1_terrain_0_0_1' ) | ( x_0_y_2_terrain_0_0_1 <-> ! x_0_y_2_terrain_0_0_1' ) | ( x_1_y_0_terrain_0_0_1 <-> ! x_1_y_0_terrain_0_0_1' ) | ( x_1_y_1_terrain_0_0_1 <-> ! x_1_y_1_terrain_0_0_1' ) | ( x_1_y_2_terrain_0_0_1 <-> ! x_1_y_2_terrain_0_0_1' ) | ( x_2_y_0_terrain_0_0_1 <-> ! x_2_y_0_terrain_0_0_1' ) | ( x_2_y_1_terrain_0_0_1 <-> ! x_2_y_1_terrain_0_0_1' ) | ( x_2_y_2_terrain_0_0_1 <-> ! x_2_y_2_terrain_0_0_1' ) ) -> ( ( x0 <-> x0' ) & ( x1 <-> x1' ) & ( x2 <-> x2' ) & ( y0 <-> y0' ) & ( y1 <-> y1' ) & ( y2 <-> y2' ) ) )
+
+[NOT_ALLOWED_REPAIR]
+( ( x0 & y0 ) -> ( ( x0' & y1' ) | ( x1' & y0' ) ) )
+( ( x0 & y1 ) -> ( ( x0' & y2' ) | ( x1' & y1' ) | ( x0' & y0' ) ) )
+( ( x0 & y2 ) -> ( ( x1' & y2' ) | ( x0' & y1' ) ) )
+( ( x1 & y0 ) -> ( ( x1' & y1' ) | ( x2' & y0' ) | ( x0' & y0' ) ) )
+( ( x1 & y1 ) -> ( ( x1' & y2' ) | ( x2' & y1' ) | ( x1' & y0' ) | ( x0' & y1' ) ) )
+( ( x1 & y2 ) -> ( ( x2' & y2' ) | ( x1' & y1' ) | ( x0' & y2' ) ) )
+( ( x2 & y0 ) -> ( ( x2' & y1' ) | ( x1' & y0' ) ) )
+( ( x2 & y1 ) -> ( ( x2' & y2' ) | ( x2' & y0' ) | ( x1' & y1' ) ) )
+( ( x2 & y2 ) -> ( ( x2' & y1' ) | ( x1' & y2' ) ) )
+
