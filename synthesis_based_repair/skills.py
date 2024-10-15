@@ -32,7 +32,11 @@ class Skill:
             self.original_skill = info['original_skill']
             self.new_skill = info['new_skill']
         self.intermediate_states = info['intermediate_states']
+        if "initial_preconditions" not in info.keys():
+            info['initial_preconditions'] = []
         self.init_pres = info['initial_preconditions']
+        if "final_postconditions" not in info.keys():
+            info['final_postconditions'] = []
         self.final_posts = info['final_postconditions']
         # self.unique = info['unique_states']
         if 'folder_train' in info.keys():
