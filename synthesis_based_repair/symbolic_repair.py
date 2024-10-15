@@ -1231,7 +1231,7 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
     T_sys_can_win = arg_bdd.exist(arg_gs.get_output_vars_prime(), winning_sys_trans)
     # print_expr(arg_bdd, "T_sys_can_win (E action respecting T_sys_not_hard to get to winning states)", T_sys_can_win,
     #            vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
-
+    print("after Line 1")
     # Line 2
     # For any outcome of the environment, the system is able to win
     # Only checks the outcomes of the grounded variables, because the user controlled variables can change at any time
@@ -1252,21 +1252,22 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
                         & ~arg_bdd.add_expr(no_skills)
     # print_expr(arg_bdd, "A x get to Y", T_sys_always_wins,
     #            vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG)
-
+    print("after Line 2")
+    # breakpoint()
     # Line 3
     # Find the skills that are actually possible to execute (like T_encoded, but hopefully making more sense to the reader)
     T_reachable = arg_bdd.let(arg_gs.get_v_prime_to_v(),
                               arg_bdd.exist(arg_gs.get_vars(), T_sys_mutable & arg_T_env)) & arg_T_env
     print_expr(arg_bdd, "T_reachable", T_reachable, vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
                do_print=DEBUG_PRE)
-
+    print("after Line 3")
     # Line 4
     # The full state from which the system will always win and the skills are real
     T_sys_always_wins_and_reachable = T_sys_always_wins & T_reachable & winning_prime & T_sys_mutable
     print_expr(arg_bdd, "T_sys_always_wins_and_reachable", T_sys_always_wins_and_reachable,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
                do_print=DEBUG_PRE)
-
+    print("after Line 4")
     # We enforce that suggestions can't include existing states in skills (the preconditions and final postcondition)
     # Line 5
     # These are the skills that might be changed
@@ -1274,7 +1275,7 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
                                                T_sys_always_wins_and_reachable)
     print_expr(arg_bdd, "T_possible_skills_changing", T_possible_skills_changing,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
-
+    print("after Line 5")
     # Line 6
     # These are the preconditions of skills that might be changed
     T_pres_in_skill = arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), arg_bdd.exist(arg_gs.get_input_vars_prime(),
@@ -1290,14 +1291,14 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
         T_curr_skills = arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), 
                                arg_bdd.exist(arg_gs.get_output_vars() + arg_opts["reactive_variables"] + arg_opts["terrain_variables_p_dp"], 
                                 T_reachable & T_possible_skills_changing))
-
+    print("after Line 6")
     # Line 7
     # These are the final postconditions of skills that might be changed
     T_final_post = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(),
                                find_final_post(arg_bdd, arg_gs, T_possible_skills_changing, T_reachable, T_sys_mutable))
     print_expr(arg_bdd, "T_final_post", T_final_post, vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
                do_print=DEBUG_PRE)
-
+    print("after Line 7")
     # Get the current terrain state
     T_terrain_state = arg_bdd.exist(list_minus(arg_gs.get_input_vars(), arg_opts['terrain_variables_current']), arg_gs.T_env_init)
     T_terrain_state_dp = arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), T_terrain_state)
@@ -1328,7 +1329,8 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
         # print("after removing reactive inputs")
     print_expr(arg_bdd, "T_possible_changes_in_dp_all", T_possible_changes_in_dp_all_noreactive,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
-
+    
+    print("after Line 8")
     # Line 10
     # Only select one precondition to be added
     all_possible_changes = list(arg_bdd.pick_iter(T_possible_changes_in_dp_all_noreactive,
