@@ -911,6 +911,7 @@ def perform_repair(arg_bdd, arg_gs, arg_winning_states, arg_target_states, arg_T
                                                                        current_winning_states,
                                                                        gs_internal,
                                                                        arg_opts)
+            # breakpoint()
             if tmp_T_env == repaired_T_env and tmp_T_sys == repaired_T_sys:
 
                 gs_internal.update_change_cons(acts_changed)
@@ -1045,13 +1046,18 @@ def modify_postconditions(arg_bdd, arg_T_env, arg_T_sys, arg_winning_states, arg
         T_curr_skills = arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), 
                                 arg_bdd.exist(arg_gs.get_output_vars() + arg_opts["reactive_variables"] + arg_opts["terrain_variables_p_dp"], 
                                               T_reachable))
+        
+    T_terrain_state = arg_bdd.exist(list_minus(arg_gs.get_input_vars(), arg_opts['terrain_variables_current']), arg_gs.T_env_init)
+    # T_terrain_state_dp = arg_bdd.let(arg_gs.get_input_to_inputdoubleprime(), T_terrain_state)        
+
     T_possible_changes = T_full_skills_not_winning & \
                          arg_gs.get_change_cons_p_and_dp() & \
                          arg_gs.get_not_allowed_repair_v_and_dp() & \
                          ~T_no_effect & \
                          (~T_skill_with_pre_dp | T_skill_with_post_dp) & \
                          arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys) & \
-                         ~T_curr_skills
+                         ~T_curr_skills & \
+                        T_terrain_state
                         
                         # & \
                          # arg_bdd.let(arg_gs.get_inputprime_to_inputdoubleprime(), arg_T_sys & arg_gs.get_t_sys_hard()) & \
@@ -1336,6 +1342,7 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
     all_possible_changes = list(arg_bdd.pick_iter(T_possible_changes_in_dp_all_noreactive,
                                                   care_vars=list_minus(arg_gs.get_vars_and_prime_and_dp(), arg_opts['reactive_variables'] + arg_opts["terrain_variables_p"])))
     if arg_opts["debug"]: breakpoint() # <- DEBUG
+    # breakpoint()
     if len(all_possible_changes) == 0:
         return arg_T_env, arg_gs.get_t_sys_not_hard(), arg_bdd.false
     sel_idx = np.random.randint(len(all_possible_changes))
@@ -1347,12 +1354,14 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
     T_old_selected_change = T_selected_change = arg_bdd.cube(all_possible_changes[sel_idx])
     print_expr(arg_bdd, "T_selected_change", T_selected_change,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
+    print("after Line 10")
 
     # # Line 11
     # Select other valid changes if this is the precondition to the last transition
     T_selected_change = T_sys_mutable & arg_bdd.exist(arg_gs.get_output_vars_prime(), T_selected_change) & arg_gs.get_t_sys_hard()
     print_expr(arg_bdd, "T_selected_change expanded", T_selected_change,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
+    print("after Line 11")
 
     # Line 12
     if arg_opts['enforce_reactive_variables']:
@@ -1366,6 +1375,7 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
     # # Remove the terrain inputs that are not to keep, because they are not part of the preconditions
     # T_selected_change = remove_terrain_inputs_not_to_keep_in_old_pre(arg_bdd, arg_gs, arg_opts, T_selected_change)
     # T_selected_change = remove_terrain_inputs_not_to_keep_in_new_pre(arg_bdd, arg_gs, arg_opts, T_selected_change)
+    print("after Line 12")
 
     # Line 16
     # This is the precondition that is added
@@ -1374,7 +1384,7 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
     print_expr(arg_bdd, "T_new_full_skill (new precondition)", T_new_full_skill,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
                do_print=DEBUG_PRE)
-
+    print("after Line 16")
     # We now need to add the transitions to the system transitions
     # line 17
     # This is the old skill
@@ -1382,7 +1392,9 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
     print_expr(arg_bdd, "T_old_full_skill (old precondition)", T_old_full_skill,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
                do_print=DEBUG_PRE)
-
+    print("after Line 17")
+    if arg_opts["debug"]: breakpoint() # <- DEBUG
+    # breakpoint()
     # Find the pre-preconditions
     # Lines 17 and 18
     # Add the new precondition to the system transition where the old precondition was
@@ -1394,7 +1406,8 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
     print_expr(arg_bdd, "T_new_pre_primed (new precondition)", T_new_pre_primed,
                vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
                do_print=DEBUG_PRE)
-
+    print("after Line 18")
+    
     # Check if this is the initial precondition. If so, don't let skills switch to this one in the middle
     # Line 20
     T_remove_from_pre = arg_bdd.false
@@ -1404,6 +1417,7 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
         print_expr(arg_bdd, "Skills that are available from the new precondition",
                    T_new_pre_input_primed & arg_gs.get_t_sys_not_hard(),
                    vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
+        print("after Line 20")
 
         # Line 21
         T_all_skills_can_be_applied = arg_bdd.forall(arg_gs.get_output_vars(), T_new_pre_input_primed & T_sys_mutable)
@@ -1419,10 +1433,12 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
         T_new_pre_primed = T_new_pre_primed & ~T_remove_from_pre
         print_expr(arg_bdd, "T_new_pre_primed (new precondition) (revised)", T_new_pre_primed,
                    vars_ordering=arg_gs.get_vars_and_prime_and_dp(), do_print=DEBUG_PRE)
-
+        print("after Line 21")
+    print("after if")
     T_old_full_skill_wo_outprime = arg_bdd.exist(arg_gs.get_output_vars_prime(), T_old_full_skill)
     T_new_full_skill_wo_outprime = arg_bdd.exist(arg_gs.get_output_vars_prime(), T_new_full_skill)
     old_skill_is_new_trans = T_old_full_skill_wo_outprime & arg_gs.new_trans == T_old_full_skill_wo_outprime
+    print("after bookkeeping")
 
     # Line 26
     # if old_skill_is_new_trans:
@@ -1435,9 +1451,11 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
     #     # T_sys_new = (T_sys_mutable | T_new_pre_primed | T_new_full_skill) & ~T_old_pre_primed
 
     T_sys_new = T_sys_mutable | T_new_pre_primed | T_new_full_skill | T_remove_from_pre
+    
 
     # Record the new transition
     arg_gs.new_trans |= T_new_full_skill_wo_outprime
+    print("after Line 26")
 
     # Adds the new preconditions to the environment transitions.
     # First, removes all transitions associated with the new precondition and skill
@@ -1451,12 +1469,14 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
                                        arg_bdd.exist(arg_gs.get_vars_prime() + arg_gs.get_output_vars(),
                                                      T_old_full_skill)) & T_cur_skill & T_reachable
     T_new_pre_pre = arg_bdd.exist(arg_gs.get_input_vars_prime(), T_old_pre_primed_env)
+    print("after Line 27")
 
     # Line 28
     T_new_pre_pre_env = T_new_pre_pre & arg_bdd.let(arg_gs.get_v_to_v_prime(),
                                                     arg_bdd.exist(arg_gs.get_output_vars(), T_new_pre_and_skill))
     print_expr(arg_bdd, "T_new_pre_pre_env", T_new_pre_pre_env, vars_ordering=arg_gs.get_vars_and_prime_and_dp(),
                do_print=DEBUG_PRE)
+    print("after Line 28")
 
     # Line 29 and 30
     # T_env_new = ((arg_T_env & ~T_new_pre_and_skill) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
@@ -1470,7 +1490,7 @@ def modify_preconditions(arg_bdd: _bdd.BDD, arg_T_env, arg_T_sys, arg_winning_st
                                                                         T_new_full_skill) | T_new_pre_pre_env) & arg_gs.get_t_env_hard()
         # T_env_new = ((arg_T_env & ~T_new_pre_and_skill & ~T_old_full_skill) | arg_bdd.exist(arg_gs.get_output_vars_prime(),
         #                                                                 T_new_full_skill) | T_new_pre_pre_env) & arg_gs.get_t_env_hard()
-
+    print("after Line 30")
     return T_env_new, T_sys_new, arg_bdd.false
 
 
@@ -2191,11 +2211,13 @@ def run_repair(file_in, opts):
     #     # if suggestion_cnt > 1:
     #     #     break
     strategy = synthesize(repaired_gs.bdd, repaired_gs, winning_states)
+    print("after synthesize in run_repair")
 
     # Determinize
     deterministic_strat = determinize_strategy(strategy.bdd, strategy)
     print_expr(deterministic_strat.bdd, "Deterministic Strategy", deterministic_strat.get_t_sys(),
                vars_ordering=deterministic_strat.get_vars_and_vars_prime(), do_names=False, do_print=False)
+    print("after determinize strategy in run_repair")
     # if opts['only_synthesis']:
     #     print("Synthesized a strategy in: {}".format(time.time() - s_time))
     #     # sys.exit("Done with synthesis")
@@ -2203,6 +2225,7 @@ def run_repair(file_in, opts):
     if opts["debug"]: breakpoint()
     T_removed, T_added, one_rep_mod_post, one_rep_mod_pre = \
         report_skill_revision(deterministic_strat.bdd, gs, deterministic_strat, opts)
+    print("after report_skill_revision in run_repair")
     all_mod_pres.append(one_rep_mod_pre)
     all_mod_posts.append(one_rep_mod_post)
 
@@ -2226,6 +2249,7 @@ def run_repair(file_in, opts):
 
     suggestions = bdd_to_suggestions(repaired_gs.bdd, all_mod_pres, all_mod_posts, opts, acts_changed_ext, repaired_gs,
                                      T_swapped_pre_all, T_swapped_post_all)
+    print("after bdd_to_suggestions in run_repair")
     
     suggestion = split_skills(suggestions[0])
 

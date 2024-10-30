@@ -209,6 +209,7 @@ x_2_y_2_terrain_0_0_1
 
 [SYS_LIVENESS]
 ( ( ( ( x0 & ! x1 & ! x2 ) <-> ( ! xrequest_0_0_2 & ! xrequest_1 ) ) & ( ( x1 & ! x0 & ! x2 ) <-> ( xrequest_0_0_2 & ! xrequest_1 ) ) & ( ( x2 & ! x0 & ! x1 ) <-> ( xrequest_1 & ! xrequest_0_0_2 ) ) ) & ( ( ( y0 & ! y1 & ! y2 ) <-> ( ! yrequest_0_0_2 & ! yrequest_1 ) ) & ( ( y1 & ! y0 & ! y2 ) <-> ( yrequest_0_0_2 & ! yrequest_1 ) ) & ( ( y2 & ! y0 & ! y1 ) <-> ( yrequest_1 & ! yrequest_0_0_2 ) ) ) )
+# x2 & y2
 
 [CHANGE_CONS]
 ! ( yrequest_0_0_2 & yrequest_1 )

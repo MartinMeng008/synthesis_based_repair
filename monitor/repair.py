@@ -244,7 +244,8 @@ def test_symbolic_repair_wo_add_skills(filename_structuredslugsplus, opts, files
         uncontrollable_symbols = []
 
     compiler = Compiler(filename_structuredslugsplus, skills_data, symbols_data, objects_data, controllable_symbols, uncontrollable_symbols)
-    repair = Repair(compiler, filename_structuredslugsplus, opts, files_json=files)
+    # repair = Repair(compiler, filename_structuredslugsplus, opts, files_json=files)
+    repair = Repair(compiler, filename_structuredslugsplus, opts, files_json=files, symbolic_repair_only=REPAIR_ONLY)
     new_skills = repair.run_symbolic_repair()
     return new_skills
 
