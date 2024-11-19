@@ -55,16 +55,24 @@ class Compiler:
         self.skills_data = skills_data
         self.symbols_data = symbols_data
         self.objects_data = objects_data
-        self.opts = json_load_wrapper(opts) if opts else None
+        if isinstance(opts, str):
+            self.opts = json_load_wrapper(opts)
+        elif isinstance(opts, dict):
+            self.opts = opts
+        else:
+            self.opts = None
         self.set_data()
         self._set_keys()
         self.set_asts(input_file)
         self.set_mappings_int_to_bool_vars()
         self.terrain_states_formula = None
+        self.request_states_formula = None
     
     def set_data(self) -> None:
         """Set the data for added new skills"""
         self.data_new_skills = {"new_skills": 0, "env_trans": 0, "sys_trans": 0}
+        self._custom_not_allowed_repair_count: int = 0
+        self._liveness_goal_count: int = 0
         self.violated_env_trans_hard_indices = set()
         self.MANIPULATION_ONLY = all(is_manipulation_object(obj, self.objects_data) for obj in self.objects_data.keys())
         self.MOBILE_ONLY = all(is_mobile_object(obj, self.objects_data) for obj in self.objects_data.keys())
@@ -112,6 +120,13 @@ class Compiler:
         self.asts = asts
         # self.env_trans_asts = self.asts[self.properties["env_trans"]] + self.asts[self.properties["env_trans_hard"]]
         self._set_pointers_to_not_any_skills()
+        return None
+    
+    def make_copy_of_asts(self) -> None:
+        """Make a copy of the ASTs"""
+        self.vars_copy = copy.deepcopy(self.vars)
+        self.asts_copy = copy.deepcopy(self.asts)
+
         return None
 
     def _get_vars_and_asts_from_structuredslugs(self) -> None:
@@ -533,6 +548,7 @@ class Monitor:
                     self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "change_cons", is_primed = True)
                     self._add_inputs_mutual_exclusion_and_must_exist(bool_vars, "change_cons", is_primed = False)
                 else:
+                    continue # we don't add constraints for uncontrollable inputs
                     self._add_inputs_limits_constraint(int_var, bool_vars, "change_cons", is_primed = True)
                     self._add_inputs_limits_constraint(int_var, bool_vars, "change_cons", is_primed = False)
         
@@ -540,16 +556,62 @@ class Monitor:
         self._add_inputs_must_change_constraint(self.location_inputs + self.terrain_inputs, "change_cons")
 
         # 3. Location inputs change implies terrain inputs static
-        self._add_change_implies_static_constraints(self.location_inputs, self.terrain_inputs, "change_cons")
+        # self._add_change_implies_static_constraints(self.location_inputs, self.terrain_inputs, "change_cons")
 
         # 4. Terrain inputs change implies location inputs static
-        self._add_change_implies_static_constraints(self.terrain_inputs, self.location_inputs, "change_cons")
+        # self._add_change_implies_static_constraints(self.terrain_inputs, self.location_inputs, "change_cons")
 
     def add_not_allowed_repair(self, opts: dict = None) -> None:
         """Add the not allowed repair to the ASTs"""
         # 1. Add physical constraints
-        self._add_physical_constraints()
+        self._add_physical_constraints(opts)
         return None
+    
+    def add_infeasible_trans_to_not_allowed_repair(self, infeasible_trans: list) -> None:
+        """Add infeasible transitions to not allowed repair
+        Inputs:
+            infeasible_trans: a list of tuple (x,y,nx,ny)
+        """
+        # pop the last added not allowed repair constraints
+        for _ in range(self._custom_not_allowed_repair_count):
+            self.asts[self.properties["not_allowed_repair"]].pop()
+        self._custom_not_allowed_repair_count = len(infeasible_trans)
+        for x, y, nx, ny in infeasible_trans:
+            self._add_infeasible_transition_to_not_allowed_repair(x, y, nx, ny)
+        return None
+    
+    def _add_infeasible_transition_to_not_allowed_repair(self, x: int, y: int, nx: int, ny: int) -> None:
+        """Add the infeasible transition to not allowed repair"""
+        pre_state = self.add_conjunction_wrapper([self.name2assignment(f"x{x}"), self.name2assignment(f"y{y}")])
+        post_state = self.add_conjunction_wrapper([self.name2assignment(f"x{nx}'"), self.name2assignment(f"y{ny}'")])
+        implication_formula = self.add_implication_wrapper(pre_state, post_state)
+        not_formula = self.add_not_wrapper(implication_formula)
+        self.asts[self.properties["not_allowed_repair"]].append(self.add_formula_wrapper(not_formula))
+        return None
+    
+    def add_liveness_goal(self, robot_state: dict) -> None:
+        """Add the liveness goal to the ASTs"""
+        # pop the last added liveness goal
+        for _ in range(self._liveness_goal_count):
+            self.asts[self.properties["sys_liveness"]].pop()
+        self._liveness_goal_count = 1
+        self._add_liveness_goal(robot_state)
+        return None
+    
+    def _add_liveness_goal(self, robot_state: dict) -> None:
+        """Add the liveness goal"""
+        var_list = []
+        for key, val in robot_state.items():
+            var_list.append(self.name2assignment(self.int_var_val_to_bool_var(key, val)))
+        if DEBUG:
+            print("var_list: ", var_list)
+        conjunction = self.add_conjunction_wrapper(var_list)
+        self.asts[self.properties["sys_liveness"]].append(self.add_formula_wrapper(conjunction))
+        return None
+    
+    def int_var_val_to_bool_var(self, int_var: str, val: int) -> str:
+        """Return the boolean variable corresponding to the integer variable and value"""
+        return int_var + str(val)
     
     def add_change_repair_cons(self, opts: dict = None) -> None:
         """Add the change repair constraints to the ASTs"""
@@ -642,17 +704,25 @@ class Monitor:
 
     def _get_keyword_inputs(self, keyword) -> list:
         """Return the request inputs"""
-        inputs = []
-        for var in self.vars[self.properties["input"]]:
-            if self.contains_keyword(var, keyword):
-                inputs.append(var)
-        return inputs
+        # inputs = []
+        # for var in self.vars[self.properties["input"]]:
+        #     if self.contains_keyword(var, keyword):
+        #         inputs.append(var)
+        # return inputs
+        return self._get_keyword_from_list(self.vars[self.properties["input"]], keyword)
     
+    def _get_keyword_from_list(self, var_list: list, keyword: str) -> list:
+        """Return the variables containing the keyword"""
+        return [var for var in var_list if self.contains_keyword(var, keyword)]
 
-    def _add_physical_constraints(self) -> None:
-        print("opts: ", self.opts)
-        if self.opts and int(self.opts["num_grid"]) == 9:
+    def _add_physical_constraints(self, opts: dict = None) -> None:
+        # print("opts: ", self.opts)
+        if opts is None:
+            opts = self.opts
+        if int(opts["num_grid"]) == 9:
             self._add_physical_constraints_9_grid()
+        elif int(opts["num_grid"]) == 25:
+            self._add_physical_constraints_25_grid()
         else:
             raise Exception("Not supported yet")
         return None
@@ -662,7 +732,15 @@ class Monitor:
         # 1. Add the physical constraints
         for x in range(3):
             for y in range(3):
-                self._add_physical_constraints_for_cell_9_grid(x, y)
+                self._add_physical_constraints_for_cell(x, y, 3)
+        return None
+    
+    def _add_physical_constraints_25_grid(self) -> None:
+        """Add the physical constraints for 25 grid"""
+        # 1. Add the physical constraints
+        for x in range(5):
+            for y in range(5):
+                self._add_physical_constraints_for_cell(x, y, 5)
         return None
     
     def update_terrain_vars_dir(self, opts: dict) -> None:
@@ -674,7 +752,7 @@ class Monitor:
 
         return None
     
-    def _add_physical_constraints_for_cell_9_grid(self, x: int, y: int) -> None:
+    def _add_physical_constraints_for_cell(self, x: int, y: int, ws_range: int = 3) -> None:
         """Add the physical constraints for a cell
             add the following constraints:
             x0y0 -> x1y0 or x0y1
@@ -696,7 +774,7 @@ class Monitor:
         for dx, dy in dirs:
             new_x = x + dx
             new_y = y + dy
-            if new_x >= 0 and new_x <= 2 and new_y >= 0 and new_y <= 2:
+            if new_x >= 0 and new_x < ws_range and new_y >= 0 and new_y < ws_range:
                 # append x_{new_x} & y_{new_y} to or list
                 or_list.append(self.add_conjunction_wrapper([self.name2assignment(f"x{new_x}'"), self.name2assignment(f"y{new_y}'")]))
         new_or = self.add_formula_wrapper(self.add_disjunction_wrapper(or_list))
@@ -1070,6 +1148,38 @@ class Monitor:
         return None
 
 # ================================================================ #
+
+# =============== Support for high-level manager ============== #
+    def remove_skills_in_vars_and_asts(self) -> None:
+        """Remove the skills from the vars and ASTs"""
+        self.remove_keywoard_in_vars_and_asts("skill")
+
+    def remove_terrains_in_vars_and_asts(self) -> None:
+        """Remove the terrains from the vars and ASTs"""
+        self.remove_keywoard_in_vars_and_asts("terrain")
+
+    def remove_requests_in_vars_and_asts(self) -> None:
+        """Remove the requests from the vars and ASTs"""
+        self.remove_keywoard_in_vars_and_asts("request")
+
+    def remove_keywoard_in_vars_and_asts(self, keyword: str) -> None:
+        self.remove_keywoard_from_vars(keyword)
+        self.remove_keywoard_from_asts(keyword)
+    
+    def remove_keywoard_from_vars(self, keyword: str) -> None:
+        """Remove the keyword from the vars"""
+        for variable_type in self.variable_types:
+            if variable_type in self.vars:
+                self.vars[variable_type] = list_minus(self.vars[variable_type], self._get_keyword_from_list(self.vars[variable_type], keyword))
+        return None
+    
+    def remove_keywoard_from_asts(self, keyword: str) -> None:
+        """Remove the keyword from the ASTs"""
+        for property_type in self.structuredslugsplus_property_types:
+            if property_type in self.asts:
+                self.asts[property_type] = [ast for ast in self.asts[property_type] if not self.contains_keyword(ast, keyword)]
+        return None
+        
 
 # =============== Relax Env_Trans assumptions =============== #
     def contains_controllable_input(self, ast: list) -> bool:
@@ -1454,18 +1564,34 @@ class Monitor:
         implication = self.add_implication_wrapper(not_pre, not_post)
         allowable_skill_formula = self.add_formula_wrapper(implication)
         return [allowable_skill_formula] + skill_continue_formulas
+    
+    def create_preconditions_no_intermediate_states(self, name: str, skill: Skill) -> list:
+        """Create the preconditions of a skill in AST sys
+        Components:
+            1. !(init_pre') -> !skill'
+        """
+        not_post = self.add_not_wrapper(self.name2assignment(name, is_prime=True))
+        implication = self.add_implication_wrapper(self.add_not_wrapper(self.add_disjunction_wrapper(self.create_precondition_initial_pres(name, skill))), not_post)
+        return [self.add_formula_wrapper(implication)]
+
 
     def remove_last_added_skills(self) -> None:
         """Remove the last added skills
         Procedure:
         """
         for _ in range(self.data_new_skills['new_skills']):
+            if len(self.vars['[OUTPUT]']) == 0:
+                break
             self.vars['[OUTPUT]'].pop()
             self.asts['[SYS_INIT]'].pop()
             self.skills_data.popitem()
         for _ in range(self.data_new_skills['env_trans']):
+            if len(self.asts['[ENV_TRANS]']) == 0:
+                break
             self.asts['[ENV_TRANS]'].pop()
         for _ in range(self.data_new_skills['sys_trans']):
+            if len(self.asts['[SYS_TRANS]']) == 0:
+                break
             self.asts['[SYS_TRANS]'].pop()
         self.reset_dict_num(self.data_new_skills)
 
@@ -1502,6 +1628,9 @@ class Monitor:
         # self.modify_inactivity_without_skills_formulas_given_skills(self.not_any_manipulation_skills_conjunction, manipulation_skills)
 
         all_skills = self.get_skills()
+        if DEBUG:
+            print("not_any_skills_conjunction: ", self.not_any_skills_conjunction)
+            sys.exit(0)
         self.modify_inactivity_without_skills_formulas_given_skills(self.not_any_skills_conjunction, all_skills)
     
     def modify_inactivity_without_skills_formulas_given_skills(self, conjunction: list, skills: list) -> None:
@@ -1518,7 +1647,9 @@ class Monitor:
         elif len(skills) == 1:
             conjunction[:] = new_skill_conjunction
         else:
-            raise Exception(f"Too few skills in {skills}")
+            # raise Exception(f"Too few skills in {skills}")
+            print("[modify_inactivity_wo_skils] Too few skills in ", skills)
+            
         return None
 
 
@@ -1616,6 +1747,36 @@ class Monitor:
             self.asts['[SYS_INIT]'].append(self.add_formula_wrapper(self.add_not_wrapper(self.name2assignment(name)))) 
             postconditions = self.create_postconditions(name, skill)
             preconditions = self.create_preconditions(name, skill)
+            # print("postcondition: ", postconditions)
+            # print("precondition: ", preconditions)
+            self.asts['[ENV_TRANS]'].extend(postconditions)
+            self.asts['[SYS_TRANS]'].extend(preconditions)
+            self.data_new_skills['env_trans'] += len(postconditions)
+            self.data_new_skills['sys_trans'] += len(preconditions)
+        self.data_new_skills['new_skills'] = len(skills)
+        skills = self.change_skill_objects_to_dicts(skills)
+        self.skills_data.update(skills)
+
+        # Change the env_trans_hard and sys_trans_hard to remove last added skills and incorporate new added skills
+        self.generate_env_trans_hard()
+        self.generate_sys_trans_hard()
+
+    def add_skills_no_intermediate_states(self, skills: dict) -> None:
+        """Add skills to ASTs wrt the pre and post conditions
+        
+        Args:
+            skills (dict): A dictionary of skills, where the key is the skill name and the value is the skill object
+        """
+        # self.remove_last_added_skills()
+
+        # Add new skills
+        # cnt = len(self.vars['[OUTPUT]'])    
+        for name, skill in skills.items():
+            #[self.terminals['formula'], [self.terminals['unary'], [self.terminals['not'], ('!',)], [self.terminals['assignment'], name]]])
+            self.vars['[OUTPUT]'].append(name)
+            self.asts['[SYS_INIT]'].append(self.add_formula_wrapper(self.add_not_wrapper(self.name2assignment(name)))) 
+            postconditions = self.create_postconditions(name, skill)
+            preconditions = self.create_preconditions_no_intermediate_states(name, skill)
             # print("postcondition: ", postconditions)
             # print("precondition: ", preconditions)
             self.asts['[ENV_TRANS]'].extend(postconditions)
@@ -1862,7 +2023,18 @@ class Monitor:
         terrain_state_formula = self._get_terrain_states_formula(terrain_states)
         env_trans_hard: list = self.asts[self.properties["env_trans_hard"]]
         env_trans_hard.insert(0, terrain_state_formula)
+        self.terrain_states_assumption_idx: int = 0
         return None
+    
+    def add_request_states_as_env_trans_hard(self, request_states: list) -> None:
+        """Add or(request_state, for each request_state) as the first constraint"""
+        request_state_formula = self._get_request_states_formula(request_states)
+        env_trans_hard: list = self.asts[self.properties["env_trans_hard"]]
+        env_trans_hard.insert(0, request_state_formula)
+        self.request_states_assumption_idx: int = 0
+        self.terrain_states_assumption_idx += 1
+        return None
+    
 
     def _get_terrain_states_formula(self, terrain_states: list) -> list:
         """Return the formula for the disjunction of terrain states"""
@@ -1878,6 +2050,21 @@ class Monitor:
                 list_of_terrain_states.append(self.add_conjunction_wrapper(state_conjunction))
             self.terrain_states_formula = self.add_formula_wrapper(self.add_disjunction_wrapper(list_of_terrain_states))
         return self.terrain_states_formula
+    
+    def _get_request_states_formula(self, request_states: list) -> list:
+        """Return the formula for the disjunction of request states"""
+        if self.request_states_formula is None:
+            list_of_request_states = []
+            for request_state in request_states:
+                state_conjunction = []
+                for request_input, val in request_state.items():
+                    if val:
+                        state_conjunction.append(self.name2assignment(request_input))
+                    else:
+                        state_conjunction.append(self.add_not_wrapper(self.name2assignment(request_input)))
+                list_of_request_states.append(self.add_conjunction_wrapper(state_conjunction))
+            self.request_states_formula = self.add_formula_wrapper(self.add_disjunction_wrapper(list_of_request_states))
+        return self.request_states_formula
     
     def reset_terrain_states_formula(self) -> None:
         self.terrain_states_formula = None

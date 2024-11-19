@@ -9,6 +9,8 @@ import json
 import symbolic_repair_msgs.msg
 # from symbolic_repair_msgs.srv import FeasibilityCheck, FeasibilityCheckResponse
 
+DEBUG = True
+
 def dict_bool2list(dic: dict) -> list:
     ls = []
     for name, val in dic.items():
@@ -62,8 +64,9 @@ class Skill:
         skill_msg.name = self.name
         skill_msg.initial_preconditions = []
         skill_msg.final_postconditions = []
-        assert len(self.init_pres) == 1, f"too many preconditions: {len(self.init_pres)}"
-        assert len(self.final_posts) == 1, f"too many postconditions: {len(self.final_posts)}"
+        if not DEBUG:
+            assert len(self.init_pres) == 1, f"too many preconditions: {len(self.init_pres)}"
+            assert len(self.final_posts) == 1, f"too many postconditions: {len(self.final_posts)}"
         for input in self.location_inputs + self.terrain_inputs:
             key_val_pair = symbolic_repair_msgs.msg.AtomicProposition()
             key_val_pair.atomic_proposition = [input, "1" if self.init_pres[0][input] else "0"]

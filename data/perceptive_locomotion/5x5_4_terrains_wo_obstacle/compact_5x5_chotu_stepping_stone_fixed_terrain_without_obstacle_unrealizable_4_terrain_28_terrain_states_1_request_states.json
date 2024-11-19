@@ -12940,5 +12940,12 @@
 			"x_4_y_3_terrain" : 2,
 			"x_4_y_4_terrain" : 2
 		}
+	],
+
+	"request_states_list": [
+		{
+			"xrequest": 4,
+			"yrequest": 4
+		}
 	]
 }

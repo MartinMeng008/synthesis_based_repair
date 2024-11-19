@@ -1,0 +1,126 @@
+[INPUT]
+x0
+x1
+x2
+y0
+y1
+y2
+xrequest_0_0_2
+xrequest_1
+yrequest_0_0_2
+yrequest_1
+
+[OUTPUT]
+skill_0
+skill_1
+skill_2
+
+[ENV_INIT]
+( x1 & ! x0 & ! x2 )
+( y1 & ! y0 & ! y2 )
+! xrequest_0_0_2
+xrequest_1
+! yrequest_0_0_2
+yrequest_1
+
+[SYS_INIT]
+! skill_0
+! skill_1
+! skill_2
+
+[ENV_TRANS]
+
+
+( ( skill_0 & ( x0 & ! x1 & ! x2 ) & ( y0 & ! y1 & ! y2 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_0 & ( x1 & ! x0 & ! x2 ) & ( y0 & ! y1 & ! y2 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_0 & ( x2 & ! x0 & ! x1 ) & ( y0 & ! y1 & ! y2 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_0 & ( x0 & ! x1 & ! x2 ) & ( y1 & ! y0 & ! y2 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_0 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_0 & ( x2 & ! x0 & ! x1 ) & ( y1 & ! y0 & ! y2 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_1 & ( x0 & ! x1 & ! x2 ) & ( y1 & ! y0 & ! y2 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_1 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_1 & ( x2 & ! x0 & ! x1 ) & ( y1 & ! y0 & ! y2 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_1 & ( x0 & ! x1 & ! x2 ) & ( y2 & ! y0 & ! y1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_1 & ( x1 & ! x0 & ! x2 ) & ( y2 & ! y0 & ! y1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_1 & ( x2 & ! x0 & ! x1 ) & ( y2 & ! y0 & ! y1 ) ) -> ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_2 & ( x1 & ! x0 & ! x2 ) & ( y0 & ! y1 & ! y2 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_2 & ( x2 & ! x0 & ! x1 ) & ( y0 & ! y1 & ! y2 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
+( ( skill_2 & ( x1 & ! x0 & ! x2 ) & ( y1 & ! y0 & ! y2 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_2 & ( x2 & ! x0 & ! x1 ) & ( y1 & ! y0 & ! y2 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) )
+( ( skill_2 & ( x1 & ! x0 & ! x2 ) & ( y2 & ! y0 & ! y1 ) ) -> ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+( ( skill_2 & ( x2 & ! x0 & ! x1 ) & ( y2 & ! y0 & ! y1 ) ) -> ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
+
+[ENV_TRANS_HARD]
+! ( yrequest_0_0_2 & yrequest_1 )
+! ( yrequest_0_0_2' & yrequest_1' )
+! ( xrequest_0_0_2 & xrequest_1 )
+! ( xrequest_0_0_2' & xrequest_1' )
+! ( y1 & y2 )
+! ( y0 & y2 )
+! ( y0 & y1 )
+( y0 | y1 | y2 )
+! ( y1' & y2' )
+! ( y0' & y2' )
+! ( y0' & y1' )
+( y0' | y1' | y2' )
+! ( x1 & x2 )
+! ( x0 & x2 )
+! ( x0 & x1 )
+( x0 | x1 | x2 )
+! ( x1' & x2' )
+! ( x0' & x2' )
+! ( x0' & x1' )
+( x0' | x1' | x2' )
+( ( ( ( ! xrequest_0_0_2' & ! xrequest_1' ) <-> ( ! xrequest_0_0_2 & ! xrequest_1 ) ) & ( ( xrequest_0_0_2' & ! xrequest_1' ) <-> ( xrequest_0_0_2 & ! xrequest_1 ) ) & ( ( xrequest_1' & ! xrequest_0_0_2' ) <-> ( xrequest_1 & ! xrequest_0_0_2 ) ) ) & ( ( ( ! yrequest_0_0_2' & ! yrequest_1' ) <-> ( ! yrequest_0_0_2 & ! yrequest_1 ) ) & ( ( yrequest_0_0_2' & ! yrequest_1' ) <-> ( yrequest_0_0_2 & ! yrequest_1 ) ) & ( ( yrequest_1' & ! yrequest_0_0_2' ) <-> ( yrequest_1 & ! yrequest_0_0_2 ) ) ) )
+
+( ( ! skill_0 & ! skill_1 & ! skill_2 ) -> ( ( ( ( x0' & ! x1' & ! x2' ) <-> ( x0 & ! x1 & ! x2 ) ) & ( ( x1' & ! x0' & ! x2' ) <-> ( x1 & ! x0 & ! x2 ) ) & ( ( x2' & ! x0' & ! x1' ) <-> ( x2 & ! x0 & ! x1 ) ) ) & ( ( ( y0' & ! y1' & ! y2' ) <-> ( y0 & ! y1 & ! y2 ) ) & ( ( y1' & ! y0' & ! y2' ) <-> ( y1 & ! y0 & ! y2 ) ) & ( ( y2' & ! y0' & ! y1' ) <-> ( y2 & ! y0 & ! y1 ) ) ) ) )
+
+[SYS_TRANS]
+( ! ( ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) ) -> ! skill_0' )
+( ! ( ( ( x0' & ! x1' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) | ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) ) ) -> ! skill_1' )
+( ! ( ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y1' & ! y0' & ! y2' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y1' & ! y0' & ! y2' ) ) | ( ( x1' & ! x0' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) | ( ( x2' & ! x0' & ! x1' ) & ( y2' & ! y0' & ! y1' ) ) ) -> ! skill_2' )
+
+[SYS_TRANS_HARD]
+( ( ( ( ( x0 & ! x1 & ! x2 ) <-> ( ! xrequest_0_0_2 & ! xrequest_1 ) ) & ( ( x1 & ! x0 & ! x2 ) <-> ( xrequest_0_0_2 & ! xrequest_1 ) ) & ( ( x2 & ! x0 & ! x1 ) <-> ( xrequest_1 & ! xrequest_0_0_2 ) ) ) & ( ( ( y0 & ! y1 & ! y2 ) <-> ( ! yrequest_0_0_2 & ! yrequest_1 ) ) & ( ( y1 & ! y0 & ! y2 ) <-> ( yrequest_0_0_2 & ! yrequest_1 ) ) & ( ( y2 & ! y0 & ! y1 ) <-> ( yrequest_1 & ! yrequest_0_0_2 ) ) ) ) -> ( ! skill_0 & ! skill_1 & ! skill_2  ) )
+( ( skill_0' & ! skill_1' & ! skill_2' ) | ( skill_1' & ! skill_0' & ! skill_2' ) | ( ! skill_0' & ! skill_1' & ! skill_2' ) )
+
+[ENV_LIVENESS]
+
+[SYS_LIVENESS]
+( ( ( ( x0 & ! x1 & ! x2 ) <-> ( ! xrequest_0_0_2 & ! xrequest_1 ) ) & ( ( x1 & ! x0 & ! x2 ) <-> ( xrequest_0_0_2 & ! xrequest_1 ) ) & ( ( x2 & ! x0 & ! x1 ) <-> ( xrequest_1 & ! xrequest_0_0_2 ) ) ) & ( ( ( y0 & ! y1 & ! y2 ) <-> ( ! yrequest_0_0_2 & ! yrequest_1 ) ) & ( ( y1 & ! y0 & ! y2 ) <-> ( yrequest_0_0_2 & ! yrequest_1 ) ) & ( ( y2 & ! y0 & ! y1 ) <-> ( yrequest_1 & ! yrequest_0_0_2 ) ) ) )
+
+[CHANGE_CONS]
+! ( yrequest_0_0_2 & yrequest_1 )
+! ( yrequest_0_0_2' & yrequest_1' )
+! ( xrequest_0_0_2 & xrequest_1 )
+! ( xrequest_0_0_2' & xrequest_1' )
+! ( y1 & y2 )
+! ( y0 & y2 )
+! ( y0 & y1 )
+( y0 | y1 | y2 )
+! ( y1' & y2' )
+! ( y0' & y2' )
+! ( y0' & y1' )
+( y0' | y1' | y2' )
+! ( x1 & x2 )
+! ( x0 & x2 )
+! ( x0 & x1 )
+( x0 | x1 | x2 )
+! ( x1' & x2' )
+! ( x0' & x2' )
+! ( x0' & x1' )
+( x0' | x1' | x2' )
+( ( x0 <-> ! x0' ) | ( x1 <-> ! x1' ) | ( x2 <-> ! x2' ) | ( y0 <-> ! y0' ) | ( y1 <-> ! y1' ) | ( y2 <-> ! y2' ) )
+
+
+[NOT_ALLOWED_REPAIR]
+( ( x0 & y0 ) -> ( ( x0' & y1' ) | ( x1' & y0' ) ) )
+( ( x0 & y1 ) -> ( ( x0' & y2' ) | ( x1' & y1' ) | ( x0' & y0' ) ) )
+( ( x0 & y2 ) -> ( ( x1' & y2' ) | ( x0' & y1' ) ) )
+( ( x1 & y0 ) -> ( ( x1' & y1' ) | ( x2' & y0' ) | ( x0' & y0' ) ) )
+( ( x1 & y1 ) -> ( ( x1' & y2' ) | ( x2' & y1' ) | ( x1' & y0' ) | ( x0' & y1' ) ) )
+( ( x1 & y2 ) -> ( ( x2' & y2' ) | ( x1' & y1' ) | ( x0' & y2' ) ) )
+( ( x2 & y0 ) -> ( ( x2' & y1' ) | ( x1' & y0' ) ) )
+( ( x2 & y1 ) -> ( ( x2' & y2' ) | ( x2' & y0' ) | ( x1' & y1' ) ) )
+( ( x2 & y2 ) -> ( ( x2' & y1' ) | ( x1' & y2' ) ) )
+
