@@ -428,7 +428,7 @@ class GameStructure:
         return x
 
     def cox(self, x_set):
-        if True: breakpoint() # <- DEBUG
+        if DEBUG: breakpoint() # <- DEBUG
         x_set_prime = self.bdd.let(self.get_v_to_v_prime(), x_set)
         tmp_sys_and_x_set_prime = x_set_prime & self.get_t_sys()
         tmp_exists = self.bdd.exist(self.get_output_vars_prime(), tmp_sys_and_x_set_prime)

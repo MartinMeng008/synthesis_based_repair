@@ -6,6 +6,8 @@ import math
 import copy
 import time
 from collections import defaultdict
+import rospy
+
 from mocomp import Compiler
 from repair_base import (
     Repair,   
@@ -30,6 +32,9 @@ from tools import (
 repair_dir = '../synthesis_based_repair'
 sys.path.insert(0, repair_dir)
 from skills import Skill
+
+from symbolic_repair_msgs.msg import AtomicProposition, TerrainState, OnlineRepairResult
+from symbolic_repair_msgs.srv import OnlineRepairWithNewTerrain, OnlineRepairWithNewTerrainResponse
 
 DEBUG = False
 
@@ -58,7 +63,7 @@ class Manager:
                                            uncontrollable_variables=[],
                                            opts=self.opts)
         
-        self.main()
+        # self.offline_repair()
         
     def _setup(self, filename_json: str) -> None:
         file_json: dict = json_load_wrapper(filename_json)
@@ -68,9 +73,6 @@ class Manager:
         self.repaired_spec: str = file_json["output_file_structuredslugsplus"]
         self.repaired_spec_slugsin = file_json["output_file_slugsin"]
         self.opts: dict = json_load_wrapper(file_json["opts"])
-        if DEBUG:
-            print(self.opts)
-            sys.exit(0)
         self.num_grid: int = self.opts["num_grid"]
         self.ws_range: int = int(math.sqrt(self.num_grid))
         self.num_terrain_types: int = self.opts["num_terrain_types"]
@@ -85,123 +87,233 @@ class Manager:
         print(f"num of request states: {len(self.request_states)}")
         print("====================")
         if DEBUG:
-            sys.exit(0)
             print("==== Exit due to debugging ====")
+            sys.exit(0)
+        self._setup_for_runtime_repair(file_json)
+        self._setup_for_ros(self.opts)
+        return None
+    
+    def _setup_for_runtime_repair(self, file_json: dict) -> None:
+        """Setup for runtime repair"""
+        self.runtime_repair_spec: str = file_json["online_output_file_structuredslugsplus"]
+        self.runtime_repair_spec_slugsin: str = file_json["online_output_file_slugsin"]
+        return None
+    
+    def _setup_for_ros(self, opts: dict) -> None:
+        """Setup for ROS"""
+        if opts["symbolic_repair_only"]:
+            return None
+        else:
+            rospy.init_node("repair")
+            print("==== ROS node repair initialized ====")
+            rospy.wait_for_service("/feasibility_check")
+        return None
 
-    def main(self) -> None:
-
+            
+    def offline_setup(self) -> None:
+        """Setup for offline repair"""
         # 0. Create mappings
         self.create_mappings()
 
         # 1. Transform the spec to boolean
-        # 1.1. Add assumptions about possible terrain states and possible request states
-        self.compiler.add_terrain_states_as_env_trans_hard(self.terrain_states)
-        self.compiler.add_request_states_as_env_trans_hard(self.request_states)
-        # self.compiler.add_change_constraints(self.opts)
-        self.generate_bool_spec()
+        self.generate_bool_spec(self.compiler)
 
         # 2. Make a copy of the compiler
-        self.repair_compiler: Compiler = copy.deepcopy(self.compiler)
+        self.repair_compiler = self._make_repair_compiler(self.compiler)
+
+        return None
+    
+    def runtime_setup(self) -> None:
+        """Setup for runtime repair"""
+        # 0. Create mappings
+        self.create_mappings()
+
+        # 1. Setup the compiler
+        self.compiler = Compiler(input_file=self.repaired_spec,
+                                    skills_data=dict(),
+                                    symbols_data=dict(),
+                                    objects_data=dict(),
+                                    controllabe_variables=[],
+                                    uncontrollable_variables=[],
+                                    opts=self.opts)
         
-        # 3. Remove terrains, requests, and add repair constraints
-        self.repair_compiler.remove_terrains_in_vars_and_asts()
-        self.repair_compiler.remove_requests_in_vars_and_asts()
-        self.repair_compiler.add_change_constraints(self.opts)
-        self.repair_compiler.add_not_allowed_repair(self.opts)
+        # 2. Make a copy of the compiler
+        self.repair_compiler: Compiler = self._make_repair_compiler(self.compiler)
+        return None
 
-        FIRST_TIME = True
+    def _make_repair_compiler(self, compiler: Compiler) -> Compiler:
+        """Make a copy of the compiler for repair"""
+        repair_compiler = copy.deepcopy(compiler)
+        repair_compiler.remove_terrains_in_vars_and_asts()
+        repair_compiler.remove_requests_in_vars_and_asts()
+        repair_compiler.add_change_constraints(self.opts)
+        repair_compiler.add_not_allowed_repair(self.opts)
+        return repair_compiler
 
-        # 4. For each terrain state, repair the spec
-        for terrain_state in self.terrain_states:
-            for request_state in self.request_states:
-                # 4.1. Get relevant skills
-                skills2transitions = self.m_y(terrain_state)
-                if DEBUG:
-                    print("skills2transitions:\n", skills2transitions)
-                    sys.exit(0)
+    def offline_repair(self) -> None:
+        """The main function for offline repair"""
+        self.offline_setup()
+        self.modulo_repair(self.terrain_states, self.request_states)
+        return None
 
-                # 4.2. Get relevant infeasible transitions
-                infeasible_transitions = self.terrain_state2invalid_trans(terrain_state)
+    def runtime_repair(self) -> None:
+        """The main function for runtime repair"""
+        self.runtime_setup()
+        if self.opts["symbolic_repair_only"]:
+            self.modulo_repair(self.terrain_states, self.request_states)
+        else:
+            self.repair_service: rospy.Service = rospy.Service("/symbolic_repair/online_repair", OnlineRepairWithNewTerrain, self.runtime_repair_callback)
+            rospy.spin()
 
-                
-                # self.repair_compiler: Compiler = copy.deepcopy(self.compiler)
-                
-                # 4.3. Remove skills
-                # keep track of time used for removing skills and terrains
-                if DEBUG: 
-                    print("Time for removing skills and terrains:")
-                    start_time = time.time()
-                self.repair_compiler.remove_skills_in_vars_and_asts()
-                if DEBUG: print("--- %s seconds ---" % (time.time() - start_time))
+    def runtime_repair_callback(self, req: OnlineRepairWithNewTerrain) -> OnlineRepairWithNewTerrainResponse:
+        """Callback function for runtime repair"""
+        print("==== Received request for runtime repair ====")
+        terrain_state: dict = self.terrain_state_msg2dict(req.terrain_state)
+        request_state: dict = self.request_state_msg2dict(req.request_state)
+        print("==== Terrain state ====")
+        print(terrain_state)
+        print("==== Request state ====")
+        print(request_state)
+        print("=============")
+        self.modulo_repair([terrain_state], [request_state])
+        # Generate the repair module spec
+        self.repair_compiler.remove_backup_skills()
+        self.repair_compiler.generate_structuredslugsplus(self.runtime_repair_spec)
+        self.repair_compiler.generate_slugsin(self.runtime_repair_spec_slugsin)
 
-                if DEBUG:
-                    print("Before adding skills:")
-                    self.repair_compiler.generate_structuredslugs(self.modulo_spec)
-                    sys.exit(0)
-                
-                # 4.4. Add relevant skills
-                skills = self._form_skills(skills2transitions)
-                if DEBUG:
-                    print("Skills to be added:")
-                    for _, skill in skills.items():
-                        skill.print_dict()
-                    sys.exit(0)
-                self.repair_compiler.add_skills_no_intermediate_states(skills)
+        # TODO: return the repaired module spec
+        response = OnlineRepairWithNewTerrainResponse()
 
-                # 4.5. Add infeasible transitions
-                self.repair_compiler.add_infeasible_trans_to_not_allowed_repair(infeasible_transitions)
-                
-                if DEBUG:
-                    infeasible_transitions = [(0,0,0,1), (0,0,1,0)]
+    def terrain_state_msg2dict(self, terrain_state: TerrainState) -> dict:
+        """Convert a TerrainState message to a dictionary"""
+        raise NotImplementedError
+    
+    def request_state_msg2dict(self, request_state: AtomicProposition) -> dict:
+        """Convert an AtomicProposition message to a dictionary"""
+        raise NotImplementedError
+
+    def modulo_repair(self, terrain_states: list, request_states: list) -> None:
+        """The main function for modulo repair"""
+        #  For each terrain state, and request state, repair the spec
+        for terrain_state in terrain_states:
+            for request_state in request_states:
+                physical_feasible = False
+                while not physical_feasible:
+                    # 1. Get relevant skills
+                    skills2transitions = self.m_y(terrain_state)
+                    if DEBUG:
+                        print("skills2transitions:\n", skills2transitions)
+                        sys.exit(0)
+
+                    # 2. Get relevant infeasible transitions
+                    infeasible_transitions = self.terrain_state2invalid_trans(terrain_state)
+                    
+                    # 3. Remove skills
+                    # keep track of time used for removing skills and terrains
+                    if DEBUG: 
+                        print("Time for removing skills and terrains:")
+                        start_time = time.time()
+                    self.repair_compiler.remove_skills_in_vars_and_asts()
+                    if DEBUG: print("--- %s seconds ---" % (time.time() - start_time))
+
+                    if DEBUG:
+                        print("Before adding skills:")
+                        self.repair_compiler.generate_structuredslugs(self.modulo_spec)
+                        sys.exit(0)
+                    
+                    # 4. Add relevant skills
+                    skills = self._form_skills(skills2transitions)
+                    if DEBUG:
+                        print("Skills to be added:")
+                        for _, skill in skills.items():
+                            skill.print_dict()
+                        sys.exit(0)
+                    self.repair_compiler.add_skills_no_intermediate_states(skills)
+
+                    # 5. Add infeasible transitions
                     self.repair_compiler.add_infeasible_trans_to_not_allowed_repair(infeasible_transitions)
+                    
+                    if DEBUG:
+                        infeasible_transitions = [(0,0,0,1), (0,0,1,0)]
+                        self.repair_compiler.add_infeasible_trans_to_not_allowed_repair(infeasible_transitions)
+                        self.repair_compiler.generate_structuredslugsplus(self.modulo_spec)
+                        sys.exit(0)
+
+                    if DEBUG:
+                        print("Request state:", request_state)
+                    
+                    # 6.1. Add liveness goal
+                    self.repair_compiler.add_liveness_goal(self.request2robot(request_state))
+                    
+                    # 6.2. Add backup skills
+                    self.repair_compiler.add_backup_skills()
                     self.repair_compiler.generate_structuredslugsplus(self.modulo_spec)
-                    sys.exit(0)
+                    if DEBUG:
+                        print("==== Exit due to debugging ====")
+                        sys.exit(0)
+                    if True:
+                        print("==== skills before repair ====")
+                        print(self.repair_compiler.get_skills())
+                        print("====")
+                    # 6.3. Repair
+                    repair = Repair(compiler=self.repair_compiler, 
+                                    filename=self.modulo_spec, 
+                                    opts=self.opts, 
+                                    symbolic_repair_only=self.opts["symbolic_repair_only"])
+                    print(f"==== Repairing for terrain state: {terrain_state}, request state: {request_state} ====")
+                    print(f"==== Relevant skills: {skills2transitions} ====")
+                    if True:
+                        start_time = time.time()
+                    new_skills = repair.run_symbolic_repair()
+                    # self.repair_compiler.remove_backup_skills()
 
-            # # 4.6. Go through each request state and set it as liveness goal
-            # for request_state in self.request_states:
-                if DEBUG:
-                    print("Request state:", request_state)
+                    if True:
+                        print("Time for repair:")
+                        print("--- %s seconds ---" % (time.time() - start_time))
+                    self.repair_compiler.remove_backup_skills()
+                    if len(new_skills) > 0:
+                        # 6.4. Parse news skills to ideal format
+                        new_skills, new_M_y = self.parse_new_skills(new_skills, terrain_state)
+
+                        # 6.5. Minimize new skills to only include the needed ones
+                        new_skills, new_M_y = self.minimize_and_rename_new_skills(self.repair_compiler, new_skills, new_M_y)
+                        if DEBUG:
+                            print("==== New skills ====")
+                            for _, skill in new_skills.items():
+                                skill.print_dict()
+                            print("==== New M_Y ====")
+                            print(new_M_y)
+                            print("==== Exit due to debugging ====")
+                            sys.exit(0)
+
+                        # 6.6. Rename new skills wrt to the global compiler
+                        self.rename_skills(self.compiler, new_skills, new_M_y)
+
+                        if not self.opts["symbolic_repair_only"]:
+                            # 6.7. Perform physical check, TODO
+                            infeasible_M_y = self.perform_physical_check(new_skills, new_M_y, terrain_state)
+                            if len(infeasible_M_y) == 0:
+                                physical_feasible = True
+                            else:
+                                # 6.7.1. Add infeasible transitions to M_i
+                                for key, _ in infeasible_M_y.items():
+                                    self.M_i[key] = True
+                        else:
+                            physical_feasible = True
+                        # 6.8. Add new skills back to the original spec
+                        self.compiler.add_skills_no_intermediate_states(new_skills)
+                        self.compiler.reset_after_successful_repair()
+
+                        # 6.9. Update M_y
+                        self.M_y.update(new_M_y)
+                        self.all_new_M_y.update(new_M_y)
+                    else:
+                        physical_feasible = True
                 
-                # 4.6.1. Add liveness goal
-                self.repair_compiler.add_liveness_goal(self.request2robot(request_state))
-                
-                # 4.6.2. Add backup skills
-                self.repair_compiler.add_backup_skills()
-                self.repair_compiler.generate_structuredslugsplus(self.modulo_spec)
-                if DEBUG:
-                    print("==== Exit due to debugging ====")
-                    sys.exit(0)
+                # # Generate module spec
+                # self.repair_compiler.generate_slugsin(self.runtime_repair_spec_slugsin)
+                # self.repair_compiler.generate_structuredslugsplus(self.runtime_repair_spec)
 
-                # 4.6.3. Repair
-                repair = Repair(compiler=self.repair_compiler, 
-                                filename=self.modulo_spec, 
-                                opts=self.opts, 
-                                symbolic_repair_only=self.opts["symbolic_repair_only"])
-                print(f"==== Repairing for terrain state: {terrain_state}, request state: {request_state} ====")
-                print(f"==== Relevant skills: {skills2transitions} ====")
-                if True:
-                    start_time = time.time()
-                new_skills = repair.run_symbolic_repair()
-                # self.repair_compiler.remove_backup_skills()
-
-                if True:
-                    print("Time for repair:")
-                    print("--- %s seconds ---" % (time.time() - start_time))
-                
-                if len(new_skills) > 0:
-                    # 4.6.4. Parse news skills to ideal format
-                    new_skills, new_M_y = self.parse_new_skills(new_skills, terrain_state)
-                    if not self.opts["symbolic_repair_only"]:
-                        # 4.6.5. Perform physical check, todo
-                        raise NotImplementedError("Physical check is not implemented yet")
-
-                    # 4.6.6. Add new skills back to the original spec
-                    self.rename_skills(self.compiler, new_skills, new_M_y)
-                    self.compiler.add_skills_no_intermediate_states(new_skills)
-                    self.compiler.reset_after_successful_repair()
-
-                    # 4.6.7. Update M_y
-                    self.M_y.update(new_M_y)
                 if True:
                     if len(new_skills) > 0:
                         print("==== New skills ====")
@@ -213,17 +325,47 @@ class Manager:
                             print("==== Exit due to debugging ====")
                             sys.exit(0)
             if DEBUG:
-                sys.exit(0)
                 print("==== Exit due to debugging ====")
+                sys.exit(0)
         
         # 5. Generate repaired specs
         self.compiler.generate_structuredslugsplus(self.repaired_spec)
         self.compiler.generate_slugsin(self.repaired_spec_slugsin)
         print("==== M_Y ====")
         print(self.M_y)
+        self._check_M_y_soundness(self.compiler, self.M_y)
+        return None
+        
+
+    def perform_physical_check(self, new_skills: dict, new_M_y: dict, terrain_state: dict) -> tuple:
+        """Perform physical check on new skills
+        Inputs:
+            new_skills: dict
+            new_M_y: dict
+            terrain_state: dict
+        Outputs:
+            new_skills: dict
+            new_M_y: dict
+        """
+        # TODO: discuss with Ziyi to figure out ros message type
+        raise NotImplementedError
+
+
+        
+
+    def _check_M_y_soundness(self, compiler: Compiler, M_y: dict) -> None:
+        """Check if M_y is sound
+        Inputs:
+            compiler: Compiler
+            M_y: dict
+        """
+        # make sure all skills in the compiler are in M_y
+        for skill in compiler.get_skills():
+            if skill not in M_y.values():
+                raise ValueError(f"Skill {skill} is not in M_y")
 
     def rename_skills(self, compiler: Compiler, skills: dict, new_M_y: dict) -> None:
-        """Rename skills in the compiler
+        """Rename skills wrt the skills in compiler
         Inputs:
             compiler: Compiler
             new_skills: dict
@@ -234,7 +376,10 @@ class Manager:
             skill = skills.pop(old_name)
             tuple_key = list(filter(lambda key: new_M_y[key] == old_name, new_M_y))[0]
             name = f"skill_{cnt}"
-            assert name not in compiler.get_skills()
+            while name in compiler.get_skills():
+                cnt += 1
+                name = f"skill_{cnt}"
+            assert name not in compiler.get_skills(), f"Name {name} already exists in the compiler: {compiler.get_skills()}"
             skill.name = name
             skill.info['name'] = name
             skills[name] = skill
@@ -292,6 +437,70 @@ class Manager:
                     sys.exit(0)
         return parsed_new_skills, new_M_y
     
+    def minimize_and_rename_new_skills(self, compiler: Compiler, new_skills: dict, new_M_y: dict) -> tuple:
+        # if DEBUG:
+        if len(new_skills) <= 1:
+            if True:
+                print(" only one new skill: ", new_skills)
+                print("==== compiler current skills ====")
+                for skill in compiler.get_skills():
+                    print(skill)
+            pass
+        else:
+            # breakpoint()
+            self.rename_skills(compiler, new_skills, new_M_y)
+            for skill_name in list(new_skills.keys()):
+                compiler_copy: Compiler = copy.deepcopy(compiler)
+                removed_skill = new_skills.pop(skill_name)
+                new_skills_modulo_terrains = self._make_new_skills_modulo_terrains_copy(new_skills)
+                compiler_copy.add_skills_no_intermediate_states(new_skills_modulo_terrains)
+                if True:
+                    print("==== skills to check ====")
+                    print(compiler_copy.get_skills())
+                    print("====")
+                is_realizable = compiler_copy.check_realizability()
+                if not is_realizable:
+                    new_skills[skill_name] = removed_skill
+                else:
+                    # Remove the skill from new_M_y
+                    key_to_remove = list(filter(lambda key: new_M_y[key] == skill_name, new_M_y))[0]
+                    new_M_y.pop(key_to_remove)
+                if len(new_skills) <= 1:
+                    break
+        self.rename_skills(compiler, new_skills, new_M_y)
+        return new_skills, new_M_y
+        
+    def _make_new_skills_modulo_terrains_copy(self, new_skills: dict) -> dict:
+        """Make a copy of new_skills modulo terrains"""
+        new_skills_modulo_terrains = dict()
+        for name, skill in new_skills.items():
+            new_skills_modulo_terrains[name] = self._make_skill_modulo_terrains(skill)
+        return new_skills_modulo_terrains
+    
+    def _make_skill_modulo_terrains(self, skill: Skill) -> Skill:
+        """Make a copy of skill modulo terrains"""
+        new_skill_dict = dict()
+        new_skill_dict["name"] = skill.name
+        new_skill_dict["initial_preconditions"] = []
+        new_skill_dict["final_postconditions"] = []
+        new_skill_dict["intermediate_states"] = []
+        for pre_dict, post_dict_list in skill.intermediate_states:
+            new_pre_dict = self._make_state_modulo_terrains(pre_dict)
+            new_post_dict_list = [self._make_state_modulo_terrains(post_dict) for post_dict in post_dict_list]
+            new_skill_dict["initial_preconditions"].append(new_pre_dict)
+            new_skill_dict["intermediate_states"].append([new_pre_dict, new_post_dict_list])
+            new_skill_dict["final_postconditions"].append(new_post_dict_list[-1])
+        return Skill(info=new_skill_dict)
+    
+    def _make_state_modulo_terrains(self, state_dict: dict) -> dict:
+        """Make a copy of state_dict modulo terrains"""
+        new_state_dict = dict()
+        for key, value in state_dict.items():
+            if "terrain" in key:
+                continue
+            new_state_dict[key] = value
+        return new_state_dict
+
     def _motion_primitive_to_skill_dict(self, skill_name: str, tuple_key: tuple) -> dict:
         """Expand a motion primitive to a skill object"""
         dir_tuple, curr_terrain, next_terrain = tuple_key
@@ -363,14 +572,14 @@ class Manager:
             skills: dict
         """
         skills = dict()
-        skill_name_counter = 0
+        # skill_name_counter = 0
         for skill_name, transitions in skills2transitions.items():
             if DEBUG:
                 print("Skill name:", skill_name)
                 print("Transitions:", transitions)
                 sys.exit(0)
-            skill_name = f"skill_{skill_name_counter}"
-            skill_name_counter += 1
+            # skill_name = f"skill_{skill_name_counter}"
+            # skill_name_counter += 1
             initial_preconditions: list = []
             # pre_post_pair: list = []
             final_postconditions: list = []
@@ -419,20 +628,30 @@ class Manager:
 
     def create_mappings(self) -> None:
         """Create mappings M_Y and M_I
-        M_Y maps a terrain state to a set of relevant skills
+        m_y maps a terrain state to a set of relevant skills
         M_I maps a terrain state to a set of physically infeasible transitions
         M_y maps a tuple (dir, curr_terrain, next_terrain) to a str of skill name
             where dir \in (0,1), (0,-1), (-1,0), (1,0)
+        M_o maps a tuple (terrain_input_int, terrain_type) to a list of ASTs formula about the obstacle constraints
         """
         # M_y: (dir, curr_terrain, next_terrain) -> skill_name
         self.M_y = dict()
+        self.all_new_M_y = dict()
 
         # M_i: (dir, curr_terrain, next_terrain) -> Boolean
         self.M_i = dict()
 
+        # M_o: terrain = (terrain_input_int: str, terrain_type: int) -> a list of AST formulas
+        self.M_o = dict()
+
         self.create_M_y_mapping()
+        self.create_M_o_mapping()
         if DEBUG:
+            print("==== M_y ====")
             print(self.M_y)
+            print("==== M_o ====")
+            print(self.M_o)
+            print("==== exit due to debug ====")
             sys.exit(0)
     
     def m_y(self, terrain_state: dict) -> dict:
@@ -449,6 +668,25 @@ class Manager:
                     if key_tuple in self.M_y:
                         skills2transitions[self.M_y[key_tuple]].append((x, y, nx, ny))
         return dict(skills2transitions)
+    
+    def m_o(self, terrain_state: dict) -> list:
+        """Given a terrain state, return a list of AST formulas representing invalid locations due to obstacle
+        Inputs:
+            terrain_state: dict
+        Outputs:
+            a list of AST formulas, each representing an invalid location due to obstacle in the terrain state
+        """
+        invalid_locations_ast_formulas: list = []
+        for terrain_input_int, terrain_input_type in terrain_state.items():
+            if terrain_input_int not in self.M_o:
+                continue
+            invalid_locations_ast_formulas.append(self.M_o[terrain_input_int, terrain_input_type])
+        if DEBUG:
+            print("==== invalid locations due to obstacle ====")
+            print(invalid_locations_ast_formulas)
+            print("==== Exit due to debugging ====")
+            sys.exit(0)
+        return invalid_locations_ast_formulas
     
     def terrain_state2invalid_trans(self, terrain_state: dict) -> dict:
         """Given a terrain state, return a list of invalid transitions"""
@@ -486,6 +724,58 @@ class Manager:
                 raise ValueError(f"Duplicate key in M_y: {skill_name} vs {self.M_y[key_tuple]}")
             self.M_y[key_tuple] = skill_name
         return None
+    
+    def create_M_o_mapping(self) -> None:
+        """Create mapping M_o
+        M_o maps a terrain input (terrain_input_int: str, terrain_type: int) to a list of AST formulas representing obstacle locations
+        """
+        for sys_trans_hard_formula in self.compiler.get_sys_trans_hard_asts():
+            if not self.compiler.contains_keyword(sys_trans_hard_formula, "terrain"):
+                break
+            implication = sys_trans_hard_formula[1]
+            left, right = implication[1], implication[2]
+            terrain_input_int_and_type: tuple = self.get_terrain_input_and_type_from_ast(left)
+            constraints: list = self.get_ast_constraints_from_ast(right)
+            if DEBUG:
+                print("==== terrain_input_int_and_type ==== ")
+                print(terrain_input_int_and_type)
+                print("==== constraints ====")
+                print(constraints)
+                print("==== exit due to debugging ====")
+                sys.exit(0)
+            assert terrain_input_int_and_type not in self.M_o, f"terrain_input {terrain_input_int_and_type} is already in M_o"
+            self.M_o[terrain_input_int_and_type] = constraints
+            if DEBUG:
+                print("==== ast for obstacle constraints ==== ")
+                print(self.compiler.get_sys_trans_hard_asts()[0])
+                print("is terrain input in the ast?: ", self.compiler.contains_keyword(self.compiler.get_sys_trans_hard_asts()[0], "terrain"))
+                print("====")
+                print("implication: ", implication)
+                print("====")
+                print("left: ", left)
+                print("====")
+                print("right: ", right)
+                # print("==== exit due to debugging ====")
+                # sys.exit(0)
+
+    def get_terrain_input_and_type_from_ast(self, ast: list) -> tuple:
+        """Extract terrain input and type from ast
+        Inputs:
+            ast: list: a CalculationSubformula
+        Outputs:
+            (terrain_input, terrain_type) where
+            terrain_input: str: the terrain integer input variable
+            terrain_type: int: the terrain type
+        """
+        terrain_input_numid: list = ast[1]
+        terrain_input: str = terrain_input_numid[1]
+        terrain_type_numeral: list = ast[3]
+        terrain_type: int = int(terrain_type_numeral[1])
+        return (terrain_input, terrain_type)
+    
+    def get_ast_constraints_from_ast(self, ast: list) -> list:
+        """Extract obstacle constraint formula from conjunction ast"""
+        return self.compiler.add_formula_wrapper(ast)
             
     def get_skill_dir(self, skill_data: dict) -> tuple:
         """Return the direction of a skill
@@ -540,12 +830,29 @@ class Manager:
         
 
 
-    def generate_bool_spec(self) -> None:
-        self.compiler.transform_asts_int2bool()
-        self.compiler.generate_structuredslugsplus(self.spec_bool)
-        
+    def generate_bool_spec(self, compiler: Compiler) -> None:
+        compiler.transform_asts_int2bool()
+        compiler.generate_structuredslugsplus(self.spec_bool)
+
+# def setup_for_ros(filename_json: str) -> None:
+#     file_dict: dict = json_load_wrapper(filename_json)
+#     opts: dict = json_load_wrapper(file_dict["opts"])
+#     if opts["symbolic_repair_only"]:
+#         return None
+#     else:
+#         rospy.init_node("mocomp")
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Monitor and Repair system for MOCOMP")
     parser.add_argument("-f", "--filename_json", type=str, help="json file with input file names")
+    parser.add_argument("-o", "--offline", action="store_true", help="offline repair")
+    parser.add_argument("-r", "--runtime", action="store_true", help="runtime repair")
     args = parser.parse_args()
     manager = Manager(args.filename_json)
+    # setup_for_ros(args.filename_json)
+    if args.offline:
+        manager.offline_repair()
+    elif args.runtime:
+        manager.runtime_repair()
+    else:
+        raise ValueError("Please specify either offline or runtime repair")

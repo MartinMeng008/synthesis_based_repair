@@ -102,6 +102,7 @@ class Compiler:
         self.structuredslugsplus_property_types = ["[ENV_INIT]", "[SYS_INIT]", "[ENV_TRANS]", "[ENV_TRANS_HARD]", "[SYS_TRANS]", "[SYS_TRANS_HARD]", "[ENV_LIVENESS]", "[SYS_LIVENESS]", "[CHANGE_CONS]", "[NOT_ALLOWED_REPAIR]"]
 
         self.terminals = {"formula": "Formula", "biimplication": "Biimplication", "implication": "Implication", "conjunction": "Conjunction", "disjunction": "Disjunction", "unary": "UnaryFormula", "not": "NotOperator", "next": "NextOperator", "assignment": "Assignment", "true": "TRUE", "false": "FALSE", "calculation": "CalculationSubformula", "numID": "numID", "comparison": "NumberComparisonOperator", "equal": "EqualOperator", "number": "numeral"}
+        self.int_terminals: dict = {"numid": "numID", "calculation": "CalculationSubformula", "comparison": "NumberComparisonOperator", "equal": "EqualOperator", "number": "numeral"}
         self.properties = {"env_trans": "[ENV_TRANS]", "env_init": "[ENV_INIT]", "input": "[INPUT]", "output": "[OUTPUT]", "sys_trans": "[SYS_TRANS]", "sys_init": "[SYS_INIT]", "env_liveness": "[ENV_LIVENESS]", "sys_liveness": "[SYS_LIVENESS]", "observable_input": "[OBSERVABLE_INPUT]", "unobservable_input": "[UNOBSERVABLE_INPUT]", "controllable_input": "[CONTROLLABLE_INPUT]", "env_trans_hard": "[ENV_TRANS_HARD]", "sys_trans_hard": "[SYS_TRANS_HARD]", "change_cons": "[CHANGE_CONS]", "not_allowed_repair": "[NOT_ALLOWED_REPAIR]", "change_repair_cons": "[CHANGE_REPAIR_CONS]"}
 
     def set_mappings_int_to_bool_vars(self) -> None:
@@ -168,6 +169,9 @@ class Compiler:
     
     def get_env_trans_hard_asts(self):
         return self.asts[self.properties["env_trans_hard"]]
+    
+    def get_sys_trans_hard_asts(self):
+        return self.asts[self.properties["sys_trans_hard"]]
 
     def check_realizability(self) -> bool:
         """Check the realizability of the spec represented by the ASTs"""
@@ -2020,19 +2024,23 @@ class Monitor:
     
     def add_terrain_states_as_env_trans_hard(self, terrain_states: list) -> None:
         """Add or(terrain_state, for each terrain_state) as the first constraint in env_trans_hard"""
-        terrain_state_formula = self._get_terrain_states_formula(terrain_states)
+        if DEBUG:
+            print("terrain_states: ", terrain_states)
+            print("exit due to debug")
+            sys.exit(0)
+        terrain_state_formula = self._get_terrain_states_formula_int(terrain_states)
         env_trans_hard: list = self.asts[self.properties["env_trans_hard"]]
         env_trans_hard.insert(0, terrain_state_formula)
-        self.terrain_states_assumption_idx: int = 0
+        # self.terrain_states_assumption_idx: int = 0
         return None
     
     def add_request_states_as_env_trans_hard(self, request_states: list) -> None:
         """Add or(request_state, for each request_state) as the first constraint"""
-        request_state_formula = self._get_request_states_formula(request_states)
+        request_state_formula = self._get_request_states_formula_int(request_states)
         env_trans_hard: list = self.asts[self.properties["env_trans_hard"]]
         env_trans_hard.insert(0, request_state_formula)
-        self.request_states_assumption_idx: int = 0
-        self.terrain_states_assumption_idx += 1
+        # self.request_states_assumption_idx: int = 0
+        # self.terrain_states_assumption_idx += 1
         return None
     
 
@@ -2051,6 +2059,18 @@ class Monitor:
             self.terrain_states_formula = self.add_formula_wrapper(self.add_disjunction_wrapper(list_of_terrain_states))
         return self.terrain_states_formula
     
+    def _get_terrain_states_formula_int(self, terrain_states: list) -> list:
+        """Return the formula for the disjunction of terrain states"""
+        if self.terrain_states_formula is None:
+            list_of_terrain_states = []
+            for terrain_state in terrain_states:
+                state_conjunction = []
+                for terrain_input, val in terrain_state.items():
+                    state_conjunction.append(self.add_equal_wrapper(self.name2numid(terrain_input), self.int2number(val)))
+                list_of_terrain_states.append(self.add_conjunction_wrapper(state_conjunction))
+            self.terrain_states_formula = self.add_formula_wrapper(self.add_disjunction_wrapper(list_of_terrain_states))
+        return self.terrain_states_formula
+    
     def _get_request_states_formula(self, request_states: list) -> list:
         """Return the formula for the disjunction of request states"""
         if self.request_states_formula is None:
@@ -2065,6 +2085,19 @@ class Monitor:
                 list_of_request_states.append(self.add_conjunction_wrapper(state_conjunction))
             self.request_states_formula = self.add_formula_wrapper(self.add_disjunction_wrapper(list_of_request_states))
         return self.request_states_formula
+    
+    def _get_request_states_formula_int(self, request_states: list) -> list:
+        """Return the formula for the disjunction of request states"""
+        if self.request_states_formula is None:
+            list_of_request_states = []
+            for request_state in request_states:
+                state_conjunction = []
+                for request_input, val in request_state.items():
+                    state_conjunction.append(self.add_equal_wrapper(self.name2numid(request_input), self.int2number(val)))
+                list_of_request_states.append(self.add_conjunction_wrapper(state_conjunction))
+            self.request_states_formula = self.add_formula_wrapper(self.add_disjunction_wrapper(list_of_request_states))
+        return self.request_states_formula
+
     
     def reset_terrain_states_formula(self) -> None:
         self.terrain_states_formula = None
@@ -2161,10 +2194,27 @@ class Monitor:
                 self.print_ast(ast, 0)
 
     def name2assignment(self, name: str, is_prime: bool = False) -> list:
-        """Given a name, return its corresponding assignmetn AST"""
+        """Given a name, return its corresponding assignment AST"""
         if is_prime:
             name = name + "'"
         return [self.terminals['assignment'], name]
+    
+    def name2numid(self, name: str, is_prime: bool = False) -> list:
+        """Given a name, return its corresponding numid AST"""
+        if is_prime:
+            name = name + "'"
+        return [self.int_terminals['numid'], name]
+    
+    def int2number(self, num: int) -> list:
+        """Given a number, return its corresponding number AST"""
+        return [self.int_terminals['number'], str(num)]
+    
+    def add_equal_wrapper(self, left: list, right: list) -> list:
+        """Return left = right in AST"""
+        return [self.int_terminals['calculation'], 
+                left, 
+                [self.int_terminals["comparison"], [self.int_terminals["equal"], ('=',)]], 
+                right] 
     
     def create_empty_conjunction(self) -> list:
         return [self.terminals['conjunction']]

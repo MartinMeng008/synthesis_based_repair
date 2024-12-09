@@ -29,7 +29,7 @@ DEBUG_REVISION = False
 # DEBUG_REVISION = False
 
 class Specification:
-    def __init__(self, file_in_internal, bdd_internal):
+    def __init__(self, file_in_internal, bdd_internal, opts: dict = None):
         """
 
         :param file_in_internal:
@@ -43,6 +43,7 @@ class Specification:
                          "systranshard": "[SYS_TRANS_HARD]", "syslive": "[SYS_LIVENESS]", "envlive": "[ENV_LIVENESS]",
                          "changecons": "[CHANGE_CONS]", "notallowedrepair": "[NOT_ALLOWED_REPAIR]"}
         self.sections_inv = {v: k for k, v in self.sections.items()}
+        self.opts = opts
 
         self.input_vars = []
         self.input_vars_prime = []
@@ -67,6 +68,12 @@ class Specification:
         self.vars_prime = []
         self.input_vars = []
         self.input_vars_prime = []
+        self.controllable_input_vars = []
+        self.controllable_input_vars_prime = []
+        self.controllable_input_vars_double_prime = []
+        self.uncontrollable_input_vars = []
+        self.uncontrollable_input_vars_prime = []
+        self.uncontrollable_input_vars_double_prime = []
         self.output_vars = []
         self.output_vars_prime = []
         self.output_vars_double_prime = []
@@ -146,6 +153,26 @@ class Specification:
             self.bdd.add_var(input_var + "''")
             self.input_vars_double_prime.append(input_var + "''")
 
+        for controllable_input_var in self.opts["controllable_inputs"]:
+            self.controllable_input_vars.append(controllable_input_var)
+            self.controllable_input_vars_prime.append(controllable_input_var + "'")
+            self.controllable_input_vars_double_prime.append(controllable_input_var + "''")
+
+        for uncontrollable_input_var in self.opts["reactive_variables_current"]:
+            self.uncontrollable_input_vars.append(uncontrollable_input_var)
+            self.uncontrollable_input_vars_prime.append(uncontrollable_input_var + "'")
+            self.uncontrollable_input_vars_double_prime.append(uncontrollable_input_var + "''")
+
+        if DEBUG:
+            print("controllable_input_vars: {}".format(self.controllable_input_vars))
+            print("controllable_input_vars_prime: {}".format(self.controllable_input_vars_prime))
+            print("controllable_input_vars_double_prime: {}".format(self.controllable_input_vars_double_prime))
+            print("uncontrollable_input_vars: {}".format(self.uncontrollable_input_vars))
+            print("uncontrollable_input_vars_prime: {}".format(self.uncontrollable_input_vars_prime))
+            print("uncontrollable_input_vars_double_prime: {}".format(self.uncontrollable_input_vars_double_prime))
+            print("exit due to debug")
+            exit()
+
         for output_var in self.output_vars:
             self.bdd.add_var(output_var)
             self.bdd.add_var(output_var + "'")
@@ -195,7 +222,15 @@ class Specification:
                                     self.env_live_assumptions, self.sys_live_guarantees,
                                     self.T_env_init, self.T_sys_init,
                                     arg_change_cons=self.T_change_cons,
-                                    arg_not_allowed_repair=self.T_not_allowed_repair)
+                                    arg_not_allowed_repair=self.T_not_allowed_repair,
+                                    opts=self.opts,
+                                    controllable_input_vars=self.controllable_input_vars,
+                                    controllable_input_vars_prime=self.controllable_input_vars_prime,
+                                    controllable_input_vars_double_prime=self.controllable_input_vars_double_prime,
+                                    uncontrollable_input_vars=self.uncontrollable_input_vars,
+                                    uncontrollable_input_vars_prime=self.uncontrollable_input_vars_prime,
+                                    uncontrollable_input_vars_double_prime=self.uncontrollable_input_vars_double_prime)
+            
         return self.gs
 
     def get_init(self):
@@ -211,7 +246,10 @@ class GameStructure:
                  env_live_assumptions_internal, sys_live_guarantees_internal,
                  arg_T_env_init, arg_T_sys_init,
                  arg_cntr_vars=None, arg_cntr_vars_prime=None,
-                 arg_change_cons=None, arg_not_allowed_repair=None):
+                 arg_change_cons=None, arg_not_allowed_repair=None,
+                 opts: dict = None,
+                 controllable_input_vars: list = None, controllable_input_vars_prime: list = None, controllable_input_vars_double_prime: list = None,
+                 uncontrollable_input_vars: list = None, uncontrollable_input_vars_prime: list = None, uncontrollable_input_vars_double_prime: list = None):
         """
 
         :type bdd_internal: dd.autoref.BDD
@@ -222,6 +260,12 @@ class GameStructure:
         self.input_vars = input_vars_internal
         self.input_vars_prime = input_vars_prime_internal
         self.input_vars_double_prime = input_vars_double_prime_internal
+        self.controllable_input_vars = controllable_input_vars
+        self.controllable_input_vars_prime = controllable_input_vars_prime
+        self.controllable_input_vars_double_prime = controllable_input_vars_double_prime
+        self.uncontrollable_input_vars = uncontrollable_input_vars
+        self.uncontrollable_input_vars_prime = uncontrollable_input_vars_prime
+        self.uncontrollable_input_vars_double_prime = uncontrollable_input_vars_double_prime
         self.output_vars = output_vars_internal
         self.output_vars_prime = output_vars_prime_internal
         self.output_vars_double_prime = output_vars_double_prime_internal
@@ -259,6 +303,25 @@ class GameStructure:
         self.input_to_inputdoubleprime = self.create_mapping(self.input_vars, self.input_vars_double_prime)
 
         self.inputprime_to_input = self.create_mapping(self.input_vars_prime, self.input_vars)
+
+        self.controllableinput_to_controllableinputprime = self.create_mapping(self.controllable_input_vars, self.controllable_input_vars_prime)
+        self.controllableinput_to_controllableinputdoubleprime = self.create_mapping(self.controllable_input_vars, self.controllable_input_vars_double_prime)
+        
+        self.controllableinputprime_to_controllableinputdoubleprime = self.create_mapping(self.controllable_input_vars_prime, self.controllable_input_vars_double_prime)
+        self.controllableinputprime_to_controllableinput = self.create_mapping(self.controllable_input_vars_prime, self.controllable_input_vars)
+
+        self.controllableinputdoubleprime_to_controllableinputprime = self.create_mapping(self.controllable_input_vars_double_prime, self.controllable_input_vars_prime)
+        self.controllableinputdoubleprime_to_controllableinput = self.create_mapping(self.controllable_input_vars_double_prime, self.controllable_input_vars)
+
+        self.uncontrollableinput_to_uncontrollableinputprime = self.create_mapping(self.uncontrollable_input_vars, self.uncontrollable_input_vars_prime)
+        self.uncontrollableinput_to_uncontrollableinputdoubleprime = self.create_mapping(self.uncontrollable_input_vars, self.uncontrollable_input_vars_double_prime)
+
+        self.uncontrollableinputprime_to_uncontrollableinputdoubleprime = self.create_mapping(self.uncontrollable_input_vars_prime, self.uncontrollable_input_vars_double_prime)
+        self.uncontrollableinputprime_to_uncontrollableinput = self.create_mapping(self.uncontrollable_input_vars_prime, self.uncontrollable_input_vars)
+
+        self.uncontrollableinputdoubleprime_to_uncontrollableinputprime = self.create_mapping(self.uncontrollable_input_vars_double_prime, self.uncontrollable_input_vars_prime)
+        self.uncontrollableinputdoubleprime_to_uncontrollableinput = self.create_mapping(self.uncontrollable_input_vars_double_prime, self.uncontrollable_input_vars)
+
         self.outputprime_to_output = self.create_mapping(self.output_vars_prime, self.output_vars)
 
         self.vars_and_vars_prime = copy.copy(self.vars)
@@ -306,6 +369,9 @@ class GameStructure:
 
     def get_inputprime_to_input(self):
         return self.inputprime_to_input
+    
+    def get_controllableinput_to_controllableinputprime(self):
+        return self.controllableinput_to_controllableinputprime
 
     def get_outputprime_to_output(self):
         return self.outputprime_to_output
@@ -373,6 +439,30 @@ class GameStructure:
         x = copy.copy(self.input_vars)
         x.extend(self.input_vars_prime)
         return x
+    
+    def get_controllableinput_vars(self):
+        return self.controllable_input_vars
+        
+    def get_controllableinput_vars_prime(self):
+        return self.controllable_input_vars_prime
+    
+    def get_controllableinput_vars_double_prime(self):
+        return self.controllable_input_vars_double_prime
+    
+    def get_controllableinput_vars_and_prime(self):
+        return self.controllable_input_vars + self.controllable_input_vars_prime
+    
+    def get_uncontrollableinput_vars(self):
+        return self.uncontrollable_input_vars
+    
+    def get_uncontrollableinput_vars_prime(self):
+        return self.uncontrollable_input_vars_prime
+    
+    def get_uncontrollableinput_vars_double_prime(self):
+        return self.uncontrollable_input_vars_double_prime
+    
+    def get_uncontrollableinput_vars_and_prime(self):
+        return self.uncontrollable_input_vars + self.uncontrollable_input_vars_prime
 
     def get_vars(self):
         return self.vars
@@ -438,6 +528,28 @@ class GameStructure:
         out = tmp_all & tmp_exists_env
 
         return out
+    
+    def cox_system(self, x_set: _bdd.Function) -> _bdd.Function:
+        """CPre, but system has more control over the environment"""
+        x_set_prime = self.bdd.let(self.get_v_to_v_prime(), x_set)
+        tmp_sys_hard_and_x_set_prime = x_set_prime & self.get_t_sys_hard()
+        tmp_exists_output_prime = self.bdd.exist(self.get_output_vars_prime(), tmp_sys_hard_and_x_set_prime)
+        tmp_env_hard_and_tmp_exists_output_prime = self.get_t_env_hard() & tmp_exists_output_prime
+        tmp_exists_controllable_inputs_prime = self.bdd.exist(self.get_controllableinput_vars_prime(), tmp_env_hard_and_tmp_exists_output_prime)
+        tmp_exists_controllable_inputs_prime_env_trans_hard = self.bdd.exist(self.get_controllableinput_vars_prime(), self.get_t_env_hard())
+        tmp_implies = (~ tmp_exists_controllable_inputs_prime_env_trans_hard) | tmp_exists_controllable_inputs_prime
+        tmp_all = self.bdd.forall(self.get_uncontrollableinput_vars_prime(), tmp_implies)
+        tmp_exists_env = self.bdd.exist(self.get_input_vars_prime(), self.get_t_env_hard())
+        out = tmp_all & tmp_exists_env
+
+        return out
+
+        # tmp_sys_hard_output_vars_and_prime_removed = self.bdd.exist(self.get_output_vars_and_prime(), self.get_t_sys_hard())
+        # tmp_sys_hard_and_x_set_prime = x_set_prime & tmp_sys_hard_output_vars_and_prime_removed
+        
+        
+
+
 
     def reachable(self, init_states):
         Q = self.bdd.false
@@ -588,6 +700,133 @@ def compute_winning_states(arg_bdd, gs_internal, arg_opts):
 
                         X_prime = X
                         X = start | ((~ arg_bdd.add_expr(env_live_internal)) & gs_internal.cox(X))
+
+                        print_expr(arg_bdd, "iter_{}_live_{}_y_{}_x_{}_x_end".format(z_cnt, ii, fpY_cnt, fpX_cnt),
+                                   X, vars_ordering=gs_internal.get_vars_and_vars_prime(),
+                                   do_print=DEBUG & DEBUG_WS_COMPUTE, do_names=arg_opts['do_names'],
+                                   arg_opts=arg_opts, to_file=arg_opts['to_file'])
+                        fpX_cnt += 1
+
+                    print_debug("Finished X fixed point")
+                    Y = Y | X
+
+                    print_expr(arg_bdd, "iter_{}_live_{}_y_{}_Y_after_X".format(z_cnt, ii, fpY_cnt), Y,
+                               vars_ordering=gs_internal.get_vars_and_vars_prime(), do_print=DEBUG & DEBUG_WS_COMPUTE,
+                               do_names=arg_opts['do_names'], arg_opts=arg_opts, to_file=arg_opts['to_file'])
+                    # Add to mX
+                    if ii >= len(mX):
+                        mX.append([[]])
+                    if fpY_cnt >= len(mX[ii]):
+                        mX[ii].append([])
+                    mX[ii][fpY_cnt].append(X)
+                if ii >= len(mY):
+                    mY.append([])
+                mY[ii].append(Y)
+                fpY_cnt += 1
+            Z_internal = Y
+
+            # if bdd_internal.add_expr(sys_live_internal) & gs_internal.cox(Z_internal) == bdd_internal.false: # or (z_cnt == 1 and ii == 0):
+            #     print_expr(bdd_internal, "Cannot win. Z is:", Z_internal, vars_ordering=gs_internal.get_vars_and_vars_prime(),
+            #                do_print=DEBUG & DEBUG_WS_COMPUTE)
+            #     return WinningStates(Z_internal, bdd.false, bdd.false, True,
+            #                          bdd_internal.add_expr(sys_live_internal))
+
+            print_expr(arg_bdd, "iter_{}_live_{}_Z_after_Y".format(z_cnt, ii), Z_internal,
+                       vars_ordering=gs_internal.get_vars_and_vars_prime(), do_print=DEBUG & DEBUG_WS_COMPUTE,
+                       do_names=arg_opts['do_names'], arg_opts=arg_opts, to_file=arg_opts['to_file'])
+        z_cnt += 1
+
+    return WinningStates(Z_internal, mY, mX, False, arg_bdd.false)
+
+def compute_winning_states_cox_system(arg_bdd, gs_internal: GameStructure, arg_opts: dict):
+    # Compute winning states
+    if arg_opts["debug"]: breakpoint() # <- DEBUG
+    Z_internal = arg_bdd.true
+    Z_prime_internal = arg_bdd.false
+    z_cnt = 0
+    while Z_prime_internal != Z_internal:  # fixed point of Z
+        print_debug("Starting another Z fixed point")
+        print_expr(arg_bdd, "iter_" + str(z_cnt) + "_Z", Z_internal,
+                   vars_ordering=gs_internal.get_vars_and_vars_prime(), do_print=DEBUG & DEBUG_WS_COMPUTE,
+                   do_names=arg_opts['do_names'], arg_opts=arg_opts, to_file=arg_opts['to_file'])
+
+        Z_prime_internal = Z_internal
+        # memory
+        mY = []
+        mX = []
+        for ii, sys_live_internal in enumerate(
+                gs_internal.get_sys_live_guarantees()):  # loop through liveness guarantees
+            # print_debug("Liveness guarantee: {}".format(ii))
+            if arg_opts["debug"]: breakpoint() # <- DEBUG
+            print_expr(arg_bdd, "iter_{}_Liveness_guarantee_{}".format(z_cnt, ii), arg_bdd.add_expr(sys_live_internal),
+                       vars_ordering=gs_internal.get_vars_and_vars_prime(),
+                       do_print=DEBUG & DEBUG_WS_COMPUTE, do_names=arg_opts['do_names'], arg_opts=arg_opts,
+                       to_file=arg_opts['to_file'])
+
+            Y = arg_bdd.false
+            Y_prime = arg_bdd.true
+            fpY_cnt = 0
+
+            # if bdd_internal.add_expr(sys_live_internal) & gs_internal.cox(Z_internal) == bdd_internal.false: # or (z_cnt == 1 and ii == 0):
+            #     print_expr(bdd_internal, "Cannot win. Z is:", Z_internal, vars_ordering=gs_internal.get_vars_and_vars_prime(),
+            #                do_print=DEBUG & DEBUG_WS_COMPUTE)
+            #     return WinningStates(Z_internal, bdd.false, bdd.false, True,
+            #                          bdd_internal.add_expr(sys_live_internal))
+
+            while Y_prime != Y:
+                print_debug("Fixed point y cnt: {}".format(fpY_cnt))
+                print_expr(arg_bdd, "iter_{}_live_{}_Y_{}".format(z_cnt, ii, fpY_cnt), Y,
+                           vars_ordering=gs_internal.get_vars_and_vars_prime(), do_print=DEBUG & DEBUG_WS_COMPUTE,
+                           do_names=arg_opts['do_names'], arg_opts=arg_opts, to_file=arg_opts['to_file'])
+                Y_prime = Y
+
+                print_expr(arg_bdd, "iter_{}_live_{}_y_{}_gs_internal.cox(Z_internal)".format(z_cnt, ii, fpY_cnt),
+                           gs_internal.cox(Z_internal), vars_ordering=gs_internal.get_vars_and_vars_prime(),
+                           do_print=DEBUG & DEBUG_WS_COMPUTE, do_names=arg_opts['do_names'], arg_opts=arg_opts,
+                           to_file=arg_opts['to_file'])
+
+                start = arg_bdd.add_expr(sys_live_internal) & gs_internal.cox_system(Z_internal)
+                print_expr(arg_bdd, "iter_{}_live_{}_y_{}_start".format(z_cnt, ii, fpY_cnt), start,
+                           vars_ordering=gs_internal.get_vars_and_vars_prime(),
+                           do_print=DEBUG & DEBUG_WS_COMPUTE, do_names=arg_opts['do_names'],
+                           arg_opts=arg_opts, to_file=arg_opts['to_file'])
+
+                if start == arg_bdd.false:  # or (z_cnt == 1 and ii == 0):
+                    raise Exception("Cannot win. Z is:", Z_internal)
+                    if arg_opts["debug"]: breakpoint() # <- DEBUG
+                    print_expr(arg_bdd, "Cannot win. Z is:", Z_internal,
+                               vars_ordering=gs_internal.get_vars_and_vars_prime(),
+                               do_print=DEBUG & DEBUG_WS_COMPUTE)
+                    return WinningStates(Z_internal, arg_bdd.false, arg_bdd.false, True,
+                                         arg_bdd.add_expr(sys_live_internal))
+                    # print("This will break")
+
+                start = start | gs_internal.cox_system(Y)
+                print_expr(arg_bdd, "iter_{}_live_{}_y_{}_start_with_coxY", start,
+                           vars_ordering=gs_internal.get_vars_and_vars_prime(), do_print=DEBUG & DEBUG_WS_COMPUTE,
+                           do_names=arg_opts['do_names'], arg_opts=arg_opts, to_file=arg_opts['to_file'])
+
+                Y = arg_bdd.false
+                for jj, env_live_internal in enumerate(gs_internal.get_env_live_assumptions()):
+                    print_debug("Liveness assumption: {}".format(jj))
+                    X = Z_internal
+                    X_prime = arg_bdd.false
+                    print_debug("Starting X fixed point")
+                    fpX_cnt = 0
+                    while X_prime != X:
+                        print_expr(arg_bdd,
+                                   "iter_{}_live_{}_y_{}_x_{}_x_begin".format(z_cnt, ii, fpY_cnt, fpX_cnt),
+                                   X, vars_ordering=gs_internal.get_vars_and_vars_prime(),
+                                   do_print=DEBUG & DEBUG_WS_COMPUTE, do_names=arg_opts['do_names'],
+                                   arg_opts=arg_opts, to_file=arg_opts['to_file'])
+
+                        print_expr(arg_bdd, "iter_{}_live_{}_y_{}_x_{}_cox_x".format(z_cnt, ii, fpY_cnt, fpX_cnt),
+                                   gs_internal.cox(X), vars_ordering=gs_internal.get_vars_and_vars_prime(),
+                                   do_print=DEBUG & DEBUG_WS_COMPUTE, do_names=arg_opts['do_names'],
+                                   arg_opts=arg_opts, to_file=arg_opts['to_file'])
+
+                        X_prime = X
+                        X = start | ((~ arg_bdd.add_expr(env_live_internal)) & gs_internal.cox_system(X))
 
                         print_expr(arg_bdd, "iter_{}_live_{}_y_{}_x_{}_x_end".format(z_cnt, ii, fpY_cnt, fpX_cnt),
                                    X, vars_ordering=gs_internal.get_vars_and_vars_prime(),
@@ -2028,6 +2267,128 @@ def run_repair(file_in, opts):
                                      T_swapped_pre_all, T_swapped_post_all)
 
     return False, suggestions[0]
+
+def synthesis_with_cox_system(file_in, opts):
+    s_time = time.time()
+    bdd = _bdd.BDD()
+    spec_in = Specification(file_in_internal=file_in, bdd_internal=bdd, opts=opts)
+    if opts['suggestions']:
+        os.makedirs(opts['fid_base'], exist_ok=True)
+    gs = spec_in.get_game_structure()
+
+    do_compute_winning_states = True
+
+    # Make system reach all liveness guarantees from somewhere
+    repaired_gs = copy.copy(gs)
+    T_swapped_pre_all = bdd.false
+    T_swapped_post_all = bdd.false
+    # repaired_gs.bdd = gs.bdd
+    acts_changed_ext = []
+    T_previously_changed = bdd.false
+    while do_compute_winning_states:
+        # Compute winning states
+        winning_states = compute_winning_states_cox_system(repaired_gs.bdd, repaired_gs, opts)
+        if True:
+            print("Winning states computed")
+            print("Winning states: {}".format(winning_states.get_z()))
+            breakpoint()
+        raise Exception("Not implemented")
+        do_compute_winning_states = winning_states.does_need_repair()
+
+        if opts['only_synthesis'] and do_compute_winning_states:
+            # raise Exception(
+            #     "The specification actually needs repair (a liveness cannot be reached) and a strategy cannot just be synthesized")
+            return False, dict()
+
+        if winning_states.does_need_repair():
+            opts['cover'] = False
+            repaired_gs, acts_changed, T_previously_changed, T_swapped_pre, T_swapped_post = perform_repair(
+                repaired_gs.bdd, repaired_gs,
+                winning_states,
+                winning_states.get_target_states(),
+                T_previously_changed, opts)
+            # opts['post_first'] = not opts['post_first']
+            acts_changed_ext.extend(acts_changed)
+            T_swapped_pre_all = T_swapped_pre_all | T_swapped_pre
+            T_swapped_post_all = T_swapped_post_all | T_swapped_post
+            # repaired_gs.update_change_cons(acts_changed)
+
+    print("Computed winning states in: {}".format(time.time() - s_time))
+    # Make system reach livesness guarantees from initial states
+    is_realizable = repaired_gs.get_t_init() & winning_states.get_z() == repaired_gs.get_t_init()
+    print_expr(bdd, "init", repaired_gs.get_t_init(), vars_ordering=repaired_gs.get_vars_and_vars_prime(),
+               do_print=False)
+    print_expr(bdd, "winning states", winning_states.get_z(), vars_ordering=repaired_gs.get_vars_and_vars_prime(),
+               do_print=False)
+    if opts['only_synthesis'] and not is_realizable:
+        # raise Exception(
+        #     "The specification actually needs repair (init states do not overlap winning states) and a strategy cannot just be synthesized")
+        return False, dict()
+    elif opts['only_synthesis'] and is_realizable:
+        return True, dict()
+    while not is_realizable:
+        opts['cover'] = True
+        repaired_gs, acts_changed, T_previously_changed, T_swapped_pre, T_swapped_post = perform_repair(repaired_gs.bdd,
+                                                                                                        repaired_gs,
+                                                                                                        winning_states,
+                                                                                                        repaired_gs.get_t_init(),
+                                                                                                        T_previously_changed,
+                                                                                                        opts)
+        # opts['post_first'] = not opts['post_first']
+        winning_states = compute_winning_states(repaired_gs.bdd, repaired_gs, opts)
+        acts_changed_ext.extend(acts_changed)
+        T_swapped_pre_all = T_swapped_pre_all | T_swapped_pre
+        T_swapped_post_all = T_swapped_post_all | T_swapped_post
+        # repaired_gs.update_change_cons(acts_changed)
+
+        is_realizable = repaired_gs.get_t_init() & winning_states.get_z() == repaired_gs.get_t_init()
+    print("Checked initial states contained in: {}".format(time.time() - s_time))
+
+    # Synthesize a strategy
+    all_mod_posts = []
+    all_mod_pres = []
+    suggestion_cnt = 0
+    # while is_realizable and not winning_states.does_need_repair():
+    #     # if suggestion_cnt > 1:
+    #     #     break
+    strategy = synthesize(repaired_gs.bdd, repaired_gs, winning_states)
+
+    # Determinize
+    deterministic_strat = determinize_strategy(strategy.bdd, strategy)
+    print_expr(deterministic_strat.bdd, "Deterministic Strategy", deterministic_strat.get_t_sys(),
+               vars_ordering=deterministic_strat.get_vars_and_vars_prime(), do_names=False, do_print=False)
+    # if opts['only_synthesis']:
+    #     print("Synthesized a strategy in: {}".format(time.time() - s_time))
+    #     # sys.exit("Done with synthesis")
+    #     return True, dict()
+    T_removed, T_added, one_rep_mod_post, one_rep_mod_pre = \
+        report_skill_revision(deterministic_strat.bdd, gs, deterministic_strat, opts)
+    all_mod_pres.append(one_rep_mod_pre)
+    all_mod_posts.append(one_rep_mod_post)
+
+    # # Disallow previous suggestions and recompute winning states
+    # # Note: only works for original algorithm, not tested for changing pre/post instead of simply removing/adding
+    # repaired_gs.T_sys = repaired_gs.get_t_sys() & ~T_added
+    # repaired_gs.T_env = repaired_gs.get_t_env() | T_removed
+
+    # winning_states = compute_winning_states(repaired_gs.bdd, repaired_gs, opts)
+    # is_realizable = repaired_gs.get_t_init() & winning_states.get_z() == repaired_gs.get_t_init()
+    # suggestion_cnt += 1
+
+    print_suggestions(repaired_gs.bdd, all_mod_pres, all_mod_posts, opts, acts_changed_ext,
+                      vars_ordering=repaired_gs.get_vars_and_vars_prime(),
+                      vars_current=repaired_gs.get_input_vars() + repaired_gs.get_output_vars(),
+                      vars_input_primed=repaired_gs.get_input_vars_prime(),
+                      vars_output_primed=repaired_gs.get_output_vars_prime(), do_names=opts['do_names'])
+    print("This took: {}".format(time.time() - s_time))
+
+    # plot_suggestions(repaired_gs.bdd, all_mod_pres, all_mod_posts, vars_ordering=repaired_gs.get_vars_and_vars_prime(), do_names=True)
+
+    suggestions = bdd_to_suggestions(repaired_gs.bdd, all_mod_pres, all_mod_posts, opts, acts_changed_ext, repaired_gs,
+                                     T_swapped_pre_all, T_swapped_post_all)
+
+    return False, suggestions[0]
+
 
 #### ==== DEBUG ==== ####
 def print_pdb_to_file(ls): 

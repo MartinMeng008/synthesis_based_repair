@@ -112,8 +112,8 @@ class Repair:
                     skills[suggestion['name']] = Skill(suggestion, location_inputs=self.compiler.get_location_inputs(), terrain_inputs=self.compiler.get_terrain_inputs())
                 
                 # 5. Remove backup skills, add skills back to the ASTs
-                self.compiler.remove_backup_skills()
-                add_skills_with_reduced_size(skills, self.compiler)
+                # self.compiler.remove_backup_skills()
+                # add_skills_with_reduced_size(skills, self.compiler)
                 for _, skill in skills.items():
                     skill.print_dict()
                 if self.symbolic_repair_only or SYMBOLIC_REPAIR_ONLY:

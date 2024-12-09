@@ -1,0 +1,14 @@
+{
+    "input_file_int": "../data/perceptive_locomotion/5x5_8_terrains/5x5_go2_without_obstacle_8_terrain.structuredslugsplus",
+    "input_file_bool": "../data/perceptive_locomotion/5x5_8_terrains/transformed_5x5_go2_without_obstacle_8_terrain.structuredslugsplus",
+    "input_file_backup_skill_added": "../data/perceptive_locomotion/5x5_8_terrains/backup_added_transformed_5x5_go2_without_obstacle_8_terrain.structuredslugsplus",
+    "output_file_structuredslugsplus": "../data/perceptive_locomotion/5x5_8_terrains/repaired_transformed_5x5_go2_without_obstacle_8_terrain.structuredslugsplus",
+    "output_file_slugsin": "../data/perceptive_locomotion/5x5_8_terrains/repaired_transformed_5x5_go2_without_obstacle_8_terrain.slugsin",
+    "output_file_structuredslugs": "../data/perceptive_locomotion/5x5_8_terrains/repaired_transformed_5x5_go2_without_obstacle_8_terrain.structuredslugs",
+    "online_output_file_structuredslugsplus": "../data/perceptive_locomotion/5x5_8_terrains/online_repaired_transformed_5x5_go2_without_obstacle_8_terrain.structuredslugsplus",
+    "online_output_file_slugsin": "../data/perceptive_locomotion/5x5_8_terrains/online_repaired_transformed_5x5_go2_without_obstacle_8_terrain.slugsin",
+    "online_output_file_structuredslugs": "../data/perceptive_locomotion/5x5_8_terrains/online_repaired_transformed_5x5_go2_without_obstacle_8_terrain.structuredslugs",
+    "opts": "../data/perceptive_locomotion/5x5_8_terrains/opts.json",
+    "json_data": "../data/perceptive_locomotion/5x5_8_terrains/5x5_go2_without_obstacle_8_terrain.json",
+    "modulo_spec_structuredslugsplus": "../data/perceptive_locomotion/5x5_8_terrains/transformed_5x5_go2_without_obstacle_8_terrain.structuredslugsplus"
+}

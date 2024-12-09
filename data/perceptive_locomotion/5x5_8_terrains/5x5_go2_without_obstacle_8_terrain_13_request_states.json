@@ -1,25 +1,57 @@
 {
-	"request_state_list" : 
+	"request_states_list" : 
 	[
 		{
-			"xrequest" : 0,
-			"yrequest" : 0
+			"xrequest": 4,
+			"yrequest": 4
 		},
 		{
-			"xrequest" : 0,
-			"yrequest" : 1
+			"xrequest": 3,
+			"yrequest": 4
 		},
 		{
-			"xrequest" : 0,
-			"yrequest" : 2
+			"xrequest": 2,
+			"yrequest": 4
 		},
 		{
-			"xrequest" : 0,
-			"yrequest" : 3
+			"xrequest": 1,
+			"yrequest": 4
 		},
 		{
-			"xrequest" : 0,
-			"yrequest" : 4
+			"xrequest": 0,
+			"yrequest": 4
+		},
+		{
+			"xrequest": 0,
+			"yrequest": 3
+		},
+		{
+			"xrequest": 0,
+			"yrequest": 2
+		},
+		{
+			"xrequest": 0,
+			"yrequest": 1
+		},
+		{
+			"xrequest": 0,
+			"yrequest": 0
+		},
+		{
+			"xrequest": 4,
+			"yrequest": 3
+		},
+		{
+			"xrequest": 4,
+			"yrequest": 2
+		},
+		{
+			"xrequest": 4,
+			"yrequest": 1
+		},
+		{
+			"xrequest": 4,
+			"yrequest": 0
 		}
 	],
 	"skill_list" : 
