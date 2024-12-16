@@ -33,8 +33,8 @@ repair_dir = '../synthesis_based_repair'
 sys.path.insert(0, repair_dir)
 from skills import Skill
 
-from symbolic_repair_msgs.msg import AtomicProposition, TerrainState, OnlineRepairResult
-from symbolic_repair_msgs.srv import OnlineRepairWithNewTerrain, OnlineRepairWithNewTerrainResponse
+from symbolic_repair_msgs.msg import AtomicProposition, TerrainAndRequestStates, OnlineRepairResult, FeasibilityArray, Feasibility, SkillPrimitiveArray, SkillPrimitive, State
+from symbolic_repair_msgs.srv import OnlineRepairWithNewTerrainAndRequest, OnlineRepairWithNewTerrainAndRequestResponse, PrimitiveFeasibilityCheck, PrimitiveFeasibilityCheckResponse
 
 DEBUG = False
 
@@ -107,6 +107,7 @@ class Manager:
             rospy.init_node("repair")
             print("==== ROS node repair initialized ====")
             rospy.wait_for_service("/feasibility_check")
+            self.feasibility_check_service = rospy.ServiceProxy("/feasibility_check", PrimitiveFeasibilityCheck)
         return None
 
             
@@ -153,6 +154,9 @@ class Manager:
     def offline_repair(self) -> None:
         """The main function for offline repair"""
         self.offline_setup()
+        # if not self.opts["symbolic_repair_only"]:
+        #     rospy.init_node('repair_node')
+        #     rospy.wait_for_service('/feasibility_check')
         self.modulo_repair(self.terrain_states, self.request_states)
         return None
 
@@ -162,17 +166,18 @@ class Manager:
         if self.opts["symbolic_repair_only"]:
             self.modulo_repair(self.terrain_states, self.request_states)
         else:
-            self.repair_service: rospy.Service = rospy.Service("/symbolic_repair/online_repair", OnlineRepairWithNewTerrain, self.runtime_repair_callback)
+            self.repair_service: rospy.Service = rospy.Service("/symbolic_repair/online_repair", OnlineRepairWithNewTerrainAndRequest, self.runtime_repair_callback)
             rospy.spin()
 
-    def runtime_repair_callback(self, req: OnlineRepairWithNewTerrain) -> OnlineRepairWithNewTerrainResponse:
+    def runtime_repair_callback(self, req: OnlineRepairWithNewTerrainAndRequest) -> OnlineRepairWithNewTerrainAndRequestResponse:
         """Callback function for runtime repair"""
         print("==== Received request for runtime repair ====")
-        terrain_state: dict = self.terrain_state_msg2dict(req.terrain_state)
-        request_state: dict = self.request_state_msg2dict(req.request_state)
-        print("==== Terrain state ====")
+        print(req)
+        terrain_state: dict = self.state_msg2dict(req.terrain_request_states.terrain_state)
+        request_state: dict = self.state_msg2dict(req.terrain_request_states.request_state)
+        print("==== Runtime Terrain state ====")
         print(terrain_state)
-        print("==== Request state ====")
+        print("==== Runtime Request state ====")
         print(request_state)
         print("=============")
         self.modulo_repair([terrain_state], [request_state])
@@ -181,16 +186,28 @@ class Manager:
         self.repair_compiler.generate_structuredslugsplus(self.runtime_repair_spec)
         self.repair_compiler.generate_slugsin(self.runtime_repair_spec_slugsin)
 
-        # TODO: return the repaired module spec
-        response = OnlineRepairWithNewTerrainResponse()
+        # Return the repaired module spec
+        response = OnlineRepairWithNewTerrainAndRequestResponse()
+        response.repair_result = OnlineRepairResult()
+        response.repair_result.repair_needed = True
+        response.repair_result.slugsin_location = self.runtime_repair_spec_slugsin
 
-    def terrain_state_msg2dict(self, terrain_state: TerrainState) -> dict:
+        print("==== Sending response for runtime repair ====")
+        print(response)
+        return response
+
+
+    def state_msg2dict(self, state: list) -> dict:
         """Convert a TerrainState message to a dictionary"""
-        raise NotImplementedError
+        state_dict: dict = {}
+        for inp_prop in state:
+            inp_info = inp_prop.atomic_proposition
+            state_dict[inp_info[0]] = int(inp_info[1])
+        return state_dict
     
-    def request_state_msg2dict(self, request_state: AtomicProposition) -> dict:
-        """Convert an AtomicProposition message to a dictionary"""
-        raise NotImplementedError
+    # def request_state_msg2dict(self, request_state: list) -> dict:
+    #     """Convert an AtomicProposition message to a dictionary"""
+    #     raise NotImplementedError
 
     def modulo_repair(self, terrain_states: list, request_states: list) -> None:
         """The main function for modulo repair"""
@@ -337,21 +354,48 @@ class Manager:
         return None
         
 
-    def perform_physical_check(self, new_skills: dict, new_M_y: dict, terrain_state: dict) -> tuple:
+    def perform_physical_check(self, new_skills: dict, new_M_y: dict, terrain_state: dict) -> dict:
         """Perform physical check on new skills
         Inputs:
             new_skills: dict
             new_M_y: dict
+                M_y_new that maps a tuple (dir, curr_terrain, next_terrain) to a str of new skill name
+                where dir \in (0,1), (0,-1), (-1,0), (1,0)
             terrain_state: dict
         Outputs:
-            new_skills: dict
-            new_M_y: dict
+            infeasible_M_y: dict:
+                a set of infeasible transitions
         """
-        # TODO: discuss with Ziyi to figure out ros message type
-        raise NotImplementedError
-
-
+        Skills = SkillPrimitiveArray()
+        Skills.primitives = []
+        for key_tuple, skill_name in new_M_y.items():
+            skill_primitive = SkillPrimitive()
+            skill_primitive.name = skill_name
+            skill_primitive.dir = list[key_tuple[0]]
+            skill_primitive.current_terrain_type = key_tuple[1]
+            skill_primitive.next_terrain_type = key_tuple[2]
+            Skills.primitives.append(skill_primitive)
+        Skills.header.stamp = rospy.Time.now()
         
+
+        try:
+            response = self.feasibility_check_service(Skills)
+            print("==== Feasibility check response ====")
+            print(response)
+        except rospy.ServiceException as e:
+            print("Service call failed: %s"%e)
+        return self._parse_response_from_physical_check(response, new_M_y)
+
+    def _parse_response_from_physical_check(self, response: PrimitiveFeasibilityCheckResponse, new_M_y) -> dict:
+        """Parse response from physical check
+        """
+        infeasible_M_y = dict()
+        name_2_tuple = {v: k for k, v in new_M_y.items()}
+        feasibilities_checked = response.feasibilities_checked.feasibilities
+        for feasibility in feasibilities_checked:
+            if not feasibility.feasibility:
+                infeasible_M_y[name_2_tuple[feasibility.name]] = True
+        return infeasible_M_y
 
     def _check_M_y_soundness(self, compiler: Compiler, M_y: dict) -> None:
         """Check if M_y is sound
