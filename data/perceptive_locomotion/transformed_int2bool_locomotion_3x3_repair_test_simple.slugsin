@@ -1,0 +1,58 @@
+[INPUT]
+x0
+x1
+xrequest0
+xrequest1
+
+
+[OUTPUT]
+skill_0
+skill_1
+
+
+[ENV_TRANS]
+| ! & & skill_0 x0 ! x1 & ! x0' x1'
+| ! & & skill_1 ! x0 x1 & x0' ! x1'
+
+#[ENV_TRANS_HARD]
+! & xrequest0 xrequest1
+| xrequest0 xrequest1
+! & xrequest0' xrequest1'
+| xrequest0' xrequest1'
+! & x0 x1
+| x0 x1
+! & x0' x1'
+| x0' x1'
+| ! ! & | & ! x0 ! xrequest0 & x0 xrequest0 | & ! x1 ! xrequest1 & x1 xrequest1 & | & ! xrequest0' ! xrequest0 & xrequest0' xrequest0 | & ! xrequest1' ! xrequest1 & xrequest1' xrequest1
+| ! & ! skill_0 ! skill_1 & | & ! x0' ! x0 & x0' x0 | & ! x1' ! x1 & x1' x1
+
+
+[ENV_INIT]
+& ! xrequest0 xrequest1
+
+
+[SYS_TRANS]
+| ! ! & x0' ! x1' ! skill_0'
+| ! ! & ! x0' x1' ! skill_1'
+
+#[SYS_TRANS_HARD]
+| | & ! skill_0' ! skill_1' & skill_0' ! skill_1' & skill_1' ! skill_0'
+| ! & | & ! x0 ! xrequest0 & x0 xrequest0 | & ! x1 ! xrequest1 & x1 xrequest1 & ! skill_0 ! skill_1
+
+
+[SYS_INIT]
+! skill_0
+! skill_1
+
+
+[ENV_LIVENESS]
+
+
+[SYS_LIVENESS]
+& | & ! x0 ! xrequest0 & x0 xrequest0 | & ! x1 ! xrequest1 & x1 xrequest1
+
+#[CHANGE_CONS]
+
+#[NOT_ALLOWED_REPAIR]
+
+
