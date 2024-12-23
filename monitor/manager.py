@@ -126,10 +126,7 @@ class Manager:
     
     def runtime_setup(self) -> None:
         """Setup for runtime repair"""
-        # 0. Create mappings
-        self.create_mappings()
-
-        # 1. Setup the compiler
+        # 0. Setup the runtie repair compiler
         self.compiler = Compiler(input_file=self.repaired_spec,
                                     skills_data=dict(),
                                     symbols_data=dict(),
@@ -137,6 +134,9 @@ class Manager:
                                     controllabe_variables=[],
                                     uncontrollable_variables=[],
                                     opts=self.opts)
+        
+        # 1. Create mappings
+        self.create_mappings_bool()
         
         # 2. Make a copy of the compiler
         self.repair_compiler: Compiler = self._make_repair_compiler(self.compiler)
@@ -218,9 +218,9 @@ class Manager:
                 while not physical_feasible:
                     # 1. Get relevant skills
                     skills2transitions = self.m_y(terrain_state)
-                    if DEBUG:
+                    if True:
                         print("skills2transitions:\n", skills2transitions)
-                        sys.exit(0)
+                        # sys.exit(0)
 
                     # 2. Get relevant infeasible transitions
                     infeasible_transitions = self.terrain_state2invalid_trans(terrain_state)
@@ -264,6 +264,7 @@ class Manager:
                     
                     # 6.2. Add backup skills
                     self.repair_compiler.add_backup_skills()
+                    breakpoint()
                     self.repair_compiler.generate_structuredslugsplus(self.modulo_spec)
                     if DEBUG:
                         print("==== Exit due to debugging ====")
@@ -371,7 +372,7 @@ class Manager:
         for key_tuple, skill_name in new_M_y.items():
             skill_primitive = SkillPrimitive()
             skill_primitive.name = skill_name
-            skill_primitive.dir = list[key_tuple[0]]
+            skill_primitive.dir = list(key_tuple[0])
             skill_primitive.current_terrain_type = key_tuple[1]
             skill_primitive.next_terrain_type = key_tuple[2]
             Skills.primitives.append(skill_primitive)
@@ -690,7 +691,7 @@ class Manager:
 
         self.create_M_y_mapping()
         self.create_M_o_mapping()
-        if DEBUG:
+        if True:
             print("==== M_y ====")
             print(self.M_y)
             print("==== M_o ====")
