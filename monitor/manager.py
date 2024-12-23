@@ -887,7 +887,7 @@ class Manager:
 #         rospy.init_node("mocomp")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Monitor and Repair system for MOCOMP")
+    parser = argparse.ArgumentParser(description="High-level manager for quadruped locomotion")
     parser.add_argument("-f", "--filename_json", type=str, help="json file with input file names")
     parser.add_argument("-o", "--offline", action="store_true", help="offline repair")
     parser.add_argument("-r", "--runtime", action="store_true", help="runtime repair")
