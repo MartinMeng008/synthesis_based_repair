@@ -1885,7 +1885,7 @@ def bdd_to_suggestions(arg_bdd, arg_mod_pre, arg_mod_post, arg_opts, arg_acts_ch
                     arg_bdd.pick_iter(T_unique, care_vars=inp_vars))
 
                 skill_pre_posts[str(mod_cnt)] = {
-                    'name': 'skill' + str(len(arg_gs.get_output_vars()) + mod_cnt),
+                    'name': 'skill_' + str(len(arg_gs.get_output_vars()) + mod_cnt),
                     'new_skill':
                         list(arg_bdd.pick_iter(new_skill, care_vars=arg_gs.get_output_vars()))[
                             0],

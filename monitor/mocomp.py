@@ -67,6 +67,8 @@ class Compiler:
         self.set_mappings_int_to_bool_vars()
         self.terrain_states_formula = None
         self.request_states_formula = None
+        self.has_inacitivity_without_skills = True
+        self.has_skill_mutual_exclusion = True
     
     def set_data(self) -> None:
         """Set the data for added new skills"""
@@ -152,6 +154,9 @@ class Compiler:
 
     def get_vars(self): 
         return self.vars
+    
+    def get_inputs(self):
+        return self.vars[self.properties["input"]]
     
     def get_skills(self):
         """Get the existing skills from the input_file"""
@@ -1157,6 +1162,7 @@ class Monitor:
     def remove_skills_in_vars_and_asts(self) -> None:
         """Remove the skills from the vars and ASTs"""
         self.remove_keywoard_in_vars_and_asts("skill")
+        self.has_inacitivity_without_skills = False
 
     def remove_terrains_in_vars_and_asts(self) -> None:
         """Remove the terrains from the vars and ASTs"""
@@ -1387,6 +1393,37 @@ class Monitor:
         self.generate_env_trans_hard()
         self.generate_sys_trans_hard()
 
+    def add_backup_skills_modulo_spec(self) -> None:
+        """Add backup skills to spec before repair module"""
+        # output, sys_init, not_allowed_repair
+        backup_skills = [f'{skill}backup' for skill in self.vars[self.properties["output"]] if self.contains_skill(skill)]
+        self.vars[self.properties["output"]] = self.vars[self.properties["output"]] + backup_skills
+        # for backup_skill in backup_skills:
+        #     self.skills_data[backup_skill] = self.skills_data[backup_skill[:-6]]
+        self.asts[self.properties["sys_init"]] = self.asts[self.properties["sys_init"]] + [self.add_formula_wrapper(self.add_not_wrapper(self.name2assignment(backup_skill))) for backup_skill in backup_skills]
+        self.asts[self.properties["not_allowed_repair"]] = self.asts[self.properties["not_allowed_repair"]] + [self.add_formula_wrapper(self.add_not_wrapper(self.name2assignment(backup_skill))) for backup_skill in backup_skills]
+        
+
+        # Bookkeeping
+        # self.data_backup_skills = dict()
+        # self.data_backup_skills["num_backup_skills"] = len(backup_skills)
+
+        # env_trans, sys_trans, env_liveness, sys_liveness
+        for property_type in [self.properties['env_trans'], self.properties['sys_trans'], self.properties['env_liveness'], self.properties['sys_liveness']]:
+            new_formulas = []
+            for formula in self.asts[property_type]:
+                if self.contains_skill(formula):
+                    formula_prime = copy.deepcopy(formula)
+                    self.add_backup_skills_to_formula(formula_prime)
+                    new_formulas.append(formula_prime)
+            self.asts[property_type] = self.asts[property_type] + new_formulas
+            # self.data_backup_skills[property_type] = len(new_formulas)
+        
+        # env_trans_hard, sys_trans_hard
+        self.generate_env_trans_hard_modulo_spec()
+        self.generate_sys_trans_hard_modulo_spec()
+
+
     def remove_backup_skills(self) -> None:
         """Remove backup skills from spec after repair module"""
         # print(self.vars[self.properties["output"]])
@@ -1400,6 +1437,21 @@ class Monitor:
                 self.skills_data.pop(skill_name)
         self.generate_env_trans_hard()
         self.generate_sys_trans_hard()
+        self.data_backup_skills = dict()
+
+    def remove_backup_skills_modulo_spec(self) -> None:
+        """Remove backup skills from spec after repair module"""
+        # print(self.vars[self.properties["output"]])
+        self.vars[self.properties["output"]] = self.filter_list(self.vars[self.properties["output"]], lambda x: not self.contains_backup(x))
+        # print(self.vars[self.properties["output"]])
+        for property_type in [self.properties["sys_init"], self.properties["not_allowed_repair"], self.properties['env_trans'], self.properties['sys_trans'], self.properties['env_liveness'], self.properties['sys_liveness']]:
+            self.asts[property_type] = self.filter_list(self.asts[property_type], lambda x: not self.contains_skill_and_backup(x))
+            [ast for ast in self.asts[property_type] if not self.contains_skill_and_backup(ast)]
+        for skill_name in self.get_skills():
+            if 'backup' in skill_name:
+                self.skills_data.pop(skill_name)
+        self.generate_env_trans_hard_modulo_spec()
+        self.generate_sys_trans_hard_modulo_spec()
         self.data_backup_skills = dict()
 
     def contains_backup(self, formula: list) -> bool:
@@ -1623,6 +1675,31 @@ class Monitor:
                                                                                            symbols=self.controllable_variables))
         return formulas
     
+    def add_inactivity_without_skills_formulas(self, env_trans_hard: list) -> None:
+        """Add inactivity without skill formula"""
+        new_skill_conjunction = []
+        for skill in self.get_skills():
+            if self.contains_skill(skill):
+                new_skill_conjunction.append(self.add_not_wrapper(self.name2assignment(skill)))
+        new_skill_conjunction = self.add_conjunction_wrapper(new_skill_conjunction)
+        # new_skill_conjunction = self.add_formula_wrapper(new_skill_conjunction)
+        if self.has_inacitivity_without_skills:
+            env_trans_hard = env_trans_hard[:-1]
+        inactivity_conjunction = self.create_empty_conjunction()
+        for var in self.get_inputs():
+            inactivity_conjunction.append(self.add_biimplication_wrapper(self.name2assignment(var), self.name2assignment(var, is_prime=True)))
+        implication = self.add_implication_wrapper(new_skill_conjunction, inactivity_conjunction)
+        implication_formula = self.add_formula_wrapper(implication)
+        env_trans_hard.append(implication_formula)
+        self.not_any_skills_conjunction = new_skill_conjunction
+        self.has_inacitivity_without_skills = True
+        if DEBUG:
+            print("====")
+            print("current skills:", self.get_skills())
+            print("new_skill_conjunction:", new_skill_conjunction)
+        return env_trans_hard
+
+
     def modify_inactivity_without_skills_formulas(self) -> None:
         # mobile_skills = [skill for skill, skill_data in self.skills_data.items() if skill_data['type'] == "mobile"]
         # if not self.MANIPULATION_ONLY:
@@ -1718,6 +1795,12 @@ class Monitor:
         self.modify_inactivity_without_skills_formulas()
         # env_trans_hard.append(self.create_mutual_exclusion_skills_formula())
         self.asts[self.properties["env_trans_hard"]] = env_trans_hard
+
+    def generate_env_trans_hard_modulo_spec(self) -> None:
+        """Reset the env_trans_hard AST based on current vars and skills"""
+        env_trans_hard: list = self.asts[self.properties["env_trans_hard"]]
+        env_trans_hard = self.add_inactivity_without_skills_formulas(env_trans_hard)
+        self.asts[self.properties["env_trans_hard"]] = env_trans_hard
         
     def generate_sys_trans_hard(self) -> None:
         """Reset the sys_trans_hard AST based on current vars and skills"""
@@ -1725,6 +1808,16 @@ class Monitor:
         self.modify_waypoints_reached_imply_skill_inactivity(sys_trans_hard)
         sys_trans_hard = sys_trans_hard[:-1] # delete the skill mutual exclusion assumption
         sys_trans_hard.append(self.create_mutual_exclusion_skills_formula(is_prime=True))
+        self.asts[self.properties["sys_trans_hard"]] = sys_trans_hard
+
+    def generate_sys_trans_hard_modulo_spec(self) -> None:
+        """Reset the sys_trans_hard AST based on current vars and skills"""
+        sys_trans_hard = self.asts[self.properties["sys_trans_hard"]]
+        # self.modify_waypoints_reached_imply_skill_inactivity(sys_trans_hard)
+        if self.has_skill_mutual_exclusion:
+            sys_trans_hard = sys_trans_hard[:-1] # delete the skill mutual exclusion assumption
+        sys_trans_hard.append(self.create_mutual_exclusion_skills_formula(is_prime=True))
+        self.has_skill_mutual_exclusion = True
         self.asts[self.properties["sys_trans_hard"]] = sys_trans_hard
 
     def modify_waypoints_reached_imply_skill_inactivity(self, sys_trans_hard: list) -> None:
@@ -1795,6 +1888,38 @@ class Monitor:
         self.generate_env_trans_hard()
         self.generate_sys_trans_hard()
 
+    def add_skills_no_intermediate_states_modulo_spec(self, skills: dict) -> None:
+        """Add skills with no intermediate states to modulo spec
+        Generate env_trans_hard in a different manner:
+            need to add inactivity without skills formula
+        Generate sys_trans_hard in a different manner:
+            no need to modify the waypoints_reached_imply_skill_inactivity formula, since this formula is not there
+        
+        Inputs:
+            skills: dict: A dictionary of skills, where the key is the skill name and the value is the skill object
+        Outputs:
+            None, modify the ASTs and vars in-place
+        """
+        for name, skill in skills.items():
+            #[self.terminals['formula'], [self.terminals['unary'], [self.terminals['not'], ('!',)], [self.terminals['assignment'], name]]])
+            self.vars['[OUTPUT]'].append(name)
+            self.asts['[SYS_INIT]'].append(self.add_formula_wrapper(self.add_not_wrapper(self.name2assignment(name)))) 
+            postconditions = self.create_postconditions(name, skill)
+            preconditions = self.create_preconditions_no_intermediate_states(name, skill)
+            # print("postcondition: ", postconditions)
+            # print("precondition: ", preconditions)
+            self.asts['[ENV_TRANS]'].extend(postconditions)
+            self.asts['[SYS_TRANS]'].extend(preconditions)
+            self.data_new_skills['env_trans'] += len(postconditions)
+            self.data_new_skills['sys_trans'] += len(preconditions)
+        self.data_new_skills['new_skills'] = len(skills)
+        skills = self.change_skill_objects_to_dicts(skills)
+        self.skills_data.update(skills)
+
+        # Change the env_trans_hard and sys_trans_hard to remove last added skills and incorporate new added skills
+        self.generate_env_trans_hard_modulo_spec()
+        self.generate_sys_trans_hard_modulo_spec()
+        
     def remove_skills(self) -> None:
         self.remove_last_added_skills()
         self.generate_env_trans_hard()

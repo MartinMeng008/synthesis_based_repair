@@ -66,6 +66,7 @@ class Repair:
             skills: dict: a dictionary of suggested new skills
         """
         is_realizable = False
+        repair_needed = False
         cnt = 0
         skills = {}
         self.opts['existing_skills'] = self.compiler.get_skills()
@@ -88,7 +89,9 @@ class Repair:
             if is_realizable:
                 print("The spec is realizable")
                 self.compiler.remove_backup_skills()
-                return skills
+                return skills, repair_needed, is_realizable
+            
+            repair_needed = True
             
             # 3. Run symbolic repair
             self.opts['only_synthesis'] = False
@@ -117,7 +120,7 @@ class Repair:
                 for _, skill in skills.items():
                     skill.print_dict()
                 if self.symbolic_repair_only or SYMBOLIC_REPAIR_ONLY:
-                    return skills
+                    return skills, repair_needed, is_realizable
                 skill_array_msg = symbolic_repair_msgs.msg.SkillArray()
                 for _, skill in skills.items():
                     # skill.print_dict()
@@ -162,7 +165,7 @@ class Repair:
                     self.compiler.generate_structuredslugsplus(self.file_structuredslugsplus)
                     is_realizable = False
                 else:
-                    return skills
+                    return skills, repair_needed, is_realizable
                     raise Exception("stop here")
             print("----------------------------------")
             print("----------------------------------")
@@ -181,7 +184,7 @@ class Repair:
                 # break
             cnt += 1
         
-        return skills
+        return skills, repair_needed, is_realizable
             
 def test_symbolic_repair(filename_structuredslugsplus, opts, files=None):
     """Run the repair module

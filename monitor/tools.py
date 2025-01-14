@@ -306,6 +306,14 @@ def dump_json(file: str, d: dict) -> None:
     with open(file, 'w') as fp:
         json.dump(d, fp)
 
+def dict_key_tuple2str(d: dict) -> dict:
+    """Transform a dictionary with tuple keys to string keys"""
+    return {json.dumps(k): v for k, v in d.items()}
+
+def dict_key_str2tuple(d: dict) -> dict:
+    """Transform a dictionary with string keys to tuple keys"""
+    return {tuple(json.loads(k)): v for k, v in d.items()}
+
 def load_skills_from_json(json_file: str) -> dict:
     """Convert json file to skills dictionary"""
     skills_data = json_load_wrapper(json_file)

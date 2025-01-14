@@ -10,5 +10,6 @@
     "online_output_file_structuredslugs": "../data/perceptive_locomotion/5x5_8_terrains/online_repaired_transformed_5x5_go2_with_obstacle_8_terrain_real.structuredslugs",
     "opts": "../data/perceptive_locomotion/5x5_8_terrains/opts.json",
     "json_data": "../data/perceptive_locomotion/5x5_8_terrains/5x5_go2_with_obstacle_8_terrain_real.json",
-    "modulo_spec_structuredslugsplus": "../data/perceptive_locomotion/5x5_8_terrains/modulo_transformed_5x5_go2_with_obstacle_8_terrain_real.structuredslugsplus"
+    "modulo_spec_structuredslugsplus": "../data/perceptive_locomotion/5x5_8_terrains/modulo_transformed_5x5_go2_with_obstacle_8_terrain_real.structuredslugsplus",
+    "mapping_file": "../data/perceptive_locomotion/5x5_8_terrains/mapping_5x5_go2_with_obstacle_8_terrain_real.json"
 }

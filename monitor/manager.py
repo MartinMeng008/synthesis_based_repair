@@ -18,6 +18,9 @@ from tools import (
     check_slugsin_realizability,
     find_symbols_by_objects_type_category,
     json_load_wrapper,
+    dump_json,
+    dict_key_tuple2str,
+    dict_key_str2tuple,
     create_symbols_from_objects_and_locations,
     find_true_symbols,
     is_manipulation_object,
@@ -70,6 +73,7 @@ class Manager:
         self.spec_int: str = file_json["input_file_int"]
         self.spec_bool: str = file_json["input_file_bool"]
         self.modulo_spec: str = file_json["modulo_spec_structuredslugsplus"]
+        self.mapping_file: str = file_json["mapping_file"]
         self.repaired_spec: str = file_json["output_file_structuredslugsplus"]
         self.repaired_spec_slugsin = file_json["output_file_slugsin"]
         self.opts: dict = json_load_wrapper(file_json["opts"])
@@ -85,6 +89,7 @@ class Manager:
         print(f"num of terrain types: {self.num_terrain_types}")
         print(f"num of terrain states: {len(self.terrain_states)}")
         print(f"num of request states: {len(self.request_states)}")
+        print(f"mapping_file: {self.mapping_file}")
         print("====================")
         if DEBUG:
             print("==== Exit due to debugging ====")
@@ -119,8 +124,8 @@ class Manager:
         # 1. Transform the spec to boolean
         self.generate_bool_spec(self.compiler)
 
-        # 2. Make a copy of the compiler
-        self.repair_compiler = self._make_repair_compiler(self.compiler)
+        # # 2. Make a copy of the compiler
+        # self.repair_compiler = self._make_repair_compiler(self.compiler)
 
         return None
     
@@ -136,10 +141,10 @@ class Manager:
                                     opts=self.opts)
         
         # 1. Create mappings
-        self.create_mappings_bool()
+        self.load_mappings()
         
-        # 2. Make a copy of the compiler
-        self.repair_compiler: Compiler = self._make_repair_compiler(self.compiler)
+        # # 2. Make a copy of the compiler
+        # self.repair_compiler: Compiler = self._make_repair_compiler(self.compiler)
         return None
 
     def _make_repair_compiler(self, compiler: Compiler) -> Compiler:
@@ -182,7 +187,7 @@ class Manager:
         print("=============")
         self.modulo_repair([terrain_state], [request_state])
         # Generate the repair module spec
-        self.repair_compiler.remove_backup_skills()
+        self.repair_compiler.remove_backup_skills_modulo_spec()
         self.repair_compiler.generate_structuredslugsplus(self.runtime_repair_spec)
         self.repair_compiler.generate_slugsin(self.runtime_repair_spec_slugsin)
 
@@ -212,12 +217,14 @@ class Manager:
     def modulo_repair(self, terrain_states: list, request_states: list) -> None:
         """The main function for modulo repair"""
         #  For each terrain state, and request state, repair the spec
+        unrepairable_terrain_and_request_states = []
         for terrain_state in terrain_states:
             for request_state in request_states:
                 physical_feasible = False
                 while not physical_feasible:
                     # 1. Get relevant skills
                     skills2transitions = self.m_y(terrain_state)
+                    self.add_self_loop_skill_to_skills2transitions(skills2transitions, request_state["xrequest"], request_state["yrequest"])
                     if True:
                         print("skills2transitions:\n", skills2transitions)
                         # sys.exit(0)
@@ -230,12 +237,16 @@ class Manager:
                     if DEBUG: 
                         print("Time for removing skills and terrains:")
                         start_time = time.time()
+                    self.repair_compiler = self._make_repair_compiler(self.compiler)
                     self.repair_compiler.remove_skills_in_vars_and_asts()
+                    self.repair_compiler.has_inacitivity_without_skills = False
+                    self.repair_compiler.has_skill_mutual_exclusion = False
+
                     if DEBUG: print("--- %s seconds ---" % (time.time() - start_time))
 
                     if DEBUG:
                         print("Before adding skills:")
-                        self.repair_compiler.generate_structuredslugs(self.modulo_spec)
+                        self.repair_compiler.generate_structuredslugsplus(self.modulo_spec)
                         sys.exit(0)
                     
                     # 4. Add relevant skills
@@ -245,7 +256,7 @@ class Manager:
                         for _, skill in skills.items():
                             skill.print_dict()
                         sys.exit(0)
-                    self.repair_compiler.add_skills_no_intermediate_states(skills)
+                    self.repair_compiler.add_skills_no_intermediate_states_modulo_spec(skills)
 
                     # 5. Add infeasible transitions
                     self.repair_compiler.add_infeasible_trans_to_not_allowed_repair(infeasible_transitions)
@@ -263,8 +274,8 @@ class Manager:
                     self.repair_compiler.add_liveness_goal(self.request2robot(request_state))
                     
                     # 6.2. Add backup skills
-                    self.repair_compiler.add_backup_skills()
-                    breakpoint()
+                    self.repair_compiler.add_backup_skills_modulo_spec()
+                    # breakpoint()
                     self.repair_compiler.generate_structuredslugsplus(self.modulo_spec)
                     if DEBUG:
                         print("==== Exit due to debugging ====")
@@ -282,14 +293,26 @@ class Manager:
                     print(f"==== Relevant skills: {skills2transitions} ====")
                     if True:
                         start_time = time.time()
-                    new_skills = repair.run_symbolic_repair()
+                    new_skills, repair_needed, is_repaired = repair.run_symbolic_repair()
                     # self.repair_compiler.remove_backup_skills()
 
                     if True:
                         print("Time for repair:")
                         print("--- %s seconds ---" % (time.time() - start_time))
-                    self.repair_compiler.remove_backup_skills()
+                    self.repair_compiler.remove_backup_skills_modulo_spec()
+                    if repair_needed and len(new_skills) == 0:
+                        print("==== Unrepairable terrain and request states ====")
+                        print("Terrain state:", terrain_state)
+                        print("Request state:", request_state)
+                        unrepairable_terrain_and_request_states.append((terrain_state, request_state))
+
                     if len(new_skills) > 0:
+                        if True:
+                            print("==== New skills ====")
+                            for _, skill in new_skills.items():
+                                print(skill)
+                            # print("exit due to debugging")
+                            # sys.exit(0)
                         # 6.4. Parse news skills to ideal format
                         new_skills, new_M_y = self.parse_new_skills(new_skills, terrain_state)
 
@@ -308,7 +331,7 @@ class Manager:
                         self.rename_skills(self.compiler, new_skills, new_M_y)
 
                         if not self.opts["symbolic_repair_only"]:
-                            # 6.7. Perform physical check, TODO
+                            # 6.7. Perform physical check
                             infeasible_M_y = self.perform_physical_check(new_skills, new_M_y, terrain_state)
                             if len(infeasible_M_y) == 0:
                                 physical_feasible = True
@@ -352,6 +375,16 @@ class Manager:
         print("==== M_Y ====")
         print(self.M_y)
         self._check_M_y_soundness(self.compiler, self.M_y)
+        print("==== M_I ====")
+        print(self.M_i)
+        print("==== M_O ====")
+        print(self.M_o)
+        self.store_mappings(self.M_y, self.M_i, self.M_o)
+
+        if True:
+            print("==== unrepairable terrain and request states ====")
+            print(unrepairable_terrain_and_request_states)
+            print("==================================================")
         return None
         
 
@@ -498,7 +531,7 @@ class Manager:
                 compiler_copy: Compiler = copy.deepcopy(compiler)
                 removed_skill = new_skills.pop(skill_name)
                 new_skills_modulo_terrains = self._make_new_skills_modulo_terrains_copy(new_skills)
-                compiler_copy.add_skills_no_intermediate_states(new_skills_modulo_terrains)
+                compiler_copy.add_skills_no_intermediate_states_modulo_spec(new_skills_modulo_terrains)
                 if True:
                     print("==== skills to check ====")
                     print(compiler_copy.get_skills())
@@ -697,7 +730,28 @@ class Manager:
             print("==== M_o ====")
             print(self.M_o)
             print("==== exit due to debug ====")
-            sys.exit(0)
+            # sys.exit(0)
+
+    def load_mappings(self) -> None:
+        """Load mappings from a file"""
+        file_json: dict = json_load_wrapper(self.mapping_file)
+        self.M_y = dict_key_str2tuple(file_json["M_y"])
+        self.M_i = dict_key_str2tuple(file_json["M_i"])
+        self.M_o = dict_key_str2tuple(file_json["M_o"])
+        self.all_new_M_y = dict()
+        return None
+    
+    def store_mappings(self, M_y: dict, M_i: dict, M_o: dict) -> None:
+        """Store mappings to a file"""
+        file_json: dict = dict()
+        M_y = dict_key_tuple2str(M_y)
+        M_i = dict_key_tuple2str(M_i)
+        M_o = dict_key_tuple2str(M_o)
+        file_json["M_y"] = M_y
+        file_json["M_i"] = M_i
+        file_json["M_o"] = M_o
+        dump_json(self.mapping_file, file_json)
+        return None
     
     def m_y(self, terrain_state: dict) -> dict:
         """Given a terrain state, return a mapping from relevant skills to transitions"""
@@ -714,6 +768,11 @@ class Manager:
                         skills2transitions[self.M_y[key_tuple]].append((x, y, nx, ny))
         return dict(skills2transitions)
     
+    def add_self_loop_skill_to_skills2transitions(self, skills2transitions: dict, x, y) -> None:
+        """Add self loop skill to skills2transitions"""
+        skills2transitions['skill_selfloop'] = [(x, y, x, y)]
+        return None
+
     def m_o(self, terrain_state: dict) -> list:
         """Given a terrain state, return a list of AST formulas representing invalid locations due to obstacle
         Inputs:
