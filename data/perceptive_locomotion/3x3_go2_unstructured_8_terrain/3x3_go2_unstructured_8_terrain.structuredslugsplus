@@ -1,0 +1,165 @@
+[INPUT]
+# State of the robot in the grid
+x:0...2
+y:0...2
+
+# Command for different goals
+xrequest:0...2
+yrequest:0...2
+
+x_0_y_0_terrain:0...8
+x_0_y_1_terrain:0...8
+x_0_y_2_terrain:0...8
+x_1_y_0_terrain:0...8
+x_1_y_1_terrain:0...8
+x_1_y_2_terrain:0...8
+x_2_y_0_terrain:0...8
+x_2_y_1_terrain:0...8
+x_2_y_2_terrain:0...8
+[ENV_INIT]
+x = 1
+y = 1
+
+
+(x_0_y_0_terrain = 4 & x_1_y_0_terrain = 0 & x_2_y_0_terrain = 6 & x_0_y_1_terrain = 3 & x_1_y_1_terrain = 0 & x_2_y_1_terrain = 8 & x_0_y_2_terrain = 8 & x_1_y_2_terrain = 8 & x_2_y_2_terrain = 8) | (x_0_y_0_terrain = 4 & x_1_y_0_terrain = 4 & x_2_y_0_terrain = 0 & x_0_y_1_terrain = 8 & x_1_y_1_terrain = 3 & x_2_y_1_terrain = 0 & x_0_y_2_terrain = 8 & x_1_y_2_terrain = 8 & x_2_y_2_terrain = 8) | (x_0_y_0_terrain = 7 & x_1_y_0_terrain = 0 & x_2_y_0_terrain = 8 & x_0_y_1_terrain = 7 & x_1_y_1_terrain = 0 & x_2_y_1_terrain = 8 & x_0_y_2_terrain = 8 & x_1_y_2_terrain = 8 & x_2_y_2_terrain = 8) | (x_0_y_0_terrain = 6 & x_1_y_0_terrain = 7 & x_2_y_0_terrain = 0 & x_0_y_1_terrain = 6 & x_1_y_1_terrain = 7 & x_2_y_1_terrain = 0 & x_0_y_2_terrain = 8 & x_1_y_2_terrain = 8 & x_2_y_2_terrain = 8) | (x_0_y_0_terrain = 0 & x_1_y_0_terrain = 6 & x_2_y_0_terrain = 7 & x_0_y_1_terrain = 0 & x_1_y_1_terrain = 6 & x_2_y_1_terrain = 7 & x_0_y_2_terrain = 0 & x_1_y_2_terrain = 8 & x_2_y_2_terrain = 8) | (x_0_y_0_terrain = 4 & x_1_y_0_terrain = 0 & x_2_y_0_terrain = 6 & x_0_y_1_terrain = 4 & x_1_y_1_terrain = 0 & x_2_y_1_terrain = 6 & x_0_y_2_terrain = 3 & x_1_y_2_terrain = 0 & x_2_y_2_terrain = 8) | (x_0_y_0_terrain = 3 & x_1_y_0_terrain = 3 & x_2_y_0_terrain = 0 & x_0_y_1_terrain = 3 & x_1_y_1_terrain = 3 & x_2_y_1_terrain = 0 & x_0_y_2_terrain = 8 & x_1_y_2_terrain = 3 & x_2_y_2_terrain = 0) | (x_0_y_0_terrain = 3 & x_1_y_0_terrain = 3 & x_2_y_0_terrain = 3 & x_0_y_1_terrain = 3 & x_1_y_1_terrain = 3 & x_2_y_1_terrain = 3 & x_0_y_2_terrain = 8 & x_1_y_2_terrain = 8 & x_2_y_2_terrain = 3) | (x_0_y_0_terrain = 8 & x_1_y_0_terrain = 3 & x_2_y_0_terrain = 4 & x_0_y_1_terrain = 8 & x_1_y_1_terrain = 3 & x_2_y_1_terrain = 4 & x_0_y_2_terrain = 8 & x_1_y_2_terrain = 8 & x_2_y_2_terrain = 8) | (x_0_y_0_terrain = 7 & x_1_y_0_terrain = 0 & x_2_y_0_terrain = 8 & x_0_y_1_terrain = 7 & x_1_y_1_terrain = 0 & x_2_y_1_terrain = 8 & x_0_y_2_terrain = 7 & x_1_y_2_terrain = 0 & x_2_y_2_terrain = 8) | (x_0_y_0_terrain = 6 & x_1_y_0_terrain = 7 & x_2_y_0_terrain = 0 & x_0_y_1_terrain = 6 & x_1_y_1_terrain = 7 & x_2_y_1_terrain = 0 & x_0_y_2_terrain = 6 & x_1_y_2_terrain = 7 & x_2_y_2_terrain = 0) | (x_0_y_0_terrain = 0 & x_1_y_0_terrain = 6 & x_2_y_0_terrain = 7 & x_0_y_1_terrain = 0 & x_1_y_1_terrain = 6 & x_2_y_1_terrain = 7 & x_0_y_2_terrain = 0 & x_1_y_2_terrain = 6 & x_2_y_2_terrain = 7) | (x_0_y_0_terrain = 4 & x_1_y_0_terrain = 0 & x_2_y_0_terrain = 6 & x_0_y_1_terrain = 4 & x_1_y_1_terrain = 0 & x_2_y_1_terrain = 6 & x_0_y_2_terrain = 4 & x_1_y_2_terrain = 0 & x_2_y_2_terrain = 6) | (x_0_y_0_terrain = 3 & x_1_y_0_terrain = 3 & x_2_y_0_terrain = 0 & x_0_y_1_terrain = 3 & x_1_y_1_terrain = 3 & x_2_y_1_terrain = 0 & x_0_y_2_terrain = 3 & x_1_y_2_terrain = 3 & x_2_y_2_terrain = 0) | (x_0_y_0_terrain = 3 & x_1_y_0_terrain = 3 & x_2_y_0_terrain = 3 & x_0_y_1_terrain = 3 & x_1_y_1_terrain = 3 & x_2_y_1_terrain = 3 & x_0_y_2_terrain = 3 & x_1_y_2_terrain = 3 & x_2_y_2_terrain = 3) | (x_0_y_0_terrain = 8 & x_1_y_0_terrain = 3 & x_2_y_0_terrain = 4 & x_0_y_1_terrain = 8 & x_1_y_1_terrain = 3 & x_2_y_1_terrain = 4 & x_0_y_2_terrain = 8 & x_1_y_2_terrain = 3 & x_2_y_2_terrain = 4) | (x_0_y_0_terrain = 8 & x_1_y_0_terrain = 8 & x_2_y_0_terrain = 8 & x_0_y_1_terrain = 7 & x_1_y_1_terrain = 0 & x_2_y_1_terrain = 8 & x_0_y_2_terrain = 7 & x_1_y_2_terrain = 0 & x_2_y_2_terrain = 8) | (x_0_y_0_terrain = 8 & x_1_y_0_terrain = 8 & x_2_y_0_terrain = 8 & x_0_y_1_terrain = 6 & x_1_y_1_terrain = 7 & x_2_y_1_terrain = 0 & x_0_y_2_terrain = 6 & x_1_y_2_terrain = 7 & x_2_y_2_terrain = 0) | (x_0_y_0_terrain = 0 & x_1_y_0_terrain = 8 & x_2_y_0_terrain = 8 & x_0_y_1_terrain = 0 & x_1_y_1_terrain = 6 & x_2_y_1_terrain = 7 & x_0_y_2_terrain = 0 & x_1_y_2_terrain = 6 & x_2_y_2_terrain = 7) | (x_0_y_0_terrain = 3 & x_1_y_0_terrain = 0 & x_2_y_0_terrain = 8 & x_0_y_1_terrain = 4 & x_1_y_1_terrain = 0 & x_2_y_1_terrain = 6 & x_0_y_2_terrain = 4 & x_1_y_2_terrain = 0 & x_2_y_2_terrain = 6) | (x_0_y_0_terrain = 8 & x_1_y_0_terrain = 3 & x_2_y_0_terrain = 0 & x_0_y_1_terrain = 3 & x_1_y_1_terrain = 3 & x_2_y_1_terrain = 0 & x_0_y_2_terrain = 3 & x_1_y_2_terrain = 3 & x_2_y_2_terrain = 0) | (x_0_y_0_terrain = 8 & x_1_y_0_terrain = 8 & x_2_y_0_terrain = 3 & x_0_y_1_terrain = 3 & x_1_y_1_terrain = 3 & x_2_y_1_terrain = 3 & x_0_y_2_terrain = 3 & x_1_y_2_terrain = 3 & x_2_y_2_terrain = 3) | (x_0_y_0_terrain = 8 & x_1_y_0_terrain = 8 & x_2_y_0_terrain = 8 & x_0_y_1_terrain = 8 & x_1_y_1_terrain = 3 & x_2_y_1_terrain = 4 & x_0_y_2_terrain = 8 & x_1_y_2_terrain = 3 & x_2_y_2_terrain = 4) | (x_0_y_0_terrain = 8 & x_1_y_0_terrain = 8 & x_2_y_0_terrain = 8 & x_0_y_1_terrain = 3 & x_1_y_1_terrain = 0 & x_2_y_1_terrain = 8 & x_0_y_2_terrain = 4 & x_1_y_2_terrain = 0 & x_2_y_2_terrain = 6) | (x_0_y_0_terrain = 8 & x_1_y_0_terrain = 8 & x_2_y_0_terrain = 8 & x_0_y_1_terrain = 8 & x_1_y_1_terrain = 3 & x_2_y_1_terrain = 0 & x_0_y_2_terrain = 4 & x_1_y_2_terrain = 4 & x_2_y_2_terrain = 0)
+[OUTPUT]
+skill_0
+skill_1
+skill_2
+skill_3
+skill_4
+skill_5
+skill_6
+skill_7
+skill_8
+skill_9
+skill_10
+
+[SYS_INIT]
+! skill_0
+! skill_1
+! skill_2
+! skill_3
+! skill_4
+! skill_5
+! skill_6
+! skill_7
+! skill_8
+! skill_9
+! skill_10
+
+[SYS_TRANS]
+!((x' = 0 & y' = 0 & x_0_y_0_terrain' = 3 & x_1_y_0_terrain' = 0) | (x' = 1 & y' = 0 & x_1_y_0_terrain' = 3 & x_2_y_0_terrain' = 0) | (x' = 0 & y' = 1 & x_0_y_1_terrain' = 3 & x_1_y_1_terrain' = 0) | (x' = 1 & y' = 1 & x_1_y_1_terrain' = 3 & x_2_y_1_terrain' = 0) | (x' = 0 & y' = 2 & x_0_y_2_terrain' = 3 & x_1_y_2_terrain' = 0) | (x' = 1 & y' = 2 & x_1_y_2_terrain' = 3 & x_2_y_2_terrain' = 0)) -> ! skill_0'
+!((x' = 0 & y' = 0 & x_0_y_0_terrain' = 0 & x_1_y_0_terrain' = 6) | (x' = 1 & y' = 0 & x_1_y_0_terrain' = 0 & x_2_y_0_terrain' = 6) | (x' = 0 & y' = 1 & x_0_y_1_terrain' = 0 & x_1_y_1_terrain' = 6) | (x' = 1 & y' = 1 & x_1_y_1_terrain' = 0 & x_2_y_1_terrain' = 6) | (x' = 0 & y' = 2 & x_0_y_2_terrain' = 0 & x_1_y_2_terrain' = 6) | (x' = 1 & y' = 2 & x_1_y_2_terrain' = 0 & x_2_y_2_terrain' = 6)) -> ! skill_1'
+!((x' = 0 & y' = 0 & x_0_y_0_terrain' = 0 & x_0_y_1_terrain' = 0) | (x' = 1 & y' = 0 & x_1_y_0_terrain' = 0 & x_1_y_1_terrain' = 0) | (x' = 2 & y' = 0 & x_2_y_0_terrain' = 0 & x_2_y_1_terrain' = 0) | (x' = 0 & y' = 1 & x_0_y_1_terrain' = 0 & x_0_y_2_terrain' = 0) | (x' = 1 & y' = 1 & x_1_y_1_terrain' = 0 & x_1_y_2_terrain' = 0) | (x' = 2 & y' = 1 & x_2_y_1_terrain' = 0 & x_2_y_2_terrain' = 0)) -> ! skill_2'
+!((x' = 0 & y' = 1 & x_0_y_1_terrain' = 0 & x_0_y_0_terrain' = 0) | (x' = 1 & y' = 1 & x_1_y_1_terrain' = 0 & x_1_y_0_terrain' = 0) | (x' = 2 & y' = 1 & x_2_y_1_terrain' = 0 & x_2_y_0_terrain' = 0) | (x' = 0 & y' = 2 & x_0_y_2_terrain' = 0 & x_0_y_1_terrain' = 0) | (x' = 1 & y' = 2 & x_1_y_2_terrain' = 0 & x_1_y_1_terrain' = 0) | (x' = 2 & y' = 2 & x_2_y_2_terrain' = 0 & x_2_y_1_terrain' = 0)) -> ! skill_3'
+!((x' = 1 & y' = 0 & x_1_y_0_terrain' = 6 & x_0_y_0_terrain' = 0) | (x' = 2 & y' = 0 & x_2_y_0_terrain' = 6 & x_1_y_0_terrain' = 0) | (x' = 1 & y' = 1 & x_1_y_1_terrain' = 6 & x_0_y_1_terrain' = 0) | (x' = 2 & y' = 1 & x_2_y_1_terrain' = 6 & x_1_y_1_terrain' = 0) | (x' = 1 & y' = 2 & x_1_y_2_terrain' = 6 & x_0_y_2_terrain' = 0) | (x' = 2 & y' = 2 & x_2_y_2_terrain' = 6 & x_1_y_2_terrain' = 0)) -> ! skill_4'
+!((x' = 0 & y' = 0 & x_0_y_0_terrain' = 7 & x_1_y_0_terrain' = 0) | (x' = 1 & y' = 0 & x_1_y_0_terrain' = 7 & x_2_y_0_terrain' = 0) | (x' = 0 & y' = 1 & x_0_y_1_terrain' = 7 & x_1_y_1_terrain' = 0) | (x' = 1 & y' = 1 & x_1_y_1_terrain' = 7 & x_2_y_1_terrain' = 0) | (x' = 0 & y' = 2 & x_0_y_2_terrain' = 7 & x_1_y_2_terrain' = 0) | (x' = 1 & y' = 2 & x_1_y_2_terrain' = 7 & x_2_y_2_terrain' = 0)) -> ! skill_5'
+!((x' = 0 & y' = 0 & x_0_y_0_terrain' = 7 & x_0_y_1_terrain' = 7) | (x' = 1 & y' = 0 & x_1_y_0_terrain' = 7 & x_1_y_1_terrain' = 7) | (x' = 2 & y' = 0 & x_2_y_0_terrain' = 7 & x_2_y_1_terrain' = 7) | (x' = 0 & y' = 1 & x_0_y_1_terrain' = 7 & x_0_y_2_terrain' = 7) | (x' = 1 & y' = 1 & x_1_y_1_terrain' = 7 & x_1_y_2_terrain' = 7) | (x' = 2 & y' = 1 & x_2_y_1_terrain' = 7 & x_2_y_2_terrain' = 7)) -> ! skill_6'
+!((x' = 0 & y' = 1 & x_0_y_1_terrain' = 7 & x_0_y_0_terrain' = 7) | (x' = 1 & y' = 1 & x_1_y_1_terrain' = 7 & x_1_y_0_terrain' = 7) | (x' = 2 & y' = 1 & x_2_y_1_terrain' = 7 & x_2_y_0_terrain' = 7) | (x' = 0 & y' = 2 & x_0_y_2_terrain' = 7 & x_0_y_1_terrain' = 7) | (x' = 1 & y' = 2 & x_1_y_2_terrain' = 7 & x_1_y_1_terrain' = 7) | (x' = 2 & y' = 2 & x_2_y_2_terrain' = 7 & x_2_y_1_terrain' = 7)) -> ! skill_7'
+!((x' = 1 & y' = 0 & x_1_y_0_terrain' = 0 & x_0_y_0_terrain' = 7) | (x' = 2 & y' = 0 & x_2_y_0_terrain' = 0 & x_1_y_0_terrain' = 7) | (x' = 1 & y' = 1 & x_1_y_1_terrain' = 0 & x_0_y_1_terrain' = 7) | (x' = 2 & y' = 1 & x_2_y_1_terrain' = 0 & x_1_y_1_terrain' = 7) | (x' = 1 & y' = 2 & x_1_y_2_terrain' = 0 & x_0_y_2_terrain' = 7) | (x' = 2 & y' = 2 & x_2_y_2_terrain' = 0 & x_1_y_2_terrain' = 7)) -> ! skill_8'
+!((x' = 0 & y' = 0 & x_0_y_0_terrain' = 6 & x_1_y_0_terrain' = 7) | (x' = 1 & y' = 0 & x_1_y_0_terrain' = 6 & x_2_y_0_terrain' = 7) | (x' = 0 & y' = 1 & x_0_y_1_terrain' = 6 & x_1_y_1_terrain' = 7) | (x' = 1 & y' = 1 & x_1_y_1_terrain' = 6 & x_2_y_1_terrain' = 7) | (x' = 0 & y' = 2 & x_0_y_2_terrain' = 6 & x_1_y_2_terrain' = 7) | (x' = 1 & y' = 2 & x_1_y_2_terrain' = 6 & x_2_y_2_terrain' = 7)) -> ! skill_9'
+!((x' = 1 & y' = 0 & x_1_y_0_terrain' = 7 & x_0_y_0_terrain' = 6) | (x' = 2 & y' = 0 & x_2_y_0_terrain' = 7 & x_1_y_0_terrain' = 6) | (x' = 1 & y' = 1 & x_1_y_1_terrain' = 7 & x_0_y_1_terrain' = 6) | (x' = 2 & y' = 1 & x_2_y_1_terrain' = 7 & x_1_y_1_terrain' = 6) | (x' = 1 & y' = 2 & x_1_y_2_terrain' = 7 & x_0_y_2_terrain' = 6) | (x' = 2 & y' = 2 & x_2_y_2_terrain' = 7 & x_1_y_2_terrain' = 6)) -> ! skill_10'
+
+[SYS_TRANS_HARD]
+x_0_y_0_terrain = 8 -> !(x = 0 & y = 0) & !(x' = 0 & y' = 0)
+x_0_y_1_terrain = 8 -> !(x = 0 & y = 1) & !(x' = 0 & y' = 1)
+x_0_y_2_terrain = 8 -> !(x = 0 & y = 2) & !(x' = 0 & y' = 2)
+x_1_y_0_terrain = 8 -> !(x = 1 & y = 0) & !(x' = 1 & y' = 0)
+x_1_y_1_terrain = 8 -> !(x = 1 & y = 1) & !(x' = 1 & y' = 1)
+x_1_y_2_terrain = 8 -> !(x = 1 & y = 2) & !(x' = 1 & y' = 2)
+x_2_y_0_terrain = 8 -> !(x = 2 & y = 0) & !(x' = 2 & y' = 0)
+x_2_y_1_terrain = 8 -> !(x = 2 & y = 1) & !(x' = 2 & y' = 1)
+x_2_y_2_terrain = 8 -> !(x = 2 & y = 2) & !(x' = 2 & y' = 2)
+
+(x = xrequest & y = yrequest) -> (! skill_0 & ! skill_1 & ! skill_2 & ! skill_3 & ! skill_4 & ! skill_5 & ! skill_6 & ! skill_7 & ! skill_8 & ! skill_9 & ! skill_10)
+(skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10') | (skill_1' & ! skill_0' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10') | (skill_2' & ! skill_0' & ! skill_1' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10') | (skill_3' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10') | (skill_4' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10') | (skill_5' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10') | (skill_6' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10') | (skill_7' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_8' & ! skill_9' & ! skill_10') | (skill_8' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_9' & ! skill_10') | (skill_9' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_10') | (skill_10' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9') | (! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_7' & ! skill_8' & ! skill_9' & ! skill_10')
+
+
+[ENV_TRANS]
+(skill_0 & x = 0 & y = 0 & x_0_y_0_terrain = 3 & x_1_y_0_terrain = 0) -> (x' = 1 & y' = 0)
+(skill_0 & x = 1 & y = 0 & x_1_y_0_terrain = 3 & x_2_y_0_terrain = 0) -> (x' = 2 & y' = 0)
+(skill_0 & x = 0 & y = 1 & x_0_y_1_terrain = 3 & x_1_y_1_terrain = 0) -> (x' = 1 & y' = 1)
+(skill_0 & x = 1 & y = 1 & x_1_y_1_terrain = 3 & x_2_y_1_terrain = 0) -> (x' = 2 & y' = 1)
+(skill_0 & x = 0 & y = 2 & x_0_y_2_terrain = 3 & x_1_y_2_terrain = 0) -> (x' = 1 & y' = 2)
+(skill_0 & x = 1 & y = 2 & x_1_y_2_terrain = 3 & x_2_y_2_terrain = 0) -> (x' = 2 & y' = 2)
+(skill_1 & x = 0 & y = 0 & x_0_y_0_terrain = 0 & x_1_y_0_terrain = 6) -> (x' = 1 & y' = 0)
+(skill_1 & x = 1 & y = 0 & x_1_y_0_terrain = 0 & x_2_y_0_terrain = 6) -> (x' = 2 & y' = 0)
+(skill_1 & x = 0 & y = 1 & x_0_y_1_terrain = 0 & x_1_y_1_terrain = 6) -> (x' = 1 & y' = 1)
+(skill_1 & x = 1 & y = 1 & x_1_y_1_terrain = 0 & x_2_y_1_terrain = 6) -> (x' = 2 & y' = 1)
+(skill_1 & x = 0 & y = 2 & x_0_y_2_terrain = 0 & x_1_y_2_terrain = 6) -> (x' = 1 & y' = 2)
+(skill_1 & x = 1 & y = 2 & x_1_y_2_terrain = 0 & x_2_y_2_terrain = 6) -> (x' = 2 & y' = 2)
+(skill_2 & x = 0 & y = 0 & x_0_y_0_terrain = 0 & x_0_y_1_terrain = 0) -> (x' = 0 & y' = 1)
+(skill_2 & x = 1 & y = 0 & x_1_y_0_terrain = 0 & x_1_y_1_terrain = 0) -> (x' = 1 & y' = 1)
+(skill_2 & x = 2 & y = 0 & x_2_y_0_terrain = 0 & x_2_y_1_terrain = 0) -> (x' = 2 & y' = 1)
+(skill_2 & x = 0 & y = 1 & x_0_y_1_terrain = 0 & x_0_y_2_terrain = 0) -> (x' = 0 & y' = 2)
+(skill_2 & x = 1 & y = 1 & x_1_y_1_terrain = 0 & x_1_y_2_terrain = 0) -> (x' = 1 & y' = 2)
+(skill_2 & x = 2 & y = 1 & x_2_y_1_terrain = 0 & x_2_y_2_terrain = 0) -> (x' = 2 & y' = 2)
+(skill_3 & x = 0 & y = 1 & x_0_y_1_terrain = 0 & x_0_y_0_terrain = 0) -> (x' = 0 & y' = 0)
+(skill_3 & x = 1 & y = 1 & x_1_y_1_terrain = 0 & x_1_y_0_terrain = 0) -> (x' = 1 & y' = 0)
+(skill_3 & x = 2 & y = 1 & x_2_y_1_terrain = 0 & x_2_y_0_terrain = 0) -> (x' = 2 & y' = 0)
+(skill_3 & x = 0 & y = 2 & x_0_y_2_terrain = 0 & x_0_y_1_terrain = 0) -> (x' = 0 & y' = 1)
+(skill_3 & x = 1 & y = 2 & x_1_y_2_terrain = 0 & x_1_y_1_terrain = 0) -> (x' = 1 & y' = 1)
+(skill_3 & x = 2 & y = 2 & x_2_y_2_terrain = 0 & x_2_y_1_terrain = 0) -> (x' = 2 & y' = 1)
+(skill_4 & x = 1 & y = 0 & x_1_y_0_terrain = 6 & x_0_y_0_terrain = 0) -> (x' = 0 & y' = 0)
+(skill_4 & x = 2 & y = 0 & x_2_y_0_terrain = 6 & x_1_y_0_terrain = 0) -> (x' = 1 & y' = 0)
+(skill_4 & x = 1 & y = 1 & x_1_y_1_terrain = 6 & x_0_y_1_terrain = 0) -> (x' = 0 & y' = 1)
+(skill_4 & x = 2 & y = 1 & x_2_y_1_terrain = 6 & x_1_y_1_terrain = 0) -> (x' = 1 & y' = 1)
+(skill_4 & x = 1 & y = 2 & x_1_y_2_terrain = 6 & x_0_y_2_terrain = 0) -> (x' = 0 & y' = 2)
+(skill_4 & x = 2 & y = 2 & x_2_y_2_terrain = 6 & x_1_y_2_terrain = 0) -> (x' = 1 & y' = 2)
+(skill_5 & x = 0 & y = 0 & x_0_y_0_terrain = 7 & x_1_y_0_terrain = 0) -> (x' = 1 & y' = 0)
+(skill_5 & x = 1 & y = 0 & x_1_y_0_terrain = 7 & x_2_y_0_terrain = 0) -> (x' = 2 & y' = 0)
+(skill_5 & x = 0 & y = 1 & x_0_y_1_terrain = 7 & x_1_y_1_terrain = 0) -> (x' = 1 & y' = 1)
+(skill_5 & x = 1 & y = 1 & x_1_y_1_terrain = 7 & x_2_y_1_terrain = 0) -> (x' = 2 & y' = 1)
+(skill_5 & x = 0 & y = 2 & x_0_y_2_terrain = 7 & x_1_y_2_terrain = 0) -> (x' = 1 & y' = 2)
+(skill_5 & x = 1 & y = 2 & x_1_y_2_terrain = 7 & x_2_y_2_terrain = 0) -> (x' = 2 & y' = 2)
+(skill_6 & x = 0 & y = 0 & x_0_y_0_terrain = 7 & x_0_y_1_terrain = 7) -> (x' = 0 & y' = 1)
+(skill_6 & x = 1 & y = 0 & x_1_y_0_terrain = 7 & x_1_y_1_terrain = 7) -> (x' = 1 & y' = 1)
+(skill_6 & x = 2 & y = 0 & x_2_y_0_terrain = 7 & x_2_y_1_terrain = 7) -> (x' = 2 & y' = 1)
+(skill_6 & x = 0 & y = 1 & x_0_y_1_terrain = 7 & x_0_y_2_terrain = 7) -> (x' = 0 & y' = 2)
+(skill_6 & x = 1 & y = 1 & x_1_y_1_terrain = 7 & x_1_y_2_terrain = 7) -> (x' = 1 & y' = 2)
+(skill_6 & x = 2 & y = 1 & x_2_y_1_terrain = 7 & x_2_y_2_terrain = 7) -> (x' = 2 & y' = 2)
+(skill_7 & x = 0 & y = 1 & x_0_y_1_terrain = 7 & x_0_y_0_terrain = 7) -> (x' = 0 & y' = 0)
+(skill_7 & x = 1 & y = 1 & x_1_y_1_terrain = 7 & x_1_y_0_terrain = 7) -> (x' = 1 & y' = 0)
+(skill_7 & x = 2 & y = 1 & x_2_y_1_terrain = 7 & x_2_y_0_terrain = 7) -> (x' = 2 & y' = 0)
+(skill_7 & x = 0 & y = 2 & x_0_y_2_terrain = 7 & x_0_y_1_terrain = 7) -> (x' = 0 & y' = 1)
+(skill_7 & x = 1 & y = 2 & x_1_y_2_terrain = 7 & x_1_y_1_terrain = 7) -> (x' = 1 & y' = 1)
+(skill_7 & x = 2 & y = 2 & x_2_y_2_terrain = 7 & x_2_y_1_terrain = 7) -> (x' = 2 & y' = 1)
+(skill_8 & x = 1 & y = 0 & x_1_y_0_terrain = 0 & x_0_y_0_terrain = 7) -> (x' = 0 & y' = 0)
+(skill_8 & x = 2 & y = 0 & x_2_y_0_terrain = 0 & x_1_y_0_terrain = 7) -> (x' = 1 & y' = 0)
+(skill_8 & x = 1 & y = 1 & x_1_y_1_terrain = 0 & x_0_y_1_terrain = 7) -> (x' = 0 & y' = 1)
+(skill_8 & x = 2 & y = 1 & x_2_y_1_terrain = 0 & x_1_y_1_terrain = 7) -> (x' = 1 & y' = 1)
+(skill_8 & x = 1 & y = 2 & x_1_y_2_terrain = 0 & x_0_y_2_terrain = 7) -> (x' = 0 & y' = 2)
+(skill_8 & x = 2 & y = 2 & x_2_y_2_terrain = 0 & x_1_y_2_terrain = 7) -> (x' = 1 & y' = 2)
+(skill_9 & x = 0 & y = 0 & x_0_y_0_terrain = 6 & x_1_y_0_terrain = 7) -> (x' = 1 & y' = 0)
+(skill_9 & x = 1 & y = 0 & x_1_y_0_terrain = 6 & x_2_y_0_terrain = 7) -> (x' = 2 & y' = 0)
+(skill_9 & x = 0 & y = 1 & x_0_y_1_terrain = 6 & x_1_y_1_terrain = 7) -> (x' = 1 & y' = 1)
+(skill_9 & x = 1 & y = 1 & x_1_y_1_terrain = 6 & x_2_y_1_terrain = 7) -> (x' = 2 & y' = 1)
+(skill_9 & x = 0 & y = 2 & x_0_y_2_terrain = 6 & x_1_y_2_terrain = 7) -> (x' = 1 & y' = 2)
+(skill_9 & x = 1 & y = 2 & x_1_y_2_terrain = 6 & x_2_y_2_terrain = 7) -> (x' = 2 & y' = 2)
+(skill_10 & x = 1 & y = 0 & x_1_y_0_terrain = 7 & x_0_y_0_terrain = 6) -> (x' = 0 & y' = 0)
+(skill_10 & x = 2 & y = 0 & x_2_y_0_terrain = 7 & x_1_y_0_terrain = 6) -> (x' = 1 & y' = 0)
+(skill_10 & x = 1 & y = 1 & x_1_y_1_terrain = 7 & x_0_y_1_terrain = 6) -> (x' = 0 & y' = 1)
+(skill_10 & x = 2 & y = 1 & x_2_y_1_terrain = 7 & x_1_y_1_terrain = 6) -> (x' = 1 & y' = 1)
+(skill_10 & x = 1 & y = 2 & x_1_y_2_terrain = 7 & x_0_y_2_terrain = 6) -> (x' = 0 & y' = 2)
+(skill_10 & x = 2 & y = 2 & x_2_y_2_terrain = 7 & x_1_y_2_terrain = 6) -> (x' = 1 & y' = 2)
+
+[ENV_TRANS_HARD]
+xrequest' = xrequest & yrequest' = yrequest
+
+x_0_y_0_terrain' = x_0_y_0_terrain
+x_0_y_1_terrain' = x_0_y_1_terrain
+x_0_y_2_terrain' = x_0_y_2_terrain
+x_1_y_0_terrain' = x_1_y_0_terrain
+x_1_y_1_terrain' = x_1_y_1_terrain
+x_1_y_2_terrain' = x_1_y_2_terrain
+x_2_y_0_terrain' = x_2_y_0_terrain
+x_2_y_1_terrain' = x_2_y_1_terrain
+x_2_y_2_terrain' = x_2_y_2_terrain
+
+(! skill_0 & ! skill_1 & ! skill_2 & ! skill_3 & ! skill_4 & ! skill_5 & ! skill_6 & ! skill_7 & ! skill_8 & ! skill_9 & ! skill_10) -> (x' = x & y' = y)
+[SYS_LIVENESS]
+x = xrequest & y = yrequest
+
+[ENV_LIVENESS]
+
