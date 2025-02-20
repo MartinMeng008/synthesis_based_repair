@@ -20,6 +20,8 @@ from tools import (
     json_load_wrapper,
     dump_json,
     dict_key_tuple2str,
+    dict_key_list2str,
+    dict_key_tuple2list2str,
     dict_key_str2tuple,
     create_symbols_from_objects_and_locations,
     find_true_symbols,
@@ -30,6 +32,7 @@ from tools import (
     find_controllable_mobile_symbols,
     find_controllable_manipulation_symbols,
     list_minus,
+    find_next_skill_name,
     )
 
 repair_dir = '../synthesis_based_repair'
@@ -307,8 +310,16 @@ class Manager:
                                     filename=self.modulo_spec, 
                                     opts=self.opts, 
                                     symbolic_repair_only=self.opts["symbolic_repair_only"])
+                    print(f"==== Repairing for terrain state_idx: {idx_terrain_state}, request state_idx: {idx_request_state} ====")
                     print(f"==== Repairing for terrain state: {terrain_state}, request state: {request_state} ====")
                     print(f"==== Relevant skills: {skills2transitions} ====")
+                    if DEBUG:
+                        if terrain_state == {'x_0_y_0_terrain': 3, 'x_0_y_1_terrain': 4, 'x_0_y_2_terrain': 4, 'x_1_y_0_terrain': 0, 'x_1_y_1_terrain': 0, 'x_1_y_2_terrain': 4, 'x_2_y_0_terrain': 0, 'x_2_y_1_terrain': 0, 'x_2_y_2_terrain': 4}:
+                            if request_state == {'xrequest': 0, 'yrequest': 1}:
+                                print("==== Target terrain and request states ====")
+                                breakpoint()
+                                
+                    
                     if True:
                         start_time = time.time()
                     new_skills, repair_needed, is_repaired = repair.run_symbolic_repair()
@@ -332,6 +343,7 @@ class Manager:
                             # print("exit due to debugging")
                             # sys.exit(0)
                         # 6.4. Parse news skills to ideal format
+                        if DEBUG: breakpoint()
                         new_skills, new_M_y = self.parse_new_skills(new_skills, terrain_state)
 
                         # 6.5. Minimize new skills to only include the needed ones
@@ -371,10 +383,13 @@ class Manager:
 
                 # Record the time and new skills for each iteration
                 modulo_repair_iteration_end_time = time.time()
-                self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_time"] = modulo_repair_iteration_end_time - modulo_repair_iteration_start_time
-                # self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_new_skills"] = new_skills
-                self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_num_new_skills"] = len(new_skills)
-                dump_json(self.log_file, self.log_dict)  
+                if repair_needed:
+                    self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_time"] = modulo_repair_iteration_end_time - modulo_repair_iteration_start_time
+                    new_M_y_list_key = dict_key_tuple2list2str(new_M_y)
+                    self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_new_skills"] = new_M_y_list_key
+                    # breakpoint()
+                    self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_num_new_skills"] = len(new_skills)
+                    dump_json(self.log_file, self.log_dict)  
                 
                 # # Generate module spec
                 # self.repair_compiler.generate_slugsin(self.runtime_repair_spec_slugsin)
@@ -414,7 +429,7 @@ class Manager:
             self.log_dict["unrepairable_terrain_and_request_states"] = unrepairable_terrain_and_request_states
             self.log_dict["num_unrepairable_terrain_and_request_states"] = len(unrepairable_terrain_and_request_states)
             self.log_dict["total_time"] = time.time() - modulo_repair_start_time
-            self.log_dict["num_new_skills"] = len(self.compiler.get_skills()) - self.log_dict["num_original_skills"]
+            self.log_dict["total_num_new_skills"] = len(self.compiler.get_skills()) - self.log_dict["num_original_skills"]
             dump_json(self.log_file, self.log_dict)
         return None
         
@@ -514,6 +529,7 @@ class Manager:
         parsed_new_skills = dict()
         new_M_y = dict()
         for skill_name, skill in new_skills.items():
+            skill_name = find_next_skill_name(skill_name, new_M_y)
             for pre_dict, post_dict_list in skill.intermediate_states:
                 # assert len(post_dict_list) == 1, "Only one postcondition per intermediate transition is allowed"
                 # Instead, we just add the first postcondition
@@ -533,6 +549,7 @@ class Manager:
                 new_M_y[tuple_key] = skill_name
                 new_skill_dict = self._motion_primitive_to_skill_dict(skill_name, tuple_key)
                 parsed_new_skills[skill_name] = Skill(info=new_skill_dict)
+                skill_name = find_next_skill_name(skill_name, new_M_y)
                 if DEBUG:
                     print("pre_dict:", pre_dict)
                     print("post_dict:", post_dict)

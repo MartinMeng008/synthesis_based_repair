@@ -1,0 +1,16 @@
+{
+    "input_file_int": "../data/perceptive_locomotion/3x3_go2_unstructured_8_terrain/3x3_go2_unstructured_8_terrain.structuredslugsplus",
+    "input_file_bool": "../data/perceptive_locomotion/3x3_go2_unstructured_8_terrain/transformed_3x3_go2_unstructured_8_terrain.structuredslugsplus",
+    "input_file_backup_skill_added": "../data/perceptive_locomotion/3x3_go2_unstructured_8_terrain/backup_added_transformed_3x3_go2_unstructured_8_terrain.structuredslugsplus",
+    "output_file_structuredslugsplus": "../data/perceptive_locomotion/3x3_go2_unstructured_8_terrain/repaired_transformed_3x3_go2_unstructured_8_terrain.structuredslugsplus",
+    "output_file_slugsin": "../data/perceptive_locomotion/3x3_go2_unstructured_8_terrain/repaired_transformed_3x3_go2_unstructured_8_terrain.slugsin",
+    "output_file_structuredslugs": "../data/perceptive_locomotion/3x3_go2_unstructured_8_terrain/repaired_transformed_3x3_go2_unstructured_8_terrain.structuredslugs",
+    "online_output_file_structuredslugsplus": "../data/perceptive_locomotion/3x3_go2_unstructured_8_terrain/online_repaired_transformed_3x3_go2_unstructured_8_terrain.structuredslugsplus",
+    "online_output_file_slugsin": "../data/perceptive_locomotion/3x3_go2_unstructured_8_terrain/online_repaired_transformed_3x3_go2_unstructured_8_terrain.slugsin",
+    "online_output_file_structuredslugs": "../data/perceptive_locomotion/3x3_go2_unstructured_8_terrain/online_repaired_transformed_3x3_go2_unstructured_8_terrain.structuredslugs",
+    "opts": "../data/perceptive_locomotion/3x3_go2_unstructured_8_terrain/opts.json",
+    "json_data": "../data/perceptive_locomotion/3x3_go2_unstructured_8_terrain/3x3_go2_unstructured_8_terrain.json",
+    "modulo_spec_structuredslugsplus": "../data/perceptive_locomotion/3x3_go2_unstructured_8_terrain/modulo_transformed_3x3_go2_unstructured_8_terrain.structuredslugsplus",
+    "mapping_file": "../data/perceptive_locomotion/3x3_go2_unstructured_8_terrain/mapping_3x3_go2_unstructured_8_terrain.json",
+    "log_file": "../data/perceptive_locomotion/3x3_go2_unstructured_8_terrain/log_3x3_go2_unstructured_8_terrain.json"
+}

@@ -7,7 +7,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate a files.json file for structuredslugsplus")
     parser.add_argument("-f", "--filename", type=str, help="The name of the structuredslugsplus file")
     args = parser.parse_args()
-    breakpoint()
+    # breakpoint()
     filename = args.filename
     filename_prefix = '.'.join(filename.split(".")[:-1])
     location = '/'.join(filename_prefix.split("/")[:-1])

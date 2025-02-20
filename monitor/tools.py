@@ -310,6 +310,14 @@ def dict_key_tuple2str(d: dict) -> dict:
     """Transform a dictionary with tuple keys to string keys"""
     return {json.dumps(k): v for k, v in d.items()}
 
+def dict_key_list2str(d: dict) -> dict:
+    """Transform a dictionary with list keys to string keys"""
+    return {json.dumps(k): v for k, v in d.items()}
+
+def dict_key_tuple2list2str(d: dict) -> dict:
+    """Transform a dictionary with tuple keys to list keys"""
+    return {json.dumps([list(elt) if type(elt)==tuple else elt for elt in k]): v for k, v in d.items()}
+
 def dict_key_str2tuple(d: dict) -> dict:
     """Transform a dictionary with string keys to tuple keys"""
     return {tuple(json.loads(k)): v for k, v in d.items()}
@@ -327,6 +335,12 @@ def find_true_symbols(X: dict) -> list:
     """Find the true symbols in the environment state"""
     return [sym for sym, val in X.items() if val]
 
+def find_next_skill_name(skill_name: str, skills_data: dict) -> str:
+    """Find the next skill name"""
+    new_skill_name = skill_name
+    while new_skill_name in skills_data.values():
+        new_skill_name = f"skill_{int(new_skill_name.split('_')[-1]) + 1}"
+    return new_skill_name
 
 ## ==== Event related functions ==== ##
 
