@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Given a structuredslugsplus file name with integer inputs, generate a files.json"""
 import json
 import argparse
@@ -8,7 +9,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     breakpoint()
     filename = args.filename
-    filename_prefix = '.'.join(filename.split("."))[:-1]
+    filename_prefix = '.'.join(filename.split(".")[:-1])
     location = '/'.join(filename_prefix.split("/")[:-1])
     filename_name = filename_prefix.split("/")[-1]
 
@@ -26,6 +27,7 @@ if __name__ == "__main__":
         "json_data": f"{location}/{filename_name}.json",
         "modulo_spec_structuredslugsplus": f"{location}/modulo_transformed_{filename_name}.structuredslugsplus",
         "mapping_file": f"{location}/mapping_{filename_name}.json",
+        "log_file": f"{location}/log_{filename_name}.json",
     }
 
     files_json_name = f"{location}/files_{filename_name}.json"

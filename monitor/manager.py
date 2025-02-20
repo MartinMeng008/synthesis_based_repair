@@ -66,6 +66,10 @@ class Manager:
                                            uncontrollable_variables=[],
                                            opts=self.opts)
         
+        # log number of original skills
+        self.log_dict["num_original_skills"] = len(self.compiler.get_skills())
+        dump_json(self.log_file, self.log_dict)
+        
         # self.offline_repair()
         
     def _setup(self, filename_json: str) -> None:
@@ -76,6 +80,8 @@ class Manager:
         self.mapping_file: str = file_json["mapping_file"]
         self.repaired_spec: str = file_json["output_file_structuredslugsplus"]
         self.repaired_spec_slugsin = file_json["output_file_slugsin"]
+        self.log_file: str = file_json["log_file"]
+        self.log_dict: dict = dict()
         self.opts: dict = json_load_wrapper(file_json["opts"])
         self.num_grid: int = self.opts["num_grid"]
         self.ws_range: int = int(math.sqrt(self.num_grid))
@@ -90,7 +96,17 @@ class Manager:
         print(f"num of terrain states: {len(self.terrain_states)}")
         print(f"num of request states: {len(self.request_states)}")
         print(f"mapping_file: {self.mapping_file}")
+        # print(f"num of skills: {len(self.skills_data)}")
         print("====================")
+        
+        ## ==== Log info ==== ##
+        self.log_dict["grid_size"] = f"{self.ws_range}x{self.ws_range}"
+        self.log_dict["num_terrain_types"] = self.num_terrain_types
+        self.log_dict["num_terrain_states"] = len(self.terrain_states)
+        self.log_dict["num_request_states"] = len(self.request_states)
+        # json dump the log_dict
+        dump_json(self.log_file, self.log_dict)
+
         if DEBUG:
             print("==== Exit due to debugging ====")
             sys.exit(0)
@@ -217,10 +233,12 @@ class Manager:
     def modulo_repair(self, terrain_states: list, request_states: list) -> None:
         """The main function for modulo repair"""
         #  For each terrain state, and request state, repair the spec
+        modulo_repair_start_time = time.time()
         unrepairable_terrain_and_request_states = []
-        for terrain_state in terrain_states:
-            for request_state in request_states:
+        for idx_terrain_state, terrain_state in enumerate(terrain_states):
+            for idx_request_state, request_state in enumerate(request_states):
                 physical_feasible = False
+                modulo_repair_iteration_start_time = time.time()
                 while not physical_feasible:
                     # 1. Get relevant skills
                     skills2transitions = self.m_y(terrain_state)
@@ -350,6 +368,13 @@ class Manager:
                         self.all_new_M_y.update(new_M_y)
                     else:
                         physical_feasible = True
+
+                # Record the time and new skills for each iteration
+                modulo_repair_iteration_end_time = time.time()
+                self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_time"] = modulo_repair_iteration_end_time - modulo_repair_iteration_start_time
+                # self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_new_skills"] = new_skills
+                self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_num_new_skills"] = len(new_skills)
+                dump_json(self.log_file, self.log_dict)  
                 
                 # # Generate module spec
                 # self.repair_compiler.generate_slugsin(self.runtime_repair_spec_slugsin)
@@ -385,6 +410,12 @@ class Manager:
             print("==== unrepairable terrain and request states ====")
             print(unrepairable_terrain_and_request_states)
             print("==================================================")
+            # Record the unrepairable terrain and request states
+            self.log_dict["unrepairable_terrain_and_request_states"] = unrepairable_terrain_and_request_states
+            self.log_dict["num_unrepairable_terrain_and_request_states"] = len(unrepairable_terrain_and_request_states)
+            self.log_dict["total_time"] = time.time() - modulo_repair_start_time
+            self.log_dict["num_new_skills"] = len(self.compiler.get_skills()) - self.log_dict["num_original_skills"]
+            dump_json(self.log_file, self.log_dict)
         return None
         
 
