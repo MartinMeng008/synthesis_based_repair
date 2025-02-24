@@ -2375,6 +2375,17 @@
 			"x_2_y_0_terrain" : 7,
 			"x_2_y_1_terrain" : 1,
 			"x_2_y_2_terrain" : 1
+		},
+		{
+			"x_0_y_0_terrain" : 1,
+			"x_0_y_1_terrain" : 1,
+			"x_0_y_2_terrain" : 1,
+			"x_1_y_0_terrain" : 4,
+			"x_1_y_1_terrain" : 3,
+			"x_1_y_2_terrain" : 1,
+			"x_2_y_0_terrain" : 1,
+			"x_2_y_1_terrain" : 1,
+			"x_2_y_2_terrain" : 1
 		}
 	]
 }

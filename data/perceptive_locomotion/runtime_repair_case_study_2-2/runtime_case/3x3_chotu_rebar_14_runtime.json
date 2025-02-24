@@ -1,0 +1,34 @@
+{
+	"request_states_list" : 
+	[
+		{
+			"xrequest" : 0,
+			"yrequest" : 1
+		}
+	],
+	"terrain_states_list" : 
+	[
+		{
+			"x_0_y_0_terrain" : 1,
+			"x_0_y_1_terrain" : 8,
+			"x_0_y_2_terrain" : 1,
+			"x_1_y_0_terrain" : 1,
+			"x_1_y_1_terrain" : 4,
+			"x_1_y_2_terrain" : 1,
+			"x_2_y_0_terrain" : 1,
+			"x_2_y_1_terrain" : 1,
+			"x_2_y_2_terrain" : 1
+		}
+	],
+	"disallowed_transition" :
+	[
+		{
+			"current_terrain" : 3,
+			"next_terrain" : 1,
+			"x" : 1,
+			"x_prime" : 0,
+			"y" : 1,
+			"y_prime" : 1
+		}
+	]
+}
