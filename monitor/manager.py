@@ -106,10 +106,10 @@ class Manager:
         self.log_dict["grid_size"] = f"{self.ws_range}x{self.ws_range}"
         self.log_dict["num_terrain_types"] = self.num_terrain_types
         self.log_dict["num_terrain_states"] = len(self.terrain_states)
-        total_request_states = set()
-        for terrain_state in self.terrain_states:
-            total_request_states.update(terrain_state["request_states_list"])
-        self.log_dict["num_request_states"] = len(total_request_states)
+        # total_request_states = set()
+        # for terrain_state in self.terrain_states:
+        #     total_request_states.update(terrain_state["request_states_list"])
+        # self.log_dict["num_request_states"] = len(total_request_states)
         # json dump the log_dict
         dump_json(self.log_file, self.log_dict)
 
