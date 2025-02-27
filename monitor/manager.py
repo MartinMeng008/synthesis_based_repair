@@ -236,12 +236,16 @@ class Manager:
     def modulo_repair(self, terrain_states: list, request_states: list) -> None:
         """The main function for modulo repair"""
         #  For each terrain state, and request state, repair the spec
-        modulo_repair_start_time = time.time()
+        # modulo_repair_start_time = time.time()
         unrepairable_terrain_and_request_states = []
+        repaired_terrain_and_request_states = []
+        no_need_repair_terrain_and_request_states = []
         for idx_terrain_state, terrain_state in enumerate(terrain_states):
             for idx_request_state, request_state in enumerate(request_states):
                 physical_feasible = False
                 modulo_repair_iteration_start_time = time.time()
+                symbolic_repair_time_iteration = 0
+                physical_checker_time_iteration = 0
                 while not physical_feasible:
                     # 1. Get relevant skills
                     skills2transitions = self.m_y(terrain_state)
@@ -252,6 +256,19 @@ class Manager:
 
                     # 2. Get relevant infeasible transitions
                     infeasible_transitions = self.terrain_state2invalid_trans(terrain_state)
+
+                    # 2.5. Get obstacle constraints
+                    obstacle_constraints = self.m_o(terrain_state)
+                    if DEBUG:
+                        if obstacle_constraints:
+                            print("==== Obstacle constraints ====")
+                            print(obstacle_constraints)
+                            print("====")
+                            print("Exit due to debugging")
+                            sys.exit(0)
+                    if DEBUG:
+                        if idx_terrain_state == 1 and idx_request_state == 2:
+                            breakpoint()
                     
                     # 3. Remove skills
                     # keep track of time used for removing skills and terrains
@@ -281,6 +298,9 @@ class Manager:
 
                     # 5. Add infeasible transitions
                     self.repair_compiler.add_infeasible_trans_to_not_allowed_repair(infeasible_transitions)
+
+                    # 5.2. Add obstacle constraints to system hard constraints
+                    self.repair_compiler.add_obstacle_constraints_to_sys_hard(obstacle_constraints)
                     
                     if DEBUG:
                         infeasible_transitions = [(0,0,0,1), (0,0,1,0)]
@@ -299,8 +319,9 @@ class Manager:
                     # breakpoint()
                     self.repair_compiler.generate_structuredslugsplus(self.modulo_spec)
                     if DEBUG:
-                        print("==== Exit due to debugging ====")
-                        sys.exit(0)
+                        breakpoint()
+                        # print("==== Exit due to debugging ====")
+                        # sys.exit(0)
                     if True:
                         print("==== skills before repair ====")
                         print(self.repair_compiler.get_skills())
@@ -326,14 +347,23 @@ class Manager:
                     # self.repair_compiler.remove_backup_skills()
 
                     if True:
-                        print("Time for repair:")
+                        symbolic_repair_time_iteration += time.time() - start_time
+                        print("Time for symbolic repair:")
                         print("--- %s seconds ---" % (time.time() - start_time))
+                        # print("Time for repair:")
+                        # print("--- %s seconds ---" % (time.time() - start_time))
+                        self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_symbolic_repair_time"] = symbolic_repair_time_iteration
+                        dump_json(self.log_file, self.log_dict)
                     self.repair_compiler.remove_backup_skills_modulo_spec()
                     if repair_needed and len(new_skills) == 0:
                         print("==== Unrepairable terrain and request states ====")
                         print("Terrain state:", terrain_state)
                         print("Request state:", request_state)
                         unrepairable_terrain_and_request_states.append((terrain_state, request_state))
+                    elif repair_needed and len(new_skills) > 0:
+                        repaired_terrain_and_request_states.append((terrain_state, request_state))
+                    else:
+                        no_need_repair_terrain_and_request_states.append((terrain_state, request_state))
 
                     if len(new_skills) > 0:
                         if True:
@@ -362,7 +392,15 @@ class Manager:
 
                         if not self.opts["symbolic_repair_only"]:
                             # 6.7. Perform physical check
+                            if True:
+                                start_time = time.time()
                             infeasible_M_y = self.perform_physical_check(new_skills, new_M_y, terrain_state)
+                            if True:
+                                physical_checker_time_iteration += time.time() - start_time
+                                print("Time for physical checker:")
+                                print("--- %s seconds ---" % (time.time() - start_time))
+                                self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_physical_checker_time"] = physical_checker_time_iteration
+                                dump_json(self.log_file, self.log_dict)
                             if len(infeasible_M_y) == 0:
                                 physical_feasible = True
                             else:
@@ -382,13 +420,16 @@ class Manager:
                         physical_feasible = True
 
                 # Record the time and new skills for each iteration
-                modulo_repair_iteration_end_time = time.time()
+                # modulo_repair_iteration_end_time = time.time()
                 if repair_needed:
-                    self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_time"] = modulo_repair_iteration_end_time - modulo_repair_iteration_start_time
-                    new_M_y_list_key = dict_key_tuple2list2str(new_M_y)
-                    self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_new_skills"] = new_M_y_list_key
-                    # breakpoint()
-                    self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_num_new_skills"] = len(new_skills)
+                    # self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_time"] = modulo_repair_iteration_end_time - modulo_repair_iteration_start_time
+                    if len(new_skills) > 0:
+                        new_M_y_list_key = dict_key_tuple2list2str(new_M_y)
+                        self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_new_skills"] = new_M_y_list_key
+                        # breakpoint()
+                        self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_num_new_skills"] = len(new_skills)
+                    else:
+                        self.log_dict[f"terrain_{idx_terrain_state}_request_{idx_request_state}_num_new_skills"] = 0
                     dump_json(self.log_file, self.log_dict)  
                 
                 # # Generate module spec
@@ -418,7 +459,9 @@ class Manager:
         print("==== M_I ====")
         print(self.M_i)
         print("==== M_O ====")
-        print(self.M_o)
+        # print(self.M_o)
+        for key, value in self.M_o.items():
+            print(key, value)
         self.store_mappings(self.M_y, self.M_i, self.M_o)
 
         if True:
@@ -427,10 +470,31 @@ class Manager:
             print("==================================================")
             # Record the unrepairable terrain and request states
             self.log_dict["unrepairable_terrain_and_request_states"] = unrepairable_terrain_and_request_states
+            self.log_dict["repaired_terrain_and_request_states"] = repaired_terrain_and_request_states
+            self.log_dict["no_need_repair_terrain_and_request_states"] = no_need_repair_terrain_and_request_states
             self.log_dict["num_unrepairable_terrain_and_request_states"] = len(unrepairable_terrain_and_request_states)
-            self.log_dict["total_time"] = time.time() - modulo_repair_start_time
+            self.log_dict["num_repaired_terrain_and_request_states"] = len(repaired_terrain_and_request_states)
+            self.log_dict["num_no_need_repair_terrain_and_request_states"] = len(no_need_repair_terrain_and_request_states)
+            # self.log_dict["total_time"] = time.time() - modulo_repair_start_time
             self.log_dict["total_num_new_skills"] = len(self.compiler.get_skills()) - self.log_dict["num_original_skills"]
             dump_json(self.log_file, self.log_dict)
+
+            # ==== Calculate total symbolic time ==== #
+            total_symbolic_repair_time = 0
+            for key in self.log_dict:
+                if "_symbolic_repair_time" in key:
+                    total_symbolic_repair_time += self.log_dict[key]
+            self.log_dict["total_symbolic_repair_time"] = total_symbolic_repair_time
+            dump_json(self.log_file, self.log_dict)
+
+            # ==== Calculate total physical checker time ==== #
+            total_physical_checker_time = 0
+            for key in self.log_dict:
+                if "_physical_checker_time" in key:
+                    total_physical_checker_time += self.log_dict[key]
+            self.log_dict["total_physical_checker_time"] = total_physical_checker_time
+            dump_json(self.log_file, self.log_dict)
+            
         return None
         
 
@@ -698,14 +762,14 @@ class Manager:
             skills: dict
         """
         skills = dict()
-        # skill_name_counter = 0
+        skill_name_counter = 0
         for skill_name, transitions in skills2transitions.items():
             if DEBUG:
                 print("Skill name:", skill_name)
                 print("Transitions:", transitions)
                 sys.exit(0)
-            # skill_name = f"skill_{skill_name_counter}"
-            # skill_name_counter += 1
+            skill_name = f"skill_{skill_name_counter}"
+            skill_name_counter += 1
             initial_preconditions: list = []
             # pre_post_pair: list = []
             final_postconditions: list = []
@@ -777,7 +841,7 @@ class Manager:
             print(self.M_y)
             print("==== M_o ====")
             print(self.M_o)
-            print("==== exit due to debug ====")
+            # print("==== exit due to debug ====")
             # sys.exit(0)
 
     def load_mappings(self) -> None:
@@ -828,11 +892,12 @@ class Manager:
         Outputs:
             a list of AST formulas, each representing an invalid location due to obstacle in the terrain state
         """
+        # breakpoint()
         invalid_locations_ast_formulas: list = []
         for terrain_input_int, terrain_input_type in terrain_state.items():
-            if terrain_input_int not in self.M_o:
+            if (terrain_input_int, terrain_input_type) not in self.M_o:
                 continue
-            invalid_locations_ast_formulas.append(self.M_o[terrain_input_int, terrain_input_type])
+            invalid_locations_ast_formulas.append(self.M_o[(terrain_input_int, terrain_input_type)])
         if DEBUG:
             print("==== invalid locations due to obstacle ====")
             print(invalid_locations_ast_formulas)
@@ -907,8 +972,8 @@ class Manager:
                 print("left: ", left)
                 print("====")
                 print("right: ", right)
-                # print("==== exit due to debugging ====")
-                # sys.exit(0)
+                print("==== exit due to debugging ====")
+                sys.exit(0)
 
     def get_terrain_input_and_type_from_ast(self, ast: list) -> tuple:
         """Extract terrain input and type from ast

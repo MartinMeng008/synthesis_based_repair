@@ -74,6 +74,7 @@ class Compiler:
         """Set the data for added new skills"""
         self.data_new_skills = {"new_skills": 0, "env_trans": 0, "sys_trans": 0}
         self._custom_not_allowed_repair_count: int = 0
+        self._custom_obstacle_constraints_count: int = 0
         self._liveness_goal_count: int = 0
         self.violated_env_trans_hard_indices = set()
         self.MANIPULATION_ONLY = all(is_manipulation_object(obj, self.objects_data) for obj in self.objects_data.keys())
@@ -587,6 +588,18 @@ class Monitor:
         self._custom_not_allowed_repair_count = len(infeasible_trans)
         for x, y, nx, ny in infeasible_trans:
             self._add_infeasible_transition_to_not_allowed_repair(x, y, nx, ny)
+        return None
+    
+    def add_obstacle_constraints_to_sys_hard(self, obstacle_constraints: list) -> None:
+        """Add obstacle constraints to sys hard"""
+        # 1. Remove the previously added obstacle constraints
+        for _ in range(self._custom_obstacle_constraints_count):
+            self.asts[self.properties["sys_trans_hard"]].pop(0)
+
+        # 2. Add the new obstacle constraints to the front of the sys hard
+        self._custom_obstacle_constraints_count = len(obstacle_constraints)
+        self.asts[self.properties["sys_trans_hard"]] = obstacle_constraints + self.asts[self.properties["sys_trans_hard"]]
+
         return None
     
     def _add_infeasible_transition_to_not_allowed_repair(self, x: int, y: int, nx: int, ny: int) -> None:

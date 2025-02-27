@@ -3,6 +3,7 @@ import rospy
 import sys
 import numpy as np
 import argparse
+import copy
 from mocomp import Compiler
 from tools import (json_load_wrapper,
                    find_controllable_symbols,
@@ -30,12 +31,13 @@ class Repair:
             filename: the pure name of 
         """
         self.compiler = compiler
+        self.original_compiler = copy.deepcopy(compiler)
         self.symbolic_repair_only = symbolic_repair_only
         self.opts = opts
         if "max_repair_iter" in self.opts:
             self.max_iter = self.opts["max_repair_iter"]
         else:
-            self.max_iter = 50
+            self.max_iter = 30
         self.file_structuredslugsplus = filename
         self.opts["uncontrollable_inputs"] = self.compiler.get_request_inputs()
         print("uncontrollable_inputs: ", self.opts["uncontrollable_inputs"])
@@ -88,7 +90,7 @@ class Repair:
             print(f"is_realizable at iteration {cnt}: ", is_realizable)
             if is_realizable:
                 print("The spec is realizable")
-                self.compiler.remove_backup_skills()
+                self.compiler.remove_backup_skills_modulo_spec()
                 return skills, repair_needed, is_realizable
             
             repair_needed = True
@@ -115,27 +117,32 @@ class Repair:
                     skills[suggestion['name']] = Skill(suggestion, location_inputs=self.compiler.get_location_inputs(), terrain_inputs=self.compiler.get_terrain_inputs())
                 
                 # 5. Remove backup skills, add skills back to the ASTs
-                # self.compiler.remove_backup_skills()
+                if DEBUG and len(skills) > 0: breakpoint()
+                self.compiler = copy.deepcopy(self.original_compiler)
+                self.compiler.remove_backup_skills_modulo_spec()
+                self.compiler.add_skills_no_intermediate_states_modulo_spec(skills)
+                self.compiler.generate_structuredslugsplus(self.file_structuredslugsplus)
                 # add_skills_with_reduced_size(skills, self.compiler)
                 for _, skill in skills.items():
                     skill.print_dict()
-                if self.symbolic_repair_only or SYMBOLIC_REPAIR_ONLY:
-                    return skills, repair_needed, is_realizable
-                skill_array_msg = symbolic_repair_msgs.msg.SkillArray()
-                for _, skill in skills.items():
-                    # skill.print_dict()
-                    if DEBUG: skill.write_to_file(f"{self.opts['new_skills_file']}_{skill.get_name()}.txt")
-                    skill_msg = skill.get_skill_msg()
-                    if DEBUG:
-                        print(skill_msg)
-                    skill_array_msg.skills.append(skill_msg)
-                skill_array_msg.header.stamp = rospy.Time.now()
-                try:
-                    print("Start feasibility check")
-                    resp = self.feasibility_check(skill_array_msg)
-                    print(resp.feasibilities_checked)
-                except rospy.ServiceException as e:
-                    print("Service call failed: %s"%e)
+                    if DEBUG: breakpoint()
+                # if self.symbolic_repair_only or SYMBOLIC_REPAIR_ONLY:
+                    # return skills, repair_needed, is_realizable
+                # skill_array_msg = symbolic_repair_msgs.msg.SkillArray()
+                # for _, skill in skills.items():
+                #     # skill.print_dict()
+                #     if DEBUG: skill.write_to_file(f"{self.opts['new_skills_file']}_{skill.get_name()}.txt")
+                #     skill_msg = skill.get_skill_msg()
+                #     if DEBUG:
+                #         print(skill_msg)
+                #     skill_array_msg.skills.append(skill_msg)
+                # skill_array_msg.header.stamp = rospy.Time.now()
+                # try:
+                #     print("Start feasibility check")
+                #     resp = self.feasibility_check(skill_array_msg)
+                #     print(resp.feasibilities_checked)
+                # except rospy.ServiceException as e:
+                #     print("Service call failed: %s"%e)
                 
                 ## Feasibility check
                 # 1. go through each feasibility in resp.feasibilities_checked
@@ -144,29 +151,29 @@ class Repair:
                 #           mocomp.add_not_allowed_constraints(skills[feasibility.name])
                 # 3. if any skill is not feasible, generate a new spec from AST, and run repair again
                 # 4. Otherwise, exist
-                bad_new_transitions = []
-                bad_skill_names = []
-                for feasibility_resp in resp.feasibilities_checked.feasibilities:
-                    if not feasibility_resp.feasibility:
-                        bad_skill_name = feasibility_resp.name
-                        bad_skill_names.append(bad_skill_name)
-                        bad_skill = skills[bad_skill_name]
-                        # breakpoint()
-                        bad_new_transitions.append((bad_skill.init_pres[0], bad_skill.final_posts[0]))
-                if len(bad_new_transitions) > 0:
-                    self.compiler.add_bad_intermediate_transitions(bad_new_transitions)
-                    self.compiler.remove_skills()
-                    good_skills = {name: skill for name, skill in skills.items() if name not in bad_skill_names}
-                    if len(good_skills) > 0:
-                        self.compiler.add_skills(good_skills)
-                        self.compiler.reset_after_successful_repair()
-                    self.compiler.add_backup_skills()
-                    if DEBUG: breakpoint()
-                    self.compiler.generate_structuredslugsplus(self.file_structuredslugsplus)
-                    is_realizable = False
-                else:
-                    return skills, repair_needed, is_realizable
-                    raise Exception("stop here")
+                # bad_new_transitions = []
+                # bad_skill_names = []
+                # for feasibility_resp in resp.feasibilities_checked.feasibilities:
+                #     if not feasibility_resp.feasibility:
+                #         bad_skill_name = feasibility_resp.name
+                #         bad_skill_names.append(bad_skill_name)
+                #         bad_skill = skills[bad_skill_name]
+                #         # breakpoint()
+                #         bad_new_transitions.append((bad_skill.init_pres[0], bad_skill.final_posts[0]))
+                # if len(bad_new_transitions) > 0:
+                #     self.compiler.add_bad_intermediate_transitions(bad_new_transitions)
+                #     self.compiler.remove_skills()
+                #     good_skills = {name: skill for name, skill in skills.items() if name not in bad_skill_names}
+                #     if len(good_skills) > 0:
+                #         self.compiler.add_skills(good_skills)
+                #         self.compiler.reset_after_successful_repair()
+                #     self.compiler.add_backup_skills()
+                #     if DEBUG: breakpoint()
+                #     self.compiler.generate_structuredslugsplus(self.file_structuredslugsplus)
+                #     is_realizable = False
+                # else:
+                #     return skills, repair_needed, is_realizable
+                #     raise Exception("stop here")
             print("----------------------------------")
             print("----------------------------------")
             print(f"Finish {cnt} iteration in the while loop")
