@@ -1,0 +1,2438 @@
+{
+	"request_states_list" : 
+	[
+		{
+			"xrequest" : 0,
+			"yrequest" : 1
+		}
+	],
+	"terrain_states_list" : 
+	[
+		{
+			"x_0_y_0_terrain" : 1,
+			"x_0_y_1_terrain" : 8,
+			"x_0_y_2_terrain" : 1,
+			"x_1_y_0_terrain" : 1,
+			"x_1_y_1_terrain" : 4,
+			"x_1_y_2_terrain" : 1,
+			"x_2_y_0_terrain" : 1,
+			"x_2_y_1_terrain" : 1,
+			"x_2_y_2_terrain" : 1,
+			"request_states_list" : 
+	[
+		{
+			"xrequest" : 0,
+			"yrequest" : 1
+		}
+	]
+		}
+	],
+	"disallowed_transition" :
+	[
+		{
+			"current_terrain" : 3,
+			"next_terrain" : 1,
+			"x" : 1,
+			"x_prime" : 0,
+			"y" : 1,
+			"y_prime" : 1
+		}
+	],
+	"skill_list" : 
+	{
+		"skill_0" : 
+		[
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_0 & x = 0 & y = 0 & x_0_y_0_terrain = 1 & x_1_y_0_terrain = 0) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 1 & x_1_y_0_terrain' = 0)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_0 & x = 1 & y = 0 & x_1_y_0_terrain = 1 & x_2_y_0_terrain = 0) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 1 & x_2_y_0_terrain' = 0)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_0 & x = 0 & y = 1 & x_0_y_1_terrain = 1 & x_1_y_1_terrain = 0) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 1 & x_1_y_1_terrain' = 0)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_0 & x = 1 & y = 1 & x_1_y_1_terrain = 1 & x_2_y_1_terrain = 0) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 1 & x_2_y_1_terrain' = 0)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_0 & x = 0 & y = 2 & x_0_y_2_terrain = 1 & x_1_y_2_terrain = 0) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 1 & x_1_y_2_terrain' = 0)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_0 & x = 1 & y = 2 & x_1_y_2_terrain = 1 & x_2_y_2_terrain = 0) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 1 & x_2_y_2_terrain' = 0)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_1" : 
+		[
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_1 & x = 0 & y = 0 & x_0_y_0_terrain = 1 & x_0_y_1_terrain = 1) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 1 & x_0_y_1_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_1 & x = 1 & y = 0 & x_1_y_0_terrain = 1 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 1 & x_1_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_1 & x = 2 & y = 0 & x_2_y_0_terrain = 1 & x_2_y_1_terrain = 1) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 1 & x_2_y_1_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_1 & x = 0 & y = 1 & x_0_y_1_terrain = 1 & x_0_y_2_terrain = 1) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 1 & x_0_y_2_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_1 & x = 1 & y = 1 & x_1_y_1_terrain = 1 & x_1_y_2_terrain = 1) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 1 & x_1_y_2_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_1 & x = 2 & y = 1 & x_2_y_1_terrain = 1 & x_2_y_2_terrain = 1) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 1 & x_2_y_2_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 2
+			}
+		],
+		"skill_10" : 
+		[
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_10 & x = 0 & y = 0 & x_0_y_0_terrain = 7 & x_1_y_0_terrain = 1) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 7 & x_1_y_0_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_10 & x = 1 & y = 0 & x_1_y_0_terrain = 7 & x_2_y_0_terrain = 1) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 7 & x_2_y_0_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_10 & x = 0 & y = 1 & x_0_y_1_terrain = 7 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 7 & x_1_y_1_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_10 & x = 1 & y = 1 & x_1_y_1_terrain = 7 & x_2_y_1_terrain = 1) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 7 & x_2_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_10 & x = 0 & y = 2 & x_0_y_2_terrain = 7 & x_1_y_2_terrain = 1) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 7 & x_1_y_2_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_10 & x = 1 & y = 2 & x_1_y_2_terrain = 7 & x_2_y_2_terrain = 1) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 7 & x_2_y_2_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_11" : 
+		[
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_11 & x = 1 & y = 0 & x_1_y_0_terrain = 1 & x_0_y_0_terrain = 7) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 1 & x_0_y_0_terrain' = 7)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_11 & x = 2 & y = 0 & x_2_y_0_terrain = 1 & x_1_y_0_terrain = 7) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 1 & x_1_y_0_terrain' = 7)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_11 & x = 1 & y = 1 & x_1_y_1_terrain = 1 & x_0_y_1_terrain = 7) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 1 & x_0_y_1_terrain' = 7)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_11 & x = 2 & y = 1 & x_2_y_1_terrain = 1 & x_1_y_1_terrain = 7) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 1 & x_1_y_1_terrain' = 7)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_11 & x = 1 & y = 2 & x_1_y_2_terrain = 1 & x_0_y_2_terrain = 7) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 1 & x_0_y_2_terrain' = 7)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_11 & x = 2 & y = 2 & x_2_y_2_terrain = 1 & x_1_y_2_terrain = 7) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 1 & x_1_y_2_terrain' = 7)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_12" : 
+		[
+			{
+				"current_terrain" : 12,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_12 & x = 0 & y = 0 & x_0_y_0_terrain = 12 & x_1_y_0_terrain = 1) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 12 & x_1_y_0_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 12,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_12 & x = 1 & y = 0 & x_1_y_0_terrain = 12 & x_2_y_0_terrain = 1) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 12 & x_2_y_0_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 12,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_12 & x = 0 & y = 1 & x_0_y_1_terrain = 12 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 12 & x_1_y_1_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 12,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_12 & x = 1 & y = 1 & x_1_y_1_terrain = 12 & x_2_y_1_terrain = 1) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 12 & x_2_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 12,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_12 & x = 0 & y = 2 & x_0_y_2_terrain = 12 & x_1_y_2_terrain = 1) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 12 & x_1_y_2_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 12,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_12 & x = 1 & y = 2 & x_1_y_2_terrain = 12 & x_2_y_2_terrain = 1) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 12 & x_2_y_2_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_13" : 
+		[
+			{
+				"current_terrain" : 11,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_13 & x = 0 & y = 0 & x_0_y_0_terrain = 11 & x_1_y_0_terrain = 1) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 11 & x_1_y_0_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 11,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_13 & x = 1 & y = 0 & x_1_y_0_terrain = 11 & x_2_y_0_terrain = 1) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 11 & x_2_y_0_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 11,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_13 & x = 0 & y = 1 & x_0_y_1_terrain = 11 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 11 & x_1_y_1_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 11,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_13 & x = 1 & y = 1 & x_1_y_1_terrain = 11 & x_2_y_1_terrain = 1) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 11 & x_2_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 11,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_13 & x = 0 & y = 2 & x_0_y_2_terrain = 11 & x_1_y_2_terrain = 1) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 11 & x_1_y_2_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 11,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_13 & x = 1 & y = 2 & x_1_y_2_terrain = 11 & x_2_y_2_terrain = 1) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 11 & x_2_y_2_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_14" : 
+		[
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 12,
+				"postcondition_spec" : "(skill_14 & x = 1 & y = 0 & x_1_y_0_terrain = 1 & x_0_y_0_terrain = 12) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 1 & x_0_y_0_terrain' = 12)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 12,
+				"postcondition_spec" : "(skill_14 & x = 2 & y = 0 & x_2_y_0_terrain = 1 & x_1_y_0_terrain = 12) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 1 & x_1_y_0_terrain' = 12)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 12,
+				"postcondition_spec" : "(skill_14 & x = 1 & y = 1 & x_1_y_1_terrain = 1 & x_0_y_1_terrain = 12) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 1 & x_0_y_1_terrain' = 12)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 12,
+				"postcondition_spec" : "(skill_14 & x = 2 & y = 1 & x_2_y_1_terrain = 1 & x_1_y_1_terrain = 12) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 1 & x_1_y_1_terrain' = 12)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 12,
+				"postcondition_spec" : "(skill_14 & x = 1 & y = 2 & x_1_y_2_terrain = 1 & x_0_y_2_terrain = 12) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 1 & x_0_y_2_terrain' = 12)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 12,
+				"postcondition_spec" : "(skill_14 & x = 2 & y = 2 & x_2_y_2_terrain = 1 & x_1_y_2_terrain = 12) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 1 & x_1_y_2_terrain' = 12)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_15" : 
+		[
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 11,
+				"postcondition_spec" : "(skill_15 & x = 1 & y = 0 & x_1_y_0_terrain = 1 & x_0_y_0_terrain = 11) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 1 & x_0_y_0_terrain' = 11)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 11,
+				"postcondition_spec" : "(skill_15 & x = 2 & y = 0 & x_2_y_0_terrain = 1 & x_1_y_0_terrain = 11) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 1 & x_1_y_0_terrain' = 11)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 11,
+				"postcondition_spec" : "(skill_15 & x = 1 & y = 1 & x_1_y_1_terrain = 1 & x_0_y_1_terrain = 11) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 1 & x_0_y_1_terrain' = 11)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 11,
+				"postcondition_spec" : "(skill_15 & x = 2 & y = 1 & x_2_y_1_terrain = 1 & x_1_y_1_terrain = 11) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 1 & x_1_y_1_terrain' = 11)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 11,
+				"postcondition_spec" : "(skill_15 & x = 1 & y = 2 & x_1_y_2_terrain = 1 & x_0_y_2_terrain = 11) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 1 & x_0_y_2_terrain' = 11)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 11,
+				"postcondition_spec" : "(skill_15 & x = 2 & y = 2 & x_2_y_2_terrain = 1 & x_1_y_2_terrain = 11) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 1 & x_1_y_2_terrain' = 11)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_16" : 
+		[
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_16 & x = 0 & y = 0 & x_0_y_0_terrain = 4 & x_1_y_0_terrain = 8) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 4 & x_1_y_0_terrain' = 8)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_16 & x = 1 & y = 0 & x_1_y_0_terrain = 4 & x_2_y_0_terrain = 8) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 4 & x_2_y_0_terrain' = 8)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_16 & x = 0 & y = 1 & x_0_y_1_terrain = 4 & x_1_y_1_terrain = 8) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 4 & x_1_y_1_terrain' = 8)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_16 & x = 1 & y = 1 & x_1_y_1_terrain = 4 & x_2_y_1_terrain = 8) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 4 & x_2_y_1_terrain' = 8)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_16 & x = 0 & y = 2 & x_0_y_2_terrain = 4 & x_1_y_2_terrain = 8) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 4 & x_1_y_2_terrain' = 8)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_16 & x = 1 & y = 2 & x_1_y_2_terrain = 4 & x_2_y_2_terrain = 8) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 4 & x_2_y_2_terrain' = 8)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_17" : 
+		[
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_17 & x = 0 & y = 0 & x_0_y_0_terrain = 4 & x_0_y_1_terrain = 1) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 4 & x_0_y_1_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_17 & x = 1 & y = 0 & x_1_y_0_terrain = 4 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 4 & x_1_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_17 & x = 2 & y = 0 & x_2_y_0_terrain = 4 & x_2_y_1_terrain = 1) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 4 & x_2_y_1_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_17 & x = 0 & y = 1 & x_0_y_1_terrain = 4 & x_0_y_2_terrain = 1) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 4 & x_0_y_2_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_17 & x = 1 & y = 1 & x_1_y_1_terrain = 4 & x_1_y_2_terrain = 1) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 4 & x_1_y_2_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_17 & x = 2 & y = 1 & x_2_y_1_terrain = 4 & x_2_y_2_terrain = 1) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 4 & x_2_y_2_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 2
+			}
+		],
+		"skill_18" : 
+		[
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_18 & x = 0 & y = 1 & x_0_y_1_terrain = 1 & x_0_y_0_terrain = 4) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 1 & x_0_y_0_terrain' = 4)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_18 & x = 1 & y = 1 & x_1_y_1_terrain = 1 & x_1_y_0_terrain = 4) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 1 & x_1_y_0_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_18 & x = 2 & y = 1 & x_2_y_1_terrain = 1 & x_2_y_0_terrain = 4) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 1 & x_2_y_0_terrain' = 4)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_18 & x = 0 & y = 2 & x_0_y_2_terrain = 1 & x_0_y_1_terrain = 4) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 1 & x_0_y_1_terrain' = 4)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_18 & x = 1 & y = 2 & x_1_y_2_terrain = 1 & x_1_y_1_terrain = 4) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 1 & x_1_y_1_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_18 & x = 2 & y = 2 & x_2_y_2_terrain = 1 & x_2_y_1_terrain = 4) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 1 & x_2_y_1_terrain' = 4)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 1
+			}
+		],
+		"skill_19" : 
+		[
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_19 & x = 0 & y = 0 & x_0_y_0_terrain = 1 & x_1_y_0_terrain = 7) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 1 & x_1_y_0_terrain' = 7)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_19 & x = 1 & y = 0 & x_1_y_0_terrain = 1 & x_2_y_0_terrain = 7) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 1 & x_2_y_0_terrain' = 7)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_19 & x = 0 & y = 1 & x_0_y_1_terrain = 1 & x_1_y_1_terrain = 7) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 1 & x_1_y_1_terrain' = 7)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_19 & x = 1 & y = 1 & x_1_y_1_terrain = 1 & x_2_y_1_terrain = 7) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 1 & x_2_y_1_terrain' = 7)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_19 & x = 0 & y = 2 & x_0_y_2_terrain = 1 & x_1_y_2_terrain = 7) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 1 & x_1_y_2_terrain' = 7)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_19 & x = 1 & y = 2 & x_1_y_2_terrain = 1 & x_2_y_2_terrain = 7) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 1 & x_2_y_2_terrain' = 7)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_2" : 
+		[
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_2 & x = 0 & y = 1 & x_0_y_1_terrain = 1 & x_0_y_0_terrain = 1) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 1 & x_0_y_0_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_2 & x = 1 & y = 1 & x_1_y_1_terrain = 1 & x_1_y_0_terrain = 1) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 1 & x_1_y_0_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_2 & x = 2 & y = 1 & x_2_y_1_terrain = 1 & x_2_y_0_terrain = 1) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 1 & x_2_y_0_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_2 & x = 0 & y = 2 & x_0_y_2_terrain = 1 & x_0_y_1_terrain = 1) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 1 & x_0_y_1_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_2 & x = 1 & y = 2 & x_1_y_2_terrain = 1 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 1 & x_1_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_2 & x = 2 & y = 2 & x_2_y_2_terrain = 1 & x_2_y_1_terrain = 1) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 1 & x_2_y_1_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 1
+			}
+		],
+		"skill_20" : 
+		[
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_20 & x = 1 & y = 0 & x_1_y_0_terrain = 8 & x_0_y_0_terrain = 4) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 8 & x_0_y_0_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_20 & x = 2 & y = 0 & x_2_y_0_terrain = 8 & x_1_y_0_terrain = 4) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 8 & x_1_y_0_terrain' = 4)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_20 & x = 1 & y = 1 & x_1_y_1_terrain = 8 & x_0_y_1_terrain = 4) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 8 & x_0_y_1_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_20 & x = 2 & y = 1 & x_2_y_1_terrain = 8 & x_1_y_1_terrain = 4) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 8 & x_1_y_1_terrain' = 4)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_20 & x = 1 & y = 2 & x_1_y_2_terrain = 8 & x_0_y_2_terrain = 4) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 8 & x_0_y_2_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_20 & x = 2 & y = 2 & x_2_y_2_terrain = 8 & x_1_y_2_terrain = 4) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 8 & x_1_y_2_terrain' = 4)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_21" : 
+		[
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_21 & x = 1 & y = 0 & x_1_y_0_terrain = 7 & x_0_y_0_terrain = 1) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 7 & x_0_y_0_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_21 & x = 2 & y = 0 & x_2_y_0_terrain = 7 & x_1_y_0_terrain = 1) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 7 & x_1_y_0_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_21 & x = 1 & y = 1 & x_1_y_1_terrain = 7 & x_0_y_1_terrain = 1) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 7 & x_0_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_21 & x = 2 & y = 1 & x_2_y_1_terrain = 7 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 7 & x_1_y_1_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_21 & x = 1 & y = 2 & x_1_y_2_terrain = 7 & x_0_y_2_terrain = 1) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 7 & x_0_y_2_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_21 & x = 2 & y = 2 & x_2_y_2_terrain = 7 & x_1_y_2_terrain = 1) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 7 & x_1_y_2_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_22" : 
+		[
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 12,
+				"postcondition_spec" : "(skill_22 & x = 0 & y = 0 & x_0_y_0_terrain = 6 & x_1_y_0_terrain = 12) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 6 & x_1_y_0_terrain' = 12)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 12,
+				"postcondition_spec" : "(skill_22 & x = 1 & y = 0 & x_1_y_0_terrain = 6 & x_2_y_0_terrain = 12) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 6 & x_2_y_0_terrain' = 12)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 12,
+				"postcondition_spec" : "(skill_22 & x = 0 & y = 1 & x_0_y_1_terrain = 6 & x_1_y_1_terrain = 12) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 6 & x_1_y_1_terrain' = 12)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 12,
+				"postcondition_spec" : "(skill_22 & x = 1 & y = 1 & x_1_y_1_terrain = 6 & x_2_y_1_terrain = 12) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 6 & x_2_y_1_terrain' = 12)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 12,
+				"postcondition_spec" : "(skill_22 & x = 0 & y = 2 & x_0_y_2_terrain = 6 & x_1_y_2_terrain = 12) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 6 & x_1_y_2_terrain' = 12)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 12,
+				"postcondition_spec" : "(skill_22 & x = 1 & y = 2 & x_1_y_2_terrain = 6 & x_2_y_2_terrain = 12) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 6 & x_2_y_2_terrain' = 12)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_23" : 
+		[
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_23 & x = 0 & y = 0 & x_0_y_0_terrain = 6 & x_0_y_1_terrain = 1) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 6 & x_0_y_1_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_23 & x = 1 & y = 0 & x_1_y_0_terrain = 6 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 6 & x_1_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_23 & x = 2 & y = 0 & x_2_y_0_terrain = 6 & x_2_y_1_terrain = 1) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 6 & x_2_y_1_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_23 & x = 0 & y = 1 & x_0_y_1_terrain = 6 & x_0_y_2_terrain = 1) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 6 & x_0_y_2_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_23 & x = 1 & y = 1 & x_1_y_1_terrain = 6 & x_1_y_2_terrain = 1) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 6 & x_1_y_2_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_23 & x = 2 & y = 1 & x_2_y_1_terrain = 6 & x_2_y_2_terrain = 1) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 6 & x_2_y_2_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 2
+			}
+		],
+		"skill_24" : 
+		[
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 6,
+				"postcondition_spec" : "(skill_24 & x = 0 & y = 1 & x_0_y_1_terrain = 1 & x_0_y_0_terrain = 6) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 1 & x_0_y_0_terrain' = 6)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 6,
+				"postcondition_spec" : "(skill_24 & x = 1 & y = 1 & x_1_y_1_terrain = 1 & x_1_y_0_terrain = 6) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 1 & x_1_y_0_terrain' = 6)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 6,
+				"postcondition_spec" : "(skill_24 & x = 2 & y = 1 & x_2_y_1_terrain = 1 & x_2_y_0_terrain = 6) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 1 & x_2_y_0_terrain' = 6)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 6,
+				"postcondition_spec" : "(skill_24 & x = 0 & y = 2 & x_0_y_2_terrain = 1 & x_0_y_1_terrain = 6) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 1 & x_0_y_1_terrain' = 6)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 6,
+				"postcondition_spec" : "(skill_24 & x = 1 & y = 2 & x_1_y_2_terrain = 1 & x_1_y_1_terrain = 6) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 1 & x_1_y_1_terrain' = 6)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 6,
+				"postcondition_spec" : "(skill_24 & x = 2 & y = 2 & x_2_y_2_terrain = 1 & x_2_y_1_terrain = 6) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 1 & x_2_y_1_terrain' = 6)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 1
+			}
+		],
+		"skill_25" : 
+		[
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 11,
+				"postcondition_spec" : "(skill_25 & x = 0 & y = 0 & x_0_y_0_terrain = 1 & x_1_y_0_terrain = 11) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 1 & x_1_y_0_terrain' = 11)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 11,
+				"postcondition_spec" : "(skill_25 & x = 1 & y = 0 & x_1_y_0_terrain = 1 & x_2_y_0_terrain = 11) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 1 & x_2_y_0_terrain' = 11)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 11,
+				"postcondition_spec" : "(skill_25 & x = 0 & y = 1 & x_0_y_1_terrain = 1 & x_1_y_1_terrain = 11) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 1 & x_1_y_1_terrain' = 11)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 11,
+				"postcondition_spec" : "(skill_25 & x = 1 & y = 1 & x_1_y_1_terrain = 1 & x_2_y_1_terrain = 11) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 1 & x_2_y_1_terrain' = 11)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 11,
+				"postcondition_spec" : "(skill_25 & x = 0 & y = 2 & x_0_y_2_terrain = 1 & x_1_y_2_terrain = 11) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 1 & x_1_y_2_terrain' = 11)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 11,
+				"postcondition_spec" : "(skill_25 & x = 1 & y = 2 & x_1_y_2_terrain = 1 & x_2_y_2_terrain = 11) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 1 & x_2_y_2_terrain' = 11)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_26" : 
+		[
+			{
+				"current_terrain" : 11,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_26 & x = 1 & y = 0 & x_1_y_0_terrain = 11 & x_0_y_0_terrain = 1) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 11 & x_0_y_0_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 11,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_26 & x = 2 & y = 0 & x_2_y_0_terrain = 11 & x_1_y_0_terrain = 1) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 11 & x_1_y_0_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 11,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_26 & x = 1 & y = 1 & x_1_y_1_terrain = 11 & x_0_y_1_terrain = 1) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 11 & x_0_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 11,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_26 & x = 2 & y = 1 & x_2_y_1_terrain = 11 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 11 & x_1_y_1_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 11,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_26 & x = 1 & y = 2 & x_1_y_2_terrain = 11 & x_0_y_2_terrain = 1) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 11 & x_0_y_2_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 11,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_26 & x = 2 & y = 2 & x_2_y_2_terrain = 11 & x_1_y_2_terrain = 1) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 11 & x_1_y_2_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_27" : 
+		[
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_27 & x = 0 & y = 0 & x_0_y_0_terrain = 1 & x_1_y_0_terrain = 4) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 1 & x_1_y_0_terrain' = 4)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_27 & x = 1 & y = 0 & x_1_y_0_terrain = 1 & x_2_y_0_terrain = 4) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 1 & x_2_y_0_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_27 & x = 0 & y = 1 & x_0_y_1_terrain = 1 & x_1_y_1_terrain = 4) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 1 & x_1_y_1_terrain' = 4)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_27 & x = 1 & y = 1 & x_1_y_1_terrain = 1 & x_2_y_1_terrain = 4) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 1 & x_2_y_1_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_27 & x = 0 & y = 2 & x_0_y_2_terrain = 1 & x_1_y_2_terrain = 4) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 1 & x_1_y_2_terrain' = 4)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_27 & x = 1 & y = 2 & x_1_y_2_terrain = 1 & x_2_y_2_terrain = 4) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 1 & x_2_y_2_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_28" : 
+		[
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_28 & x = 1 & y = 0 & x_1_y_0_terrain = 4 & x_0_y_0_terrain = 1) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 4 & x_0_y_0_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_28 & x = 2 & y = 0 & x_2_y_0_terrain = 4 & x_1_y_0_terrain = 1) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 4 & x_1_y_0_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_28 & x = 1 & y = 1 & x_1_y_1_terrain = 4 & x_0_y_1_terrain = 1) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 4 & x_0_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_28 & x = 2 & y = 1 & x_2_y_1_terrain = 4 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 4 & x_1_y_1_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_28 & x = 1 & y = 2 & x_1_y_2_terrain = 4 & x_0_y_2_terrain = 1) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 4 & x_0_y_2_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_28 & x = 2 & y = 2 & x_2_y_2_terrain = 4 & x_1_y_2_terrain = 1) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 4 & x_1_y_2_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_29" : 
+		[
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_29 & x = 1 & y = 0 & x_1_y_0_terrain = 6 & x_0_y_0_terrain = 1) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 6 & x_0_y_0_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_29 & x = 2 & y = 0 & x_2_y_0_terrain = 6 & x_1_y_0_terrain = 1) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 6 & x_1_y_0_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_29 & x = 1 & y = 1 & x_1_y_1_terrain = 6 & x_0_y_1_terrain = 1) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 6 & x_0_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_29 & x = 2 & y = 1 & x_2_y_1_terrain = 6 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 6 & x_1_y_1_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_29 & x = 1 & y = 2 & x_1_y_2_terrain = 6 & x_0_y_2_terrain = 1) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 6 & x_0_y_2_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 6,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_29 & x = 2 & y = 2 & x_2_y_2_terrain = 6 & x_1_y_2_terrain = 1) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 6 & x_1_y_2_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_3" : 
+		[
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_3 & x = 1 & y = 0 & x_1_y_0_terrain = 0 & x_0_y_0_terrain = 1) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 0 & x_0_y_0_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_3 & x = 2 & y = 0 & x_2_y_0_terrain = 0 & x_1_y_0_terrain = 1) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 0 & x_1_y_0_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_3 & x = 1 & y = 1 & x_1_y_1_terrain = 0 & x_0_y_1_terrain = 1) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 0 & x_0_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_3 & x = 2 & y = 1 & x_2_y_1_terrain = 0 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 0 & x_1_y_1_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_3 & x = 1 & y = 2 & x_1_y_2_terrain = 0 & x_0_y_2_terrain = 1) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 0 & x_0_y_2_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_3 & x = 2 & y = 2 & x_2_y_2_terrain = 0 & x_1_y_2_terrain = 1) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 0 & x_1_y_2_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_30" : 
+		[
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_30 & x = 0 & y = 0 & x_0_y_0_terrain = 0 & x_1_y_0_terrain = 1) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 0 & x_1_y_0_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_30 & x = 1 & y = 0 & x_1_y_0_terrain = 0 & x_2_y_0_terrain = 1) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 0 & x_2_y_0_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_30 & x = 0 & y = 1 & x_0_y_1_terrain = 0 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 0 & x_1_y_1_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_30 & x = 1 & y = 1 & x_1_y_1_terrain = 0 & x_2_y_1_terrain = 1) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 0 & x_2_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_30 & x = 0 & y = 2 & x_0_y_2_terrain = 0 & x_1_y_2_terrain = 1) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 0 & x_1_y_2_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_30 & x = 1 & y = 2 & x_1_y_2_terrain = 0 & x_2_y_2_terrain = 1) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 0 & x_2_y_2_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_31" : 
+		[
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_31 & x = 1 & y = 0 & x_1_y_0_terrain = 1 & x_0_y_0_terrain = 0) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 1 & x_0_y_0_terrain' = 0)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_31 & x = 2 & y = 0 & x_2_y_0_terrain = 1 & x_1_y_0_terrain = 0) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 1 & x_1_y_0_terrain' = 0)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_31 & x = 1 & y = 1 & x_1_y_1_terrain = 1 & x_0_y_1_terrain = 0) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 1 & x_0_y_1_terrain' = 0)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_31 & x = 2 & y = 1 & x_2_y_1_terrain = 1 & x_1_y_1_terrain = 0) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 1 & x_1_y_1_terrain' = 0)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_31 & x = 1 & y = 2 & x_1_y_2_terrain = 1 & x_0_y_2_terrain = 0) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 1 & x_0_y_2_terrain' = 0)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_31 & x = 2 & y = 2 & x_2_y_2_terrain = 1 & x_1_y_2_terrain = 0) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 1 & x_1_y_2_terrain' = 0)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_32" : 
+		[
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_32 & x = 0 & y = 0 & x_0_y_0_terrain = 8 & x_0_y_1_terrain = 8) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 8 & x_0_y_1_terrain' = 8)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_32 & x = 1 & y = 0 & x_1_y_0_terrain = 8 & x_1_y_1_terrain = 8) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 8 & x_1_y_1_terrain' = 8)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_32 & x = 2 & y = 0 & x_2_y_0_terrain = 8 & x_2_y_1_terrain = 8) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 8 & x_2_y_1_terrain' = 8)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_32 & x = 0 & y = 1 & x_0_y_1_terrain = 8 & x_0_y_2_terrain = 8) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 8 & x_0_y_2_terrain' = 8)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_32 & x = 1 & y = 1 & x_1_y_1_terrain = 8 & x_1_y_2_terrain = 8) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 8 & x_1_y_2_terrain' = 8)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_32 & x = 2 & y = 1 & x_2_y_1_terrain = 8 & x_2_y_2_terrain = 8) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 8 & x_2_y_2_terrain' = 8)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 2
+			}
+		],
+		"skill_33" : 
+		[
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_33 & x = 0 & y = 1 & x_0_y_1_terrain = 8 & x_0_y_0_terrain = 8) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 8 & x_0_y_0_terrain' = 8)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_33 & x = 1 & y = 1 & x_1_y_1_terrain = 8 & x_1_y_0_terrain = 8) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 8 & x_1_y_0_terrain' = 8)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_33 & x = 2 & y = 1 & x_2_y_1_terrain = 8 & x_2_y_0_terrain = 8) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 8 & x_2_y_0_terrain' = 8)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_33 & x = 0 & y = 2 & x_0_y_2_terrain = 8 & x_0_y_1_terrain = 8) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 8 & x_0_y_1_terrain' = 8)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_33 & x = 1 & y = 2 & x_1_y_2_terrain = 8 & x_1_y_1_terrain = 8) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 8 & x_1_y_1_terrain' = 8)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_33 & x = 2 & y = 2 & x_2_y_2_terrain = 8 & x_2_y_1_terrain = 8) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 8 & x_2_y_1_terrain' = 8)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 1
+			}
+		],
+		"skill_34" : 
+		[
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_34 & x = 0 & y = 0 & x_0_y_0_terrain = 4 & x_0_y_1_terrain = 4) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 4 & x_0_y_1_terrain' = 4)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_34 & x = 1 & y = 0 & x_1_y_0_terrain = 4 & x_1_y_1_terrain = 4) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 4 & x_1_y_1_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_34 & x = 2 & y = 0 & x_2_y_0_terrain = 4 & x_2_y_1_terrain = 4) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 4 & x_2_y_1_terrain' = 4)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_34 & x = 0 & y = 1 & x_0_y_1_terrain = 4 & x_0_y_2_terrain = 4) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 4 & x_0_y_2_terrain' = 4)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_34 & x = 1 & y = 1 & x_1_y_1_terrain = 4 & x_1_y_2_terrain = 4) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 4 & x_1_y_2_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_34 & x = 2 & y = 1 & x_2_y_1_terrain = 4 & x_2_y_2_terrain = 4) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 4 & x_2_y_2_terrain' = 4)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 2
+			}
+		],
+		"skill_35" : 
+		[
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_35 & x = 0 & y = 1 & x_0_y_1_terrain = 4 & x_0_y_0_terrain = 4) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 4 & x_0_y_0_terrain' = 4)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_35 & x = 1 & y = 1 & x_1_y_1_terrain = 4 & x_1_y_0_terrain = 4) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 4 & x_1_y_0_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_35 & x = 2 & y = 1 & x_2_y_1_terrain = 4 & x_2_y_0_terrain = 4) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 4 & x_2_y_0_terrain' = 4)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_35 & x = 0 & y = 2 & x_0_y_2_terrain = 4 & x_0_y_1_terrain = 4) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 4 & x_0_y_1_terrain' = 4)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_35 & x = 1 & y = 2 & x_1_y_2_terrain = 4 & x_1_y_1_terrain = 4) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 4 & x_1_y_1_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_35 & x = 2 & y = 2 & x_2_y_2_terrain = 4 & x_2_y_1_terrain = 4) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 4 & x_2_y_1_terrain' = 4)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 1
+			}
+		],
+		"skill_36" : 
+		[
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_36 & x = 0 & y = 0 & x_0_y_0_terrain = 4 & x_1_y_0_terrain = 4) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 4 & x_1_y_0_terrain' = 4)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_36 & x = 1 & y = 0 & x_1_y_0_terrain = 4 & x_2_y_0_terrain = 4) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 4 & x_2_y_0_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_36 & x = 0 & y = 1 & x_0_y_1_terrain = 4 & x_1_y_1_terrain = 4) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 4 & x_1_y_1_terrain' = 4)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_36 & x = 1 & y = 1 & x_1_y_1_terrain = 4 & x_2_y_1_terrain = 4) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 4 & x_2_y_1_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_36 & x = 0 & y = 2 & x_0_y_2_terrain = 4 & x_1_y_2_terrain = 4) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 4 & x_1_y_2_terrain' = 4)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_36 & x = 1 & y = 2 & x_1_y_2_terrain = 4 & x_2_y_2_terrain = 4) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 4 & x_2_y_2_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_37" : 
+		[
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_37 & x = 1 & y = 0 & x_1_y_0_terrain = 4 & x_0_y_0_terrain = 4) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 4 & x_0_y_0_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_37 & x = 2 & y = 0 & x_2_y_0_terrain = 4 & x_1_y_0_terrain = 4) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 4 & x_1_y_0_terrain' = 4)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_37 & x = 1 & y = 1 & x_1_y_1_terrain = 4 & x_0_y_1_terrain = 4) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 4 & x_0_y_1_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_37 & x = 2 & y = 1 & x_2_y_1_terrain = 4 & x_1_y_1_terrain = 4) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 4 & x_1_y_1_terrain' = 4)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_37 & x = 1 & y = 2 & x_1_y_2_terrain = 4 & x_0_y_2_terrain = 4) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 4 & x_0_y_2_terrain' = 4)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 4,
+				"next_terrain" : 4,
+				"postcondition_spec" : "(skill_37 & x = 2 & y = 2 & x_2_y_2_terrain = 4 & x_1_y_2_terrain = 4) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 4 & x_1_y_2_terrain' = 4)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_4" : 
+		[
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_4 & x = 0 & y = 0 & x_0_y_0_terrain = 0 & x_0_y_1_terrain = 0) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 0 & x_0_y_1_terrain' = 0)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_4 & x = 1 & y = 0 & x_1_y_0_terrain = 0 & x_1_y_1_terrain = 0) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 0 & x_1_y_1_terrain' = 0)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_4 & x = 2 & y = 0 & x_2_y_0_terrain = 0 & x_2_y_1_terrain = 0) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 0 & x_2_y_1_terrain' = 0)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_4 & x = 0 & y = 1 & x_0_y_1_terrain = 0 & x_0_y_2_terrain = 0) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 0 & x_0_y_2_terrain' = 0)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_4 & x = 1 & y = 1 & x_1_y_1_terrain = 0 & x_1_y_2_terrain = 0) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 0 & x_1_y_2_terrain' = 0)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_4 & x = 2 & y = 1 & x_2_y_1_terrain = 0 & x_2_y_2_terrain = 0) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 0 & x_2_y_2_terrain' = 0)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 2
+			}
+		],
+		"skill_5" : 
+		[
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_5 & x = 0 & y = 1 & x_0_y_1_terrain = 0 & x_0_y_0_terrain = 0) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 0 & x_0_y_0_terrain' = 0)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_5 & x = 1 & y = 1 & x_1_y_1_terrain = 0 & x_1_y_0_terrain = 0) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 0 & x_1_y_0_terrain' = 0)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_5 & x = 2 & y = 1 & x_2_y_1_terrain = 0 & x_2_y_0_terrain = 0) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 0 & x_2_y_0_terrain' = 0)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_5 & x = 0 & y = 2 & x_0_y_2_terrain = 0 & x_0_y_1_terrain = 0) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 0 & x_0_y_1_terrain' = 0)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_5 & x = 1 & y = 2 & x_1_y_2_terrain = 0 & x_1_y_1_terrain = 0) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 0 & x_1_y_1_terrain' = 0)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 0,
+				"next_terrain" : 0,
+				"postcondition_spec" : "(skill_5 & x = 2 & y = 2 & x_2_y_2_terrain = 0 & x_2_y_1_terrain = 0) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 0 & x_2_y_1_terrain' = 0)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 1
+			}
+		],
+		"skill_6" : 
+		[
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_6 & x = 0 & y = 0 & x_0_y_0_terrain = 1 & x_1_y_0_terrain = 1) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 1 & x_1_y_0_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_6 & x = 1 & y = 0 & x_1_y_0_terrain = 1 & x_2_y_0_terrain = 1) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 1 & x_2_y_0_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_6 & x = 0 & y = 1 & x_0_y_1_terrain = 1 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 1 & x_1_y_1_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_6 & x = 1 & y = 1 & x_1_y_1_terrain = 1 & x_2_y_1_terrain = 1) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 1 & x_2_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_6 & x = 0 & y = 2 & x_0_y_2_terrain = 1 & x_1_y_2_terrain = 1) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 1 & x_1_y_2_terrain' = 1)",
+				"x" : 0,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_6 & x = 1 & y = 2 & x_1_y_2_terrain = 1 & x_2_y_2_terrain = 1) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 1 & x_2_y_2_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_7" : 
+		[
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_7 & x = 1 & y = 0 & x_1_y_0_terrain = 1 & x_0_y_0_terrain = 1) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 1 & x_0_y_0_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_7 & x = 2 & y = 0 & x_2_y_0_terrain = 1 & x_1_y_0_terrain = 1) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 1 & x_1_y_0_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_7 & x = 1 & y = 1 & x_1_y_1_terrain = 1 & x_0_y_1_terrain = 1) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 1 & x_0_y_1_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_7 & x = 2 & y = 1 & x_2_y_1_terrain = 1 & x_1_y_1_terrain = 1) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 1 & x_1_y_1_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_7 & x = 1 & y = 2 & x_1_y_2_terrain = 1 & x_0_y_2_terrain = 1) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 1 & x_0_y_2_terrain' = 1)",
+				"x" : 1,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 1,
+				"next_terrain" : 1,
+				"postcondition_spec" : "(skill_7 & x = 2 & y = 2 & x_2_y_2_terrain = 1 & x_1_y_2_terrain = 1) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 1 & x_1_y_2_terrain' = 1)",
+				"x" : 2,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 2
+			}
+		],
+		"skill_8" : 
+		[
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_8 & x = 0 & y = 0 & x_0_y_0_terrain = 8 & x_0_y_1_terrain = 7) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 0 & x_0_y_0_terrain' = 8 & x_0_y_1_terrain' = 7)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_8 & x = 1 & y = 0 & x_1_y_0_terrain = 8 & x_1_y_1_terrain = 7) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 0 & x_1_y_0_terrain' = 8 & x_1_y_1_terrain' = 7)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_8 & x = 2 & y = 0 & x_2_y_0_terrain = 8 & x_2_y_1_terrain = 7) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 0 & x_2_y_0_terrain' = 8 & x_2_y_1_terrain' = 7)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 0,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_8 & x = 0 & y = 1 & x_0_y_1_terrain = 8 & x_0_y_2_terrain = 7) -> (x' = 0 & y' = 2)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 8 & x_0_y_2_terrain' = 7)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_8 & x = 1 & y = 1 & x_1_y_1_terrain = 8 & x_1_y_2_terrain = 7) -> (x' = 1 & y' = 2)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 8 & x_1_y_2_terrain' = 7)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 2
+			},
+			{
+				"current_terrain" : 8,
+				"next_terrain" : 7,
+				"postcondition_spec" : "(skill_8 & x = 2 & y = 1 & x_2_y_1_terrain = 8 & x_2_y_2_terrain = 7) -> (x' = 2 & y' = 2)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 8 & x_2_y_2_terrain' = 7)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 2
+			}
+		],
+		"skill_9" : 
+		[
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_9 & x = 0 & y = 1 & x_0_y_1_terrain = 7 & x_0_y_0_terrain = 8) -> (x' = 0 & y' = 0)",
+				"precondition_spec" : "(x' = 0 & y' = 1 & x_0_y_1_terrain' = 7 & x_0_y_0_terrain' = 8)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_9 & x = 1 & y = 1 & x_1_y_1_terrain = 7 & x_1_y_0_terrain = 8) -> (x' = 1 & y' = 0)",
+				"precondition_spec" : "(x' = 1 & y' = 1 & x_1_y_1_terrain' = 7 & x_1_y_0_terrain' = 8)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_9 & x = 2 & y = 1 & x_2_y_1_terrain = 7 & x_2_y_0_terrain = 8) -> (x' = 2 & y' = 0)",
+				"precondition_spec" : "(x' = 2 & y' = 1 & x_2_y_1_terrain' = 7 & x_2_y_0_terrain' = 8)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 1,
+				"y_prime" : 0
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_9 & x = 0 & y = 2 & x_0_y_2_terrain = 7 & x_0_y_1_terrain = 8) -> (x' = 0 & y' = 1)",
+				"precondition_spec" : "(x' = 0 & y' = 2 & x_0_y_2_terrain' = 7 & x_0_y_1_terrain' = 8)",
+				"x" : 0,
+				"x_prime" : 0,
+				"y" : 2,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_9 & x = 1 & y = 2 & x_1_y_2_terrain = 7 & x_1_y_1_terrain = 8) -> (x' = 1 & y' = 1)",
+				"precondition_spec" : "(x' = 1 & y' = 2 & x_1_y_2_terrain' = 7 & x_1_y_1_terrain' = 8)",
+				"x" : 1,
+				"x_prime" : 1,
+				"y" : 2,
+				"y_prime" : 1
+			},
+			{
+				"current_terrain" : 7,
+				"next_terrain" : 8,
+				"postcondition_spec" : "(skill_9 & x = 2 & y = 2 & x_2_y_2_terrain = 7 & x_2_y_1_terrain = 8) -> (x' = 2 & y' = 1)",
+				"precondition_spec" : "(x' = 2 & y' = 2 & x_2_y_2_terrain' = 7 & x_2_y_1_terrain' = 8)",
+				"x" : 2,
+				"x_prime" : 2,
+				"y" : 2,
+				"y_prime" : 1
+			}
+		]
+	}
+}
