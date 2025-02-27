@@ -899,6 +899,7 @@ class Manager:
         # breakpoint()
         invalid_locations_ast_formulas: list = []
         for terrain_input_int, terrain_input_type in terrain_state.items():
+            if "terrain" not in terrain_input_int: continue
             if (terrain_input_int, terrain_input_type) not in self.M_o:
                 continue
             invalid_locations_ast_formulas.append(self.M_o[(terrain_input_int, terrain_input_type)])
