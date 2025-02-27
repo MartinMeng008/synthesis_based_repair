@@ -20,6 +20,6 @@
     "num_grid": 9,
     "num_terrain_types": 5,
     "new_skills_file": "build/new_skill",
-    "symbolic_repair_only": true,
-    "max_repair_iter": 1
+    "symbolic_repair_only": false,
+    "max_repair_iter": 2
   }
