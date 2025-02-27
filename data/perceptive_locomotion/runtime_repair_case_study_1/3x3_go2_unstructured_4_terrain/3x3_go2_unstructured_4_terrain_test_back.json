@@ -3,28 +3,15 @@
 	[
 		{
 			"xrequest" : 0,
-			"yrequest" : 1
-		}
-	],
-	"terrain_states_list" : 
-	[
-		{
-			"x_0_y_0_terrain" : 3,
-			"x_0_y_1_terrain" : 3,
-			"x_0_y_2_terrain" : 3,
-			"x_1_y_0_terrain" : 0,
-			"x_1_y_1_terrain" : 0,
-			"x_1_y_2_terrain" : 0,
-			"x_2_y_0_terrain" : 1,
-			"x_2_y_1_terrain" : 1,
-			"x_2_y_2_terrain" : 1,
-			"request_states_list" : 
-	[
+			"yrequest" : 0
+		},
 		{
 			"xrequest" : 0,
 			"yrequest" : 1
-		}
-	]
+		},
+		{
+			"xrequest" : 0,
+			"yrequest" : 2
 		}
 	],
 	"skill_list" : 
@@ -785,5 +772,140 @@
 				"y_prime" : 2
 			}
 		]
-	}
+	},
+	"terrain_states_list" : 
+	[
+		{
+			"x_0_y_0_terrain" : 2,
+			"x_0_y_1_terrain" : 2,
+			"x_0_y_2_terrain" : 4,
+			"x_1_y_0_terrain" : 0,
+			"x_1_y_1_terrain" : 0,
+			"x_1_y_2_terrain" : 4,
+			"x_2_y_0_terrain" : 4,
+			"x_2_y_1_terrain" : 4,
+			"x_2_y_2_terrain" : 4
+		},
+		{
+			"x_0_y_0_terrain" : 1,
+			"x_0_y_1_terrain" : 1,
+			"x_0_y_2_terrain" : 4,
+			"x_1_y_0_terrain" : 2,
+			"x_1_y_1_terrain" : 2,
+			"x_1_y_2_terrain" : 4,
+			"x_2_y_0_terrain" : 0,
+			"x_2_y_1_terrain" : 0,
+			"x_2_y_2_terrain" : 4
+		},
+		{
+			"x_0_y_0_terrain" : 0,
+			"x_0_y_1_terrain" : 0,
+			"x_0_y_2_terrain" : 4,
+			"x_1_y_0_terrain" : 1,
+			"x_1_y_1_terrain" : 1,
+			"x_1_y_2_terrain" : 4,
+			"x_2_y_0_terrain" : 2,
+			"x_2_y_1_terrain" : 2,
+			"x_2_y_2_terrain" : 4
+		},
+		{
+			"x_0_y_0_terrain" : 0,
+			"x_0_y_1_terrain" : 0,
+			"x_0_y_2_terrain" : 4,
+			"x_1_y_0_terrain" : 0,
+			"x_1_y_1_terrain" : 0,
+			"x_1_y_2_terrain" : 4,
+			"x_2_y_0_terrain" : 1,
+			"x_2_y_1_terrain" : 1,
+			"x_2_y_2_terrain" : 4
+		},
+		{
+			"x_0_y_0_terrain" : 2,
+			"x_0_y_1_terrain" : 2,
+			"x_0_y_2_terrain" : 2,
+			"x_1_y_0_terrain" : 0,
+			"x_1_y_1_terrain" : 0,
+			"x_1_y_2_terrain" : 0,
+			"x_2_y_0_terrain" : 4,
+			"x_2_y_1_terrain" : 4,
+			"x_2_y_2_terrain" : 4
+		},
+		{
+			"x_0_y_0_terrain" : 1,
+			"x_0_y_1_terrain" : 1,
+			"x_0_y_2_terrain" : 1,
+			"x_1_y_0_terrain" : 2,
+			"x_1_y_1_terrain" : 2,
+			"x_1_y_2_terrain" : 2,
+			"x_2_y_0_terrain" : 0,
+			"x_2_y_1_terrain" : 0,
+			"x_2_y_2_terrain" : 0
+		},
+		{
+			"x_0_y_0_terrain" : 0,
+			"x_0_y_1_terrain" : 0,
+			"x_0_y_2_terrain" : 0,
+			"x_1_y_0_terrain" : 1,
+			"x_1_y_1_terrain" : 1,
+			"x_1_y_2_terrain" : 1,
+			"x_2_y_0_terrain" : 2,
+			"x_2_y_1_terrain" : 2,
+			"x_2_y_2_terrain" : 2
+		},
+		{
+			"x_0_y_0_terrain" : 0,
+			"x_0_y_1_terrain" : 0,
+			"x_0_y_2_terrain" : 0,
+			"x_1_y_0_terrain" : 0,
+			"x_1_y_1_terrain" : 0,
+			"x_1_y_2_terrain" : 0,
+			"x_2_y_0_terrain" : 1,
+			"x_2_y_1_terrain" : 1,
+			"x_2_y_2_terrain" : 1
+		},
+		{
+			"x_0_y_0_terrain" : 4,
+			"x_0_y_1_terrain" : 2,
+			"x_0_y_2_terrain" : 2,
+			"x_1_y_0_terrain" : 4,
+			"x_1_y_1_terrain" : 0,
+			"x_1_y_2_terrain" : 0,
+			"x_2_y_0_terrain" : 4,
+			"x_2_y_1_terrain" : 4,
+			"x_2_y_2_terrain" : 4
+		},
+		{
+			"x_0_y_0_terrain" : 4,
+			"x_0_y_1_terrain" : 1,
+			"x_0_y_2_terrain" : 1,
+			"x_1_y_0_terrain" : 4,
+			"x_1_y_1_terrain" : 2,
+			"x_1_y_2_terrain" : 2,
+			"x_2_y_0_terrain" : 4,
+			"x_2_y_1_terrain" : 0,
+			"x_2_y_2_terrain" : 0
+		},
+		{
+			"x_0_y_0_terrain" : 4,
+			"x_0_y_1_terrain" : 0,
+			"x_0_y_2_terrain" : 0,
+			"x_1_y_0_terrain" : 4,
+			"x_1_y_1_terrain" : 1,
+			"x_1_y_2_terrain" : 1,
+			"x_2_y_0_terrain" : 4,
+			"x_2_y_1_terrain" : 2,
+			"x_2_y_2_terrain" : 2
+		},
+		{
+			"x_0_y_0_terrain" : 4,
+			"x_0_y_1_terrain" : 0,
+			"x_0_y_2_terrain" : 0,
+			"x_1_y_0_terrain" : 4,
+			"x_1_y_1_terrain" : 0,
+			"x_1_y_2_terrain" : 0,
+			"x_2_y_0_terrain" : 4,
+			"x_2_y_1_terrain" : 1,
+			"x_2_y_2_terrain" : 1
+		}
+	]
 }
