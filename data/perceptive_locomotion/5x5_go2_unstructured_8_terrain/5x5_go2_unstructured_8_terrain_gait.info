@@ -37,10 +37,6 @@ skill_1
     [5]    STANCE
     [6]    RF_LH
     [7]    STANCE
-    [8]    LF_RH
-    [9]    STANCE
-    [10]    RF_LH
-    [11]    STANCE
   }
   switchingTimes
   {
@@ -53,10 +49,6 @@ skill_1
     [6]    1.5
     [7]    1.95
     [8]    2
-    [9]    2.45
-    [10]    2.5
-    [11]    2.95
-    [12]    3
   }
 }
 
@@ -72,6 +64,33 @@ skill_2
     [5]    STANCE
     [6]    RF_LH
     [7]    STANCE
+  }
+  switchingTimes
+  {
+    [0]    0
+    [1]    0.45
+    [2]    0.5
+    [3]    0.95
+    [4]    1
+    [5]    1.45
+    [6]    1.5
+    [7]    1.95
+    [8]    2
+  }
+}
+
+skill_3
+{
+  modeSequence
+  {
+    [0]    LF_RH
+    [1]    STANCE
+    [2]    RF_LH
+    [3]    STANCE
+    [4]    LF_RH
+    [5]    STANCE
+    [6]    RF_LH
+    [7]    STANCE
     [8]    LF_RH
     [9]    STANCE
     [10]    RF_LH
@@ -95,33 +114,6 @@ skill_2
   }
 }
 
-skill_3
-{
-  modeSequence
-  {
-    [0]    LF_RH
-    [1]    STANCE
-    [2]    RF_LH
-    [3]    STANCE
-    [4]    LF_RH
-    [5]    STANCE
-    [6]    RF_LH
-    [7]    STANCE
-  }
-  switchingTimes
-  {
-    [0]    0
-    [1]    0.45
-    [2]    0.5
-    [3]    0.95
-    [4]    1
-    [5]    1.45
-    [6]    1.5
-    [7]    1.95
-    [8]    2
-  }
-}
-
 skill_4
 {
   modeSequence
@@ -134,6 +126,10 @@ skill_4
     [5]    STANCE
     [6]    RF_LH
     [7]    STANCE
+    [8]    LF_RH
+    [9]    STANCE
+    [10]    RF_LH
+    [11]    STANCE
   }
   switchingTimes
   {
@@ -146,6 +142,10 @@ skill_4
     [6]    1.5
     [7]    1.95
     [8]    2
+    [9]    2.45
+    [10]    2.5
+    [11]    2.95
+    [12]    3
   }
 }
 
@@ -258,6 +258,10 @@ skill_8
     [5]    STANCE
     [6]    RF_LH
     [7]    STANCE
+    [8]    LF_RH
+    [9]    STANCE
+    [10]    RF_LH
+    [11]    STANCE
   }
   switchingTimes
   {
@@ -270,6 +274,10 @@ skill_8
     [6]    1.5
     [7]    1.95
     [8]    2
+    [9]    2.45
+    [10]    2.5
+    [11]    2.95
+    [12]    3
   }
 }
 
@@ -374,10 +382,6 @@ skill_12
     [5]    STANCE
     [6]    RF_LH
     [7]    STANCE
-    [8]    LF_RH
-    [9]    STANCE
-    [10]    RF_LH
-    [11]    STANCE
   }
   switchingTimes
   {
@@ -390,10 +394,6 @@ skill_12
     [6]    1.5
     [7]    1.95
     [8]    2
-    [9]    2.45
-    [10]    2.5
-    [11]    2.95
-    [12]    3
   }
 }
 
@@ -436,6 +436,10 @@ skill_14
     [5]    STANCE
     [6]    RF_LH
     [7]    STANCE
+    [8]    LF_RH
+    [9]    STANCE
+    [10]    RF_LH
+    [11]    STANCE
   }
   switchingTimes
   {
@@ -448,6 +452,10 @@ skill_14
     [6]    1.5
     [7]    1.95
     [8]    2
+    [9]    2.45
+    [10]    2.5
+    [11]    2.95
+    [12]    3
   }
 }
 
@@ -498,6 +506,33 @@ skill_16
     [5]    STANCE
     [6]    RF_LH
     [7]    STANCE
+  }
+  switchingTimes
+  {
+    [0]    0
+    [1]    0.45
+    [2]    0.5
+    [3]    0.95
+    [4]    1
+    [5]    1.45
+    [6]    1.5
+    [7]    1.95
+    [8]    2
+  }
+}
+
+skill_17
+{
+  modeSequence
+  {
+    [0]    LF_RH
+    [1]    STANCE
+    [2]    RF_LH
+    [3]    STANCE
+    [4]    LF_RH
+    [5]    STANCE
+    [6]    RF_LH
+    [7]    STANCE
     [8]    LF_RH
     [9]    STANCE
     [10]    RF_LH
@@ -518,33 +553,6 @@ skill_16
     [10]    2.5
     [11]    2.95
     [12]    3
-  }
-}
-
-skill_17
-{
-  modeSequence
-  {
-    [0]    LF_RH
-    [1]    STANCE
-    [2]    RF_LH
-    [3]    STANCE
-    [4]    LF_RH
-    [5]    STANCE
-    [6]    RF_LH
-    [7]    STANCE
-  }
-  switchingTimes
-  {
-    [0]    0
-    [1]    0.45
-    [2]    0.5
-    [3]    0.95
-    [4]    1
-    [5]    1.45
-    [6]    1.5
-    [7]    1.95
-    [8]    2
   }
 }
 
@@ -576,176 +584,6 @@ skill_18
 }
 
 skill_19
-{
-  modeSequence
-  {
-    [0]    LF_RH
-    [1]    STANCE
-    [2]    RF_LH
-    [3]    STANCE
-    [4]    LF_RH
-    [5]    STANCE
-    [6]    RF_LH
-    [7]    STANCE
-    [8]    LF_RH
-    [9]    STANCE
-    [10]    RF_LH
-    [11]    STANCE
-  }
-  switchingTimes
-  {
-    [0]    0
-    [1]    0.45
-    [2]    0.5
-    [3]    0.95
-    [4]    1
-    [5]    1.45
-    [6]    1.5
-    [7]    1.95
-    [8]    2
-    [9]    2.45
-    [10]    2.5
-    [11]    2.95
-    [12]    3
-  }
-}
-
-skill_20
-{
-  modeSequence
-  {
-    [0]    LF_RH
-    [1]    STANCE
-    [2]    RF_LH
-    [3]    STANCE
-    [4]    LF_RH
-    [5]    STANCE
-    [6]    RF_LH
-    [7]    STANCE
-  }
-  switchingTimes
-  {
-    [0]    0
-    [1]    0.45
-    [2]    0.5
-    [3]    0.95
-    [4]    1
-    [5]    1.45
-    [6]    1.5
-    [7]    1.95
-    [8]    2
-  }
-}
-
-skill_21
-{
-  modeSequence
-  {
-    [0]    LF_RH
-    [1]    STANCE
-    [2]    RF_LH
-    [3]    STANCE
-    [4]    LF_RH
-    [5]    STANCE
-    [6]    RF_LH
-    [7]    STANCE
-  }
-  switchingTimes
-  {
-    [0]    0
-    [1]    0.45
-    [2]    0.5
-    [3]    0.95
-    [4]    1
-    [5]    1.45
-    [6]    1.5
-    [7]    1.95
-    [8]    2
-  }
-}
-
-skill_22
-{
-  modeSequence
-  {
-    [0]    LF_RH
-    [1]    STANCE
-    [2]    RF_LH
-    [3]    STANCE
-    [4]    LF_RH
-    [5]    STANCE
-    [6]    RF_LH
-    [7]    STANCE
-  }
-  switchingTimes
-  {
-    [0]    0
-    [1]    0.45
-    [2]    0.5
-    [3]    0.95
-    [4]    1
-    [5]    1.45
-    [6]    1.5
-    [7]    1.95
-    [8]    2
-  }
-}
-
-skill_23
-{
-  modeSequence
-  {
-    [0]    LF_RH
-    [1]    STANCE
-    [2]    RF_LH
-    [3]    STANCE
-    [4]    LF_RH
-    [5]    STANCE
-    [6]    RF_LH
-    [7]    STANCE
-  }
-  switchingTimes
-  {
-    [0]    0
-    [1]    0.45
-    [2]    0.5
-    [3]    0.95
-    [4]    1
-    [5]    1.45
-    [6]    1.5
-    [7]    1.95
-    [8]    2
-  }
-}
-
-skill_24
-{
-  modeSequence
-  {
-    [0]    LF_RH
-    [1]    STANCE
-    [2]    RF_LH
-    [3]    STANCE
-    [4]    LF_RH
-    [5]    STANCE
-    [6]    RF_LH
-    [7]    STANCE
-  }
-  switchingTimes
-  {
-    [0]    0
-    [1]    0.45
-    [2]    0.5
-    [3]    0.95
-    [4]    1
-    [5]    1.45
-    [6]    1.5
-    [7]    1.95
-    [8]    2
-  }
-}
-
-skill_25
 {
   modeSequence
   {
