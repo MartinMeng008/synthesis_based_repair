@@ -92,12 +92,12 @@ class Manager:
         json_data: dict = json_load_wrapper(file_json["json_data"])
         self.skills_data = json_data["skill_list"]
         self.terrain_states = json_data["terrain_states_list"]
-        self.request_states = json_data["request_states_list"]
+        # self.request_states = json_data["request_states_list"]
         print("==== Setup data ====")
         print(f"grid size: {self.ws_range}x{self.ws_range}")
         print(f"num of terrain types: {self.num_terrain_types}")
         print(f"num of terrain states: {len(self.terrain_states)}")
-        print(f"num of request states: {len(self.request_states)}")
+        # print(f"num of request states: {len(self.request_states)}")
         print(f"mapping_file: {self.mapping_file}")
         # print(f"num of skills: {len(self.skills_data)}")
         print("====================")
@@ -106,7 +106,10 @@ class Manager:
         self.log_dict["grid_size"] = f"{self.ws_range}x{self.ws_range}"
         self.log_dict["num_terrain_types"] = self.num_terrain_types
         self.log_dict["num_terrain_states"] = len(self.terrain_states)
-        self.log_dict["num_request_states"] = len(self.request_states)
+        total_request_states = set()
+        for terrain_state in self.terrain_states:
+            total_request_states.update(terrain_state["request_states_list"])
+        self.log_dict["num_request_states"] = len(total_request_states)
         # json dump the log_dict
         dump_json(self.log_file, self.log_dict)
 
@@ -181,14 +184,14 @@ class Manager:
         # if not self.opts["symbolic_repair_only"]:
         #     rospy.init_node('repair_node')
         #     rospy.wait_for_service('/feasibility_check')
-        self.modulo_repair(self.terrain_states, self.request_states)
+        self.modulo_repair(self.terrain_states)
         return None
 
     def runtime_repair(self) -> None:
         """The main function for runtime repair"""
         self.runtime_setup()
         if self.opts["symbolic_repair_only"]:
-            self.modulo_repair(self.terrain_states, self.request_states)
+            self.modulo_repair(self.terrain_states)
         else:
             self.repair_service: rospy.Service = rospy.Service("/symbolic_repair/online_repair", OnlineRepairWithNewTerrainAndRequest, self.runtime_repair_callback)
             rospy.spin()
@@ -233,7 +236,7 @@ class Manager:
     #     """Convert an AtomicProposition message to a dictionary"""
     #     raise NotImplementedError
 
-    def modulo_repair(self, terrain_states: list, request_states: list) -> None:
+    def modulo_repair(self, terrain_states: list, request_states: list = None) -> None:
         """The main function for modulo repair"""
         #  For each terrain state, and request state, repair the spec
         # modulo_repair_start_time = time.time()
@@ -241,9 +244,10 @@ class Manager:
         repaired_terrain_and_request_states = []
         no_need_repair_terrain_and_request_states = []
         for idx_terrain_state, terrain_state in enumerate(terrain_states):
+            request_states = terrain_state["request_states_list"]
             for idx_request_state, request_state in enumerate(request_states):
                 physical_feasible = False
-                modulo_repair_iteration_start_time = time.time()
+                # modulo_repair_iteration_start_time = time.time()
                 symbolic_repair_time_iteration = 0
                 physical_checker_time_iteration = 0
                 while not physical_feasible:
