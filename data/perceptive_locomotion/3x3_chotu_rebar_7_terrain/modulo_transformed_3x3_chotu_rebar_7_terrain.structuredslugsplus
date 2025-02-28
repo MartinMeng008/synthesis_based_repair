@@ -12,15 +12,11 @@ skill_1
 skill_2
 skill_3
 skill_4
-skill_5
-skill_6
 skill_0backup
 skill_1backup
 skill_2backup
 skill_3backup
 skill_4backup
-skill_5backup
-skill_6backup
 
 [ENV_INIT]
 ( x1 & ! x0 & ! x2 )
@@ -32,35 +28,27 @@ skill_6backup
 ! skill_2
 ! skill_3
 ! skill_4
-! skill_5
-! skill_6
 ! skill_0backup
 ! skill_1backup
 ! skill_2backup
 ! skill_3backup
 ! skill_4backup
-! skill_5backup
-! skill_6backup
 
 [ENV_TRANS]
 ( ( skill_0 & ! x0 & ! y0 & x1 & y1 & ! x2 & ! y2 ) -> ( ! x0' & ! y0' & x1' & ! y1' & ! x2' & y2' ) )
 ( ( skill_0 & ! x0 & ! y0 & ! x1 & y1 & x2 & ! y2 ) -> ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) )
-( ( skill_1 & ! x0 & ! y0 & x1 & y1 & ! x2 & ! y2 ) -> ( ! x0' & ! y0' & ! x1' & y1' & x2' & ! y2' ) )
-( ( skill_2 & ! x0 & ! y0 & x1 & ! y1 & ! x2 & y2 ) -> ( ! x0' & ! y0' & x1' & y1' & ! x2' & ! y2' ) )
-( ( skill_2 & ! x0 & ! y0 & ! x1 & ! y1 & x2 & y2 ) -> ( ! x0' & ! y0' & ! x1' & y1' & x2' & ! y2' ) )
-( ( skill_3 & ! x0 & ! y0 & x1 & ! y1 & ! x2 & y2 ) -> ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) )
-( ( skill_4 & ! x0 & ! y0 & ! x1 & y1 & x2 & ! y2 ) -> ( ! x0' & ! y0' & x1' & y1' & ! x2' & ! y2' ) )
-( ( skill_5 & ! x0 & ! y0 & ! x1 & ! y1 & x2 & y2 ) -> ( ! x0' & ! y0' & x1' & ! y1' & ! x2' & y2' ) )
-( ( skill_6 & ! x0 & ! y0 & ! x1 & ! y1 & x2 & y2 ) -> ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) )
+( ( skill_1 & ! x0 & ! y0 & x1 & ! y1 & ! x2 & y2 ) -> ( ! x0' & ! y0' & x1' & y1' & ! x2' & ! y2' ) )
+( ( skill_1 & ! x0 & ! y0 & ! x1 & ! y1 & x2 & y2 ) -> ( ! x0' & ! y0' & ! x1' & y1' & x2' & ! y2' ) )
+( ( skill_2 & ! x0 & ! y0 & x1 & ! y1 & ! x2 & y2 ) -> ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) )
+( ( skill_3 & ! x0 & ! y0 & ! x1 & ! y1 & x2 & y2 ) -> ( ! x0' & ! y0' & x1' & ! y1' & ! x2' & y2' ) )
+( ( skill_4 & ! x0 & ! y0 & ! x1 & ! y1 & x2 & y2 ) -> ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) )
 ( ( skill_0backup & ! x0 & ! y0 & x1 & y1 & ! x2 & ! y2 ) -> ( ! x0' & ! y0' & x1' & ! y1' & ! x2' & y2' ) )
 ( ( skill_0backup & ! x0 & ! y0 & ! x1 & y1 & x2 & ! y2 ) -> ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) )
-( ( skill_1backup & ! x0 & ! y0 & x1 & y1 & ! x2 & ! y2 ) -> ( ! x0' & ! y0' & ! x1' & y1' & x2' & ! y2' ) )
-( ( skill_2backup & ! x0 & ! y0 & x1 & ! y1 & ! x2 & y2 ) -> ( ! x0' & ! y0' & x1' & y1' & ! x2' & ! y2' ) )
-( ( skill_2backup & ! x0 & ! y0 & ! x1 & ! y1 & x2 & y2 ) -> ( ! x0' & ! y0' & ! x1' & y1' & x2' & ! y2' ) )
-( ( skill_3backup & ! x0 & ! y0 & x1 & ! y1 & ! x2 & y2 ) -> ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) )
-( ( skill_4backup & ! x0 & ! y0 & ! x1 & y1 & x2 & ! y2 ) -> ( ! x0' & ! y0' & x1' & y1' & ! x2' & ! y2' ) )
-( ( skill_5backup & ! x0 & ! y0 & ! x1 & ! y1 & x2 & y2 ) -> ( ! x0' & ! y0' & x1' & ! y1' & ! x2' & y2' ) )
-( ( skill_6backup & ! x0 & ! y0 & ! x1 & ! y1 & x2 & y2 ) -> ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) )
+( ( skill_1backup & ! x0 & ! y0 & x1 & ! y1 & ! x2 & y2 ) -> ( ! x0' & ! y0' & x1' & y1' & ! x2' & ! y2' ) )
+( ( skill_1backup & ! x0 & ! y0 & ! x1 & ! y1 & x2 & y2 ) -> ( ! x0' & ! y0' & ! x1' & y1' & x2' & ! y2' ) )
+( ( skill_2backup & ! x0 & ! y0 & x1 & ! y1 & ! x2 & y2 ) -> ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) )
+( ( skill_3backup & ! x0 & ! y0 & ! x1 & ! y1 & x2 & y2 ) -> ( ! x0' & ! y0' & x1' & ! y1' & ! x2' & y2' ) )
+( ( skill_4backup & ! x0 & ! y0 & ! x1 & ! y1 & x2 & y2 ) -> ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) )
 
 [ENV_TRANS_HARD]
 ! ( y1 & y2 )
@@ -79,23 +67,19 @@ skill_6backup
 ! ( x0' & x2' )
 ! ( x0' & x1' )
 ( x0' | x1' | x2' )
-( ( ! skill_0 & ! skill_1 & ! skill_2 & ! skill_3 & ! skill_4 & ! skill_5 & ! skill_6 & ! skill_0backup & ! skill_1backup & ! skill_2backup & ! skill_3backup & ! skill_4backup & ! skill_5backup & ! skill_6backup ) -> ( ( x0 <-> x0' ) & ( x1 <-> x1' ) & ( x2 <-> x2' ) & ( y0 <-> y0' ) & ( y1 <-> y1' ) & ( y2 <-> y2' ) ) )
+( ( ! skill_0 & ! skill_1 & ! skill_2 & ! skill_3 & ! skill_4 & ! skill_0backup & ! skill_1backup & ! skill_2backup & ! skill_3backup & ! skill_4backup ) -> ( ( x0 <-> x0' ) & ( x1 <-> x1' ) & ( x2 <-> x2' ) & ( y0 <-> y0' ) & ( y1 <-> y1' ) & ( y2 <-> y2' ) ) )
 
 [SYS_TRANS]
 ( ! ( ( ! x0' & ! y0' & x1' & y1' & ! x2' & ! y2' ) | ( ! x0' & ! y0' & ! x1' & y1' & x2' & ! y2' ) ) -> ! skill_0' )
-( ! ( ( ! x0' & ! y0' & x1' & y1' & ! x2' & ! y2' ) ) -> ! skill_1' )
-( ! ( ( ! x0' & ! y0' & x1' & ! y1' & ! x2' & y2' ) | ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) ) -> ! skill_2' )
-( ! ( ( ! x0' & ! y0' & x1' & ! y1' & ! x2' & y2' ) ) -> ! skill_3' )
-( ! ( ( ! x0' & ! y0' & ! x1' & y1' & x2' & ! y2' ) ) -> ! skill_4' )
-( ! ( ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) ) -> ! skill_5' )
-( ! ( ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) ) -> ! skill_6' )
+( ! ( ( ! x0' & ! y0' & x1' & ! y1' & ! x2' & y2' ) | ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) ) -> ! skill_1' )
+( ! ( ( ! x0' & ! y0' & x1' & ! y1' & ! x2' & y2' ) ) -> ! skill_2' )
+( ! ( ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) ) -> ! skill_3' )
+( ! ( ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) ) -> ! skill_4' )
 ( ! ( ( ! x0' & ! y0' & x1' & y1' & ! x2' & ! y2' ) | ( ! x0' & ! y0' & ! x1' & y1' & x2' & ! y2' ) ) -> ! skill_0backup' )
-( ! ( ( ! x0' & ! y0' & x1' & y1' & ! x2' & ! y2' ) ) -> ! skill_1backup' )
-( ! ( ( ! x0' & ! y0' & x1' & ! y1' & ! x2' & y2' ) | ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) ) -> ! skill_2backup' )
-( ! ( ( ! x0' & ! y0' & x1' & ! y1' & ! x2' & y2' ) ) -> ! skill_3backup' )
-( ! ( ( ! x0' & ! y0' & ! x1' & y1' & x2' & ! y2' ) ) -> ! skill_4backup' )
-( ! ( ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) ) -> ! skill_5backup' )
-( ! ( ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) ) -> ! skill_6backup' )
+( ! ( ( ! x0' & ! y0' & x1' & ! y1' & ! x2' & y2' ) | ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) ) -> ! skill_1backup' )
+( ! ( ( ! x0' & ! y0' & x1' & ! y1' & ! x2' & y2' ) ) -> ! skill_2backup' )
+( ! ( ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) ) -> ! skill_3backup' )
+( ! ( ( ! x0' & ! y0' & ! x1' & ! y1' & x2' & y2' ) ) -> ! skill_4backup' )
 
 [SYS_TRANS_HARD]
 ( ! ( ( x0 & ! x1 & ! x2 ) & ( y0 & ! y1 & ! y2 ) ) & ! ( ( x0' & ! x1' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
@@ -103,7 +87,7 @@ skill_6backup
 ( ! ( ( x0 & ! x1 & ! x2 ) & ( y2 & ! y0 & ! y1 ) ) & ! ( ( x0' & ! x1' & ! x2' ) & ( y2' & ! y0' & ! y1' ) ) )
 ( ! ( ( x1 & ! x0 & ! x2 ) & ( y0 & ! y1 & ! y2 ) ) & ! ( ( x1' & ! x0' & ! x2' ) & ( y0' & ! y1' & ! y2' ) ) )
 ( ! ( ( x2 & ! x0 & ! x1 ) & ( y0 & ! y1 & ! y2 ) ) & ! ( ( x2' & ! x0' & ! x1' ) & ( y0' & ! y1' & ! y2' ) ) )
-( ( skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' & ! skill_5backup' & ! skill_6backup' ) | ( skill_1' & ! skill_0' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' & ! skill_5backup' & ! skill_6backup' ) | ( skill_2' & ! skill_0' & ! skill_1' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' & ! skill_5backup' & ! skill_6backup' ) | ( skill_3' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' & ! skill_5backup' & ! skill_6backup' ) | ( skill_4' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_5' & ! skill_6' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' & ! skill_5backup' & ! skill_6backup' ) | ( skill_5' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_6' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' & ! skill_5backup' & ! skill_6backup' ) | ( skill_6' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' & ! skill_5backup' & ! skill_6backup' ) | ( skill_0backup' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' & ! skill_5backup' & ! skill_6backup' ) | ( skill_1backup' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_0backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' & ! skill_5backup' & ! skill_6backup' ) | ( skill_2backup' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_0backup' & ! skill_1backup' & ! skill_3backup' & ! skill_4backup' & ! skill_5backup' & ! skill_6backup' ) | ( skill_3backup' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_4backup' & ! skill_5backup' & ! skill_6backup' ) | ( skill_4backup' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_5backup' & ! skill_6backup' ) | ( skill_5backup' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' & ! skill_6backup' ) | ( skill_6backup' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' & ! skill_5backup' ) | ( ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_5' & ! skill_6' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' & ! skill_5backup' & ! skill_6backup' ) )
+( ( skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' ) | ( skill_1' & ! skill_0' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' ) | ( skill_2' & ! skill_0' & ! skill_1' & ! skill_3' & ! skill_4' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' ) | ( skill_3' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_4' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' ) | ( skill_4' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' ) | ( skill_0backup' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' ) | ( skill_1backup' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_0backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' ) | ( skill_2backup' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_0backup' & ! skill_1backup' & ! skill_3backup' & ! skill_4backup' ) | ( skill_3backup' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_4backup' ) | ( skill_4backup' & ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' ) | ( ! skill_0' & ! skill_1' & ! skill_2' & ! skill_3' & ! skill_4' & ! skill_0backup' & ! skill_1backup' & ! skill_2backup' & ! skill_3backup' & ! skill_4backup' ) )
 
 [ENV_LIVENESS]
 
@@ -144,6 +128,4 @@ skill_6backup
 ! skill_2backup
 ! skill_3backup
 ! skill_4backup
-! skill_5backup
-! skill_6backup
 
