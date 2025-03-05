@@ -243,6 +243,10 @@ class Manager:
         unrepairable_terrain_and_request_states = []
         repaired_terrain_and_request_states = []
         no_need_repair_terrain_and_request_states = []
+        if False:
+            # Hacking runtime 2.2
+            self.M_y[((0, 1), 8, 1)] = "skill_38"
+            self.M_y[((0, -1), 1, 8)] = "skill_39"
         for idx_terrain_state, terrain_state in enumerate(terrain_states):
             request_states = terrain_state["request_states_list"]
             for idx_request_state, request_state in enumerate(request_states):
