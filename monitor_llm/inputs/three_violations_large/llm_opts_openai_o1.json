@@ -1,0 +1,14 @@
+{
+    "gpu_memory_utilization": 0.95,
+    "download_dir": "/home/qian/workspace/models",
+    "model_name": "o1",
+    "base_url": "https://api.openai.com/v1",
+    "temperature": 0,
+    "num_samples": 1,
+    "prompt_name": "basic",
+    "informalization_max_tokens": 5000,
+    "repair_max_tokens": 7000,
+    "force": false,
+    "manual_prompt": false,
+    "check_skill_syntax": true
+}

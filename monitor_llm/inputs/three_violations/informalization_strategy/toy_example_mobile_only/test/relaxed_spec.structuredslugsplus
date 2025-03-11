@@ -1,0 +1,146 @@
+[INPUT]
+p_base_x0
+p_base_x1
+p_base_x2
+p_base_x3
+p_cone_x0
+p_cone_x1
+p_cone_x2
+p_cone_x3
+
+[OUTPUT]
+skill0
+skill1
+skill2
+skill3
+
+[ENV_INIT]
+p_base_x0
+! p_base_x1
+! p_base_x2
+! p_base_x3
+! p_cone_x0
+! p_cone_x1
+p_cone_x2
+! p_cone_x3
+
+[SYS_INIT]
+! skill0
+! skill1
+! skill2
+! skill3
+
+[ENV_TRANS]
+( ( skill0 & p_base_x0 & ! p_base_x1 & ! p_base_x2 & ! p_base_x3 ) -> ( ! p_base_x0' & p_base_x1' & ! p_base_x2' & ! p_base_x3' ) )
+( ( skill0 & ! p_base_x0 & p_base_x1 & ! p_base_x2 & ! p_base_x3 ) -> ( ! p_base_x0' & ! p_base_x1' & ! p_base_x2' & p_base_x3' ) )
+( ( skill1 & ! p_base_x0 & ! p_base_x1 & ! p_base_x2 & p_base_x3 ) -> ( ! p_base_x0' & p_base_x1' & ! p_base_x2' & ! p_base_x3' ) )
+( ( skill1 & ! p_base_x0 & p_base_x1 & ! p_base_x2 & ! p_base_x3 ) -> ( p_base_x0' & ! p_base_x1' & ! p_base_x2' & ! p_base_x3' ) )
+( ( skill2 & p_base_x0 & ! p_base_x1 & ! p_base_x2 & ! p_base_x3 ) -> ( ! p_base_x0' & ! p_base_x1' & p_base_x2' & ! p_base_x3' ) )
+( ( skill3 & ! p_base_x0 & ! p_base_x1 & p_base_x2 & ! p_base_x3 ) -> ( ! p_base_x0' & ! p_base_x1' & ! p_base_x2' & p_base_x3' ) )
+( ( skill3 & ! p_base_x0 & p_base_x1 & ! p_base_x2 & ! p_base_x3 ) -> ( ! p_base_x0' & ! p_base_x1' & ! p_base_x2' & p_base_x3' ) )
+( ( skill3 & p_base_x0 & ! p_base_x1 & ! p_base_x2 & ! p_base_x3 ) -> ( ! p_base_x0' & p_base_x1' & ! p_base_x2' & ! p_base_x3' ) )
+
+[ENV_TRANS_HARD]
+( p_cone_x0 -> p_cone_x0' )
+( p_cone_x1 -> p_cone_x1' )
+( ( p_cone_x2 -> p_cone_x2' ) | ( p_base_x0 & ! p_base_x1 & ! p_base_x2 & ! p_base_x3 & p_cone_x2 & ! p_cone_x0 & ! p_cone_x1 & ! p_cone_x3 & p_base_x0' & ! p_base_x1' & ! p_base_x2' & ! p_base_x3' & ! p_cone_x0' & p_cone_x1' & ! p_cone_x2' & ! p_cone_x3' ) )
+( p_cone_x3 -> p_cone_x3' )
+! ( p_base_x0 & p_base_x1 )
+! ( p_base_x0' & p_base_x1' )
+! ( p_base_x0 & p_base_x2 )
+! ( p_base_x0' & p_base_x2' )
+! ( p_base_x0 & p_base_x3 )
+! ( p_base_x0' & p_base_x3' )
+! ( p_base_x1 & p_base_x2 )
+! ( p_base_x1' & p_base_x2' )
+! ( p_base_x1 & p_base_x3 )
+! ( p_base_x1' & p_base_x3' )
+! ( p_base_x2 & p_base_x3 )
+! ( p_base_x2' & p_base_x3' )
+( p_base_x0 | p_base_x1 | p_base_x2 | p_base_x3 )
+( p_base_x0' | p_base_x1' | p_base_x2' | p_base_x3' )
+! ( p_cone_x0 & p_cone_x1 )
+! ( p_cone_x0' & p_cone_x1' )
+! ( p_cone_x0 & p_cone_x2 )
+! ( p_cone_x0' & p_cone_x2' )
+! ( p_cone_x0 & p_cone_x3 )
+! ( p_cone_x0' & p_cone_x3' )
+! ( p_cone_x1 & p_cone_x2 )
+! ( p_cone_x1' & p_cone_x2' )
+! ( p_cone_x1 & p_cone_x3 )
+! ( p_cone_x1' & p_cone_x3' )
+! ( p_cone_x2 & p_cone_x3 )
+! ( p_cone_x2' & p_cone_x3' )
+( p_cone_x0 | p_cone_x1 | p_cone_x2 | p_cone_x3 )
+( p_cone_x0' | p_cone_x1' | p_cone_x2' | p_cone_x3' )
+( ( ! skill0 & ! skill1 & ! skill2 & ! skill3 ) -> ( ( p_base_x0 <-> p_base_x0' ) & ( p_base_x1 <-> p_base_x1' ) & ( p_base_x2 <-> p_base_x2' ) & ( p_base_x3 <-> p_base_x3' ) ) )
+( ( skill0 & ! skill1 & ! skill2 & ! skill3 ) | ( skill1 & ! skill0 & ! skill2 & ! skill3 ) | ( skill2 & ! skill0 & ! skill1 & ! skill3 ) | ( skill3 & ! skill0 & ! skill1 & ! skill2 ) | ( ! skill0 & ! skill1 & ! skill2 & ! skill3 ) )
+
+[SYS_TRANS]
+( ! ( ( p_base_x0 & ! p_base_x1 & ! p_base_x2 & ! p_base_x3 & skill0 & ! p_base_x0' & p_base_x1' & ! p_base_x2' & ! p_base_x3' ) | ( p_base_x0' & ! p_base_x1' & ! p_base_x2' & ! p_base_x3' ) ) -> ! skill0' )
+( ! ( ( ! p_base_x0 & ! p_base_x1 & ! p_base_x2 & p_base_x3 & skill1 & ! p_base_x0' & p_base_x1' & ! p_base_x2' & ! p_base_x3' ) | ( ! p_base_x0' & ! p_base_x1' & ! p_base_x2' & p_base_x3' ) ) -> ! skill1' )
+( ( p_base_x0 & ! p_base_x1 & ! p_base_x2 & ! p_base_x3 & skill0 & ! p_base_x0' & p_base_x1' & ! p_base_x2' & ! p_base_x3' ) -> skill0' )
+( ( ! p_base_x0 & ! p_base_x1 & ! p_base_x2 & p_base_x3 & skill1 & ! p_base_x0' & p_base_x1' & ! p_base_x2' & ! p_base_x3' ) -> skill1' )
+( ! ( ( p_base_x0' & ! p_base_x1' & ! p_base_x2' & ! p_base_x3' ) ) -> ! skill2' )
+( ! ( ( p_base_x0 & ! p_base_x1 & ! p_base_x2 & ! p_base_x3 & skill3 & ! p_base_x0' & p_base_x1' & ! p_base_x2' & ! p_base_x3' ) | ( ! p_base_x0' & ! p_base_x1' & p_base_x2' & ! p_base_x3' ) | ( p_base_x0' & ! p_base_x1' & ! p_base_x2' & ! p_base_x3' ) ) -> ! skill3' )
+( ( p_base_x0 & ! p_base_x1 & ! p_base_x2 & ! p_base_x3 & skill3 & ! p_base_x0' & p_base_x1' & ! p_base_x2' & ! p_base_x3' ) -> skill3' )
+
+[SYS_TRANS_HARD]
+! ( p_base_x0 & p_cone_x0 )
+! ( p_base_x0' & p_cone_x0' )
+! ( p_base_x1 & p_cone_x1 )
+! ( p_base_x1' & p_cone_x1' )
+! ( p_base_x2 & p_cone_x2 )
+! ( p_base_x2' & p_cone_x2' )
+! ( p_base_x3 & p_cone_x3 )
+! ( p_base_x3' & p_cone_x3' )
+( ( skill0' & ! skill1' & ! skill2' & ! skill3' ) | ( skill1' & ! skill0' & ! skill2' & ! skill3' ) | ( skill2' & ! skill0' & ! skill1' & ! skill3' ) | ( skill3' & ! skill0' & ! skill1' & ! skill2' ) | ( ! skill0' & ! skill1' & ! skill2' & ! skill3' ) )
+
+[ENV_LIVENESS]
+
+[SYS_LIVENESS]
+p_base_x3
+
+[CHANGE_CONS]
+( ( p_cone_x0 <-> p_cone_x0' ) & ( p_cone_x1 <-> p_cone_x1' ) & ( p_cone_x2 <-> p_cone_x2' ) & ( p_cone_x3 <-> p_cone_x3' ) )
+! ( p_base_x0 & p_base_x1 )
+! ( p_base_x0' & p_base_x1' )
+! ( p_base_x0 & p_base_x2 )
+! ( p_base_x0' & p_base_x2' )
+! ( p_base_x0 & p_base_x3 )
+! ( p_base_x0' & p_base_x3' )
+! ( p_base_x1 & p_base_x2 )
+! ( p_base_x1' & p_base_x2' )
+! ( p_base_x1 & p_base_x3 )
+! ( p_base_x1' & p_base_x3' )
+! ( p_base_x2 & p_base_x3 )
+! ( p_base_x2' & p_base_x3' )
+( p_base_x0 | p_base_x1 | p_base_x2 | p_base_x3 )
+( p_base_x0' | p_base_x1' | p_base_x2' | p_base_x3' )
+! ( p_cone_x0 & p_cone_x1 )
+! ( p_cone_x0' & p_cone_x1' )
+! ( p_cone_x0 & p_cone_x2 )
+! ( p_cone_x0' & p_cone_x2' )
+! ( p_cone_x0 & p_cone_x3 )
+! ( p_cone_x0' & p_cone_x3' )
+! ( p_cone_x1 & p_cone_x2 )
+! ( p_cone_x1' & p_cone_x2' )
+! ( p_cone_x1 & p_cone_x3 )
+! ( p_cone_x1' & p_cone_x3' )
+! ( p_cone_x2 & p_cone_x3 )
+! ( p_cone_x2' & p_cone_x3' )
+( p_cone_x0 | p_cone_x1 | p_cone_x2 | p_cone_x3 )
+( p_cone_x0' | p_cone_x1' | p_cone_x2' | p_cone_x3' )
+! ( ( p_base_x0 <-> p_base_x0' ) & ( p_base_x1 <-> p_base_x1' ) & ( p_base_x2 <-> p_base_x2' ) & ( p_base_x3 <-> p_base_x3' ) )
+
+[NOT_ALLOWED_REPAIR]
+( ( p_cone_x0 <-> p_cone_x0' ) & ( p_cone_x1 <-> p_cone_x1' ) & ( p_cone_x2 <-> p_cone_x2' ) & ( p_cone_x3 <-> p_cone_x3' ) )
+! ( p_base_x0 & p_cone_x0 )
+! ( p_base_x0' & p_cone_x0' )
+! ( p_base_x1 & p_cone_x1 )
+! ( p_base_x1' & p_cone_x1' )
+! ( p_base_x2 & p_cone_x2 )
+! ( p_base_x2' & p_cone_x2' )
+! ( p_base_x3 & p_cone_x3 )
+! ( p_base_x3' & p_cone_x3' )
+

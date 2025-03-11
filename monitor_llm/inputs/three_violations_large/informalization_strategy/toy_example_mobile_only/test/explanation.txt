@@ -1,0 +1,4 @@
+"Initially, the robot's base is in x0 and the cone is in x2, and the liveness goal `p_base_x0` which requires the base to repeatedly reach x0 is satisfied" corresponds to node 0.
+"The robot then executes skill0 to move to x1 and then x3, satisfying the liveness goal `p_base_x3` which requires he base to repeatedly reach x3" corresponds to the transitions from node 0 to node 1, node 2, node 3, and then node 4. 
+"Next, the robot executes skill1 to move back to x0 via x1, satisfying the liveness goal `p_base_x0` again" corresponds to the transitions from node 4 to node 5, node 6, node 7, and then back to node 0. 
+"This behavior continues indefinitely" corresponds to the loop from node 0 to node 1, node 2, node 3, node 4, node 5, node 6, node 7, and then back to node 0. 

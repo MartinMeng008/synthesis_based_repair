@@ -1,0 +1,13 @@
+{
+    "gpu_memory_utilization": 0.95,
+    "download_dir": "/home/qian/workspace/models",
+    "model_name": "gpt-4o",
+    "base_url": "https://api.openai.com/v1",
+    "temperature": 0,
+    "num_samples": 1,
+    "prompt_name": "cot",
+    "informalization_max_tokens": 5000,
+    "repair_max_tokens": 7000,
+    "force": false,
+    "check_skill_syntax": true
+}

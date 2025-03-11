@@ -1,0 +1,15 @@
+[INPUT]
+a
+
+[OUTPUT]
+b
+
+[ENV_INIT]
+a
+
+[SYS_INIT]
+!b
+
+[SYS_LIVENESS]
+a -> b
+!a -> !b

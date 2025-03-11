@@ -1,0 +1,13 @@
+{
+    "env_init_true": ["p_base_x0", "p_cone_x2"],
+    "sys_init_true": [],
+    "env_live": "",
+    "sys_live": ["p_base_x0", 
+                "p_base_x3"],
+    "not_allowed_repair": "",
+    "user_sys_trans": [], 
+    "user_env_trans": ["p_cone_x0 -> p_cone_x0'", 
+                        "p_cone_x1 -> p_cone_x1'", 
+                        "p_cone_x2 -> p_cone_x2'", 
+                        "p_cone_x3 -> p_cone_x3'"]
+}

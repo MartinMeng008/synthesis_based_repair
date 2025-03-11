@@ -1,0 +1,105 @@
+{
+    "skill0": {
+        "name": "skill0",
+        "primitive_skill": "movebase",
+        "type": "mobile",
+        "goal_type": "region",
+        "initial_preconditions": [
+            {
+                "p_base_x0": true,
+                "p_base_x1": false,
+                "p_base_x2": false,
+                "p_base_x3": false}
+        ],
+        "intermediate_states": [
+            [
+                {
+                    "p_base_x0": true,
+                    "p_base_x1": false,
+                    "p_base_x2": false,
+                    "p_base_x3": false
+                },
+                [
+                    {
+                        "p_base_x0": false,
+                        "p_base_x1": true,
+                        "p_base_x2": false,
+                        "p_base_x3": false
+                    }]
+            ],
+            [
+                {
+                    "p_base_x0": false,
+                    "p_base_x1": true,
+                    "p_base_x2": false,
+                    "p_base_x3": false
+                },
+                [
+                    {
+                        "p_base_x0": false,
+                        "p_base_x1": false,
+                        "p_base_x2": false,
+                        "p_base_x3": true
+                    }]
+            ]],
+        "final_postconditions": [
+            {
+                "p_base_x0": false,
+                "p_base_x1": false,
+                "p_base_x2": false,
+                "p_base_x3": true
+            }]
+    },
+    "skill1": {
+        "name": "skill1",
+        "primitive_skill": "movebase",
+        "type": "mobile",
+        "goal_type": "region",
+        "initial_preconditions": [
+            {
+                "p_base_x0": false,
+                "p_base_x1": false,
+                "p_base_x2": false,
+                "p_base_x3": true
+            }
+        ],
+        "intermediate_states": [
+            [
+                {
+                    "p_base_x0": false,
+                    "p_base_x1": false,
+                    "p_base_x2": false,
+                    "p_base_x3": true
+                },
+                [
+                    {
+                        "p_base_x0": false,
+                        "p_base_x1": true,
+                        "p_base_x2": false,
+                        "p_base_x3": false
+                    }]
+            ],
+            [
+                {
+                    "p_base_x0": false,
+                    "p_base_x1": true,
+                    "p_base_x2": false,
+                    "p_base_x3": false
+                },
+                [
+                    {
+                        "p_base_x0": true,
+                        "p_base_x1": false,
+                        "p_base_x2": false,
+                        "p_base_x3": false
+                    }]
+            ]],
+        "final_postconditions": [
+            {
+                "p_base_x0": true,
+                "p_base_x1": false,
+                "p_base_x2": false,
+                "p_base_x3": false
+            }]
+    }
+}

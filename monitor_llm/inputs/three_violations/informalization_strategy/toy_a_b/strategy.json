@@ -1,0 +1,1 @@
+{"nodes": {"0": {"rank": 0, "state": ["a"], "trans": [1, 2]}, "1": {"rank": 0, "state": [], "trans": [1, 0]}, "2": {"rank": 0, "state": ["a", "b"], "trans": [1, 0]}}}

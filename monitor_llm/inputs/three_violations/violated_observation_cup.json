@@ -1,0 +1,3 @@
+{"previous_input_state": ["p_cup_ee", "p_base_x2", "p_cone_x3", "p_block_k0", "p_plate_k3"],
+"previous_output_state": ["skill1"],
+"current_input_state": ["p_cup_ee", "p_base_x2", "p_cone_x3", "p_block_k0", "p_plate_k3", "empty"]}

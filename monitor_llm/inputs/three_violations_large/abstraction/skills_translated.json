@@ -1,0 +1,56 @@
+{
+    "skill0": {
+        "name": "skill0", 
+        "initial_preconditions": [["p_base_x0", "p_cup_ee"]], 
+        "intermediate_states": [
+            [["p_base_x0", "p_cup_ee"], [["p_base_x2", "p_cup_ee"]]], 
+            [["p_base_x2", "p_cup_ee"], [["p_base_x4", "p_cup_ee"]]]
+        ], 
+        "final_postconditions": [["p_base_x4", "p_cup_ee"]]
+    }, 
+    "skill1": {
+        "name": "skill1", 
+        "initial_preconditions": [["p_base_x4", "p_cup_ee"]], 
+        "intermediate_states": [
+            [["p_base_x4", "p_cup_ee"], [["p_base_x2", "p_cup_ee"]]], 
+            [["p_base_x2", "p_cup_ee"], [["p_base_x0", "p_cup_ee"]]]
+        ], 
+        "final_postconditions": [["p_base_x0", "p_cup_ee"]]
+    }, 
+    "skill2": {
+        "name": "skill2", 
+        "initial_preconditions": [["p_base_x4", "p_cup_k2"]], 
+        "intermediate_states": [[["p_base_x4", "p_cup_k2"], [["p_base_x4", "p_cup_ee"]]]], 
+        "final_postconditions": [["p_base_x4", "p_cup_ee"]]
+    }, 
+    "skill3": {
+        "name": "skill3", 
+        "initial_preconditions": [["p_base_x0", "p_cup_t"]], 
+        "intermediate_states": [[["p_base_x0", "p_cup_t"], [["p_base_x0", "p_cup_ee"]]]], 
+        "final_postconditions": [["p_base_x0", "p_cup_ee"]]
+    }, 
+    "skill4": {
+        "name": "skill4", 
+        "initial_preconditions": [["p_base_x4", "p_block_k1"]], 
+        "intermediate_states": [[["p_base_x4", "p_block_k1"], [["p_base_x4", "p_block_ee"]]]], 
+        "final_postconditions": [["p_base_x4", "p_block_ee"]]
+    }, 
+    "skill5": {
+        "name": "skill5", 
+        "initial_preconditions": [["p_base_x4", "p_cup_ee"]], 
+        "intermediate_states": [[["p_base_x4", "p_cup_ee"], [["p_base_x4", "p_cup_k2"]]]], 
+        "final_postconditions": [["p_base_x4", "p_cup_k2"]]
+    }, 
+    "skill6": {
+        "name": "skill6", 
+        "initial_preconditions": [["p_base_x0", "p_cup_ee"]], 
+        "intermediate_states": [[["p_base_x0", "p_cup_ee"], [["p_base_x0", "p_cup_t"]]]], 
+        "final_postconditions": [["p_base_x0", "p_cup_t"]]
+    }, 
+    "skill7": {
+        "name": "skill7", 
+        "initial_preconditions": [["p_base_x4", "p_block_ee"]], 
+        "intermediate_states": [[["p_base_x4", "p_block_ee"], [["p_base_x4", "p_block_k3"]]]], 
+        "final_postconditions": [["p_base_x4", "p_block_k3"]]
+    }
+}

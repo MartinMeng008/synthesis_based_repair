@@ -1,0 +1,1 @@
+Initially, the input 'a' is true and the output 'b' is false. If 'a' remains to be true, 'b' turns on and off repeatedly. While 'a' becomes false, 'b' remains false.

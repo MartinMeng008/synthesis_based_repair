@@ -1,0 +1,186 @@
+[INPUT]
+
+p_base_x0
+p_base_x1
+p_base_x2
+p_base_x3
+p_cone_x0
+p_cone_x1
+p_cone_x2
+p_cone_x3
+
+[OUTPUT]
+
+skill0
+skill1
+
+[ENV_INIT]
+
+p_base_x0
+!p_base_x1
+!p_base_x2
+!p_base_x3
+!p_cone_x0
+!p_cone_x1
+p_cone_x2
+!p_cone_x3
+
+[SYS_INIT]
+
+!skill0
+!skill1
+
+[ENV_TRANS]
+
+# Post-condition
+(skill0 & p_base_x0 & !p_base_x1 & !p_base_x2 & !p_base_x3 -> ((!p_base_x0' & p_base_x1' & !p_base_x2' & !p_base_x3'))) | (p_base_x0 & !p_base_x1 & !p_base_x2 & !p_base_x3 & p_cone_x2 & !p_cone_x0 & !p_cone_x1 & !p_cone_x3 & skill0 & !skill1 & p_base_x0' & !p_base_x1' & !p_base_x2' & !p_base_x3' & !p_cone_x0' & p_cone_x1' & !p_cone_x2' & !p_cone_x3')
+skill0 & !p_base_x0 & p_base_x1 & !p_base_x2 & !p_base_x3 -> ((!p_base_x0' & !p_base_x1' & !p_base_x2' & p_base_x3'))
+skill1 & !p_base_x0 & !p_base_x1 & !p_base_x2 & p_base_x3 -> ((!p_base_x0' & p_base_x1' & !p_base_x2' & !p_base_x3'))
+skill1 & !p_base_x0 & p_base_x1 & !p_base_x2 & !p_base_x3 -> ((p_base_x0' & !p_base_x1' & !p_base_x2' & !p_base_x3'))
+
+[ENV_TRANS_HARD]
+
+
+# User environment assumptions
+p_cone_x0 -> p_cone_x0'
+p_cone_x1 -> p_cone_x1'
+(p_cone_x2 -> p_cone_x2') | (p_base_x0 & !p_base_x1 & !p_base_x2 & !p_base_x3 & p_cone_x2 & !p_cone_x0 & !p_cone_x1 & !p_cone_x3 & skill0 & !skill1 & p_base_x0' & !p_base_x1' & !p_base_x2' & !p_base_x3' & !p_cone_x0' & p_cone_x1' & !p_cone_x2' & !p_cone_x3')
+p_cone_x3 -> p_cone_x3'
+
+# Inputs mutual exclusion
+
+# Objects mutual exclusion
+!(p_base_x0 & p_base_x1)
+!(p_base_x0' & p_base_x1')
+!(p_base_x0 & p_base_x2)
+!(p_base_x0' & p_base_x2')
+!(p_base_x0 & p_base_x3)
+!(p_base_x0' & p_base_x3')
+!(p_base_x1 & p_base_x2)
+!(p_base_x1' & p_base_x2')
+!(p_base_x1 & p_base_x3)
+!(p_base_x1' & p_base_x3')
+!(p_base_x2 & p_base_x3)
+!(p_base_x2' & p_base_x3')
+(p_base_x0 | p_base_x1 | p_base_x2 | p_base_x3)
+(p_base_x0' | p_base_x1' | p_base_x2' | p_base_x3')
+!(p_cone_x0 & p_cone_x1)
+!(p_cone_x0' & p_cone_x1')
+!(p_cone_x0 & p_cone_x2)
+!(p_cone_x0' & p_cone_x2')
+!(p_cone_x0 & p_cone_x3)
+!(p_cone_x0' & p_cone_x3')
+!(p_cone_x1 & p_cone_x2)
+!(p_cone_x1' & p_cone_x2')
+!(p_cone_x1 & p_cone_x3)
+!(p_cone_x1' & p_cone_x3')
+!(p_cone_x2 & p_cone_x3)
+!(p_cone_x2' & p_cone_x3')
+(p_cone_x0 | p_cone_x1 | p_cone_x2 | p_cone_x3)
+(p_cone_x0' | p_cone_x1' | p_cone_x2' | p_cone_x3')
+
+# Control manipulation object change implies other objects stay
+
+# Inactivity without skills
+(!skill0 & !skill1) -> ((p_base_x0 <-> p_base_x0') & (p_base_x1 <-> p_base_x1') & (p_base_x2 <-> p_base_x2') & (p_base_x3 <-> p_base_x3'))
+
+# Skills mutual exclusion
+(skill0 & !skill1) | (!skill0 & skill1) | (!skill0 & !skill1)
+
+[SYS_TRANS]
+
+!((p_base_x0 & !p_base_x1 & !p_base_x2 & !p_base_x3 & skill0 & !p_base_x0' & p_base_x1' & !p_base_x2' & !p_base_x3') | (p_base_x0' & !p_base_x1' & !p_base_x2' & !p_base_x3')) -> !skill0'
+!((!p_base_x0 & !p_base_x1 & !p_base_x2 & p_base_x3 & skill1 & !p_base_x0' & p_base_x1' & !p_base_x2' & !p_base_x3') | (!p_base_x0' & !p_base_x1' & !p_base_x2' & p_base_x3')) -> !skill1'
+(p_base_x0 & !p_base_x1 & !p_base_x2 & !p_base_x3 & skill0 & !p_base_x0' & p_base_x1' & !p_base_x2' & !p_base_x3') -> skill0'
+(!p_base_x0 & !p_base_x1 & !p_base_x2 & p_base_x3 & skill1 & !p_base_x0' & p_base_x1' & !p_base_x2' & !p_base_x3') -> skill1'
+
+[SYS_TRANS_HARD]
+
+
+# Location mutual exclusion
+!(p_base_x0 & p_cone_x0)
+!(p_base_x0' & p_cone_x0')
+!(p_base_x1 & p_cone_x1)
+!(p_base_x1' & p_cone_x1')
+!(p_base_x2 & p_cone_x2)
+!(p_base_x2' & p_cone_x2')
+!(p_base_x3 & p_cone_x3)
+!(p_base_x3' & p_cone_x3')
+
+# Skills mutual exclusion
+(skill0' & !skill1') | (!skill0' & skill1') | (!skill0' & !skill1')
+
+[SYS_LIVENESS]
+
+p_base_x0
+p_base_x3
+
+[CHANGE_CONS]
+
+# Manipulation symbols must not change
+
+# Uncontrollable symbols must not change
+((p_cone_x0 <-> p_cone_x0') & (p_cone_x1 <-> p_cone_x1') & (p_cone_x2 <-> p_cone_x2') & (p_cone_x3 <-> p_cone_x3'))
+
+# Inputs mutual exclusion
+
+# Objects mutual exclusion
+!(p_base_x0 & p_base_x1)
+!(p_base_x0' & p_base_x1')
+!(p_base_x0 & p_base_x2)
+!(p_base_x0' & p_base_x2')
+!(p_base_x0 & p_base_x3)
+!(p_base_x0' & p_base_x3')
+!(p_base_x1 & p_base_x2)
+!(p_base_x1' & p_base_x2')
+!(p_base_x1 & p_base_x3)
+!(p_base_x1' & p_base_x3')
+!(p_base_x2 & p_base_x3)
+!(p_base_x2' & p_base_x3')
+(p_base_x0 | p_base_x1 | p_base_x2 | p_base_x3)
+(p_base_x0' | p_base_x1' | p_base_x2' | p_base_x3')
+!(p_cone_x0 & p_cone_x1)
+!(p_cone_x0' & p_cone_x1')
+!(p_cone_x0 & p_cone_x2)
+!(p_cone_x0' & p_cone_x2')
+!(p_cone_x0 & p_cone_x3)
+!(p_cone_x0' & p_cone_x3')
+!(p_cone_x1 & p_cone_x2)
+!(p_cone_x1' & p_cone_x2')
+!(p_cone_x1 & p_cone_x3)
+!(p_cone_x1' & p_cone_x3')
+!(p_cone_x2 & p_cone_x3)
+!(p_cone_x2' & p_cone_x3')
+(p_cone_x0 | p_cone_x1 | p_cone_x2 | p_cone_x3)
+(p_cone_x0' | p_cone_x1' | p_cone_x2' | p_cone_x3')
+
+# Some controllable inputs must change
+!(((p_base_x0 <-> p_base_x0') & (p_base_x1 <-> p_base_x1') & (p_base_x2 <-> p_base_x2') & (p_base_x3 <-> p_base_x3')))
+
+
+
+[NOT_ALLOWED_REPAIR]
+
+
+# Manipulation symbols must not change
+
+# Uncontrollable symbols must not change
+((p_cone_x0 <-> p_cone_x0') & (p_cone_x1 <-> p_cone_x1') & (p_cone_x2 <-> p_cone_x2') & (p_cone_x3 <-> p_cone_x3'))
+
+# If controllable mobile objects change, then controllable manipulation objects must not change
+
+# If controllable manipulation objects change, then controllable mobile objects must not change
+
+# Control manipulation object change implies other objects stay
+
+# Location mutual exclusion
+!(p_base_x0 & p_cone_x0)
+!(p_base_x0' & p_cone_x0')
+!(p_base_x1 & p_cone_x1)
+!(p_base_x1' & p_cone_x1')
+!(p_base_x2 & p_cone_x2)
+!(p_base_x2' & p_cone_x2')
+!(p_base_x3 & p_cone_x3)
+!(p_base_x3' & p_cone_x3')
+
+

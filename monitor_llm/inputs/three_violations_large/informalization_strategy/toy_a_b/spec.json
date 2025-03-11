@@ -1,0 +1,8 @@
+{
+    "env_init_true": ["a"],
+    "sys_init_true": [],
+    "env_live": [],
+    "sys_live": ["a -> b", "!a -> !b"],
+    "user_sys_trans": [],
+    "user_env_trans": []
+}

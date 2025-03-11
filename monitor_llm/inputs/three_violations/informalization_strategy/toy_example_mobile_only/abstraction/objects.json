@@ -1,0 +1,14 @@
+{
+    "base": {
+        "index": 0,
+        "name": "base",
+        "type": "mobile",
+        "category": "controllable"
+    },
+    "cone": {
+        "index": 1,
+        "name": "cone",
+        "type": "mobile",
+        "category": "uncontrollable"
+    }
+}

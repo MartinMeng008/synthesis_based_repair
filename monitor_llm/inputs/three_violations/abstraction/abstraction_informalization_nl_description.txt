@@ -1,0 +1,12 @@
+## Input propositions
+The set of input propositions X = ['p_cup_t', 'p_cup_k0', 'p_cup_k1', 'p_cup_k2', 'p_cup_k3', 'p_cup_ee', 'p_base_x0', 'p_base_x1', 'p_base_x2', 'p_base_x3', 'p_base_x4', 'p_cone_x0', 'p_cone_x1', 'p_cone_x2', 'p_cone_x3', 'p_cone_x4', 'p_block_t', 'p_block_k0', 'p_block_k1', 'p_block_k2', 'p_block_k3', 'p_block_ee', 'p_plate_t', 'p_plate_k0', 'p_plate_k1', 'p_plate_k2', 'p_plate_k3', 'p_plate_ee', 'empty'].
+
+## The grounding of input proposition is as follows:
+
+Each input proposition \( p\_o\_r \) represents the physical condition where object \( o \) is located within spatial region \( r \). The grounding function \( G \) maps these propositions to the set of physical states where the pose of object \( o \) falls within region \( r \). The proposition "empty" represents the physical state concerning the status of the cup (e.g., whether it is empty). Collectively, these propositions describe the presence and positioning of objects in specific regions and certain object statuses within the physical state space. 
+
+## Controllable inputs
+The controllable inputs, whose values can be changed by the robot's skills, are ['p_cup_t', 'p_cup_k0', 'p_cup_k1', 'p_cup_k2', 'p_cup_k3', 'p_cup_ee', 'p_base_x0', 'p_base_x1', 'p_base_x2', 'p_base_x3', 'p_base_x4', 'p_block_t', 'p_block_k0', 'p_block_k1', 'p_block_k2', 'p_block_k3', 'p_block_ee'].
+
+## Uncontrollable inputs
+The uncontrollable inputs, for which the robot has no control over, are ['p_cone_x0', 'p_cone_x1', 'p_cone_x2', 'p_cone_x3', 'p_cone_x4', 'p_plate_t', 'p_plate_k0', 'p_plate_k1', 'p_plate_k2', 'p_plate_k3', 'p_plate_ee', 'empty'].

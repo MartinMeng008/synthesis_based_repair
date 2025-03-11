@@ -1,0 +1,13 @@
+{
+    "gpu_memory_utilization": 0.95,
+    "download_dir": "/home/qian/workspace/models",
+    "model_name": "llama3_1_8b_instruct",
+    "base_url": "http://149.165.154.240:8000/v1",
+    "temperature": 0,
+    "num_samples": 1,
+    "prompt_name": "cot",
+    "informalization_max_tokens": 500,
+    "repair_max_tokens": 4000,
+    "force": false,
+    "check_skill_syntax": true
+}

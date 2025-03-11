@@ -1,0 +1,1 @@
+"Initially, the input 'a' is true and the output 'b' is false" corresponds to node 0. "If 'a' remains to be true, 'b' turns on and off repeatedly" corresponds to the transitions between node 0 and node 2. "While 'a' becomes false, 'b' remains false" corresponds to the transitions from node 0 and node 2 to node 1, and self-transitions to node 1.
