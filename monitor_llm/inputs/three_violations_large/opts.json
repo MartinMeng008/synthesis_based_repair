@@ -14,8 +14,8 @@
     "n_dims": 3,
     "generate_figure": "",
     "n_seeds": 429,
-    "max_repair_cnt": 60,
-    "max_repair_time": 7200,
+    "max_repair_cnt": 600000000000000000000000000000000000000000000000000,
+    "max_repair_time": 72000000000000000000000000000000000000000000000000000000,
 
     "informalize_abstraction": true,
     "informalize_strategy": true,

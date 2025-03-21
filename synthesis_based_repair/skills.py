@@ -6,7 +6,7 @@ from synthesis_based_repair.tools import dict_to_formula, pre_posts_to_env_formu
 import os
 from synthesis_based_repair.symbols import in_symbols, find_symbols_true_and_false, load_symbols, plot_symbolic_state
 import json
-import symbolic_repair_msgs.msg
+# import symbolic_repair_msgs.msg
 # from symbolic_repair_msgs.srv import FeasibilityCheck, FeasibilityCheckResponse
 
 DEBUG = True
@@ -52,30 +52,30 @@ class Skill:
     def get_name(self):
         return self.name
     
-    def get_skill_msg(self) -> symbolic_repair_msgs.msg.Skill:
-        """Output a dictionary representation of skill
-        Output:
-            skill_out = symbolic_repair_msgs.msg.Skill 
-            skill_out.initial_precondition: str[str[]]: [["x0", "0"], ["y0", "0"]] 
-            skill_out.final_postcondition: str[str[]]: [["x0", "0"], ["y0", "1"]] 
-            skill_out.name: str 
-        """
-        skill_msg = symbolic_repair_msgs.msg.Skill()
-        skill_msg.name = self.name
-        skill_msg.initial_preconditions = []
-        skill_msg.final_postconditions = []
-        if not DEBUG:
-            assert len(self.init_pres) == 1, f"too many preconditions: {len(self.init_pres)}"
-            assert len(self.final_posts) == 1, f"too many postconditions: {len(self.final_posts)}"
-        for input in self.location_inputs + self.terrain_inputs:
-            key_val_pair = symbolic_repair_msgs.msg.AtomicProposition()
-            key_val_pair.atomic_proposition = [input, "1" if self.init_pres[0][input] else "0"]
-            skill_msg.initial_preconditions.append(key_val_pair)
-        for input in self.location_inputs:
-            key_val_pair = symbolic_repair_msgs.msg.AtomicProposition()
-            key_val_pair.atomic_proposition = [input, "1" if self.final_posts[0][input] else "0"]
-            skill_msg.final_postconditions.append(key_val_pair)
-        return skill_msg
+    # def get_skill_msg(self) -> symbolic_repair_msgs.msg.Skill:
+    #     """Output a dictionary representation of skill
+    #     Output:
+    #         skill_out = symbolic_repair_msgs.msg.Skill 
+    #         skill_out.initial_precondition: str[str[]]: [["x0", "0"], ["y0", "0"]] 
+    #         skill_out.final_postcondition: str[str[]]: [["x0", "0"], ["y0", "1"]] 
+    #         skill_out.name: str 
+    #     """
+    #     skill_msg = symbolic_repair_msgs.msg.Skill()
+    #     skill_msg.name = self.name
+    #     skill_msg.initial_preconditions = []
+    #     skill_msg.final_postconditions = []
+    #     if not DEBUG:
+    #         assert len(self.init_pres) == 1, f"too many preconditions: {len(self.init_pres)}"
+    #         assert len(self.final_posts) == 1, f"too many postconditions: {len(self.final_posts)}"
+    #     for input in self.location_inputs + self.terrain_inputs:
+    #         key_val_pair = symbolic_repair_msgs.msg.AtomicProposition()
+    #         key_val_pair.atomic_proposition = [input, "1" if self.init_pres[0][input] else "0"]
+    #         skill_msg.initial_preconditions.append(key_val_pair)
+    #     for input in self.location_inputs:
+    #         key_val_pair = symbolic_repair_msgs.msg.AtomicProposition()
+    #         key_val_pair.atomic_proposition = [input, "1" if self.final_posts[0][input] else "0"]
+    #         skill_msg.final_postconditions.append(key_val_pair)
+    #     return skill_msg
 
 
 

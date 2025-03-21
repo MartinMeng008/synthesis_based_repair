@@ -320,7 +320,8 @@ def dict_key_tuple2list2str(d: dict) -> dict:
 
 def dict_key_str2tuple(d: dict) -> dict:
     """Transform a dictionary with string keys to tuple keys"""
-    return {tuple(json.loads(k)): v for k, v in d.items()}
+    # return {tuple(json.loads(k)): v for k, v in d.items()}
+    return {tuple([tuple(i) for i in json.loads(k) if type(i) is list] + [i for i in json.loads(k) if type(i) is int]): v for k, v in d.items()}
 
 def load_skills_from_json(json_file: str) -> dict:
     """Convert json file to skills dictionary"""

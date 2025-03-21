@@ -1,0 +1,277 @@
+Command terminated by signal 9
+331.49user 7.99system 13:23.54elapsed 42%CPU (0avgtext+0avgdata 4970840maxresident)k
+36603272inputs+624outputs (163539major+1346539minor)pagefaults 0swaps
+Traceback (most recent call last):
+  File "./repair_baseline.py", line 258, in <module>
+    test_symbolic_repair(args.filename, json_load_wrapper(args.opts), json_load_wrapper(args.files_json))
+  File "./repair_baseline.py", line 155, in test_symbolic_repair
+    compiler = Compiler(filename_structuredslugsplus, 
+  File "/home/jnl77/workspace/synthesis_based_repair/monitor_llm/mocomp.py", line 76, in __init__
+    self.set_asts(input_file)
+  File "/home/jnl77/workspace/synthesis_based_repair/monitor_llm/mocomp.py", line 95, in set_asts
+    self._get_vars_and_asts_from_structuredslugsplus()
+  File "/home/jnl77/workspace/synthesis_based_repair/monitor_llm/mocomp.py", line 119, in _get_vars_and_asts_from_structuredslugsplus
+    vars, asts = get_asts_from_structuredslugsplus(self.input_file)
+  File "/home/jnl77/multi_ws/src/stretch_controller/slugs/tools/StructuredSlugsParser/compiler.py", line 792, in get_asts_from_structuredslugsplus
+    specFile = open(inputFile,"r")
+FileNotFoundError: [Errno 2] No such file or directory: '../data/llm_repair_baseline/baseline_spec_cup.structuredslugsplus'
+Command exited with non-zero status 1
+1.09user 0.41system 0:01.43elapsed 105%CPU (0avgtext+0avgdata 103380maxresident)k
+107480inputs+104outputs (428major+24458minor)pagefaults 0swaps
+Manipulation only:  False
+not any mobile skill conjunction:  ['Conjunction', ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill0']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill1']]]
+not any manipulation skill conjunction:  ['Conjunction', ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill2']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill3']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill4']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill5']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill6']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill7']]]
+not any skill conjunction:  ['Conjunction', ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill0']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill1']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill2']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill3']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill4']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill5']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill6']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill7']]]
+Computed winning states in: 2.9788761138916016
+is_realizable at iteration 0:  False
+post first?  False
+Computed winning states in: 3.1265060901641846
+perform_repair call number: 0
+modify preconditions
+perform_repair call number: 1
+modify postconditions
+T_winning_change_sel:
+00000101000010000000100100000100000000000000000000100100010000000100100000000000000000000000000110000010000000100100001
+T_env removed:
+00000101000-----000010-------100000000000000000000100100-----000010----------------------------------------------------
+perform_repair call number: 2
+modify preconditions
+perform_repair call number: 3
+modify postconditions
+T_winning_change_sel:
+10000000001010000000010010000000000010000000010000000001010000000100010001000000000000000010000010000010000000100010000
+T_env removed:
+10000000001-----000001-------000000010000000010000000001-----000010----------------------------------------------------
+perform_repair call number: 4
+modify preconditions
+perform_repair call number: 5
+modify postconditions
+T_winning_change_sel:
+00000110000010000010001000001100000000000000000000100010010000010000100001000000000000000000000100001010000010000100001
+T_env removed:
+00000110000-----001000-------100000000000000000000100010-----001000----------------------------------------------------
+perform_repair call number: 6
+modify preconditions
+perform_repair call number: 7
+modify postconditions
+T_winning_change_sel:
+00000100001000100000100010000010000000000000000000100010000100000100010000000000000000000000000110000000100000100010000
+T_env removed:
+00000100001-----000010-------010000000000000000000100010-----000010----------------------------------------------------
+perform_repair call number: 8
+modify preconditions
+perform_repair call number: 9
+modify postconditions
+T_winning_change_sel:
+00000110000000100100000010000100000000000000000000101000000100100000010000000000000000000000000100001000100100000010000
+T_env removed:
+00000110000-----010000-------100000000000000000000101000-----010000----------------------------------------------------
+perform_repair call number: 10
+modify preconditions
+perform_repair call number: 11
+modify postconditions
+T_winning_change_sel:
+00000100001010000100001000001010000000000000000000101000010000100000000101000000000000000000000110000010000100000000101
+T_env removed:
+00000100001-----010000-------010000000000000000000101000-----010000----------------------------------------------------
+perform_repair call number: 12
+modify preconditions
+perform_repair call number: 13
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 14
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 15
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+Checked initial states contained in: 10.392533540725708
+Skill postconditions modified::
+-----------------------------1000000000000000-----------------------------------------------
+New skill::
+000001001000001001000000001011000000000000000000000100001000100100000000101-----------------
+Suggestion 0
+Action postconditions modified::
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill5 & !skill6 & !skill7 & !skill0backup & !skill1backup & !skill2backup & !skill3backup & !skill4backup & !skill5backup & !skill6backup & !skill7backup & 
+Original skill:
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill5 & !skill6 & !skill7 & !skill0backup & !skill1backup & !skill2backup & !skill3backup & !skill4backup & !skill5backup & !skill6backup & !skill7backup & 
+Original skill:
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill5 & !skill6 & !skill7 & !skill0backup & !skill1backup & !skill2backup & !skill3backup & !skill4backup & !skill5backup & !skill6backup & !skill7backup & 
+Original skill:
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill5 & !skill6 & !skill7 & !skill0backup & !skill1backup & !skill2backup & !skill3backup & !skill4backup & !skill5backup & !skill6backup & !skill7backup & 
+New action::
+(!p_cup_t & !p_cup_k0 & !p_cup_k1 & !p_cup_k2 & !p_cup_k3 & p_cup_ee & !p_base_x0 & !p_base_x1 & p_base_x2 & !p_base_x3 & !p_base_x4 & !p_block_t & p_block_k0 & !p_block_k1 & !p_block_k2 & !p_block_k3 & !p_block_ee & skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill5 & !skill6 & !skill7 & !skill0backup & !skill1backup & !skill2backup & !skill3backup & !skill4backup & !skill5backup & !skill6backup & !skill7backup) -> ((!p_cup_t' & !p_cup_k0' & !p_cup_k1' & !p_cup_k2' & !p_cup_k3' & p_cup_ee' & !p_base_x0' & !p_base_x1' & !p_base_x2' & !p_base_x3' & p_base_x4' & !p_block_t' & p_block_k0' & !p_block_k1' & !p_block_k2' & !p_block_k3' & !p_block_ee'))
+
+This took: 10.445276498794556
+Suggestion 0
+new skill:
+-----------------------------1000000000000000--------------------------------------------------------------------------
+Init pres:
+00000100100-----010000-------------------------------------------------------------------------------------------------
+posts:
+---------------------------------------------00000100001-----010000----------------------------------------------------
+Final posts:
+00000100001-----010000-------------------------------------------------------------------------------------------------
+suggestions:  {'0': {'name': 'skill16', 'new_skill': {'skill3backup': False, 'skill3': False, 'skill6': False, 'skill6backup': False, 'skill5': False, 'skill5backup': False, 'skill2backup': False, 'skill2': False, 'skill7backup': False, 'skill7': False, 'skill4': False, 'skill4backup': False, 'skill1backup': False, 'skill1': False, 'skill0backup': False, 'skill0': True}, 'original_skill': {'skill3backup': False, 'skill3': False, 'skill6': False, 'skill6backup': False, 'skill5': False, 'skill5backup': False, 'skill2backup': False, 'skill2': False, 'skill7backup': False, 'skill7': False, 'skill4': False, 'skill4backup': False, 'skill1backup': False, 'skill1': False, 'skill0backup': False, 'skill0': True}, 'intermediate_states_all_pres': [], 'intermediate_states': [[{'p_cup_t': False, 'p_cup_ee': True, 'p_block_ee': False, 'p_block_t': False, 'p_block_k3': False, 'p_cup_k3': False, 'p_cup_k2': False, 'p_block_k1': False, 'p_cup_k1': False, 'p_block_k0': True, 'p_cup_k0': False, 'p_block_k2': False, 'p_base_x4': False, 'p_base_x0': False, 'p_base_x3': False, 'p_base_x1': False, 'p_base_x2': True}, [{'p_cup_t': False, 'p_cup_ee': True, 'p_block_ee': False, 'p_block_t': False, 'p_block_k3': False, 'p_cup_k3': False, 'p_cup_k2': False, 'p_block_k1': False, 'p_cup_k1': False, 'p_block_k0': True, 'p_cup_k0': False, 'p_block_k2': False, 'p_base_x4': True, 'p_base_x0': False, 'p_base_x3': False, 'p_base_x1': False, 'p_base_x2': False}]]], 'final_postconditions': [{'p_cup_t': False, 'p_cup_ee': True, 'p_block_ee': False, 'p_block_t': False, 'p_block_k3': False, 'p_cup_k3': False, 'p_cup_k2': False, 'p_block_k1': False, 'p_cup_k1': False, 'p_block_k0': True, 'p_cup_k0': False, 'p_block_k2': False, 'p_base_x4': True, 'p_base_x0': False, 'p_base_x3': False, 'p_base_x1': False, 'p_base_x2': False}], 'initial_preconditions': [{'p_cup_t': False, 'p_cup_ee': True, 'p_block_ee': False, 'p_block_t': False, 'p_block_k3': False, 'p_cup_k3': False, 'p_cup_k2': False, 'p_block_k1': False, 'p_cup_k1': False, 'p_block_k0': True, 'p_cup_k0': False, 'p_block_k2': False, 'p_base_x4': False, 'p_base_x0': False, 'p_base_x3': False, 'p_base_x1': False, 'p_base_x2': True}], 'unique_states': [{'p_cup_t': False, 'p_cup_ee': True, 'p_block_ee': False, 'p_block_t': False, 'p_block_k3': False, 'p_cup_k3': False, 'p_cup_k2': False, 'p_block_k1': False, 'p_cup_k1': False, 'p_block_k0': True, 'p_cup_k0': False, 'p_block_k2': False, 'p_base_x4': False, 'p_base_x0': False, 'p_base_x3': False, 'p_base_x1': False, 'p_base_x2': True}, {'p_cup_t': False, 'p_cup_ee': True, 'p_block_ee': False, 'p_block_t': False, 'p_block_k3': False, 'p_cup_k3': False, 'p_cup_k2': False, 'p_block_k1': False, 'p_cup_k1': False, 'p_block_k0': True, 'p_cup_k0': False, 'p_block_k2': False, 'p_base_x4': True, 'p_base_x0': False, 'p_base_x3': False, 'p_base_x1': False, 'p_base_x2': False}], 'swapped': [], 'avoid_states': [], 'folder_train': '', 'folder_val': '', 'suggestion': True}}
+========
+skill16
+initial preconditions: 
+['p_cup_ee', 'p_block_k0', 'p_base_x2']
+====
+intermediate states: 
+pre:  ['p_cup_ee', 'p_block_k0', 'p_base_x2']
+post:  ['p_cup_ee', 'p_block_k0', 'p_base_x4']
+====
+final postconditions: 
+['p_cup_ee', 'p_block_k0', 'p_base_x4']
+
+========
+
+----------------------------------
+----------------------------------
+Finish 0 iteration in the while loop
+skills ['skill16']
+----------------------------------
+----------------------------------
+['skill0', 'skill1', 'skill2', 'skill3', 'skill4', 'skill5', 'skill6', 'skill7', 'skill0backup', 'skill1backup', 'skill2backup', 'skill3backup', 'skill4backup', 'skill5backup', 'skill6backup', 'skill7backup', 'skill16']
+Computed winning states in: 3.9780771732330322
+is_realizable at iteration 1:  True
+The spec is realizable
+18.52user 0.26system 0:18.55elapsed 101%CPU (0avgtext+0avgdata 125212maxresident)k
+0inputs+360outputs (3major+33206minor)pagefaults 0swaps
+Manipulation only:  False
+not any mobile skill conjunction:  ['Conjunction', ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill0']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill1']]]
+not any manipulation skill conjunction:  ['Conjunction', ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill2']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill3']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill4']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill5']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill6']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill7']]]
+not any skill conjunction:  ['Conjunction', ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill0']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill1']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill2']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill3']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill4']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill5']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill6']], ['UnaryFormula', ['NotOperator', ('!',)], ['Assignment', 'skill7']]]
+Computed winning states in: 2.962963342666626
+is_realizable at iteration 0:  False
+post first?  False
+Computed winning states in: 2.9426867961883545
+perform_repair call number: 0
+modify preconditions
+perform_repair call number: 1
+modify postconditions
+T_winning_change_sel:
+00000101000010000000100100000100000000000000000000100100010000000100100000000000000000000000000110000010000000100100001
+T_env removed:
+00000101000-----000010-------100000000000000000000100100-----000010----------------------------------------------------
+perform_repair call number: 2
+modify preconditions
+perform_repair call number: 3
+modify postconditions
+T_winning_change_sel:
+10000000001010000000010010000000000010000000010000000001010000000100010001000000000000000010000010000010000000100010000
+T_env removed:
+10000000001-----000001-------000000010000000010000000001-----000010----------------------------------------------------
+perform_repair call number: 4
+modify preconditions
+perform_repair call number: 5
+modify postconditions
+T_winning_change_sel:
+00000110000010000010001000001100000000000000000000100010010000010000100001000000000000000000000100001010000010000100001
+T_env removed:
+00000110000-----001000-------100000000000000000000100010-----001000----------------------------------------------------
+perform_repair call number: 6
+modify preconditions
+perform_repair call number: 7
+modify postconditions
+T_winning_change_sel:
+00000100001000100000100010000010000000000000000000100010000100000100010000000000000000000000000110000000100000100010000
+T_env removed:
+00000100001-----000010-------010000000000000000000100010-----000010----------------------------------------------------
+perform_repair call number: 8
+modify preconditions
+perform_repair call number: 9
+modify postconditions
+T_winning_change_sel:
+00000110000000100100000010000100000000000000000000101000000100100000010000000000000000000000000100001000100100000010000
+T_env removed:
+00000110000-----010000-------100000000000000000000101000-----010000----------------------------------------------------
+perform_repair call number: 10
+modify preconditions
+perform_repair call number: 11
+modify postconditions
+T_winning_change_sel:
+00000100001010000100001000001010000000000000000000101000010000100000000101000000000000000000000110000010000100000000101
+T_env removed:
+00000100001-----010000-------010000000000000000000101000-----010000----------------------------------------------------
+perform_repair call number: 12
+modify preconditions
+perform_repair call number: 13
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 14
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+perform_repair call number: 15
+modify postconditions
+T_winning_change_sel:
+T_env removed:
+modify preconditions
+Checked initial states contained in: 9.85495138168335
+Skill postconditions modified::
+-----------------------------1000000000000000-----------------------------------------------
+New skill::
+000001001000001001000000001011000000000000000000000100001000100100000000101-----------------
+Suggestion 0
+Action postconditions modified::
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill5 & !skill6 & !skill7 & !skill0backup & !skill1backup & !skill2backup & !skill3backup & !skill4backup & !skill5backup & !skill6backup & !skill7backup & 
+Original skill:
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill5 & !skill6 & !skill7 & !skill0backup & !skill1backup & !skill2backup & !skill3backup & !skill4backup & !skill5backup & !skill6backup & !skill7backup & 
+Original skill:
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill5 & !skill6 & !skill7 & !skill0backup & !skill1backup & !skill2backup & !skill3backup & !skill4backup & !skill5backup & !skill6backup & !skill7backup & 
+Original skill:
+skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill5 & !skill6 & !skill7 & !skill0backup & !skill1backup & !skill2backup & !skill3backup & !skill4backup & !skill5backup & !skill6backup & !skill7backup & 
+New action::
+(!p_cup_t & !p_cup_k0 & !p_cup_k1 & !p_cup_k2 & !p_cup_k3 & p_cup_ee & !p_base_x0 & !p_base_x1 & p_base_x2 & !p_base_x3 & !p_base_x4 & !p_block_t & p_block_k0 & !p_block_k1 & !p_block_k2 & !p_block_k3 & !p_block_ee & skill0 & !skill1 & !skill2 & !skill3 & !skill4 & !skill5 & !skill6 & !skill7 & !skill0backup & !skill1backup & !skill2backup & !skill3backup & !skill4backup & !skill5backup & !skill6backup & !skill7backup) -> ((!p_cup_t' & !p_cup_k0' & !p_cup_k1' & !p_cup_k2' & !p_cup_k3' & p_cup_ee' & !p_base_x0' & !p_base_x1' & !p_base_x2' & !p_base_x3' & p_base_x4' & !p_block_t' & p_block_k0' & !p_block_k1' & !p_block_k2' & !p_block_k3' & !p_block_ee'))
+
+This took: 9.906702756881714
+Suggestion 0
+new skill:
+-----------------------------1000000000000000--------------------------------------------------------------------------
+Init pres:
+00000100100-----010000-------------------------------------------------------------------------------------------------
+posts:
+---------------------------------------------00000100001-----010000----------------------------------------------------
+Final posts:
+00000100001-----010000-------------------------------------------------------------------------------------------------
+suggestions:  {'0': {'name': 'skill16', 'new_skill': {'skill3backup': False, 'skill3': False, 'skill6': False, 'skill6backup': False, 'skill5': False, 'skill5backup': False, 'skill2backup': False, 'skill2': False, 'skill7backup': False, 'skill7': False, 'skill4': False, 'skill4backup': False, 'skill1backup': False, 'skill1': False, 'skill0backup': False, 'skill0': True}, 'original_skill': {'skill3backup': False, 'skill3': False, 'skill6': False, 'skill6backup': False, 'skill5': False, 'skill5backup': False, 'skill2backup': False, 'skill2': False, 'skill7backup': False, 'skill7': False, 'skill4': False, 'skill4backup': False, 'skill1backup': False, 'skill1': False, 'skill0backup': False, 'skill0': True}, 'intermediate_states_all_pres': [], 'intermediate_states': [[{'p_cup_t': False, 'p_cup_ee': True, 'p_block_ee': False, 'p_block_t': False, 'p_block_k3': False, 'p_cup_k3': False, 'p_cup_k2': False, 'p_block_k1': False, 'p_cup_k1': False, 'p_block_k0': True, 'p_cup_k0': False, 'p_block_k2': False, 'p_base_x4': False, 'p_base_x0': False, 'p_base_x3': False, 'p_base_x1': False, 'p_base_x2': True}, [{'p_cup_t': False, 'p_cup_ee': True, 'p_block_ee': False, 'p_block_t': False, 'p_block_k3': False, 'p_cup_k3': False, 'p_cup_k2': False, 'p_block_k1': False, 'p_cup_k1': False, 'p_block_k0': True, 'p_cup_k0': False, 'p_block_k2': False, 'p_base_x4': True, 'p_base_x0': False, 'p_base_x3': False, 'p_base_x1': False, 'p_base_x2': False}]]], 'final_postconditions': [{'p_cup_t': False, 'p_cup_ee': True, 'p_block_ee': False, 'p_block_t': False, 'p_block_k3': False, 'p_cup_k3': False, 'p_cup_k2': False, 'p_block_k1': False, 'p_cup_k1': False, 'p_block_k0': True, 'p_cup_k0': False, 'p_block_k2': False, 'p_base_x4': True, 'p_base_x0': False, 'p_base_x3': False, 'p_base_x1': False, 'p_base_x2': False}], 'initial_preconditions': [{'p_cup_t': False, 'p_cup_ee': True, 'p_block_ee': False, 'p_block_t': False, 'p_block_k3': False, 'p_cup_k3': False, 'p_cup_k2': False, 'p_block_k1': False, 'p_cup_k1': False, 'p_block_k0': True, 'p_cup_k0': False, 'p_block_k2': False, 'p_base_x4': False, 'p_base_x0': False, 'p_base_x3': False, 'p_base_x1': False, 'p_base_x2': True}], 'unique_states': [{'p_cup_t': False, 'p_cup_ee': True, 'p_block_ee': False, 'p_block_t': False, 'p_block_k3': False, 'p_cup_k3': False, 'p_cup_k2': False, 'p_block_k1': False, 'p_cup_k1': False, 'p_block_k0': True, 'p_cup_k0': False, 'p_block_k2': False, 'p_base_x4': False, 'p_base_x0': False, 'p_base_x3': False, 'p_base_x1': False, 'p_base_x2': True}, {'p_cup_t': False, 'p_cup_ee': True, 'p_block_ee': False, 'p_block_t': False, 'p_block_k3': False, 'p_cup_k3': False, 'p_cup_k2': False, 'p_block_k1': False, 'p_cup_k1': False, 'p_block_k0': True, 'p_cup_k0': False, 'p_block_k2': False, 'p_base_x4': True, 'p_base_x0': False, 'p_base_x3': False, 'p_base_x1': False, 'p_base_x2': False}], 'swapped': [], 'avoid_states': [], 'folder_train': '', 'folder_val': '', 'suggestion': True}}
+========
+skill16
+initial preconditions: 
+['p_cup_ee', 'p_block_k0', 'p_base_x2']
+====
+intermediate states: 
+pre:  ['p_cup_ee', 'p_block_k0', 'p_base_x2']
+post:  ['p_cup_ee', 'p_block_k0', 'p_base_x4']
+====
+final postconditions: 
+['p_cup_ee', 'p_block_k0', 'p_base_x4']
+
+========
+
+----------------------------------
+----------------------------------
+Finish 0 iteration in the while loop
+skills ['skill16']
+----------------------------------
+----------------------------------
+['skill0', 'skill1', 'skill2', 'skill3', 'skill4', 'skill5', 'skill6', 'skill7', 'skill0backup', 'skill1backup', 'skill2backup', 'skill3backup', 'skill4backup', 'skill5backup', 'skill6backup', 'skill7backup', 'skill16']
+Computed winning states in: 3.9637036323547363
+is_realizable at iteration 1:  True
+The spec is realizable
+18.00user 0.23system 0:17.98elapsed 101%CPU (0avgtext+0avgdata 125356maxresident)k
+0inputs+368outputs (4major+33528minor)pagefaults 0swaps
+Command terminated by signal 9
+365.55user 194.07system 5:05:09elapsed 3%CPU (0avgtext+0avgdata 5675808maxresident)k
+1262036872inputs+624outputs (5626426major+2192724minor)pagefaults 0swaps

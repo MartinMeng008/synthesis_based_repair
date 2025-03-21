@@ -27,7 +27,8 @@ from tools import (
     run_slugs,
     )
 from grounding import Groundings
-sys.path.insert(0, '/home/qian/workspace/slugs/tools/StructuredSlugsParser')
+# sys.path.insert(0, '/home/qian/workspace/slugs/tools/StructuredSlugsParser')
+sys.path.insert(0, '/home/jnl77/multi_ws/src/stretch_controller/slugs/tools/StructuredSlugsParser')
 from compiler import (
     get_asts, 
     asts_to_slugsin, 
@@ -40,8 +41,10 @@ import os
 from z3 import *
 
 
-synthesis_based_repair_dir = '/home/qian/workspace/synthesis_based_repair/synthesis_based_repair'
-sys.path.insert(0, synthesis_based_repair_dir)
+# synthesis_based_repair_dir = '/home/qian/workspace/synthesis_based_repair/synthesis_based_repair'
+# sys.path.insert(0, synthesis_based_repair_dir)
+repair_dir = '../synthesis_based_repair'
+sys.path.insert(0, repair_dir)
 from skills import Skill
 
 DEBUG = False

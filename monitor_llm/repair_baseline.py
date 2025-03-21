@@ -4,14 +4,14 @@ import numpy as np
 import argparse
 import time
 from mocomp import Compiler
-root_dir = '/home/qian/catkin_ws/src/stretch_controller/'
-sys.path.insert(0, f'{root_dir}scripts')
+# root_dir = '/home/qian/catkin_ws/src/stretch_controller/'
+# sys.path.insert(0, f'{root_dir}scripts')
 from tools import (json_load_wrapper,
                    find_controllable_symbols,
                    varlist2prime,
                    varlist2doubleprime,
                    )
-repair_dir = "/home/qian/workspace/synthesis_based_repair/synthesis_based_repair"
+repair_dir = '../synthesis_based_repair'
 sys.path.insert(0, repair_dir)
 from symbolic_repair_llm_repair_baseline import run_repair
 from skills import Skill
@@ -33,7 +33,7 @@ class Repair:
         if "max_repair_iter" in self.opts:
             self.max_iter = self.opts["max_repair_iter"]
         else:
-            self.max_iter = 50
+            self.max_iter = 5000000000000000000000000000000000000000000000000000000000000000000000000000
         self.file_structuredslugsplus = filename
         self.compiler.generate_structuredslugsplus(self.file_structuredslugsplus)
         # np.random.seed(seed)
@@ -141,12 +141,25 @@ def test_symbolic_repair(filename_structuredslugsplus, opts, files):
     # # print_debug("self.filename_structuredslugsplus in repair:")
     # # print_debug(self.filename_structuredslugsplus)
     skills_data = json_load_wrapper(files["skills"])
-    symbols_data = json_load_wrapper(files["inputs"])
+    symbols_data = json_load_wrapper(files["inputs_data"])
     objects_data = json_load_wrapper(files["objects"])
-    controllable_symbols = find_controllable_symbols(symbols_data, objects_data)
-    uncontrollable_symbols = [s for s in symbols_data.keys() if s not in controllable_symbols]
+    controllable_symbols = json_load_wrapper(files["controllable_inputs"])["controllable_inputs"]
 
-    compiler = Compiler(filename_structuredslugsplus, skills_data, symbols_data, objects_data, controllable_symbols, uncontrollable_symbols)
+    # controllable_symbols = find_controllable_symbols(symbols_data, objects_data)
+    uncontrollable_symbols = json_load_wrapper(files["uncontrollable_inputs"])["uncontrollable_inputs"]
+
+    controllable_mobile_inputs = json_load_wrapper(files["controllable_mobile_inputs"])["controllable_mobile_inputs"]
+    controllable_manipulation_inputs = json_load_wrapper(files["controllable_manipulation_inputs"])["controllable_manipulation_inputs"]
+
+
+    compiler = Compiler(filename_structuredslugsplus, 
+                        skills_data, 
+                        symbols_data, 
+                        objects_data, 
+                        controllable_symbols, 
+                        uncontrollable_symbols,
+                        controllable_mobile_inputs,
+                        controllable_manipulation_inputs)
     # input_file = f"tests/original_{filename_structuredslugsplus.split('/')[-1]}"
     # compiler.generate_structuredslugsplus(input_file)
     # breakpoint()
@@ -241,7 +254,11 @@ if __name__ == "__main__":
     if args.baseline:
         test_add_violation_and_repair_with_backup_skills(args.filename, json_load_wrapper(args.opts), json_load_wrapper(args.files_json))
     if args.add_skills:
+        start_time = time.time()
         test_symbolic_repair(args.filename, json_load_wrapper(args.opts), json_load_wrapper(args.files_json))
+        used_time = time.time() - start_time
+        with open('log.txt', 'w') as f:
+            f.write(str(used_time))
     else:
         test_symbolic_repair_wo_add_skills(args.filename, json_load_wrapper(args.opts), json_load_wrapper(args.files_json))
 

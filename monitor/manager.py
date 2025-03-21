@@ -206,6 +206,7 @@ class Manager:
         print(terrain_state)
         print("==== Runtime Request state ====")
         print(request_state)
+        terrain_state["request_states_list"] = [request_state]
         print("=============")
         self.modulo_repair([terrain_state], [request_state])
         # Generate the repair module spec
@@ -855,6 +856,7 @@ class Manager:
     def load_mappings(self) -> None:
         """Load mappings from a file"""
         file_json: dict = json_load_wrapper(self.mapping_file)
+        # breakpoint()
         self.M_y = dict_key_str2tuple(file_json["M_y"])
         self.M_i = dict_key_str2tuple(file_json["M_i"])
         self.M_o = dict_key_str2tuple(file_json["M_o"])
